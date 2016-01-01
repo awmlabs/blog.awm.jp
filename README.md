@@ -1,2 +1,3 @@
-# blog.awm.jp
-blog markdown source
+# setup
+
+hugo new site blog.awm.jp
