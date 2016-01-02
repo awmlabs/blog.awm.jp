@@ -19,14 +19,16 @@ Hugo でブログサイトを作ってみたけれど、サマリーが大きす
  * https://gohugo.io/overview/configuration
 
 ```
-# if true, auto-detect Chinese/Janapese/Korean Languages in the content. (.Summary and .WordCount can work properly in CJKLanguage)
+# if true, auto-detect Chinese/Janapese/Korean Languages in the content.
+ (.Summary and .WordCount can work properly in CJKLanguage)
 hasCJKLanguage              false
 ```
 
  * https://gohugo.io/content/front-matter
 
 ```
-**isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
+**isCJKLanguage** If true, explicitly treat the content as CJKLanguage
+ (.Summary and .WordCount can work properly in CJKLanguage)
 ```
 
 # Hugo のサマリーの実例
