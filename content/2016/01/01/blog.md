@@ -3,6 +3,7 @@ date = "2016-01-01"
 title = "Blog はじめました"
 categories = ["Blog"]
 tags = ["Github", "Hugo", "CSS"]
+isCJKLanguage = true
 +++
 
 # Blog はじめました
