@@ -47,11 +47,20 @@ deployment:
     branch: master
     commands:
       - git clone git@github.com:awmlabs/awmlabs.github.io.git public
+      - pip install Pygments --user
       - hugo
       - cd public && git add . && git commit -m "[ci skip] publish"; if [ $? -eq 0 ]; then git push origin master; else :; fi
 {{< /highlight >}}
 
 ありがとう、ありがとう。
+
+## Pygments
+
+Syntax Highlight を使いたいので、Pygments を入れたいけど、
+```
+pip install Pygments
+```
+だと、/usr/ 以下に入れようとして権限的にエラーになるので --user を後ろにつけてます。
 
 # Circle CI アカウント作成
 
@@ -82,3 +91,8 @@ Github API 的に組織ごとのオンオフ出来ないそうで。アカウン
 
  * 当初、作りたてのレポジトリが見えなくていつの間にか見えたので反映に時間がかかるのかと思いましたが、普通はすぐ反映されるそうです。謎です。
  * 別アカウントでの連携をしたかったけど、push で marked as read only のエラーの壁を越えられなかったので、そのうち挑戦したい。
+
+# 参考URL
+
+ * http://qiita.com/xlune/items/f5248a6cdddfb011c2ac
+ * http://tdoc.info/blog/2014/01/15/pip.html
