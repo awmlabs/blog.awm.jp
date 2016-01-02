@@ -65,6 +65,7 @@ pip install Pygments
 # Circle CI アカウント作成
 
 連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。
+
  * https://circleci.com/
 
 尚、Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良いかも。
@@ -75,13 +76,14 @@ Github API 的に組織ごとのオンオフ出来ないそうで。アカウン
 
  * Add Project で監視するレポジトリを選択します。
  * Project Settings の Permissions (SSH, API, AWS のでなく、唯の Permissions) から Authorize ＞ Create and add とボタンを押してく。
- * https://github.com/settings/applications で連携を確認 (revoke 押すと面倒なので気をつけて)
+ * https://github.com/settings/applications で連携を確認 (revoke 押すと戻すのが少し面倒なので気をつけて)
 
 (あと一手間あった気がするので、思い出したら後で追記します)
 
 # 異なる Github アカウントでの連携 (推測)
 
-同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id_rsa_(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気もしますが、気のせいでした。
+同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id_rsa_(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。
+
  * https://circleci.com/gh/<ユーザor組織名>/<リポジトリ名>/edit#ssh
  * https://github.com/<ユーザor組織名>/<リポジトリ名/settings/keys
 

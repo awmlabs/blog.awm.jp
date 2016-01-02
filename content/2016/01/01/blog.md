@@ -77,6 +77,10 @@ md ファイルを編集するとリアルタイムに反映してくれて便�
 
 ## Syntax Highlight
 
+* http://gohugo.io/extras/highlighting/
+
+これの通りに作業します。
+
 ```
 pip install Pygments
 ```
