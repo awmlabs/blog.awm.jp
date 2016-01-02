@@ -1,4 +1,7 @@
 all:
+	hugo server --watch
+
+install:
 	rm -rf public
 	git clone git@github.com:awmlabs/awmlabs.github.io.git public
 	hugo
