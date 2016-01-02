@@ -1,7 +1,7 @@
 baseurl: "http://blog.awm.jp/"
-languageCode: "jp-ja"
-title: "awm TechNotes"
+languageCode: "jp-JP"
 theme: "base16"
+title: "awm TechNotes"
 copyright: "&copy; awm.jp"
 disqusShortname: "awmnotes"
 
