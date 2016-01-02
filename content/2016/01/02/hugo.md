@@ -28,11 +28,9 @@ hasCJKLanguage              false
 **isCJKLanguage** If true, explicitly treat the content as CJKLanguage (.Summary and .WordCount can work properly in CJKLanguage)
 ```
 
-ドキュメントもちゃんとあります。
-
 # Hugo のサマリーの実例
 
-デフォルトだと以下のように、サマリーが巨大になります。
+デフォルトだと以下のようにサマリーが巨大になります。
 <center> <img src="/2016/01/02/ss1_h.png" title="figure-1" > </center>
 
 hasCJK 又は isCJK の設定を入れると以下のように自然なサイズになります。
@@ -48,7 +46,7 @@ By default, Hugo automatically takes the first 70 words of your content as its
 summary and stores it into the .Summary variable, which you may use in your
 templates.
 ```
-単語70個だけ表示するそうです。
+単語を70個だけ表示するそうです。(By default と書いてるので、値を 70 以外に変える方法があるのかな。と思って遠回りしちゃいました)
 
 # 実装
 
@@ -72,7 +70,9 @@ var SummaryLength = 70
 {{< /highlight >}}
 
 この SummaryLength を上書きする場所が無いので、単語数を減らすという戦術は使えません。(そもそもやるの間違えてる)
+
 よくよく見返すと、
+
 {{< highlight go >}}
 if p.isCJKLanguage {
 	summary, truncated = helpers.TruncateWordsByRune(
@@ -113,9 +113,9 @@ $ grep -ri hascjklanguage  docs
 docs/content/overview/configuration.md:    hasCJKLanguage              false
 ```
 
-後は対応する URL を開いて確認するだけです。
+後は対応する URL を開いて確認するだけです。(冒頭で紹介した URL)
 
  * https://gohugo.io/overview/configuration
  * https://gohugo.io/content/front-matter
 
-以上、 同じ罠にハマった方のお役に立てれば幸いです。
+以上、 同じ罠にハマった方のお役に立てれば幸いです！
