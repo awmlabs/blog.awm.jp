@@ -1,0 +1,11 @@
+baseurl: "http://blog.awm.jp/"
+languageCode: "jp-ja"
+title: "awm TechNotes"
+theme: "base16"
+copyright: "&copy; awm.jp"
+disqusShortname: "awmnotes"
+
+params:
+  author: "awmlabs"
+  avatar: "https://avatars3.githubusercontent.com/u/12230940?v=3&s=400"
+  contact: "labs@g.awm.jp"
