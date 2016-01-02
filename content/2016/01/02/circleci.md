@@ -24,6 +24,35 @@ tags = ["Blog", "Github", "CircleCI"]
  * https://github.com/nobu666/nobu666.com/blob/master/circle.yml
  * https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml
 
+{{< highlight yaml >}}
+machine:
+  timezone: Asia/Tokyo
+
+checkout:
+  post:
+    - git submodule update --init --recursive
+
+dependencies:
+  pre:
+    - go get -v github.com/spf13/hugo
+    - git config --global user.name "awm labs"
+    - git config --global user.email "labs@awm.jp"
+
+test:
+  override:
+   - echo
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - git clone git@github.com:awmlabs/awmlabs.github.io.git public
+      - hugo
+      - cd public && git add . && git commit -m "[ci skip] publish"; if [ $? -eq 0 ]; then git push origin master; else :; fi
+{{< /highlight >}}
+
+ありがとう、ありがとう。
+
 # Circle CI アカウント作成
 
 連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。
