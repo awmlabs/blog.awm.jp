@@ -12,7 +12,7 @@ WordPressを試したり色々と迷いましたが、神の啓示に従い Gith
 
  * https://twitter.com/nobu666/status/680683739534393344
 
-CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果がこれです。
+CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。
 
  * https://github.com/awmcorp/blog.awm.jp
 
