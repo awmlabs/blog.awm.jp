@@ -51,9 +51,9 @@ article.single section,
   background-color: #fcf8f0;
   color: #2d2d2d;
   padding-left: 128px;
-  padding-left: 8rem;
+  padding-left: 4rem;
   padding-right: 128px;
-  padding-right: 8rem;
+  padding-right: 4rem;
   padding-top: 16px;
   padding-top: 1rem;
   padding-bottom: 16px;
@@ -308,9 +308,9 @@ article.single h1.headline {
 
 article.single section.body {
   padding-top: 64px;
-  padding-top: 4rem;
+  padding-top: 1rem;
   padding-bottom: 48px;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
 }
 
 @media (max-width: 52em) {
@@ -340,7 +340,7 @@ article.single pre {
   overflow-x: scroll;
   border-radius: 3px;
   padding: 32px;
-  padding: 2rem;
+  padding: 1.2rem;
 }
 
 article.single p code {
