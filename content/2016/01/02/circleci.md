@@ -7,11 +7,11 @@ tags = ["Blog", "Github", "CircleCI"]
 
 # Blog の Deploy で Circle CI
 
-昨日の時点では Markdown ファイルの編集後に、make install する事でブログサイトに HTML をデプロイしますが、今回、Markdown を git commit したら自動でデプロイされるべく、Circle CI に連携の設定を入れました。
+昨日の時点では Markdown ファイルの編集後に make install する事でブログサイトに HTML をデプロイしますが、今回は Markdown を git commit したら自動でデプロイされるべく、Circle CI で連携する仕組みを導入しました。
 
 # はじめに
 
-前回は、awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。
+前回は awmcorp に markdown 等の blog のソースを置いてましたが、権限設定が面倒なので、awmlabs アカウントにレポジトリをまとめました。
 
  * × https://github.com/awmcorp/blog.awm.jp
  * ○ https://github.com/awmlabs/blog.awm.jp blog のソース
@@ -19,7 +19,7 @@ tags = ["Blog", "Github", "CircleCI"]
 
 # circle.yaml
 
-連携時にどういうコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに書き換えました。
+連携時にどういったコマンドを実行するかの指定ですが、nobu666 神のファイルをコピペして、自分のとこに合うよう書き換えました。
 
  * https://github.com/nobu666/nobu666.com/blob/master/circle.yml
  * https://github.com/awmlabs/blog.awm.jp/blob/master/circle.yml
@@ -52,7 +52,7 @@ deployment:
       - cd public && git add . && git commit -m "[ci skip] publish"; if [ $? -eq 0 ]; then git push origin master; else :; fi
 {{< /highlight >}}
 
-ありがとう、ありがとう。
+神よ、ありがとう、ありがとう。(666なので邪神かもしれないが。)
 
 ## Pygments
 
@@ -60,17 +60,17 @@ Syntax Highlight を使いたいので、Pygments を入れたいけど、
 ```
 pip install Pygments
 ```
-だと、/usr/ 以下に入れようとして権限的にエラーになるので --user を後ろにつけてます。
+を実行すると、/usr/ 以下に入れようとして権限的にエラーになるので --user を後ろにつけてます。
 
 # Circle CI アカウント作成
 
-連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れます。
+連携したい Github アカウントで Github にログインしておいて、Circle CI のページにアクセスして Circle CI のページで SignUp すると連携用アカウントが作れます。
 
  * https://circleci.com/
 
-Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良さそう。
+Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するアカウントでの連携は避けたい。という人は新しい Github アカウントを作って設定すると良さそうです。
 
-Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証だし仕方なさそう) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。
+Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証なので仕方ないのかも) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。
 
 # Circle CI での連携設定
 
@@ -82,12 +82,12 @@ Github API 的に組織ごとのオンオフ出来ません。(アカウント�
 
 # 異なる Github アカウントでの連携 (推測)
 
-同じアカウントであれば。 Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は、ssh-keygen -f id_rsa_(アカウント名) で passphrase 空で作成して秘密鍵と公開鍵を、以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。
+同じアカウントであれば Permission 設定でボタン一発ですが、アカウントが違うレポジトリの場合は ssh-keygen -f id_rsa_(アカウント名) で passphrase 空で作成して、秘密鍵と公開鍵を以下の URL に登録すれば出来そうな気がして試して駄目でした。気のせいでした。
 
  * https://circleci.com/gh/<ユーザor組織名>/<リポジトリ名>/edit#ssh
  * https://github.com/<ユーザor組織名>/<リポジトリ名/settings/keys
 
-そのうち必要に迫られたら、もう少し試行錯誤します。
+必要に迫られた時にでも、もう少し試行錯誤してみます。
 
 # 備考
 
