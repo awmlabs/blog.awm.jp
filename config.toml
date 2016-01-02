@@ -5,7 +5,7 @@ title = "awm TechNotes"
 copyright = "&copy; awm.jp"
 disqusShortname = "awmnotes"
 
-[[params]]
+[params]
 
 author = "awmlabs"
 avatar = "https://avatars3.githubusercontent.com/u/12230940?v=3&s=400"
