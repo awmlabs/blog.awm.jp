@@ -30,7 +30,7 @@ body {
   line-height: 1.5;
   font-size: 100%;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, Tahoma, Verdana, Arial, sans-serif;
-;  font-family: 'Source Code Pro', monospace;
+/*  font-family: 'Source Code Pro', monospace; */
 }
 
 .container {
@@ -47,7 +47,7 @@ body {
 
 article.single section,
 .article-list article {
-;  background-color: #f2f0ec;
+/*  background-color: #f2f0ec; */
   background-color: #fcf8f0;
   color: #2d2d2d;
   padding-left: 128px;
