@@ -3,7 +3,6 @@ date = "2016-01-02"
 title = "Blog の Deploy で Circle CI"
 categories = ["CircleCI"]
 tags = ["Blog", "Github", "CircleCI"]
-isCJKLanguage = true
 +++
 
 # Blog の Deploy で Circle CI

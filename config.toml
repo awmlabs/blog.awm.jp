@@ -4,6 +4,7 @@ theme = "base16"
 title = "awm TechNotes"
 copyright = "&copy; awm.jp"
 disqusShortname = "awmnotes"
+hasCJKLanguage = true
 
 [params]
 
