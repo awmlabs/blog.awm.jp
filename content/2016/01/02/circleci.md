@@ -64,13 +64,13 @@ pip install Pygments
 
 # Circle CI アカウント作成
 
-連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れるっぽいです。
+連携したい Github アカウントで Github にログインしておいて。Circle CI のページにアクセスして、Circle CI のページで SignUp すると連携用アカウントが作れます。
 
  * https://circleci.com/
 
-尚、Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良いかも。
+Github で所属する組織(Organizatins)全てのアクセス権を要求するので、色んな組織に所属するようなアカウントでの連携は厳しい。という人は新しい Github アカウントを作って設定すると良さそう。
 
-Github API 的に組織ごとのオンオフ出来ないそうで。アカウント単位での認証だし仕方なさそう。あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういう手もあるそうです。
+Github API 的に組織ごとのオンオフ出来ません。(アカウント単位での認証だし仕方なさそう) あと組織(Organization) 側で Circle CI との連携は切る事も出来るので、融通が効く場合はそういった手もあります。
 
 # Circle CI での連携設定
 
