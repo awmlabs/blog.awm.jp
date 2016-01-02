@@ -1,3 +1,6 @@
 baseurl = "http://blog.awm.jp/"
 languageCode = "en-us"
-title = "TechNotes"
+title = "AWM TechNotes"
+theme = "base16"
+copyright = "&copy; awm.jp"
+disqusShortname = "awmnotes"
