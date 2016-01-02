@@ -1,4 +1,5 @@
 all:
+	rm -rf public
 	hugo server --watch
 
 install:
