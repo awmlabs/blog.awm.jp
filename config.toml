@@ -1,9 +1,9 @@
 baseurl = "http://blog.awm.jp/"
 languageCode = "ja-JP"
 theme = "base16"
-title = "awm TechNotes"
+title = "awm-Tech"
 copyright = "&copy; awm.jp"
-disqusShortname = "awm-Tech"
+disqusShortname = "awmtech"
 hasCJKLanguage = true
 
 [params]
