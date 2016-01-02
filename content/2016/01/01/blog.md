@@ -8,7 +8,7 @@ tags = ["Github", "Hugo"]
 
 # Blog はじめました
 
-WordPressを試したり色々と迷いましたが、神のお告げに従い Github.io + Hugo + CircleCI の構成にしました。
+WordPressを試したり色々と迷いましたが、神の啓示に従い Github.io + Hugo + CircleCI の構成にしました。
 
  * https://twitter.com/nobu666/status/680683739534393344
 
