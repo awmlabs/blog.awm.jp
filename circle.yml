@@ -1,0 +1,24 @@
+machine:
+  timezone: Asia/Tokyo
+
+checkout:
+  post:
+    - git submodule update --init --recursive
+
+dependencies:
+  pre:
+    - go get -v github.com/spf13/hugo
+    - git config --global user.name "yoya"
+    - git config --global user.email "yoya@awm.jp"
+
+test:
+  override:
+   - echo
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - git clone git@github.com:awmlabs/awmlabs.github.io.git public
+      - hugo
+      - cd public && git add . && git commit -m "[ci skip] publish"; if [ $? -eq 0 ]; then git push origin master; else :; fi
