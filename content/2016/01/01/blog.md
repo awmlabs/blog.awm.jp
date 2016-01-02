@@ -2,8 +2,7 @@
 date = "2016-01-01"
 title = "Blog はじめました"
 categories = ["Blog"]
-tags = ["Github", "Hugo"]
-
+tags = ["Github", "Hugo", "CSS"]
 +++
 
 # Blog はじめました
@@ -14,7 +13,8 @@ WordPressを試したり色々と迷いましたが、神の啓示に従い Gith
 
 CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。
 
- * https://github.com/awmcorp/blog.awm.jp
+ * <del> https://github.com/awmcorp/blog.awm.jp </del>
+ * <ins> https://github.com/awmlabs/blog.awm.jp (CircleCI連携の都合で、レポジトリを移動しました)</ins>
 
 # Github.io
 
@@ -112,6 +112,8 @@ body {
 # CircleCI
 
 間に合わなかったので、また今度。。
+
+(2016/01/02 追記) > http://blog.awm.jp/2016/01/02/circleci/
 
 # 備考
 
