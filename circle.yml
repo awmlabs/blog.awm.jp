@@ -8,8 +8,8 @@ checkout:
 dependencies:
   pre:
     - go get -v github.com/spf13/hugo
-    - git config --global user.name "yoya"
-    - git config --global user.email "yoya@awm.jp"
+    - git config --global user.name "awm labs"
+    - git config --global user.email "labs@awm.jp"
 
 test:
   override:
