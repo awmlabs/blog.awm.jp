@@ -13,7 +13,8 @@ Hugo でブログサイトを作ってみたけれど、サマリーが大きす
  * config.toml の頭に hasCJKLanguage = true を入れる
  * もしくは、 各々の markdown ファイルの先頭で isCJKLanguage = true を入れる
 
-そこまで辿り着くまでの話。ドキュメントに明記されてました。恥ずかしいっ (*ノノ
+そこまで辿り着くまでの話です。
+尚、ドキュメントに明記されてました。恥ずかしいっ (*ノノ
 
  * https://gohugo.io/overview/configuration
 
@@ -46,9 +47,15 @@ By default, Hugo automatically takes the first 70 words of your content as its
 summary and stores it into the .Summary variable, which you may use in your
 templates.
 ```
-単語を70個だけ表示するそうです。(By default と書いてるので、値を 70 以外に変える方法があるのかな。と思って遠回りしちゃいました)
+単語を70個だけ表示するそうです。
+By default と書いてるので、値を 70 以外に変える方法があるのかなとドキュメントを漁りましたが見つかりません。
+
+仕方ないので、実装を見る事にします。
+
+ * https://github.com/spf13/hugo
 
 # 実装
+
 
  * github.com/spf13/hugo/hugolib/page.go
 
