@@ -519,6 +519,7 @@ pre { background: #2d2d2d; color: #f2f0ec }
 
 .older-posts,.newer-posts
 {
+	color: #99cc99;
 	display: inline!important;
 	border: 1px solid #ddd;
 	border-radius: 15px;
@@ -546,6 +547,6 @@ pre { background: #2d2d2d; color: #f2f0ec }
 
 .older-posts:hover,.newer-posts:hover
 {
-	color: #889093;
+	color: #ffcc66;
 	border-color: #98a0a4;
 }
