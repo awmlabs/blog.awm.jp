@@ -6,7 +6,7 @@ tags = ["Hugo"]
 draft = false
 +++
 
-# Hugo 
+# Hugo の記事テンプレート
 
 hugo new <path> を実行すると Markdown ファイルが作られます。
 
@@ -15,14 +15,14 @@ $ hugo new 2016/01/03/hugo.md
 /yoya/yoya/git/blog.awm.jp/content/2016/01/03/hugo.md created
 ```
 
-しかしデフォルトのテンプレートが
+しかしデフォルトの記事テンプレートが
 ```
 date = "2016-01-03T22:12:24+09:00"
 title = "test"
 ```
 のように date と title だけで、出来ればもう少し欲しい所です。
 
-そこで archetypes の出番。
+そこで archetypes の出番！
 
 # archetypes/post.md
 
