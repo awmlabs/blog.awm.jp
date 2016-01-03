@@ -60,3 +60,16 @@ title = "test3"
 これで少し書き始める手間が減りますね。
 
  * 参考 https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f
+
+# 思う所
+
+メタデータの並びは、出来れば
+```
+title = "Hugo の post テンプレートのカスタマイズ"
+date = "2016-01-03T22:03:24+09:00"
+categories = ["Hugo"]
+tags = ["Hugo"]
+draft = false
+
+```
+のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。
