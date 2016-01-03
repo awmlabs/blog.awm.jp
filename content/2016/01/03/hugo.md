@@ -22,7 +22,9 @@ title = "test"
 ```
 のように date と title だけで、出来ればもう少し欲しい所です。
 
-そこで archetypes の出番！
+ * https://gohugo.io/content/types/
+
+何となく、この ContentTypes の archetype が使えそうです。
 
 # archetypes/post.md
 
@@ -73,3 +75,50 @@ draft = false
 
 ```
 のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。
+
+# 追記
+
+英語のドキュメントが苦手なので、ソースコードを追って見つけました。
+
+* github.com/spf13/hugo
+
+```
+$ cd github.com/spf13/hugo
+$ grep -r "title =" . | head -3
+./commands/import_jekyll.go:	       	 title = str
+./create/content.go:			       by = []byte("+++\n title = \"title\"\n draft = true \n+++\n")
+./docs/config.toml:title = "Hugo: A Fast and Flexible Website Generator"
+```
+
+ * create/content.go
+
+{{< highlight go >}}
+func NewContent(kind, name string) (err error) {
+	location := FindArchetype(kind)
+	if location == "" || err != nil {
+		by = []byte("+++\n title = \"title\"\n draft = true \n+++\n")
+	}
+	psr, err := parser.ReadFrom(bytes.NewReader(by))
+	metadata, err := psr.Metadata()
+{{< /highlight >}}
+
+archetype にファイルを置いてカスタムするのが分かります。kind で指定しているようです。
+
+ * command/new.go
+
+{{< highlight go >}}
+newCmd.Flags().StringVarP(&contentType, "kind", "k", "", "Content type to create")
+＜略＞
+if contentType != "" {
+	kind = contentType
+}
+return create.NewContent(kind, createpath)
+{{< /highlight >}}
+
+これで、-k オプションで指定する事が分かります。
+
+あとはドキュメントを検索すると、
+
+ * https://gohugo.io/content/types/
+
+が出てきて、hugo new <path> は post と呼ばれるので、-k post だなと推測できる訳です。
