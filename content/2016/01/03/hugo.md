@@ -63,7 +63,8 @@ title = "test3"
 
 これで少し書き始める手間が減りますね。
 
- * 参考 https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f
+ * 参考1 https://github.com/awmlabs/blog.awm.jp/commit/d9ac4c2eee770077fb39efc5aa5b0d436839407f
+ * 参考2 https://github.com/awmlabs/blog.awm.jp/commit/7ad97d0766219602cf72434cd2b0daad3d72c2ac
 
 # 思う所
 
