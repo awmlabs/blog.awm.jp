@@ -26,12 +26,14 @@ title = "test"
 
 何となく、この ContentTypes の archetype が使えそうです。
 
-# archetypes/post.md
+# archetypes
 
-archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。
+<del> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</del>
+
+# archetypes/default.md に追加したいテンプレートを入れます。
 
 ```
-$ cat archetypes/post.md
+$ cat archetypes/default.md
 +++
 categories = []
 tags = []
@@ -39,7 +41,7 @@ draft = false
 +++
 
 #
-$ hugo new -k post test.md
+$ hugo new test.md
 ```
 
 # 結果
