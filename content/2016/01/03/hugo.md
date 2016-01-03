@@ -30,7 +30,7 @@ title = "test"
 
 <del> archetypes/post.md に追加したいテンプレートを書いて、hugo new -k post <path> を実行します。</del>
 
-# archetypes/default.md に追加したいテンプレートを入れます。
+archetypes/default.md に追加したいテンプレートを入れます。
 
 ```
 $ cat archetypes/default.md
@@ -78,7 +78,7 @@ draft = false
 ```
 のようにしたいのですが、abc 順で並び直されてしまうようです。ここは出来れば改造したいです。
 
-# 追記
+# ソース巡り
 
 英語のドキュメントが苦手なので、ソースコードを追って見つけました。
 
