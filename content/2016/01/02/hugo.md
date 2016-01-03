@@ -50,14 +50,13 @@ summary and stores it into the .Summary variable, which you may use in your
 templates.
 ```
 単語を70個だけ表示するそうです。
-By default と書 いてるので、値を 70 以外に変える方法があるのかなとドキュメントを漁りましたが見つかりません。
+By default なので値を 70 以外に変える方法があると推測し、ドキュメントを漁りましたが見つかりません。
 
 仕方ないので、実装を見る事にします。
 
  * https://github.com/spf13/hugo
 
 # 実装
-
 
  * github.com/spf13/hugo/hugolib/page.go
 
