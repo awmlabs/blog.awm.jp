@@ -7,4 +7,4 @@ else
     name=$1
 fi;
 
-hugo new -k post $(date +%Y/%m/%d)/$name.md
+hugo new $(date +%Y/%m/%d)/$name.md
