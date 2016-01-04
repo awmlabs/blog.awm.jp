@@ -77,7 +77,7 @@ $ convert -resize 800% -filter point batsu.png batsu_8.png
 
 # PGM (portable graymap format)
 
-白と黒の間で濃淡をつけられます。以下のは4段階にしてます。
+白と黒の間で濃淡をつけられます。いわゆるグレー画像です。4段階で作ってみます。
 
  * batsu_gray.pgm
 
@@ -104,7 +104,7 @@ $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 
 # PPM (portable pixmap format)
 
-RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すれば皆さんお馴染みの RGB 表現になります。
+RGB でカラーを表現できます。以下のも4段階です。ちなみに、256 段階を指定すると皆さんお馴染みの RGB 表現になります。
 
  * batsu_rgb.ppm
 
