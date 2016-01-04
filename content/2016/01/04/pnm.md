@@ -75,11 +75,13 @@ P1
 0 1 0 0 0 1 0
 1 0 0 0 0 0 1
 ```
+
 ImageMagick の convert で変換します。ついでに8倍に拡大したものも。
 ```
 $ convert batsu.pbm batsu.png
 $ convert -resize 800% -filter point batsu.png batsu_8.png
 ```
+
 <center> <img src="/2016/01/04/batsu.png" title="batsu" > </center>
 <center> 8倍に ↓ 拡大 </center>
 <center> <img src="/2016/01/04/batsu_8.png" title="batsu_8" > </center>
@@ -102,11 +104,13 @@ P2
 0 3 0 0 0 3 0
 4 0 0 0 0 0 4
 ```
+
 convert で変換 & 8倍画像
 ```
 $ convert batsu_gray.pgm batsu_gray.png
 $ convert -resize 800% -filter point batsu_gray.png batsu_gray_8.png
 ```
+
 <center> <img src="/2016/01/04/batsu_gray.png" title="batsu_gray" > </center>
 <center> 8倍に ↓ 拡大 </center>
 <center> <img src="/2016/01/04/batsu_gray_8.png" title="batsu_gray_8" > </center>
@@ -129,10 +133,11 @@ P3
 0 0 0  0 3 0  0 0 0  0 0 0  0 0 0  3 3 0  0 0 0
 0 4 0  0 0 0  0 0 0  0 0 0  0 0 0  0 0 0  4 4 0
 ```
+
 convert で変換
 ```
-convert  batsu_rgb.ppm batsu_rgb.png
- convert  -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
+$ convert batsu_rgb.ppm batsu_rgb.png
+$ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 ```
 <center> <img src="/2016/01/04/batsu_rgb.png" title="batsu_rgb" > </center>
 <center> 8倍に ↓ 拡大 </center>
