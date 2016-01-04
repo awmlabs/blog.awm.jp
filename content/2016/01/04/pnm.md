@@ -18,12 +18,17 @@ draft = false
 
 PNM は 以下の３つのフォーマットをまとめた呼び方です。
 
- * PBM (portable bitmap format)
+ * PBM (portable bitmap)
    * http://netpbm.sourceforge.net/doc/pbm.html
- * PGM (portable graymap format)
+ * PGM (portable graymap)
    * http://netpbm.sourceforge.net/doc/pgm.html
- * PPM (portable pixmap format)
+ * PPM (portable pixmap)
    * http://netpbm.sourceforge.net/doc/ppm.html
+
+今回解説しませんが、以下のフォーマットも含むようです。透明度が表現できます。
+
+ * PAM (portable arbitrary map)
+   * http://netpbm.sourceforge.net/doc/pam.html
 
 # フォーマット概要
 
