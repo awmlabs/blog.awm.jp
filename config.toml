@@ -5,7 +5,7 @@ title = "awm-Tech"
 copyright = "&copy; awm.jp"
 disqusShortname = "awmtech"
 hasCJKLanguage = true
-paginate = 3
+paginate = 5
 
 [params]
 
