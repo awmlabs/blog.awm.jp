@@ -14,7 +14,7 @@ draft = false
 
 古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来る事が大きな特徴です、尚、圧縮はいたしません。
 
- * [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
+ * Wikiedia: [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
 
 PNM は 以下の３つのフォーマットをまとめた呼び方です。
 
@@ -140,7 +140,7 @@ convert  batsu_rgb.ppm batsu_rgb.png
 
 # 参考 URL
 
- * wikipedia: [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
+ * Wikipedia: [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
  * 碧色工房 〜 PNM ( PPM / PGM / PBM ) ファイルフォーマット
    * http://www.mm2d.net/main/prog/c/image_io-01.html
  * https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c
