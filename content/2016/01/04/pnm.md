@@ -25,14 +25,18 @@ PNM は 以下の３つのフォーマットをまとめた呼び方です。
  * PPM (portable pixmap)
    * http://netpbm.sourceforge.net/doc/ppm.html
 
-今回解説しませんが、広義には以下のフォーマットも含むかもしれません。透明度が表現できます。
+## 拡張フォーマット
+
+PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float 表現です。
 
  * PAM (portable arbitrary map)
    * http://netpbm.sourceforge.net/doc/pam.html
+ * PFM (portable float map)
+   * http://netpbm.sourceforge.net/doc/pfm.html
 
 # フォーマット概要
 
-ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf もありますが、今回は省きます。
+ファイル先頭の文字列に応じて、以下のフォーマットに分かれます。P7 (PAM形式), PF, Pf (PFM形式) もありますが、今回は省きます。
 
 ファイル先頭 | フォーマット | データ表現 | 画像表現
 ------------ | ------------ | ---------- | --------
