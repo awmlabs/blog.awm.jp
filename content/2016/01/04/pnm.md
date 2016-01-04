@@ -1,12 +1,12 @@
 +++
-title = "PNM と ImageMagick で画像ファイルを手作業生成"
+title = "PNM と ImageMagick で画像ファイルを手作り生成"
 date = "2016-01-04T19:38:39+09:00"
 categories = ["Graphics"]
 tags = ["PNM", "ImageMagick", "PBM", "PGM", "PPM"]
 draft = false
 +++
 
-# PNM と ImageMagick で画像ファイルを手作業生成
+# PNM と ImageMagick で画像ファイルを手作り生成
 
 何らかの画像実験で都合の良い画像ファイルが欲しい時にテキストエディタで作れると便利で、PNM (Portable aNyMap) フォーマットを利用するとそんな事が簡単に出来ます。
 
