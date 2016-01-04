@@ -25,7 +25,7 @@ PNM は 以下の３つのフォーマットをまとめた呼び方です。
  * PPM (portable pixmap)
    * http://netpbm.sourceforge.net/doc/ppm.html
 
-今回解説しませんが、以下のフォーマットも含むようです。透明度が表現できます。
+今回解説しませんが、広義には以下のフォーマットも含むかもしれません。透明度が表現できます。
 
  * PAM (portable arbitrary map)
    * http://netpbm.sourceforge.net/doc/pam.html
