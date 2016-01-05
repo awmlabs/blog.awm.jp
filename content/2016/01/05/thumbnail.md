@@ -59,9 +59,9 @@ convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_
 ```
 <center> <img src="/2016/01/05/saitama_100x100crop.jpg" alt="100x100crop" /></center>
 
-## 余白を埋める
+## 余白をつける
 
-左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白を適当な色で埋めれば可能です。
+左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。
 
 ```
 convert saitama.jpg -thumbnail 100x100 -gravity center -extent 100x100 saitama_100x100extent.jpg
