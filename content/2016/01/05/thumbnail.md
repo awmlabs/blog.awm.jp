@@ -55,7 +55,8 @@ $ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。
 
 ```
-convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_100x100crop.jpg
+$ convert saitama.jpg -thumbnail 100x100^ -gravity center \
+	-extent 100x100 saitama_100x100crop.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100crop.jpg" alt="100x100crop" /></center>
 
@@ -64,14 +65,16 @@ convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_
 左右の子達が見切れて可哀想。削っちゃ嫌だ！という要望に応えて削らない方法もあります。余白をつけて適当な色で埋めれば可能です。
 
 ```
-convert saitama.jpg -thumbnail 100x100 -gravity center -extent 100x100 saitama_100x100extent.jpg
+$ convert saitama.jpg -thumbnail 100x100 -gravity center \
+	-extent 100x100 saitama_100x100extent.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100extent.jpg" alt="100x100extent" /></center>
 
 余白の色が白で見えにくいので、-background で黒を指定してみます。
 
 ```
-convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent 100x100 saitama_100x100black.jpg
+$ convert saitama.jpg -thumbnail 100x100 -background black \
+	-gravity center -extent 100x100 saitama_100x100black.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100black.jpg" alt="100x100black" /></center>
 
@@ -84,7 +87,8 @@ convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent
 まずは、convert の -draw オプションで丸のクリップ用画像を作ります。
 
 ```
-$ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" circle_mask.png
+$ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" \
+	circle_mask.png
 ```
 <center> <img src="/2016/01/05/circle_mask.png" alt="circle_mask" /></center>
 
@@ -92,7 +96,8 @@ $ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" circle_mas
 -compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。
 
 ```
-$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
+$ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
+	circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 ```
 <center> <img src="/2016/01/05/saitama_icon.png" alt="icon" /></center>
 
