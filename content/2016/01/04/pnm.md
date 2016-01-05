@@ -143,6 +143,10 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
 <center> 8倍に ↓ 拡大 </center>
 <center> <img src="/2016/01/04/batsu_rgb_8.png" title="batsu_rgb_8" > </center>
 
+# さいごに
+
+エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。
+
 # 参考 URL
 
  * Wikipedia: [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
@@ -150,6 +154,3 @@ $ convert -resize 800% -filter point batsu_rgb.png batsu_rgb_8.png
    * http://www.mm2d.net/main/prog/c/image_io-01.html
  * https://github.com/ImageMagick/ImageMagick/blob/master/coders/pnm.c
 
-# さいごに
-
-エディタで任意のビットマップ画像を作りたい時にご活用下さい。たまに便利です。
