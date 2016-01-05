@@ -17,7 +17,7 @@ ImageMagick の convert コマンドでリサイズするのに色んなオプ�
 
 # とりあえず小さくする
 
-手始めに適当なサイズを指定してサムネールを作ります。
+手始めに適当なサイズ 100x100 を指定してサムネールを作ります。
 
 ```
 $ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
@@ -33,20 +33,20 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 
 単純に 100x100 を指定すると、アスペクト比(縦と横の比率)が変わらないよう調整される為です。
 
-# リサイズ後のサイズを固定する
+# リサイズ後のサイズを 100x100 にする
 
-確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。
+アスペクト比を無視して、確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。
 
 ```
 $ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100f.jpg" alt="100x100!" /></center>
 
-しかしアスペクト比が変わっているので、恐らく望む結果ではないでしょう。
+しかしこれは、恐らく望む結果ではないでしょう。
 
 # アスペクト比を変えずに 100x100 にする
 
-そんな矛盾した要求を。。。と一瞬思いますが、２つ方法が考えられます。
+そんな矛盾した要求を。。。と一瞬怯みますが、２つ方法が思いつきます。
 
 ## 削っちゃう
 
@@ -75,24 +75,25 @@ convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent
 ```
 <center> <img src="/2016/01/05/saitama_100x100black.jpg" alt="100x100black" /></center>
 
-# 丸くクリップする
+# 丸いアイコン風画像の作り方
 
-最後に、サムネールとは少し異なりますが丸いアイコンの作り方も紹介します。
+最後に、サムネールとは少し異なりますが丸いアイコン風画像の作り方も紹介します。
 
-尚、円の縁の外側は透明にしたいので、今回は png を生成します。
+尚、円の外側は透明にしたいので、今回は png を生成します。
 
 まずは、convert の -draw オプションで丸のクリップ用画像を作ります。
 
 ```
 $ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" circle_mask.png
 ```
+<center> <img src="/2016/01/05/circle_mask.png" alt="circle_mask" /></center>
+
 
 -compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。
 
 ```
 $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 ```
-
 <center> <img src="/2016/01/05/saitama_icon.png" alt="icon" /></center>
 
 ## 一行にまとめる
