@@ -18,12 +18,14 @@ ImageMagick の convert コマンドでリサイズするのに色んなオプ�
 # とりあえず小さくする
 
 手始めに適当なサイズを指定してサムネールを作ります。
+
 ```
 $ convert  saitama.jpg -thumbnail 100x100 saitama_100x100.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100.jpg" alt="100x100" /></center>
 
-良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うと思います。
+良い感じに変換してくれますが、100x100 を指定したのに 100x76 画像が生成される事に戸惑うでしょう。
+
 ```
 $ identify saitama_100x100.jpg
 saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
@@ -34,6 +36,7 @@ saitama_100x100.jpg JPEG 100x76 100x76+0+0 8-bit sRGB 3.57KB 0.000u 0:00.000
 # リサイズ後のサイズを固定する
 
 確実に 100x100 にしたい場合は 100x100! のように後ろに ! をつけます。
+
 ```
 $ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 ```
@@ -47,9 +50,9 @@ $ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 
 ## 削っちゃう
 
-先程の 100x100 指定では大きい方の辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。
+先程の 100x100 指定では縦と横のうち大きい辺を 100 にして、アスペクト比が変わらないように小さな辺を算出しました。
 
-その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな方の辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。
+その逆で、小さい方の辺を 100 にして、アスペクト比固定で 100 を超える大きな辺を作り、その画像の左右または上下を削って 100 に切り詰めるという戦略が取れます。
 
 ```
 convert saitama.jpg -thumbnail 100x100^ -gravity center -extent 100x100 saitama_100x100crop.jpg
@@ -66,6 +69,7 @@ convert saitama.jpg -thumbnail 100x100 -gravity center -extent 100x100 saitama_1
 <center> <img src="/2016/01/05/saitama_100x100extent.jpg" alt="100x100extent" /></center>
 
 余白の色が白で見えにくいので、-background で黒を指定してみます。
+
 ```
 convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent 100x100 saitama_100x100black.jpg
 ```
@@ -73,15 +77,18 @@ convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent
 
 # 丸くクリップする
 
-最後にサムネールとは少し異なりますが、丸いアイコンの作り方も紹介します。
+最後に、サムネールとは少し異なりますが丸いアイコンの作り方も紹介します。
 
 尚、円の縁の外側は透明にしたいので、今回は png を生成します。
 
 まずは、convert の -draw オプションで丸のクリップ用画像を作ります。
+
 ```
 $ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" circle_mask.png
 ```
+
 -compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。
+
 ```
 $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 ```
@@ -91,16 +98,18 @@ $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circ
 ## 一行にまとめる
 
 カッコを使って入れ子に出来ます。
+
 ```
 $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
   \( -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" \) \
   -compose CopyOpacity -composite saitama_icon.png
 ```
+
 画像は同じ結果なので省略します。
 
 # 最後に
 
-リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった事へのケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明しようと思います。
+リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった事へのケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明します。
 
 # 参考 URL
 
