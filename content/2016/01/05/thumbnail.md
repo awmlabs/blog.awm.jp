@@ -75,13 +75,13 @@ convert saitama.jpg -thumbnail 100x100 -background black -gravity center -extent
 
 最後にサムネールとは少し異なりますが、丸いアイコンの作り方も紹介します。
 
-円の縁の外側は透明にしたいので、png を生成します。
+尚、円の縁の外側は透明にしたいので、今回は png を生成します。
 
-convert の -draw オプションで丸の画像を作ってみます。
+まずは、convert の -draw オプションで丸のクリップ用画像を作ります。
 ```
 $ convert -size 100x100 xc:none -fill white -draw "circle 50,50,50,0" circle_mask.png
 ```
--compose CopyOpacity を使うとクリップ出来ます。
+-compose CopyOpacity を使いクリップ画像を指定する事でクリップが出来ます。
 ```
 $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100  circle_mask.png -compose CopyOpacity -composite saitama_icon.png
 ```
@@ -97,6 +97,10 @@ $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
   -compose CopyOpacity -composite saitama_icon.png
 ```
 画像は同じ結果なので省略します。
+
+# 最後に
+
+リサイズする時にぼやけたり、色味が物足りなかったり、追加でフィルタをかけたかったりといった事へのケアも大事で、ImageMagick なら対応出来ますが、それはまた今度説明しようと思います。
 
 # 参考 URL
 
