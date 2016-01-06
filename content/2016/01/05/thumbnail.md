@@ -12,7 +12,7 @@ title = "ImageMagick でサムネール画像生成"
 
 ImageMagick の convert コマンドでリサイズするのに色んなオプションがあって、自分は -resize を使う事が多いですが、今回は余計なメタデータを削除してくれる -thumbnail を使ってみます。
 
-オリジナル画像はこれを使います。
+オリジナル画像はこちらをを使います。
 <center> <img src="/2016/01/05/saitama.jpg" alt="saitama" /> </center>
 
 # とりあえず小さくする
