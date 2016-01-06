@@ -15,7 +15,9 @@ title = "ImageMagick の -auto-orient でオフセットがズレる件"
    * http://blog.cybozu.io/entry/2016/01/06/080000
 
 ```
-ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、offset 情報がおかしくなります。
+ただ、ImageMagick といえど Orientation 画像の変換でちょっと怪しい挙動があります。
+上記サンプル画像の right-mirrored.jpg を -auto-orient をつけて png に変換すると、
+offset 情報がおかしくなります。
 
 $ convert right-mirrored.jpg -auto-orient out.png
 $ identify out.png
@@ -47,7 +49,7 @@ out.png PNG 480x640 640x480+160-160 8-bit sRGB 256c 13.9KB 0.000u 0:00.000
 
 <center> <img src="/2016/01/06/1.jpg" /> </center>
 
-画像を単独で表示する場合は問題ないのですが、例えば HTML ドキュメントにレイアウトされる場合に、期待する場所より右上に配置されるかもしれません。(未確認)
+画像を単独で表示する場合は問題ないのですが、例えば HTML ドキュメントにレイアウトされる場合に、期待する場所は左下で、実際んは右上に方に配置されるかもしれません。(未確認)
 
 <center> <img src="/2016/01/06/2.jpg" /> </center>
 
