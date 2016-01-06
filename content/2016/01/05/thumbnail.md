@@ -121,4 +121,7 @@ $ convert saitama.jpg -thumbnail 100x100 -background white -extent 100x100 \
 
  * http://www.imagemagick.org/Usage/masking/
  * http://www.imagemagick.org/script/command-line-processing.php#geometry
- * http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a
+ * Imagemagick - Ways of cropping an image to a circle (or other shape).
+   * http://daemonsandagents.tumblr.com/post/108369306151/imagemagick-ways-of-cropping-an-image-to-a
+ * ImageMagickで画像をリサイズする時のメモ
+   * http://o.inchiki.jp/obbr/125
