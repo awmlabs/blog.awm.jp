@@ -1,4 +1,4 @@
-baseurl = "http://blog.awm.jp/"
+baseurl = "https://blog.awm.jp/"
 languageCode = "ja-JP"
 theme = "base16"
 title = "awm-Tech"
