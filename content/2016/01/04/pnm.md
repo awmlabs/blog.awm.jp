@@ -12,7 +12,7 @@ draft = false
 
 # PNM とは
 
-古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来る事が大きな特徴です、尚、圧縮はいたしません。
+古くからある画像フォーマット群で ASCII テキストでもバイナリでも表現出来るのが大きな特徴です、尚、圧縮はいたしません。
 
  * Wikiedia: [PNM (画像フォーマット)](https://ja.wikipedia.org/wiki/PNM_(%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88))
 
@@ -27,7 +27,7 @@ PNM は 以下の３つのフォーマットをまとめた呼び方です。
 
 ## 拡張フォーマット
 
-PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float 表現です。
+PNM ファミリーではない為に今回は解説しませんが、以下の拡張フォーマットがあります。PAM は透明度が表現できます。PFM は float(浮動小数点)表現です。
 
  * PAM (portable arbitrary map)
    * http://netpbm.sourceforge.net/doc/pam.html
@@ -40,12 +40,12 @@ PNM ファミリーではない為に今回は解説しませんが、以下の�
 
 ファイル先頭 | フォーマット | データ表現 | 画像表現
 ------------ | ------------ | ---------- | --------
-P1 |  PBM | ASCII | 白黒画像
-P2 |  PGM | ASCII | グレー画像
-P3 |  PPM | ASCII | カラー画像(RGB)
-P4 |  PGM | Binary | 白黒画像
-P5 |  PGM | Binary | グレー画像
-P6 |  PPM | Binary | カラー画像(RGB)
+P1 |  PBM | ASCII | 白黒画像 <img src="/2016/01/04/wb.png" />
+P2 |  PGM | ASCII | グレー画像 <img src="/2016/01/04/gray.png" />
+P3 |  PPM | ASCII | カラー画像 <img src="/2016/01/04/color.png" />
+P4 |  PBM | Binary | 白黒画像 <img src="/2016/01/04/wb.png" />
+P5 |  PGM | Binary | グレー画像 <img src="/2016/01/04/gray.png" />
+P6 |  PPM | Binary | カラー画像 <img src="/2016/01/04/color.png" />
 
 データ表現が ASCII の場合は以下のフォーマットをとります。
 ```
