@@ -29,7 +29,7 @@ JPEG は画像の周波数成分のデータを保持していて、JPEG の Dec
 <center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
 引用) https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
 
-## scale factor つきでデコード
+## scaling 指定で Decode
 
 元のサイズの画像データに変換する場合と比べて、手間を増やさず 1/2, 1/4, 1/8 サイズの画像データに変換できます。高周波成分を見なくて済む上に変換後のサイズが小さい事から、むしろより少ない手間でさえあります。
 
@@ -109,7 +109,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 拡大時もそんなに極端にメモリは食わないはずですが、例のブログでは 1.5 倍使うという報告もありますし、小さくリサイズする時だけ -define jpeg:size をつけるよう気をつければ良いと思います。ただしリサイズアルゴリズムとは処理が異なるので、画質的に大丈夫か確認した方が良いでしょう。
 
-# 該当コード
+# scaling の該当コード
 
 * http://gt.awm.jp/ImageMagick-6.9.3-0/S/1372.html#L1105
   * ReadJPEGImage (coders/jpeg.c)
