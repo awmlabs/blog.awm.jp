@@ -57,7 +57,7 @@ $ brew install exiftool
 ```
 Debian Linux は
 ```
-apt-get install exiftool
+# apt-get install exiftool
 ```
 でインストールできます。
 
@@ -131,6 +131,15 @@ $ identify -verbose orient-?.jpg | grep Orient
   Orientation: LeftBottom
     exif:Orientation: 8
 ```
+
+ちなみに、上記の表に貼り付けた画像は、更に
+```
+for i in *-?.jpg ; do
+  o=`basename $i .jpg` ;
+  convert -strip $i $o-strip.jpg;
+done
+```
+として Exif タグを削除したものです。
 
 # 参考 URL
 
