@@ -153,3 +153,6 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
    * http://blog.mirakui.com/entry/20110123/1295795409
  * JPEG ライブラリを試す
    * http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/
+ * New djpeg -scale N/8 with all N=1...16 feature
+   * http://jpegclub.org/djpeg/
+ * https://ja.wikipedia.org/wiki/Libjpeg
