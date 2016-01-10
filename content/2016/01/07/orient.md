@@ -11,14 +11,14 @@ title = "JPEG Exif Orientation の操作"
 
 ## Orientation とは
 
-JPEG には画像データそのものと別に Exif という形式で日付とか撮影条件とか場所といった情報をタグ形式で入れる事が出来ます。
+JPEG には画像データそのものと別に Exif という形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation というタグがあります。
 
 例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しになります。
-撮影した時のカメラの向きを元に、この Orientation タグを付与する事で、表示する時に向きを直す事ができます。
+撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に向きを直す事ができます。
 <center> <img src="/2016/01/07/digicame.png" /> </center>
 
-ImageMagicl の identify コマンドを使うと Orientation が幾つに設定されているか分かります。
+ImageMagicl の identify コマンドで Orientation の値を参照出来ます。
 
 ```
 $ identify -verbose orient-6.jpg | grep Orient
@@ -35,13 +35,13 @@ Orientation に各値を設定する事で、全て 1 の向きに補正され�
 1: <img src="/2016/01/07/orient-1-strip.jpg" /> | 2: <img src="/2016/01/07/orient-2-strip.jpg" />  | 3: <img src="/2016/01/07/orient-3-strip.jpg" />  | 4: <img src="/2016/01/07/orient-4-strip.jpg" /> 
 5: <img src="/2016/01/07/orient-5-strip.jpg" /> | 6: <img src="/2016/01/07/orient-6-strip.jpg" />  | 7: <img src="/2016/01/07/orient-7-strip.jpg" />  | 8: <img src="/2016/01/07/orient-8-strip.jpg" /> 
  | | | 
-(回転する向きでない事に注意)
+(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)
 
 ## 編集ツール
 
-この Orientation タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。
+Exif タグはツールを使って自由に入れ替えができるので、Orientation 検証画像を自分で作る事が出来ます。
 
-ImageMagick を使いたい所ですが ExifTool が便利なのでこちらを使う事にします。
+ExifTool が便利なのでこちらを使う事にします。
 
 # ExifTool
 
@@ -132,6 +132,8 @@ $ identify -verbose orient-?.jpg | grep Orient
 
 # 参考 URL
 
-* http://hackmylife.net/archives/7400448.html
-* http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf
+ * Exif 2.3 規格書
+   * http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf
+ * ExifのOrientationを見て画像を回転させる
+   * http://hackmylife.net/archives/7400448.html
 
