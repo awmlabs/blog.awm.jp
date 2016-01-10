@@ -18,7 +18,7 @@ JPEG には画像データそのものと別に Exif という形式で日付、
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に向きを直す事ができます。
 <center> <img src="/2016/01/07/digicame.png" /> </center>
 
-ImageMagicl の identify コマンドで Orientation の値を参照出来ます。
+ImageMagick の identify コマンドで Orientation の値を参照出来ます。
 
 ```
 $ identify -verbose orient-6.jpg | grep Orient
@@ -36,6 +36,8 @@ Orientation に各値を設定する事で、全て 1 の向きに補正され�
 5: <img src="/2016/01/07/orient-5-strip.jpg" /> | 6: <img src="/2016/01/07/orient-6-strip.jpg" />  | 7: <img src="/2016/01/07/orient-7-strip.jpg" />  | 8: <img src="/2016/01/07/orient-8-strip.jpg" /> 
  | | | 
 (補正で行う回転する向きでない事に注意。これらは回転する前の画像です)
+
+尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]
 
 ## 編集ツール
 
