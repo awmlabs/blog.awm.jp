@@ -28,7 +28,7 @@ $ identify -verbose orient-6.jpg | grep Orient
 
 ## Orientation の数値の対応
 
-Orientation に各数字を入れる事で、全て表示する時に 1 の向きに補正されます。
+Orientation に各値を設定する事で、全て 1 の向きに補正されて表示されます。(古いビューアだと補正しない事もあります)
 
  | | | 
 ----|----|---|---
