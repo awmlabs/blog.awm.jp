@@ -147,14 +147,12 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 # 参考 URL
 
- * Imlib2とImage::Imlib2のJPEGヒント対応版を作成しました
-   * http://kkoudev.github.io/blog/2014/06/15/imlib2/
+ * https://en.wikipedia.org/wiki/Libjpeg
+ * JPEG tutorial
+   * https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
  * 本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
    * http://blog.mirakui.com/entry/20110123/1295795409
  * JPEG ライブラリを試す
    * http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/
  * New djpeg -scale N/8 with all N=1...16 feature
    * http://jpegclub.org/djpeg/
- * https://en.wikipedia.org/wiki/Libjpeg
- * JPEG tutorial
-   * https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
