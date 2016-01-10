@@ -35,9 +35,7 @@ JPEG は画像の周波数成分のデータを保持していて、JPEG の Dec
 
 <center> <img src="/2016/01/08/dct8x8-4-1-600.png" /> </center>
 
-大きなサイズの画像からサムネール画像を生成するのに、一般的なリサイズのアルゴリズムを使わずにいきなり 1/2, 1/4, 1/8 の画像に変換、デコード出来ます。
-
-ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合でしょう。
+(ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)
 
 ## やっている事
 
@@ -45,7 +43,7 @@ ImageMagick (から利用する libjpeg) が 2,4,8 のように 2^n に限って
 
 # JPEG size hinting の動作イメージ
 
-こちらに詳しいです。
+詳しくはこちらを参照して下さい。
 
  * 本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
   * http://blog.mirakui.com/entry/20110123/1295795409
@@ -155,4 +153,3 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
    * http://blog.mirakui.com/entry/20110123/1295795409
  * JPEG ライブラリを試す
    * http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/
-
