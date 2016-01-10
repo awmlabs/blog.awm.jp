@@ -42,7 +42,7 @@ $ convert  saitama.jpg -thumbnail 100x100! saitama_100x100f.jpg
 ```
 <center> <img src="/2016/01/05/saitama_100x100f.jpg" alt="100x100!" /></center>
 
-しかしこれは、恐らく望む結果ではないでしょう。
+しかしこれは、恐らく望む結果ではないはずです。
 
 # アスペクト比を変えずに 100x100 にする
 
