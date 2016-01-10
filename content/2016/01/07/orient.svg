@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400">
+
+  <rect x="0" y="0" width="200" height="200" fill="#f00" />
+  <text x="50" y="150" font-size="128" fill="#fff" > R </text>
+
+  <rect x="200" y="0" width="200" height="200" fill="#0f0" />
+  <text x="250" y="150" font-size="128" fill="#fff"> G </text>
+
+  <rect x="0" y="200" width="200" height="200" fill="#00f" />
+  <text x="50" y="340" font-size="128" fill="#000"> B </text>
+
+  <rect x="200" y="200" width="200" height="200" fill="#ff0" />
+  <text x="250" y="350" font-size="128" fill="#000"> Y </text>
+
+</svg>
