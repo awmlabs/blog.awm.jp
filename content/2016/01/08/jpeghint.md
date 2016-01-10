@@ -6,18 +6,18 @@ tags = ["ImageMagick", "JPEG", "Resize"]
 title = "JPEG の size hinting について"
 +++
 
-何度もしつこいですけど、以下の記事の -define jpeg:size への勝手な補足。
+何度もしつこいですが、以下の記事の -define jpeg:size への勝手な補足。
 
  * もうサムネイルで泣かないための ImageMagick ノウハウ集
    * http://blog.cybozu.io/entry/2016/01/06/080000
 
 ```
-いつでもつければ良いというものではないので注意しましょう。弊社では、
-このオプションはサービスの安定運用のためには無用と判断し、
+いつでもつければ良いというものではないので注意しましょう。
+弊社では、このオプションはサービスの安定運用のためには無用と判断し、
 現在このオプションは利用していません。
 ```
 
-注意する点ではありますが、この結論では JPEG size hinting は危険なので使わない方が良いと誤解する人が出そうなので勝手に補足します。
+注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。
 
 # -define jpeg:size とは？
 
@@ -146,4 +146,13 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 {{< /highlight >}}
 
 この 2/block_size scaling の条件にマッチしたのかなと予想してます。
+
+# 参考 URL
+
+ * Imlib2とImage::Imlib2のJPEGヒント対応版を作成しました
+   * http://kkoudev.github.io/blog/2014/06/15/imlib2/
+ * 本当は速いImageMagick: サムネイル画像生成を10倍速くする方法
+   * http://blog.mirakui.com/entry/20110123/1295795409
+ * JPEG ライブラリを試す
+   * http://mibai.tec.u-ryukyu.ac.jp/~oshiro/Doc/misc/Jpeg-lib/
 
