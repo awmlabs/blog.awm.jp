@@ -13,8 +13,8 @@ WordPressを試したり色々と迷いましたが、神の啓示に従い Gith
 
 CircleCI 対応は時間かかりそうなので、デプロイはとりあえず手動対処にして試行錯誤した結果が以下のレポジトリです。
 
- * <del> https://github.com/awmcorp/blog.awm.jp </del>
- * <ins> https://github.com/awmlabs/blog.awm.jp (CircleCI連携の都合で、レポジトリを移動しました)</ins>
+ * <del> https://github.com/awmcorp/blog.awm.jp </del> (CircleCI連携の都合で、レポジトリを awmlabs に移動しました)
+ * <ins> https://github.com/awmlabs/blog.awm.jp </ins>
 
 # Github.io
 
