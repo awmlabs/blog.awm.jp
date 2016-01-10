@@ -22,8 +22,8 @@ ImageMagick の identify コマンドで Orientation の値を参照出来ます
 
 ```
 $ identify -verbose orient-6.jpg | grep Orient
- Orientation: RightTop
-   exif:Orientation: 6
+  Orientation: RightTop
+    exif:Orientation: 6
 ```
 
 ## Orientation の数値の対応
