@@ -9,8 +9,8 @@
     {{ range $index, $page := .Paginator.Pages }}
       {{ partial "article-list-item.html" . }}
     {{ end }}
-  {{ partial "pagination.html" .Paginator }}
   </div>
+ {{ partial "pagination.html" .Paginator }}
 
 {{ with .Site.Taxonomies.categories }}
 
