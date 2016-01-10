@@ -156,4 +156,5 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
  * New djpeg -scale N/8 with all N=1...16 feature
    * http://jpegclub.org/djpeg/
  * https://en.wikipedia.org/wiki/Libjpeg
-
+ * JPEG tutorial
+   * https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
