@@ -117,7 +117,7 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
       jpeg_calc_output_dimensions(&jpeg_info);
 {{< /highlight >}}
 
-ここだけ見ると、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。
+(scale_num/scale_denom) 倍で変換するので、縮小しか対応していないように見えますが。libjpeg の中でよしなに処理してくれるようです。
 
  * http://gt.awm.jp/jpeg-8/S/85.html#L52
    * jpeg_core_output_dimensions
