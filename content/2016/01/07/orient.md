@@ -28,14 +28,15 @@ $ identify -verbose orient-6.jpg | grep Orient
 
 ## Orientation の数値の対応
 
-Orientation に各値を設定する事で、全て 1 の向きに補正されて表示されます。(古いビューアだと補正しない事もあります)
+以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)
 
  | | | 
 ----|----|---|---
-1: <img src="/2016/01/07/orient-1-strip.jpg" /> | 2: <img src="/2016/01/07/orient-2-strip.jpg" />  | 3: <img src="/2016/01/07/orient-3-strip.jpg" />  | 4: <img src="/2016/01/07/orient-4-strip.jpg" /> 
-5: <img src="/2016/01/07/orient-5-strip.jpg" /> | 6: <img src="/2016/01/07/orient-6-strip.jpg" />  | 7: <img src="/2016/01/07/orient-7-strip.jpg" />  | 8: <img src="/2016/01/07/orient-8-strip.jpg" /> 
+1: <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a> | 2: <a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a>  | 3: <a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a>  | 4: <a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a>
+5: <a href="/2016/01/07/orient-5-strip.jpg"> <img src="/2016/01/07/orient-5-strip.jpg" /> </a> | 6: <a href="/2016/01/07/orient-6-strip.jpg"> <img src="/2016/01/07/orient-6-strip.jpg" /> </a>  | 7: <a href="/2016/01/07/orient-7-strip.jpg"> <img src="/2016/01/07/orient-7-strip.jpg" /> </a>  | 8: <a href="/2016/01/07/orient-8-strip.jpg"> <img src="/2016/01/07/orient-8-strip.jpg" /> </a>
  | | | 
-(補正で行う回転する向きでない事に注意。これらは回転する前の画像です)
+
+(補正で行う回転する向きでない事に注意。これらはその真逆です)
 
 尚、画像の反転が定義されているのは、鏡のように映るインカメラ用だと思われます。[要出典]
 
@@ -132,6 +133,16 @@ $ identify -verbose orient-?.jpg | grep Orient
     exif:Orientation: 8
 ```
 
+* 結果
+
+ | | | 
+----|----|---|---
+1: <a href="/2016/01/07/orient-1.jpg"> <img src="/2016/01/07/orient-1.jpg" /> </a> | 2: <a href="/2016/01/07/orient-2.jpg"> <img src="/2016/01/07/orient-2.jpg" /> </a>  | 3: <a href="/2016/01/07/orient-3.jpg"> <img src="/2016/01/07/orient-3.jpg" /> </a>  | 4: <a href="/2016/01/07/orient-4.jpg"> <img src="/2016/01/07/orient-4.jpg" /> </a> 
+5: <a href="/2016/01/07/orient-5.jpg"> <img src="/2016/01/07/orient-5.jpg" /> </a> | 6: <a href="/2016/01/07/orient-6.jpg"> <img src="/2016/01/07/orient-6.jpg" /> </a>  | 7: <a href="/2016/01/07/orient-7.jpg"> <img src="/2016/01/07/orient-7.jpg" /> </a>  | 8: <a href="/2016/01/07/orient-8.jpg"> <img src="/2016/01/07/orient-8.jpg" /> </a>
+ | | | 
+
+テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。
+
 ちなみに、上記の表に貼り付けた画像は、更に
 ```
 for i in *-?.jpg ; do
@@ -147,4 +158,3 @@ done
    * http://www.cipa.jp/std/documents/j/DC-008-2012_J.pdf
  * ExifのOrientationを見て画像を回転させる
    * http://hackmylife.net/archives/7400448.html
-
