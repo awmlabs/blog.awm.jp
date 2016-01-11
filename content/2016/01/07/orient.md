@@ -141,7 +141,7 @@ $ identify -verbose orient-?.jpg | grep Orient
 5: <a href="/2016/01/07/orient-5.jpg"> <img src="/2016/01/07/orient-5.jpg" /> </a> | 6: <a href="/2016/01/07/orient-6.jpg"> <img src="/2016/01/07/orient-6.jpg" /> </a>  | 7: <a href="/2016/01/07/orient-7.jpg"> <img src="/2016/01/07/orient-7.jpg" /> </a>  | 8: <a href="/2016/01/07/orient-8.jpg"> <img src="/2016/01/07/orient-8.jpg" /> </a>
  | | | 
 
-テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。
+テーブルの中では傾いてますが、画像をクリックすると向きが補正された画像が出ます。(テーブルに表示するのもクリックして表示されるのも同じ JPEG 画像です)
 
 ちなみに、上記の表に貼り付けた画像は、更に
 ```
