@@ -15,9 +15,7 @@ https://speakerdeck.com/yoya/imagemagick-knowhow
 </center>
 
 
-スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。
-
- * Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。
+発表スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があり、ほぼ同じ内容のエントリを作りました。
 
 # 一部界隈で話題
 
@@ -35,7 +33,7 @@ https://speakerdeck.com/yoya/imagemagick-knowhow
 $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 </pre>
 
- * 画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。
+画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。
 
 ## ImageMagick のオプションの順序に注意
 
@@ -75,8 +73,7 @@ WandExport MagickBooleanType MogrifyImage(ImageInfo *image_info,const int argc,
           }
 {{< /highlight >}}
 
-なので順番で結果が変わります。
-逆にいうと順序次第で色んな操作が可能になるという事です。
+逆にいうと順序次第で組み合わせ的に色んな操作が可能になるという事です。
 
 # 補足したい項目
 
@@ -92,3 +89,5 @@ WandExport MagickBooleanType MogrifyImage(ImageInfo *image_info,const int argc,
    * http://blog.awm.jp/2016/01/06/gray/ グレー形式JPEGをPNGに変換すると暗くなる件
  * -define jpeg:size に注意
    * http://blog.awm.jp/2016/01/08/jpeghint/ JPEG の size hinting について
+
+以上です。もし、お役に立つ事があれば幸いです。
