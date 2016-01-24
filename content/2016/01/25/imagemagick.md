@@ -39,20 +39,17 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 
  * ImageMagick は引数を先頭から順に命令実行する
 
-以下のように、for ループで引数を先頭から順番に見て、該当するオプションを個別に実行します。
+以下のように、for ループで引数を先頭から順番に見て、オプションに対応する関数を個別に実行します。
 
  * wand/mogrify.c (convert も引数チェック後にこの関数を呼ぶ)
 
 {{< highlight c >}}
-for (i=1; i < (ssize_t) (argc-1); i++)
-  {
-    option=argv[i];
-＜略＞
 WandExport MagickBooleanType MogrifyImage(ImageInfo *image_info,const int argc,
   const char **argv,Image **image,ExceptionInfo *exception)
 ＜略＞
   for (i=0; i < (ssize_t) argc; i++)
   {
+    option=argv[i];
     ＜略＞
     switch (*(option+1))
     {
