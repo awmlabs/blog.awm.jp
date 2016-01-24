@@ -31,7 +31,7 @@ title = "ImageMagick で画像を比較する"
 
  * difference
 
--compose difference と -auto-level を使うと、違いがあるかもしれない箇所を調べられます。
+-compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
 
 <pre>
 $ convert image.jpg image.gif
@@ -45,10 +45,10 @@ $ mogrify -auto-level  diff.png  #差分画像を明るくする
 
  * identify mean
 
-difference と idenfity mean を組み合わせると画像の違いの度合いが分かります。
+difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。
 
 <pre>
-$ for i in *-logo.gif ; do 
+$ for i in *-logo.gif ; do
 composite -compose difference 6.9.3-0-logo.gif $i t.png ;
 identify -format "%[mean]" t.png  ; echo " : $i" ; done
 </pre>
@@ -73,4 +73,4 @@ $ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
 [Parsed_ssim_0 @ 0x7fe623c00340] SSIM Y:0.886660 U:0.849172 V:0.840235 All:0.858689 (8.498241)
 </pre>
 
-１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されます。これが PNG だと RGB別になります。
+１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが PNG だと RGB別になります。
