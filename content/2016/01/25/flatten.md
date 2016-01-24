@@ -36,7 +36,7 @@ $ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
 
 詳しくは追っていませんが、リサイズでピクセルの補完アルゴリズムが働く際に黒(0,0,0)を元に加色混合でピクセルを計算していくのだろうと想像してます。(要調査)
 
-# -extent で背景を白にできる？
+# -extent で背景を白にできる
 
 <pre>
 $ convert in.png -resize 200x200 out.jpg <img src="../logoblack_hh.jpg" />
@@ -51,7 +51,7 @@ $ convert in.png -resize 200x200 –extent 400x400 out.jpg <img src="../logowhit
 
 # -flatten (レイヤーを重ねる命令)が正しい
 
--extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten で十分ですし意味的に正しい方法です。
+-extent でも同じ結果になるので重箱の隅をついてるようですが、レイヤーを重ねれば良いので -flatten を使うのが意味的に正しいと思います。
 
 <pre>
 $ convert in.png -resize 200x200 –flatten out.jpg <img src="../logowhite_hh.jpg" />
