@@ -24,7 +24,7 @@ https://speakerdeck.com/yoya/imagemagick-knowhow
 もうサムネイルで泣かないための ImageMagick ノウハウ集
 <center> <img src="../cybozuinsideout.png" /> </center>
 
-色んなノウハウが詰まっていて素晴らしい記事ですが、幾つか追加したい情報がありますので勝手に補足してみます。
+色んなノウハウが詰まっていて素晴らしい記事です。便乗して幾つか勝手に補足してみます。
 
 # 良いノウハウ
 
