@@ -9,7 +9,12 @@ title = "もうサムネイルで泣かないための ImageMagick ノウハウ�
 
 # もうサムネイルで泣かないための ImageMagick ノウハウ集に一言
 
- * https://speakerdeck.com/yoya/imagemagick-knowhow
+<center>
+<iframe allowfullscreen="true" allowtransparency="true" frameborder="0" height="497" mozallowfullscreen="true" src="//speakerdeck.com/player/248da47aa52d48ae8d57e8656f117997" style="border:0; padding:0; margin:0; background:transparent;" webkitallowfullscreen="true" width="578"></iframe>
+https://speakerdeck.com/yoya/imagemagick-knowhow
+</center>
+
+
 スライドだと URL のリンクが辿りにくいのとブログ形式で読みたいとの声があったので、ほぼ同じ内容のエントリを作りました。
 
  * Slideshare を使えば、テキストの中身が展開されて便利なのですが、僕は SpeakerDeck 派なので。すみません。
