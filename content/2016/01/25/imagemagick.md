@@ -19,7 +19,7 @@ title = "もうサムネイルで泣かないための ImageMagick ノウハウ�
 もうサムネイルで泣かないための ImageMagick ノウハウ集
 <center> <img src="../cybozuinsideout.png" /> </center>
 
-色んなノウハウが詰まっていて良い記事ですが、幾つか理解の違う場所があるので勝手に補足してみます。
+色んなノウハウが詰まっていて素晴らしい記事ですが、幾つか追加したい情報がありますので勝手に補足してみます。
 
 # 良いノウハウ
 
@@ -87,4 +87,3 @@ WandExport MagickBooleanType MogrifyImage(ImageInfo *image_info,const int argc,
    * http://blog.awm.jp/2016/01/06/gray/ グレー形式JPEGをPNGに変換すると暗くなる件
  * -define jpeg:size に注意
    * http://blog.awm.jp/2016/01/08/jpeghint/ JPEG の size hinting について
-
