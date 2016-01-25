@@ -32,6 +32,7 @@ title = "ImageMagick で画像を比較する"
  * difference
 
 -compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
+以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。
 
 <pre>
 $ convert image.jpg image.gif
@@ -39,9 +40,10 @@ $ composite <u>-compose difference</u> image.jpg image.gif  diff.png
 $ mogrify -auto-level  diff.png  #差分画像を明るくする
 </pre>
 
-<center> <img src="../image7p20.jpg" /> <img src="../image8p20.gif" /> <img src="../image9p20.png" /> </center>
+<center> <img src="../image7p20.jpg" /> <img src="../image8p20.gif" /> <img src="../image9p20.png" /> <br />
+@Dinyc http://www.pixiv.net/member_illust.php?mode=medium&illust_id=13086025 </center>
 
-全体的に画質の劣化が激しいですが、特に風鈴のハイライトの色味が変わっているのが分かります。
+全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。
 
  * identify mean
 
