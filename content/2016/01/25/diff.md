@@ -72,7 +72,7 @@ identify -format "%[mean]" t.png  ; echo " : $i" ; done
 2.6 系にはない機能です。2.8 系の ffmpeg でお試し下さい。
 
 <pre>
-$ ffmpeg -i image7.jpg -i image8.gif -filter_complex ssim -an -f null -
+$ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 ＜略＞
 [Parsed_ssim_0 @ 0x7fe623c00340] SSIM Y:0.886660 U:0.849172 V:0.840235 All:0.858689 (8.498241)
 </pre>
