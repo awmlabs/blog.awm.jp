@@ -60,5 +60,12 @@ $ convert in.png -resize 200x200 –flatten out.jpg <img src="../logowhite_hh.jp
 -background も有効です。
 
 <pre>
-$ convert in.png -resize 200x200 -background red –flatten out.jpg <img src="../logored_hh.jpg" />
+$ convert in.png -resize 200x200 <u>-background red</u> –flatten out.jpg <img src="../logored_hh.jpg" />
 </pre>
+
+尚、引数の順番で挙動が変わるので注意して下さい。
+<pre>
+$ convert in.png -resize 200x200  –flatten <u>-background red</u> out.jpg <img src="../logowhite_hh.jpg" />
+</pre>
+
+背景を赤くぬる前にレイヤー統合してしまったからだと思われます。
