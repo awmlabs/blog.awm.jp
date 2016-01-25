@@ -67,6 +67,9 @@ identify -format "%[mean]" t.png  ; echo " : $i" ; done
 
 # SSIM
 
+ * https://en.m.wikipedia.org/wiki/Structural_similarity
+ * https://ece.uwaterloo.ca/~z70wang/research/ssim/
+
 画質の劣化の指標でよく使われる値で、その簡易版が ffmpeg で計算できます。類似度なので 1.0 が最大値で、違いがある分減って 0 に近づきます。
 
 2.6 系にはない機能です。2.8 系の ffmpeg でお試し下さい。
@@ -77,4 +80,10 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 [Parsed_ssim_0 @ 0x7fe623c00340] SSIM Y:0.886660 U:0.849172 V:0.840235 All:0.858689 (8.498241)
 </pre>
 
-１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB別になります。
+１つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB 別になります。
+
+あと、未検証ですが、ImageMagick のフィルタを駆使して SSIM を算出するスクリプトがあります。
+
+ * http://www.fmwconcepts.com/imagemagick/ssim/index.php
+
+SSIM アルゴリズム実装は有名なのが沢山あるので、無理に ImageMagick を使わなくても良いのかなと思います。
