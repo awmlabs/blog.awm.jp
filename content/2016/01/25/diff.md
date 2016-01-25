@@ -29,7 +29,7 @@ title = "ImageMagick で画像を比較する"
 
 ## 画像の差分
 
- * difference
+### compose difference
 
 -compose difference と -auto-level を使うと、違いがあるかもしれない箇所を浮き彫りにできます。
 以下のは JPEG 画像を GIF に変換して劣化の激しい場所を調べるコマンドです。
@@ -45,7 +45,7 @@ $ mogrify -auto-level  diff.png  #差分画像を明るくする
 
 全体的に劣化が激しいですが、特に風鈴のハイライトの色味が大きく変わっているのが分かります。
 
- * identify mean
+### identify mean
 
 difference と idenfity mean を組み合わせると画像の違いの度合いを算出できます。
 
