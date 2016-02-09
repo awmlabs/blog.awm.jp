@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title> YCbCr </title>
+</head>
+<body>
+
+<table border="1" width="500">
+<tr><td colspan="3">
+<center> <canvas width="400", height="200" id="paint"> </canvas> </center>
+</td>
+<tr>
+  <td width="33%"> <div> RED:   <span id="red_num"> _ </span>
+      <canvas width="32" height="16" id="red_paint">   </canvas>
+    </div>
+    <input type="range" id="red"   min="0" max="255" />
+  </td>
+  <td width="33%"> <div> GREEN: <span id="green_num"> _ </span>
+      <canvas width="32" height="16" id="green_paint"> </canvas>
+    </div>
+    <input type="range" id="green" min="0" max="255" />
+  </td>
+  <td> <div> BLUE:  <span id="blue_num"> _ </span>
+      <canvas width="32" height="16" id="blue_paint">  </canvas>
+    </div>
+    <input type="range" id="blue"  min="0" max="255" />
+  </td>
+</tr>
+<tr>
+  <td> <div> Y:  <span id="y_num"> _ </span>
+      <canvas width="32" height="16" id="y_paint">  </canvas>
+    </div>
+    <input type="range" id="y"  min="0" max="255" />
+  </td>
+  <td> <div> Cb: <span id="cb_num"> _ </span>
+      <canvas width="32" height="16" id="cb_paint"> </canvas>
+    </div>
+    <input type="range" id="cb" min="0" max="255" />
+  </td>
+  <td> <div> Cr: <span id="cr_num"> _ </span>
+      <canvas width="32" height="16" id="cr_paint"> </canvas>
+    </div>
+    <input type="range" id="cr" min="0" max="255" />
+  </td>
+</tr>
+</table>
+
+<pre border="1">
+* RGB => YCbCr
+    var y  =  0.29891 * r + 0.58661 * g + 0.11448 * b;
+    var cb = -0.16874 * r - 0.33126 * g + 0.50000 * b + 128;
+    var cr =  0.50000 * r - 0.41869 * g - 0.08131 * b + 128;
+* YCbCr => RGB
+    var r = y + 1.40200 * (cr - 128);
+    var g = y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128);
+    var b = y + 1.77200 * (cb - 128);
+</pre>
+ref) <a href="http://www.technotype.net/tutorial/tutorial.php?fileId=%7BImage%20processing%7D&sectionId=%7Bconverting-between-rgb-and-ycbcr-color-space%7D"> RGBとYCbCrの相互変換 @www.technotype.net </a>
+
+<script type="text/javascript" src="./ycbcr.js"> </script>
+</body>
+</html>
