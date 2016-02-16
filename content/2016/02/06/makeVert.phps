@@ -48,8 +48,8 @@ function YCbCr2RGB($ycbcr) {
 
 $vertList = [];
 foreach ($vertUnitList as $id => $u) {
-    //    $vertList []=RGB2YCbcr($u);
-    $vertList []= $u;
+    // $vertList []= $u;
+    $vertList []=RGB2YCbcr($u);
 }
 
 foreach ($vertList as $vert) {
