@@ -15,7 +15,7 @@ JPEG で保存する色は RGB でなく YCbCr なので、その話。
 
 RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方式ですが、JPEG は YCbCr で色を保存します。Y (輝度)、Cb(青の色差)、Cr(赤の色差)です。
 
-色空間の CIE-XYZ [^1]で輝度を Y 軸にとるので Y をよく使います。Cb は Chroma(色度) の Blue, Cr は Red です。
+Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。
 
 大雑把にはこんなイメージ。
 <center> <img src="../ycbcr.jpg" /> </center>
