@@ -67,8 +67,6 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
  * https://en.wikipedia.org/wiki/Chroma_subsampling
  * Chrome subsampling notation
    * http://www.poynton.com/PDFs/Chroma_subsampling_notation.pdf
- * YUV/YCbCr Chroma Subsampling Ratio
-   * http://binglongx.com/tag/yuv444/
  * YUVのサンプリング種類
    * http://blogs.yahoo.co.jp/linear_pcm0153/24210613.html
  * Digital Color Coding
