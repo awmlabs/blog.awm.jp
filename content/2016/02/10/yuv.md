@@ -54,7 +54,7 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
 
 <center> <img src="../yuv440.png" /> </center>
 
- * YUV420 : 横方向に1/2、縦方向も1/2間引く。
+ * YUV420 : 横方向に 1/2 、縦方向も 1/2 間引く。
 
 <center> <img src="../yuv420.png" /> </center>
 
