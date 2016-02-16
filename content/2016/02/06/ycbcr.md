@@ -77,7 +77,15 @@ JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプル�
 
 ### YUVxxx
 
-間引きかたによって YUV444、YUV422 といった表現があります。以下のページで詳しく説明します。
+間引きかたによって YUV444、YUV422 といった表現があります。
+
+* YUV444
+<center> <img src="../yuv444.png" /> </center>
+
+* YUV422
+<center> <img src="../yuv422.png" /> </center>
+
+以下のページで詳しく説明します。
 
  * JPEG のクロマサブサンプリングと YUVxxx について
    * http://blog.awm.jp/2016/02/10/yuv/
