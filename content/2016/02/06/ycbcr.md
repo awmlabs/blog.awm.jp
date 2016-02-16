@@ -95,7 +95,8 @@ JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプル�
 RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバーする為に YCbCr は 0-255 の範囲をハミ出さないように狭めにとります。
 
  * 大きな立体が RGB の空間で、中の小さい立体が YCbCr のとりうる空間の大きさを示します。
-<center> <img src="../rgb2ycbcr_half.png" /> </center>
+<center> <img src="../rgb2ycbcr_half.png" /> </center> (<a href="../RGB2YCbCr.gcx"> Grapher ファイル</a> | プロットデータ生成スクリプト <a href="../"> makeVert.phps </a>)
+
 (奥行きが分かりにくいのですが頂点の丸が大きい方が手前です。後で改善します)
 
  大小２つの立方体の間にある隙間が RGB<=>YCbCr で死ぬ無駄な空間で、YCbCr のビット数を RGB と同じにすると粒度が荒くなり表現できる色数が減ります。色数が1/4ほどまで減るとも言われます。
