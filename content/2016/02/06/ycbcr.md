@@ -106,6 +106,11 @@ RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバ�
  * ConvertToRGB
   * http://csbarn.blogspot.jp/2012/01/converttorgb.html
 
+# まとめ
+
+ * メリットとして色成分だけ間引く事で見た目をあまり変えずにデータを少なく出来る。
+ * デメリットとして 8bit depth のはずが実際には約 7bit depth 分しかない。(ちなみに人間の目は 10bit まで識別可能)
+
 # 参考ページ
 
  * ImageMagickでHSLとHSV色空間を理解する
