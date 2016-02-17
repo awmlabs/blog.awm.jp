@@ -18,7 +18,7 @@ RGB は Red(赤)、Green(緑)、Blue(青)の加色混合で色を表現する方
 Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度) の Blue, Cr は Red です。
 
 大雑把にはこんなイメージ。
-<center> <img src="../ycbcr.jpg" /> </center>
+<center> <img src="../ycbcrvolume.png" /> </center>
 
  * スライダーで色を調整するデモを作りました。お試し下さい。
    * http://blog.awm.jp/color/ycbcrslider.html
