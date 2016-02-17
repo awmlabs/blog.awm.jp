@@ -70,8 +70,8 @@ function showColorYCbCr(ycbcr) {
     // console.debug("showColorYCbCr:", ycbcr);
     var y = ycbcr[0], cb = ycbcr[1], cr = ycbcr[2];
     var rgb1 = ycbcr2rgb([  y, 127, 127]),
-	rgb2 = ycbcr2rgb([127,  cb,   0]),
-	rgb3 = ycbcr2rgb([127,   0,  cr]);
+	rgb2 = ycbcr2rgb([127,  cb,   127]),
+	rgb3 = ycbcr2rgb([127,  127,  cr]);
     getById("y_paint").style.backgroundColor  = "#" + strN6(rgb1);
     getById("cb_paint").style.backgroundColor = "#" + strN6(rgb2);
     getById("cr_paint").style.backgroundColor = "#" + strN6(rgb3);
