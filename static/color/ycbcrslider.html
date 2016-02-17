@@ -47,13 +47,13 @@
 
 <pre border="1">
 * RGB => YCbCr
-    var y  =  0.29891 * r + 0.58661 * g + 0.11448 * b;
-    var cb = -0.16874 * r - 0.33126 * g + 0.50000 * b + 128;
-    var cr =  0.50000 * r - 0.41869 * g - 0.08131 * b + 128;
+    Y  =  0.299  * R + 0.587  * G + 0.114  * B
+    Cb = -0.1687 * R - 0.3313 * G + 0.5    * B + 128
+    Cr =  0.5    * R - 0.4187 * G - 0.0813 * B + 128
 * YCbCr => RGB
-    var r = y + 1.40200 * (cr - 128);
-    var g = y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128);
-    var b = y + 1.77200 * (cb - 128);
+    R = Y                        + 1.402   * (Cr - 128)
+    G = Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128)
+    B = Y + 1.772   * (Cb - 128)
 </pre>
 ref) <a href="http://www.technotype.net/tutorial/tutorial.php?fileId=%7BImage%20processing%7D&sectionId=%7Bconverting-between-rgb-and-ycbcr-color-space%7D"> RGBとYCbCrの相互変換 @www.technotype.net </a>
 

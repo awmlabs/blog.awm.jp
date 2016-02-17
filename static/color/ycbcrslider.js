@@ -34,17 +34,17 @@ function strN6(n) {
 // http://www.technotype.net/tutorial/tutorial.php?fileId=%7BImage%20processing%7D&sectionId=%7Bconverting-between-rgb-and-ycbcr-color-space%7D
 function rgb2ycbcr(rgb) {
     var r = rgb[0], g = rgb[1], b = rgb[2];
-    var y  =  0.29891 * r + 0.58661 * g + 0.11448 * b;
-    var cb = -0.16874 * r - 0.33126 * g + 0.50000 * b + 128;
-    var cr =  0.50000 * r - 0.41869 * g - 0.08131 * b + 128;
+    var y  =  0.299  * r + 0.587  * g + 0.114  * b;
+    var cb = -0.1687 * r - 0.3313 * g + 0.5    * b + 128;
+    var cr =  0.5    * r - 0.4187 * g - 0.0813 * b + 128;
     return [Math.round(y), Math.round(cb), Math.round(cr)];
 }
 
 function ycbcr2rgb(ycbcr) {
     var y = ycbcr[0], cb = ycbcr[1], cr = ycbcr[2];
-    var r = y + 1.40200 * (cr - 128);
+    var r = y                        + 1.402   * (cr - 128);
     var g = y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128);
-    var b = y + 1.77200 * (cb - 128);
+    var b = y + 1.772   * (cb - 128);
     return [Math.round(r), Math.round(g), Math.round(b)];
 }
 

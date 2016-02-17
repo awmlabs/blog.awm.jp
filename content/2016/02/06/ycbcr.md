@@ -28,16 +28,16 @@ Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度)
 ### RGB => YCbCr
    |   |   | 
 ---|---|---|---
-Y  |輝度信号            |  0.29891 * R + 0.58661 * G + 0.11448 * B |
-Cb |青の色差 <br> (B-Y) | -0.16874 * R - 0.33126 * G + 0.50000 * B + 128 |
-Cr |赤の色差 <br> (R-Y) |  0.50000 * R - 0.41869 * G - 0.08131 * B + 128 |
+Y  | 輝度信号             |  0.299  * R + 0.587  * G + 0.114  * B       |
+Cb | 青の色差 <br> (B'-Y) | -0.1687 * R - 0.3313 * G + 0.5    * B + 128 |
+Cr | 赤の色差 <br> (R'-Y) |  0.5    * R - 0.4187 * G - 0.0813 * B + 128 |
 
 ###  YCbCr => RGB
    |   |   | 
 ---|---|---|---
-R |赤 <br> Y + Cr'       | Y + 1.40200 * (Cr - 128) |
-G |緑 <br> Y - Cb' - Cr' | Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128) |
-B |青 <br> Y + Cb'       | Y + 1.77200 * (Cb - 128) |
+R |赤 <br> (Y       + Cr') | Y                        + 1.402   * (Cr - 128) |
+G |緑 <br> (Y - Cb' - Cr') | Y - 0.34414 * (Cb - 128) - 0.71414 * (Cr - 128) |
+B |青 <br> (Y + Cb'      ) | Y + 1.772   * (Cb - 128)                        |
 
 ## RGB との比較
 
@@ -116,10 +116,12 @@ RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバ�
 
 # 参考ページ
 
+ * JPEG File Interchange Format
+   * https://www.w3.org/Graphics/JPEG/jfif3.pdf
  * RGB⇔YCbCr変換
    * http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html
+ * XYZ表色系
+   * http://www.dic-color.com/knowledge/xyz.html
  * ImageMagickでHSLとHSV色空間を理解する
    * http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html
- * XYZ表色系
-  * http://www.dic-color.com/knowledge/xyz.html
 
