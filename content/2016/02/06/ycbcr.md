@@ -20,6 +20,9 @@ Y は色空間の CIE-XYZ で輝度に対応する Y 軸。Cb は Chroma(色度)
 大雑把にはこんなイメージ。
 <center> <img src="../ycbcr.jpg" /> </center>
 
+ * スライダーで色を調整するデモを作りました。お試し下さい。
+   * http://blog.awm.jp/color/ycbcrslider.html
+
 ## 変換式
 
 ### RGB => YCbCr
