@@ -113,7 +113,10 @@ RGB と YCbCr は色空間が斜めで対応するので、RGB を全部カバ�
 
 # 参考ページ
 
+ * RGB⇔YCbCr変換
+   * http://koujinz.cocolog-nifty.com/blog/2009/03/rgbycbcr-a4a5.html
  * ImageMagickでHSLとHSV色空間を理解する
    * http://smash.nobuto-murata.org/2009/12/imagemagickhslhsv.html
  * XYZ表色系
   * http://www.dic-color.com/knowledge/xyz.html
+
