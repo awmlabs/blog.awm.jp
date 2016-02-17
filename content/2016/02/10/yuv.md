@@ -62,6 +62,15 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
 
 <center> <img src="../yuv411.png" /> </center>
 
+# まとめ
+
+ * YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
+   * a は Y の横方向サンプル数で4固定
+   * b は横方向の間引き。Cb,Cr の横方向サンプル数で 4, 2, 1 のいずれか
+   * c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか。
+ * YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ
+ * YUV422 は Cb,Cr を横方向で 1/2 で間引く。JPEG や動画でよく使われる
+
 # 参考
 
  * https://en.wikipedia.org/wiki/Chroma_subsampling
