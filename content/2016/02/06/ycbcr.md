@@ -75,9 +75,9 @@ JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプル�
 
 ### クロマサブサンプリング
 
-### YUVxxx
+### YUVabc
 
-間引きかたによって YUV444、YUV422 といった表現があります。
+間引きかたによって YUV444、YUV422 のように表現します。
 
 * YUV444
 <center> <img src="../yuv444.png" /> </center>
@@ -85,9 +85,9 @@ JPEG や多くの動画形式では Y はそのままで Cb, Cr のサンプル�
 * YUV422
 <center> <img src="../yuv422.png" /> </center>
 
-以下のページで詳しく説明します。
+より詳しくは以下のエントリをご参考ください。
 
- * JPEG のクロマサブサンプリングと YUVxxx について
+ * JPEG のクロマサブサンプリングと YUVabc について
    * http://blog.awm.jp/2016/02/10/yuv/
 
 ## デメリット

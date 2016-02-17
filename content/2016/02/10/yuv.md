@@ -3,11 +3,11 @@ categories = ["YUV"]
 date = "2016-02-10T21:53:44+09:00"
 draft = false
 tags = ["JPEG", "YUV", "SabSampling"]
-title = "JPEG のクロマサブサンプリングと YUVxxx について"
+title = "JPEG のクロマサブサンプリングと YUVabc について"
 
 +++
 
-# JPEG のクロマサブサンプリングと YUVxxx について
+# JPEG のクロマサブサンプリングと YUVabc について
 
 YCbCr については以下のページで紹介しました。
 
@@ -18,9 +18,9 @@ YCbCr のメリットとして説明したクロマサブサンプリングの�
 
 JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当てはめて解説します。YUV と YCbCr は計算式が違いますが、サブサンプリングの記法としては同じものが使われます。
 
-# YUVxxx の種類
+# YUVabc の種類
 
-よく見る表現として、YUV444 、YUV422 というのがあります。
+よく見る表現として、YUV444 、YUV422 の２つがあります。
 
  * YUV444 の Y,Cb,Cr の並び
 
@@ -38,9 +38,9 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
 
 <center> <img src="../yuv422.png" /> </center>
 
-# 色々な YUVxxx 
+# 色々な YUVabc 
 
-実際に表記を見たことのある YUVxxx を列挙します。(他で実例あれば教えて下さい)
+実際に表記を見たことのある YUVabc を列挙します。(他で実例あれば教えて下さい)
 
  * YUV444 (再掲) : 間引かない
 
