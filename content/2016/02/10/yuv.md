@@ -24,7 +24,7 @@ JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当て�
 
  * YUV444 の Y,Cb,Cr の並び
 
-YUVabc と見立てて a, b, c の番号は以下のように対応します。
+YUVabc と見立てると a, b, c の番号は以下のように対応します。
 
 <center> <img src="../yuv444.png" /> </center>
 
@@ -46,7 +46,7 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
 
 <center> <img src="../yuv444.png" /> </center>
 
- * YUV422 (再掲) : 横方向方向に 1/2 間引く。
+ * YUV422 (再掲) : 横方向に 1/2 間引く。
 
 <center> <img src="../yuv422.png" /> </center>
 
