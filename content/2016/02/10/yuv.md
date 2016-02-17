@@ -12,7 +12,7 @@ title = "JPEG のクロマサブサンプリングと YUVxxx について"
 YCbCr については以下のページで紹介しました。
 
  * JPEG の YCbCr について
-   * http://localhost:1313/2016/02/06/ycbcr/
+   * https://blog.awm.jp/2016/02/06/ycbcr/
 
 YCbCr のメリットとして説明したクロマサブサンプリングの種類についてまとめます。
 
