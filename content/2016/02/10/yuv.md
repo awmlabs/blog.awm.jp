@@ -3,11 +3,11 @@ categories = ["YUV"]
 date = "2016-02-10T21:53:44+09:00"
 draft = false
 tags = ["JPEG", "YUV", "SabSampling"]
-title = "JPEG のクロマサブサンプリングと YUVabc について"
+title = "JPEG のクロマサブサンプリングと YUVabc"
 
 +++
 
-# JPEG のクロマサブサンプリングと YUVabc について
+# JPEG のクロマサブサンプリングと YUVabc
 
 YCbCr については以下のページで紹介しました。
 
