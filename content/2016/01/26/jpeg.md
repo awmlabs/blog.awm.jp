@@ -44,6 +44,32 @@ $ convert orig.jpg -sampling-factor "2x2,1x1,1x1" yuv420.jpg
 $ convert orig.jpg -sampling-factor "4x2,1x1,1x1" yuv410.jpg
 ```
 
+# Exif (Exittool で変換)
+
+## Orientation
+
+Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)
+
+<center> <img src="../exif_orientation.png"> </center>
+
+Exif Orientation の向きについては以下の記事をどうぞ。
+
+ * https://blog.awm.jp/2016/01/07/orient/
+
+<center> <img src="../orient-38per.png"> </center>
+
+既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。
+
+```
+$ exiftool orig.jpgt -Orientation=0 -n orient0.jpg
+$ exiftool orig.jpgt -Orientation=1 -n orient1.jpg
+$ exiftool orig.jpgt -Orientation=2 -n orient2.jpg
+$ exiftool orig.jpgt -Orientation=3 -n orient3.jpg
+$ exiftool orig.jpgt -Orientation=4 -n orient4.jpg
+$ exiftool orig.jpgt -Orientation=5 -n orient5.jpg
+$ exiftool orig.jpgt -Orientation=6 -n orient6.jpg
+$ exiftool orig.jpgt -Orientation=7 -n orient7.jpg
+```
 # Profile
 
 ## ICC Profile
@@ -84,32 +110,6 @@ $ convert srgb.jpg -profile sRGB.icc srgb.icc # 見た目変わらない
 $ convert srgb.jpg -profile  GBR.icc  gbr.icc # 見た目変わらない
 ```
 <center> <img src="../icc-profile2.png"> </center>
-# Exif (Exittool で変換)
-
-## Orientation
-
-Exif の Orientation タグを指定する事で表示の時の画像の向きを制御できます。(たまに無視するビューアもあります)
-
-<center> <img src="../exif_orientation.png"> </center>
-
-Exif Orientation の向きについては以下の記事をどうぞ。
-
- * https://blog.awm.jp/2016/01/07/orient/
-
-<center> <img src="../orient-38per.png"> </center>
-
-既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。
-
-```
-$ exiftool orig.jpgt -Orientation=0 -n orient0.jpg
-$ exiftool orig.jpgt -Orientation=1 -n orient1.jpg
-$ exiftool orig.jpgt -Orientation=2 -n orient2.jpg
-$ exiftool orig.jpgt -Orientation=3 -n orient3.jpg
-$ exiftool orig.jpgt -Orientation=4 -n orient4.jpg
-$ exiftool orig.jpgt -Orientation=5 -n orient5.jpg
-$ exiftool orig.jpgt -Orientation=6 -n orient6.jpg
-$ exiftool orig.jpgt -Orientation=7 -n orient7.jpg
-```
 
 # グレイJPEG
 
