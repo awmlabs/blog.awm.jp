@@ -96,7 +96,7 @@ Exif Orientation の向きについては以下の記事をどうぞ。
 
  * https://blog.awm.jp/2016/01/07/orient/
 
-<center> <img src="../orient-half.png"> </center>
+<center> <img src="../orient-38per.png"> </center>
 
 既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。
 
