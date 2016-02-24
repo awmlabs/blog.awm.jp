@@ -12,7 +12,7 @@ JPEG は同じように見える画像でも、バイナリ的に色んな形式
 
 # プログレッシブJPEG
 
-読み込み始めは粗い画像を表示して、読み込みながら高画質に更新するような表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
+読みはじめに粗い画像を表示して、読み進めるにつれて画質に更新する表示が出来ます。ネットワーク回線が細い環境に嬉しい形式です。
 周波数成分が粗い方から段階的に分けて JPEG チャンクに配置する事で実現します。
 
 <center> <img src="../progressive.png"> </center>
@@ -130,4 +130,4 @@ $ convert orig.jpg -type grayscale gray.jpg
  * Exiftool
    * http://www.sno.phy.queensu.ca/~phil/exiftool/
 
-[^1]: CMYK の値で持つ事もできます。
+[^1]: Grayscale や CMYK の値で持つ事もできます。
