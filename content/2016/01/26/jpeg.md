@@ -61,15 +61,17 @@ Exif Orientation の向きについては以下の記事をどうぞ。
 既に Exif Orientation が含まれる画像ファイルであれば ImageMagick で更新出来ますが、入っていない場合に新規に追加する事は無理そうです。このケースでは Exiftool を使います。
 
 ```
-$ exiftool orig.jpgt -Orientation=0 -n orient0.jpg
-$ exiftool orig.jpgt -Orientation=1 -n orient1.jpg
-$ exiftool orig.jpgt -Orientation=2 -n orient2.jpg
-$ exiftool orig.jpgt -Orientation=3 -n orient3.jpg
-$ exiftool orig.jpgt -Orientation=4 -n orient4.jpg
-$ exiftool orig.jpgt -Orientation=5 -n orient5.jpg
-$ exiftool orig.jpgt -Orientation=6 -n orient6.jpg
-$ exiftool orig.jpgt -Orientation=7 -n orient7.jpg
+$ exiftool orig.jpg -Orientation=0 -n -o orient0.jpg
+$ exiftool orig.jpg -Orientation=1 -n -o orient1.jpg
+$ exiftool orig.jpg -Orientation=2 -n -o orient2.jpg
+$ exiftool orig.jpg -Orientation=3 -n -o orient3.jpg
+$ exiftool orig.jpg -Orientation=4 -n -o orient4.jpg
+$ exiftool orig.jpg -Orientation=5 -n -o orient5.jpg
+$ exiftool orig.jpg -Orientation=6 -n -o orient6.jpg
+$ exiftool orig.jpg -Orientation=7 -n -o orient7.jpg
 ```
+※ -o をつけ忘れると orig.jpg を上書きしてしまうので注意
+
 # Profile
 
 ## ICC Profile
