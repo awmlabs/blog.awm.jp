@@ -28,7 +28,9 @@ $ convert orig.jpg -interlace JPEG progressive.jpg
 
 基本的に [^1] JPEG は色を YCbCr の３つの値で保持していて、色味を表す Cb と Cr だけ間引く事で見た目をあまり変えずにデータ量を削減する事ができます。人の目が色味の変化に鈍感な性質を利用する方式です。
 
- * JPEG のクロマサブサンプリングと YUVxxx について
+ * JPEG の YCbCr について
+   * https://blog.awm.jp/2016/02/06/ycbcr/
+ * JPEG のクロマサブサンプリングと YUVabc
    * http://blog.awm.jp/2016/02/10/yuv/
 
 <center> <img src="../yuvabc.png"> </center>
