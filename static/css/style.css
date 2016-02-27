@@ -423,6 +423,7 @@ article.single tr:last-child td {
 article.single th {
   text-align: left;
   font-weight: bold;
+  color: #f4f4f4;
   vertical-align: bottom;
 }
 
