@@ -399,6 +399,10 @@ article.single table {
   border-spacing: 0;
   max-width: 100%;
   width: 100%;
+  border-style: inset;
+  border-width: 3px;
+  background: #105030;
+  color: #ffffff;
 }
 
 article.single th,
