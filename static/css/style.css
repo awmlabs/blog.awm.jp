@@ -31,11 +31,10 @@ body {
   font-size: 100%;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, Tahoma, Verdana, Arial, sans-serif;
 /*  font-family: 'Source Code Pro', monospace; */
-  width: 800px; // for iPhone
 }
 
 .container {
-  max-width: 52em;
+//  max-width: 52em; // iPhone6plus だと狭くなる
   margin-left: auto;
   margin-right: auto;
 }
