@@ -1,7 +1,7 @@
 +++
 categories = ["PNG"]
 date = "2016-01-26T14:55:42+09:00"
-draft = true
+draft = false
 tags = ["PNG", "ImageMagick", "Format"]
 title = "ImageMagick で PNG の形式を変換"
 +++
@@ -13,7 +13,7 @@ PNG は同じように見える画像でも、バイナリ的に色んな形式�
 
 # カラータイプ
 
-PNG は以下の5種類のカラータイプがあります。
+PNG は以下の5種類のカラータイプがあります。仕様書からコピペします。
 
 Color  Type | Allowed Bit Depths | Interpretation
 ----|----|----
@@ -23,8 +23,7 @@ Color  Type | Allowed Bit Depths | Interpretation
 4 |       8,16 | Each pixel is a grayscale sample, followed by an alpha sample.
 6 |       8,16 | Each pixel is an R,G,B triple, followed by an alpha sample.
 
-意訳＆再構築)
-
+日本語に訳しつつ、いくつか情報を追記してみます。
 
 カラー型 | ビット<br />深度 | PLTE | tRNS | ピクセル値の解釈
 ----|----|----|----|----
@@ -92,9 +91,8 @@ $ convert Opaopa.png  png32:Opaopa-png32.png
 
 ## cHRM (基本色度)
 
-sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。
-
-## sRGB
+基本色度やホワイトバランスを指定します。
+尚、sRGB 又は iCPP チャンクがある場合、cHRM チャンクは無効です。
 
 ## iCPP (ICC プロファイル)
 
@@ -102,8 +100,28 @@ ICC プロファイルを埋め込めます。 (JPEG と同じ要領です)
 
 ```
 $ convert Opaopa.png -profile sRGB.icc Opaopa-sRGB.png
+```
+<center> <img src="../Opaopa-sRGB.png"> </center>
+
+```
 $ convert Opaopa.png -profile GBR.icc Opaopa-GBR.png
 ```
+<center> <img src="../Opaopa-GBR.png"> </center>
+```
+$ convert Opaopa-sRGB.png -profile GBR.icc Opaopa-sRGB-GBR.png
+```
+<center> <img src="../Opaopa-sRGB-GBR.png"> </center>
+
+```
+$ convert Opaopa-sRGB-GBR.png -strip Opaopa-sRGB-GBR-strip.png
+```
+<center> <img src="../Opaopa-sRGB-GBR-strip.png"> </center>
+
+JPEG の時と同じのようです。
+
+ * 元画像ファイルに ICC プロファイルがない場合
+    *  => 単に ICC プロファイルを付けるだけ
+ * ICC プロファイルがあった場合 => 見た目の色が変わらないよう画像データのRGBを書き換えつつ ICCプロファイルを上書きする
 
 ## bKGD (背景色)
 
@@ -113,7 +131,7 @@ $ convert Opaopa.png -profile GBR.icc Opaopa-GBR.png
 
 ## pHYs
 
-もしかしたら印刷に影響するかもしれません。
+DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。
 
 ## sBIT
 
