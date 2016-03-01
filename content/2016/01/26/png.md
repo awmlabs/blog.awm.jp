@@ -54,7 +54,7 @@ $ convert Opaopa.png -type Grayscale Opaopa-type0.png
 $ convert Opaopa.png png24:Opaopa-png24.png
 ```
 
- * tRNS チャンクをつける事で透明ピクセルも表現できます。但し、0 か 255 のどちらかで半透明は表現できません。大人しく Type 6 の RGBA 形式を使いましょう。
+ * tRNS チャンクをつける事で透明ピクセルも表現できます。但し、どの色を透明にするかを指定する方式なので、透明か不透明のどちらかで半透明は表現できません。大人しく Type 6 の RGBA 形式を使いましょう。
  * PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)
 
 ## Type:3 パレット (PNG8)
