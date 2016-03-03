@@ -87,7 +87,7 @@ $ convert Opaopa.png  png32:Opaopa-png32.png
 
 ## gAMA (ガンマ補正)
 
-単純にガンマ値を指定します。
+単純にガンマ値を指定します。BigEndian の4byteで表現していて、ガンマ値を100000倍した値を格納します。逆にいうと、バイナリを整数として読み出し、1/100000 した値がガンマ値です。
 
 ## cHRM (基本色度)
 
@@ -131,19 +131,19 @@ JPEG の時と同じのようです。
 
 ## pHYs
 
-DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。
+DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像度を指定します。印刷に影響するかもしれません。単位がインチでなくメートルなので少し計算が面倒です。
 
 ## sBIT
 
 元画像データの Bit深度を記録します。
-恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えるようです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味ないので。
+恐らく、任意のビット深度を表現できる画像データ(例えば BMP とか)から PNG に変換した後で、また元のビット深度に戻したいといった場合に使えそうです。ビット深度を下げるような変換をした場合はつけないよう勧めています。意味がないので。
 
 # 参考 URL
 
  * PNG (Portable Network Graphics) Specification, Version 1.2
-   * http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf
+   * (PDF版) http://www.libpng.org/pub/png/spec/1.2/png-1.2.pdf
+   * (HTML版) http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html
  * PNGについて
    * http://homepage2.nifty.com/sophia0/png.html
  * JPG ファイルフォーマット
    * http://www.setsuki.com/hsp/ext/jpg.htm
-
