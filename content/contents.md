@@ -1,8 +1,8 @@
 +++
 categories = ["Index"]
 date = "2016-01-26T18:09:45+09:00"
-draft = true
-tags = ["ImageMagick", "JPEG", "Exif", "Hugo"]
+draft = false
+tags = []
 title = "目次"
 
 +++
@@ -14,10 +14,18 @@ title = "目次"
 
 # JPEG
 
+ * ImageMagick で JPEG の形式を変換
+   * http://localhost:1313/2016/01/26/jpeg/
+
 ## Orientation
 
  * JPEG Exif Orientation の操作
    * http://blog.awm.jp/2016/01/07/orient/
+
+# PNG
+
+ * ImageMagick で PNG の形式を変換
+   * http://localhost:1313/2016/01/26/png/
 
 # Hugo
 
