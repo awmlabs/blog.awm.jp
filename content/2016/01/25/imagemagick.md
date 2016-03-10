@@ -36,6 +36,25 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 
 画像や処理によって予期しない量のメモリを使われる事があるので、-limit memory で制限をかけるのと、仮にディスクが使われた日には極端に遅くなるので -limit disk も必要です。
 
+## CMYK 画像を考慮しよう
+
+画像データの色の表現は主に RGB と CMYK が使われます。この内 CMYK の画像をそのままリサイズすると色味が壊れます。これはリサイズの補間アルゴリズムがリニアRGBを前提としているからだと思われます。
+
+ちなみに、この"リニア"RGB というのが曲者で、画像は sRGB で入っている事が多くガンマ補正がかかっているので、実は微妙に明るさが期待したものより暗くなる事があります。
+補間の問題なのでドットが疎らに入っている画像で特に暗くなる傾向があります。
+<!-- 色数少なめでディザをかけた画像で実験すると顕著に差が出ます。 -->
+
+厳密に処理したい場合は RGB にしてから処理すると良いでしょう。
+
+ * Resizing with Colorspace Correction
+  * http://www.imagemagick.org/Usage/resize/#resize_colorspace
+
+```
+$ convert earth_lights_4800.tif \
+          -colorspace RGB -resize 500 --colorspace sRGB \
+          earth_lights_colorspace.png
+```
+
 ## ImageMagick のオプションの順序に注意
 
  * ImageMagick は引数を先頭から順に命令実行する
