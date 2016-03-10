@@ -96,15 +96,42 @@ WandExport MagickBooleanType MogrifyImage(ImageInfo *image_info,const int argc,
 
 対応するブログのエントリを並べます。
 
- * 画像比較は人間の眼で行うべし
-   * http://blog.awm.jp/2016/01/25/diff/ ImageMagick で画像を比較する
- * Orientation を考慮しよう
-   * http://blog.awm.jp/2016/01/06/orient/ -auto-orient でオフセットがズレる件
- * 透過画像を考慮しよう
-   * http://blog.awm.jp/2016/01/25/flatten/ 透明度を含む画像を JPEG に変換する時の背景色
- * グレイスケール画像を考慮しよう
-   * http://blog.awm.jp/2016/01/06/gray/ グレー形式JPEGをPNGに変換すると暗くなる件
- * -define jpeg:size に注意
-   * http://blog.awm.jp/2016/01/08/jpeghint/ JPEG の size hinting について
+## 画像比較は人間の眼で行うべし
 
-以上です。もし、お役に立つ事があれば幸いです。
+ある程度、計算で差分の多い画像や領域を自動抽出できます。
+
+ * ImageMagick で画像を比較する
+   * http://blog.awm.jp/2016/01/25/diff/
+
+## Orientation を考慮しよう
+
+わざわざ JPEG を経由しなくても +repage で対処出来る。かもしれません。
+
+ * -auto-orient でオフセットがズレる件
+   * http://blog.awm.jp/2016/01/06/orient/
+
+## 透過画像を考慮しよう
+
+-extent は副作用的に対処出来るだけで、実際の処理は -flatten です。が、結果はおそらく同じなので重箱の隅付きです。
+
+ * 透明度を含む画像を JPEG に変換する時の背景色
+   * http://blog.awm.jp/2016/01/25/flatten/
+
+## グレイスケール画像を考慮しよう
+
+6.8.0-0 〜 6.8.0-7 にあった色空間変換のバグです。それ以降のバージョンでは問題ないはずです。あと回避策として PNG24, PNG32 に変換するのも良いですが、減色が理由ではないので PNG8 でも良いかもしれません。
+
+ * グレー形式JPEGをPNGに変換すると暗くなる件
+   * http://blog.awm.jp/2016/01/06/gray/
+
+## -define jpeg:size に注意
+
+大きい方向にリサイズする時はメモリを余計に消費しますが、小さい方にリサイズする場合は大変有効ですので、是非使いましょう。元の 1/2 以下にリサイズする場合は jpeg:size をつける。という条件をつけるのが良さそうです。
+
+ * JPEG の size hinting について
+   * http://blog.awm.jp/2016/01/08/jpeghint/
+
+# さいごに
+
+以上です。誤りや物足りない所があればご指摘ください。
+もし、お役に立つ事があれば幸いです。
