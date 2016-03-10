@@ -42,6 +42,7 @@ bit数は 1,2,4,8,16 から選択できます。
 ```
 $ convert Opaopa.png -type Grayscale Opaopa-type0.png
 ```
+<center> <img src="../Opaopa-type0.png" /> </center>
 
  * 尚、tRNS チャンクをつける事で透明ピクセルも表現できます。
 
@@ -53,6 +54,14 @@ $ convert Opaopa.png -type Grayscale Opaopa-type0.png
 ```
 $ convert Opaopa.png png24:Opaopa-png24.png
 ```
+<center> <img src="../Opaopa-png24.png" /> </center>
+
+PNG32 から PNG24 に変換しても透明度は消えますが、tRNS 付きの PNG8 からは tRNS を引き継げます。但し半透明は表現できず透明か不透明かのどちらかに割り当てられます。
+
+```
+$ convert Opaopa-png8-trns.png png24:Opaopa-png24-trns.png
+```
+<center> <img src="../Opaopa-png24-trns.png" /> </center>
 
  * tRNS チャンクをつける事で透明ピクセルも表現できます。但し、どの色を透明にするかを指定する方式なので、透明か不透明のどちらかで半透明は表現できません。大人しく Type 6 の RGBA 形式を使いましょう。
  * PLTE チャンクをつける事で擬似カラー端末で表示する時のパレットを指定できます。今時レアですが。(sPLT とおなじ？)
@@ -65,7 +74,11 @@ $ convert Opaopa.png png24:Opaopa-png24.png
 ```
 $ convert Opaopa.png  png8:Opaopa-png8.png
 ```
+<center> <img src="../Opaopa-png8.png" /> </center>
+
 tRNS チャンクをつける事で透明度も表現できます。
+<center> <img src="../png-type3-tRNS.png" /> </center>
+<center> <img src="../Opaopa-png8-trns.png" /> </center>
 
 ## Type:4 透明度つきグレースケール
 
@@ -74,6 +87,7 @@ tRNS チャンクをつける事で透明度も表現できます。
 ```
 $ convert Opaopa.png -type GrayscaleMatte  Opaopa-type4.png
 ```
+<center> <img src="../Opaopa-type4.png" /> </center>
 
 ## Type:6 RGBA (PNG32)
 
@@ -82,6 +96,16 @@ $ convert Opaopa.png -type GrayscaleMatte  Opaopa-type4.png
 ```
 $ convert Opaopa.png  png32:Opaopa-png32.png
 ```
+<center> <img src="../Opaopa-png32.png" /> </center>
+
+# インターレース
+
+ PNG のインターレースは独特で、Adam7 アルゴリズムを使います。
+
+```
+$ convert Opaopa.png -interlace PNG Opaopa-adam7.png
+```
+<center> <img src="../Opaopa-adam7.png" /> </center>
 
 # メタデータ
 
