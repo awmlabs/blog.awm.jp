@@ -30,6 +30,8 @@ $ identify -verbose orient-6.jpg | grep Orient
 
 以下の画像は Orientation に各値を設定すると、全て 1 の向きに補正されて表示される画像です。(古いビューアだと補正しない事もあります)
 
+### 早見表1
+
  | | | 
 ----|----|---|---
 1: <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a> | 2: <a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a>  | 3: <a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a>  | 4: <a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a>
@@ -47,6 +49,22 @@ $ identify -verbose orient-6.jpg | grep Orient
  * 1,2,3,4 => 5,6,7,8 斜めを軸に反転。
 ```
 となっていて、右回転、左回転の定義が不要なのが面白いです。
+
+### 早見表2
+
+変換の方向がわかりやすい図もつけます。
+
+Orient | 画像の実データ | Exif-Orient を解釈して表示
+----|----|---
+1 | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" /> </a> | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+2 | <a href="/2016/01/07/orient-2-strip.jpg"> <img src="/2016/01/07/orient-2-strip.jpg" /> </a>  | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+3 | <a href="/2016/01/07/orient-3-strip.jpg"> <img src="/2016/01/07/orient-3-strip.jpg" /> </a>  | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+4 | <a href="/2016/01/07/orient-4-strip.jpg"> <img src="/2016/01/07/orient-4-strip.jpg" /> </a> |  <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+5 | <a href="/2016/01/07/orient-5-strip.jpg"> <img src="/2016/01/07/orient-5-strip.jpg" /> </a> | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+6 | <a href="/2016/01/07/orient-6-strip.jpg"> <img src="/2016/01/07/orient-6-strip.jpg" /> </a>  | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+7 | <a href="/2016/01/07/orient-7-strip.jpg"> <img src="/2016/01/07/orient-7-strip.jpg" /> </a>  | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+8 | <a href="/2016/01/07/orient-8-strip.jpg"> <img src="/2016/01/07/orient-8-strip.jpg" /> </a> | <a href="/2016/01/07/orient-1-strip.jpg"> <img src="/2016/01/07/orient-1-strip.jpg" />
+
 
 ## 編集ツール
 
