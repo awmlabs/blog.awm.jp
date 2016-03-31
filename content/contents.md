@@ -17,7 +17,14 @@ title = "目次"
  * ImageMagick で JPEG の形式を変換
    * http://blog.awm.jp/2016/01/26/jpeg/
 
-## Orientation
+## YCbCr
+
+ * JPEG の YCbCr について
+   * https://blog.awm.jp/2016/02/06/ycbcr/
+ * https://blog.awm.jp/2016/02/10/yuv/
+   * JPEG のクロマサブサンプリングと YUVabc
+
+## Exif
 
  * JPEG Exif Orientation の操作
    * http://blog.awm.jp/2016/01/07/orient/
