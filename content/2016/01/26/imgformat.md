@@ -13,8 +13,8 @@ title = "ImageMagick で画像形式を変換"
 ## JPEG,PNG,GIF 別
 
  * JPEG
-   * http://localhost:1313/2016/01/26/jpeg/
+   * https://blog.awm.jp/2016/01/26/jpeg/
  * PNG
-   * http://localhost:1313/2016/01/26/png/
+   * https://blog.awm.jp/2016/01/26/png/
  * GIF
-   * http://localhost:1313/2016/01/26/gif/
+   * https://blog.awm.jp/2016/01/26/gif/
