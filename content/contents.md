@@ -15,7 +15,7 @@ title = "目次"
 # JPEG
 
  * ImageMagick で JPEG の形式を変換
-   * http://localhost:1313/2016/01/26/jpeg/
+   * http://blog.awm.jp/2016/01/26/jpeg/
 
 ## Orientation
 
@@ -25,7 +25,7 @@ title = "目次"
 # PNG
 
  * ImageMagick で PNG の形式を変換
-   * http://localhost:1313/2016/01/26/png/
+   * http://blog.awm.jp/2016/01/26/png/
 
 # Hugo
 
