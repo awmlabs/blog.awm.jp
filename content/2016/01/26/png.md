@@ -111,6 +111,13 @@ $ convert Opaopa.png -interlace PNG Opaopa-adam7.png
 
 ### ピクセルの並ぶ順番
 
+- 8x8 のブロックで左上のを１つ
+- 4x4 のブロックで左上を１つ
+- 2x2 のブロックで左上を１つ
+- 残り全部
+
+という順でピクセルを保存します。
+
 |ピクセル |実際の表示
 ---|---
 <img src="../Opaopa-dot1-adam7-1.png" /> <img src="../Opaopa-dot8-adam7-1.png" /> | <img src="../Opaopa-dot1-adam7-1-cmpl.png" /> <img src="../Opaopa-dot8-adam7-1-cmpl.png" />
