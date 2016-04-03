@@ -212,3 +212,5 @@ DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像�
    * http://homepage2.nifty.com/sophia0/png.html
  * JPG ファイルフォーマット
    * http://www.setsuki.com/hsp/ext/jpg.htm
+ * The Fx Special Effects Image Operator
+   * http://www.imagemagick.org/script/fx.php
