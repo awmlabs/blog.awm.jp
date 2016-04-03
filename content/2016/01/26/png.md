@@ -102,10 +102,44 @@ $ convert Opaopa.png  png32:Opaopa-png32.png
 
  PNG のインターレースは独特で、Adam7 アルゴリズムを使います。
 
+## インターレース方式 Adam7
+
 ```
 $ convert Opaopa.png -interlace PNG Opaopa-adam7.png
 ```
 <center> <img src="../Opaopa-adam7.png" /> </center>
+
+### ピクセルの並ぶ順番
+
+|ピクセル |実際の表示
+---|---
+<img src="../Opaopa-dot1-adam7-1.png" /> <img src="../Opaopa-dot8-adam7-1.png" /> | <img src="../Opaopa-dot1-adam7-1-cmpl.png" /> <img src="../Opaopa-dot8-adam7-1-cmpl.png" />
+<img src="../Opaopa-dot1-adam7-2.png" /> <img src="../Opaopa-dot8-adam7-2.png" /> | <img src="../Opaopa-dot1-adam7-2-cmpl.png" /> <img src="../Opaopa-dot8-adam7-2-cmpl.png" />
+<img src="../Opaopa-dot1-adam7-3.png" /> <img src="../Opaopa-dot8-adam7-3.png" /> | <img src="../Opaopa-dot1-adam7-3-cmpl.png" /> <img src="../Opaopa-dot8-adam7-3-cmpl.png" />
+<img src="../Opaopa-dot1.png" /> <img src="../Opaopa-dot8.png" /> | 
+
+ちなみに上記画像は ImageMagick で以下のように生成できます。(-fx オプション便利！)
+
+- インターレースのフェーズ別画像
+```
+$ convert Opaopa-dot1.png -filter Point -fx "!(i%8)*!(j%8)*u" Opaopa-dot1-adam7-1.png
+$ convert Opaopa-dot1.png -filter Point -fx "!(i%4)*!(j%4)*u" Opaopa-dot1-adam7-2.png
+$ convert Opaopa-dot1.png -filter Point -fx "!(i%2)*!(j%2)*u" Opaopa-dot1-adam7-3.png
+```
+
+-  フェーズ別画像ピクセル補完あり
+```
+$ convert  Opaopa-dot1.png -filter Point -fx "p{i-i%8,j-j%8}" Opaopa-dot1-adam7-1-cmpl.png
+$ convert  Opaopa-dot1.png -filter Point -fx "p{i-i%4,j-j%4}" Opaopa-dot1-adam7-2-cmpl.png
+$ convert  Opaopa-dot1.png -filter Point -fx "p{i-i%2,j-j%2}" Opaopa-dot1-adam7-3-cmpl.png
+```
+
+- ドット絵の拡大風画像
+```
+$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx "(i%8!=0)*(j%8!=0)*u" Opaopa-dot8-adam7-1.png
+＜略＞
+```
+
 
 # メタデータ
 
