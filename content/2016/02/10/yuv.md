@@ -3,11 +3,11 @@ categories = ["YUV"]
 date = "2016-02-10T21:53:44+09:00"
 draft = false
 tags = ["JPEG", "YUV", "SabSampling"]
-title = "JPEG のクロマサブサンプリングと YUVabc"
+title = "JPEG のクロマサブサンプリングと YUV Y:a:b"
 
 +++
 
-# JPEG のクロマサブサンプリングと YUVabc
+# JPEG のクロマサブサンプリングと YUV Y:a:b
 
 YCbCr については以下のページで紹介しました。
 
@@ -20,7 +20,9 @@ JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当て�
 
 # はじめに早見表
 
-<center> <img src="../yuvabc.png" /> </center>
+<center> <img src="../yuvyab.png" /> </center>
+
+※ YUV410 だけ変則的です
 
 # YUVabc の種類
 
@@ -70,6 +72,10 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
 
 <center> <img src="../yuv410.png" /> </center>
 
+と言いたい所ですが、実際には 4x4 として使われるようです。
+
+<center> <img src="../yuv410-4x4.png" /> </center>
+
 # まとめ
 
  * YUVabc は横4pixel縦2pixel で考えて以下のようなパラメータ
@@ -78,6 +84,7 @@ YUV422 の場合は Y に対して Cb, Cr を半分に間引きます。
    * c は縦方向の間引き。次の行の Cb,Cr の横方向サンプル数で b と同じか 0 のどちらか
  * YUV444 は全ピクセル Y,Cb,Cr をセットで持つ。画質を落としたくない場合はこれ
  * YUV422 は Cb,Cr を横方向で 1/2 で間引く。JPEG や動画でよく使われる
+ * YUV410 は Y:a:b の法則から例外
 
 # 参考
 
