@@ -82,11 +82,143 @@ $ convert Opaopa.png -transparent "#00d342" Opaopa-transparent.gif
 
 # アニメーションGIF
 
+各コマの画像を作って convert で繋いで作成できます。
+
+<center> <img src="../Opaopa-anime-dot1-0.png" /> <img src="../Opaopa-anime-dot1-1.png" /> <img src="../Opaopa-anime-dot1-2.png" /> <img src="../Opaopa-anime-dot1-3.png" /> <img src="../Opaopa-anime-dot1-4.png" /> <img src="../Opaopa-anime-dot1-5.png" /> <img src="../Opaopa-anime-dot1-6.png" /> <img src="../Opaopa-anime-dot1-7.png" />  </center>
+
+```
+$ convert Opaopa-anime-dot1-[0-7].png Opaopa-anime-dot1.gif
+```
+<center> <img src="../Opaopa-anime-dot1.gif" /> </center>
+ついでに拡大バージョン
+<center> <img src="../Opaopa-anime-dot8.gif" /> </center>
+
+```
+$ for n in `seq 0 7`
+do convert Opaopa-anime-dot1-$n.png -filter Point -resize 800% -fx "(i%8>0)*(j%8>0)*u" Opaopa-anime-dot8-$n.png
+done
+$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
+```
+
 ## Delay
 
-## Local Descriptor Table
+-delay オプションでコマ間の時間を指定できます。1/100 単位なので、例えば -delay 100 を指定すると 1 frame/sec です。
 
-## dispose
+```
+$ convert -delay 100  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay100.gif
+$ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
+```
+<center> <img src="../Opaopa-anime-dot8-delay100.gif" /> </center>
+<center> <img src="../Opaopa-anime-dot8-delay25.gif" /> </center>
+
+(-delay を入力画像より前に置かないと反映されない事に注意)
+
+## ループ回数
+
+```
+$ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
+```
+<center> <a href="../Opaopa-anime-dot8-loop1.gif" /> <img src="../Opaopa-anime-dot8-loop1.gif" /> </a> <br /> ↑ クリックして開けます </center>
+
+## Global or Local ColorMap
+
+単純に convert でコマを連結して GIFアニメにするだけだと、色パレットをコマ毎に持ちます。
+
+ImageMagick にコマンドで判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。[^1]
+
+```
+$ giftext Opaopa-anime-dot8.gif | grep "Color Map"
+  Has Global Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  No Image Color Map.
+  Image Has Color Map.
+```
+今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみ。
+
+コマ毎にバラバラに Local Color Map を持つ場合は +map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。
+
+## Optimize
+
+### OptimizeFrame
+
+変化のあるピクセルだけ画像として持ちます。
 
 
+```
+$ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
+```
+<center> <img src="../Opaopa-anime-dot1-optframe.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-optframe.gif"> </center>
 
+コマを分解します。
+
+```
+$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.png
+```
+
+|元画像 |フレーム最適化
+---|---
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optframe-0.gif">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optframe-1.gif">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optframe-2.gif">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optframe-3.gif">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optframe-4.gif">
+＜以下 5-7 は省略＞
+
+### Optimize Transparency
+
+```
+$ convert  Opaopa-anime-dot8.gif  -layers OptimizeTransparency Opaopa-anime-dot8-opttrans.gif
+```
+<center> <img src="../Opaopa-anime-dot1-opttrans.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-opttrans.gif"> </center>
+
+コマを分解します。
+
+```
+$ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
+```
+
+|元画像 |透明最適化
+---|---
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-opttrans-0.png">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-opttrans-1.png">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-opttrans-2.png">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-opttrans-3.png">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-opttrans-4.png">
+＜以下 5-7 は省略＞
+
+## Optimiez
+
+それらが合わさり最強になった Optimize がこれです。
+
+```
+$ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
+```
+<center> <img src="../Opaopa-anime-dot1-optimize.gif"> </center>
+<center> <img src="../Opaopa-anime-dot8-optimize.gif"> </center>
+
+分解します。
+
+|元画像 |最適化
+---|---
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optimize-0.gif">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optimize-1.gif">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optimize-2.gif">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optimize-3.gif">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optimize-4.gif">
+＜以下 5-7 は省略＞
+
+# 参考 URL
+
+- ImageMagick v6 Examples -- Animation Optimization
+  - http://www.imagemagick.org/Usage/anim_opt/
+
+
+[^1]: 公式ページでは giftrans を使って説明してます > http://www.imagemagick.org/Usage/anim_opt/#colortables
