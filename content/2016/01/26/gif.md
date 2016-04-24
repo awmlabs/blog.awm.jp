@@ -24,7 +24,7 @@ $ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
 - 2行ごとに1行
 - 残り全部
 
-という順でピクセルを保存する事で、ネットワークが遅い場合でも始めに全体像を表示してから、データが取得でき次第少しずつ細部を表示できます。
+という順でピクセルを保存する事で、ネットワークが遅い場合でもはじめに全体像を表示してから、データが取得しながら少しずつ細部を表示できます。
 
 |ピクセル |実際の表示
 ---|---
@@ -57,7 +57,7 @@ $ convert Opaopa-dot1-interlace-1.png -filter Point -resize 800% -fx "(i%8>0)*(j
 
 # ポジション指定
 
-GIF は描画場所の Screen と実際に描画する Image の位置を別に持るので、その描画場所を指定できます。
+GIF は描画場所の Screen と実際に描画する Image の位置を別に持つので、その描画場所を指定できます。
 
 ```
 $ convert Opaopa.png -page +50+30 Opaopa-posi.gif
@@ -115,6 +115,7 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 
 ## ループ回数
 
+例えば、ループ回数に 1 を指定すると、ループしない GIF アニメが作れます。
 ```
 $ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
 ```
@@ -138,9 +139,9 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
   No Image Color Map.
   Image Has Color Map.
 ```
-今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。
+今回は１コマ目で使う色パレットで、残り全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。
 
-尚、コマ毎にバラバラに Local Color Map を持つ場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。
+尚、Local Color Map があるけど全部消したい場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。[^2]
 
 ## Optimize
 
@@ -231,3 +232,4 @@ $ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
 
 
 [^1]: 公式ページでは giftrans を使って説明してます > http://www.imagemagick.org/Usage/anim_opt/#colortables
+[^2]: たしか大昔、Local ColorMap を読まないガラケー端末があって +map が必須だった時代があったかも。。
