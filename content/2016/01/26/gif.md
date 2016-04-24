@@ -147,7 +147,7 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
 
 ### OptimizeFrame
 
-変化のあるピクセルだけ画像として持つ事で、データサイズを減らせます。
+変化のあるピクセルを全部囲う四角(いわゆる Dirty Rectangle)でクロップした画像を持つ事で、GIF のデータサイズを減らせます。
 
 ```
 $ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
