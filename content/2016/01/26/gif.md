@@ -119,7 +119,7 @@ $ convert -delay  25  Opaopa-anime-dot8.gif Opaopa-anime-dot8-delay25.gif
 ```
 $ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
 ```
-<center> <a href="../Opaopa-anime-dot8-loop1.gif" /> <img src="../Opaopa-anime-dot8-loop1.gif" /> </a> <br /> ↑ クリックして開けます </center>
+<center> <a href="../Opaopa-anime-dot8-loop1.gif" target="_blank"/> <img src="../Opaopa-anime-dot8-loop1.gif" /> </a> <br /> ↑ クリックして開けます </center>
 
 ## Global or Local ColorMap
 
