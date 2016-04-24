@@ -24,7 +24,7 @@ $ convert Opaopa.png -interlace GIF Opaopa-interlace.gif
 - 2行ごとに1行
 - 残り全部
 
-という順でピクセルを保存します。
+という順でピクセルを保存する事で、ネットワークが遅い場合でも始めに全体像を表示してから、データが取得でき次第少しずつ細部を表示できます。
 
 |ピクセル |実際の表示
 ---|---
@@ -147,11 +147,19 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
 
 ### OptimizeFrame
 
-変化のあるピクセルだけ画像として持ちます。
-
+変化のあるピクセルだけ画像として持つ事で、データサイズを減らせます。
 
 ```
 $ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
+$ identify Opaopa-anime-dot1-optframe.gif
+Opaopa-anime-dot1-optframe.gif[0] GIF 41x18 41x18+0+0 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[1] GIF 15x5 41x18+4+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[2] GIF 14x7 41x18+3+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[3] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[4] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[5] GIF 5x3 41x18+5+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[6] GIF 15x3 41x18+4+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+Opaopa-anime-dot1-optframe.gif[7] GIF 16x5 41x18+3+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
 ```
 <center> <img src="../Opaopa-anime-dot1-optframe.gif"> </center>
 <center> <img src="../Opaopa-anime-dot8-optframe.gif"> </center>
@@ -187,14 +195,16 @@ $ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
 
 |元画像 |透明最適化
 ---|---
-<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-opttrans-0.png">
-<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-opttrans-1.png">
-<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-opttrans-2.png">
-<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-opttrans-3.png">
-<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-opttrans-4.png">
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-opttrans-0.png" style="background-color:black">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-opttrans-1.png" style="background-color:black">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-opttrans-2.png" style="background-color:black">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-opttrans-3.png" style="background-color:black">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-opttrans-4.png" style="background-color:black">
 ＜以下 5-7 は省略＞
+(分かりやすくする為に透明部を黒にしてます)
+１つ前のコマと色が変わらないピクセルを透明にする事で、色数を減らして圧縮の効率が上がるのが期待出来ます。
 
-## Optimiez
+### (最強の) Optimize
 
 それらが合わさり最強になった Optimize がこれです。
 
