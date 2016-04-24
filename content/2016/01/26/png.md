@@ -141,12 +141,11 @@ $ convert  Opaopa-dot1.png -filter Point -fx "p{i-i%4,j-j%4}" Opaopa-dot1-adam7-
 $ convert  Opaopa-dot1.png -filter Point -fx "p{i-i%2,j-j%2}" Opaopa-dot1-adam7-3-cmpl.png
 ```
 
-- ドット絵の拡大風画像
+- ドット絵風の拡大画像
 ```
-$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx "(i%8!=0)*(j%8!=0)*u" Opaopa-dot8-adam7-1.png
+$ convert Opaopa-dot1-adam7-1.png -filter Point -resize 800% -fx "(i%8>0)*(j%8>0)*u" Opaopa-dot8-adam7-1.png
 ＜略＞
 ```
-
 
 # メタデータ
 
@@ -210,7 +209,5 @@ DPI ならぬ DPM (インチでなくメートル単位) で物理的な解像�
    * (HTML版) http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html
  * PNGについて
    * http://homepage2.nifty.com/sophia0/png.html
- * JPG ファイルフォーマット
-   * http://www.setsuki.com/hsp/ext/jpg.htm
  * The Fx Special Effects Image Operator
    * http://www.imagemagick.org/script/fx.php
