@@ -208,7 +208,7 @@ $ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
 (分かりやすくする為に透明部を黒にしてます)
 １つ前のコマと色が変わらないピクセルを透明にする事で、色数を減らして圧縮の効率が上がるのが期待出来ます。
 
-尚、透明にするだけで画像のクリップはしません。
+尚、透明にするだけで画像のクロップはしません。
 ```
 $ identify -format "size=%wx%h geom:%g\n" Opaopa-anime-dot1-opttrans.gif
 size=41x18 geom:41x18+0+0
@@ -223,7 +223,7 @@ size=41x18 geom:41x18+0+0
 
 ### (最強の) Optimize
 
-それらが合わさり最強になった Optimize がこれです。
+それらが合わさり最強になった Optimize がこちらです。
 
 ```
 $ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
