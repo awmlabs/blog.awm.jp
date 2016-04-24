@@ -43,7 +43,7 @@ $ convert orig.jpg -sampling-factor "2x1,1x1,1x1" yuv422.jpg
 $ convert orig.jpg -sampling-factor "4x1,1x1,1x1" yuv411.jpg
 $ convert orig.jpg -sampling-factor "1x2,1x1,1x1" yuv440.jpg
 $ convert orig.jpg -sampling-factor "2x2,1x1,1x1" yuv420.jpg
-$ convert orig.jpg -sampling-factor "4x2,1x1,1x1" yuv410.jpg
+$ convert orig.jpg -sampling-factor "4x4,1x1,1x1" yuv410.jpg # yuv9
 ```
 
 # Exif (Exittool で変換)
@@ -133,5 +133,7 @@ $ convert orig.jpg -type grayscale gray.jpg
 
  * Exiftool
    * http://www.sno.phy.queensu.ca/~phil/exiftool/
+ * JPG ファイルフォーマット
+   * http://www.setsuki.com/hsp/ext/jpg.htm
 
 [^1]: Grayscale や CMYK の値で持つ事もできます。
