@@ -121,7 +121,7 @@ $ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
 ```
 <center> <a href="../Opaopa-anime-dot8-loop1.gif" target="_blank"/> <img src="../Opaopa-anime-dot8-loop1.gif" /> </a> <br /> ↑ クリックして開けます </center>
 
-## Global or Local ColorMap
+## Global & Local(Image) ColorMap
 
 ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。[^1]
 
