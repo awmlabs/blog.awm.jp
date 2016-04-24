@@ -137,7 +137,6 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
   No Image Color Map.
   No Image Color Map.
   No Image Color Map.
-  Image Has Color Map.
 ```
 今回は１コマ目で使う色パレットで、残り全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。
 
