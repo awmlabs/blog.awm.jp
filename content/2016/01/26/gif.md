@@ -122,11 +122,10 @@ $ convert -delay 50 -loop 1 Opaopa-anime-dot8.gif Opaopa-anime-dot8-loop1.gif
 
 ## Global or Local ColorMap
 
-単純に convert でコマを連結して GIFアニメにするだけだと、色パレットをコマ毎に持ちます。
-
-ImageMagick にコマンドで判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。[^1]
+ImageMagick のコマンドで Global と Local を判別する方法が分からないので、giftext を使ってみます。giflib もしくは giflib-tools でコマンドをインストール出来ます。[^1]
 
 ```
+$ convert Opaopa-anime-dot8-[0-7].png Opaopa-anime-dot8.gif
 $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
   Has Global Color Map.
   No Image Color Map.
@@ -139,9 +138,9 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
   No Image Color Map.
   Image Has Color Map.
 ```
-今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみ。
+今回は１コマ目で使う色パレットで、全部のコマの色を表現できるので Global Color Map １つのみになります。途中のコマで色が増える場合は Local Color Map が生成されます。
 
-コマ毎にバラバラに Local Color Map を持つ場合は +map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。
+尚、コマ毎にバラバラに Local Color Map を持つ場合、+map オプションを使う事で、全コマの Color Map を Global Color Map にまとめられます。
 
 ## Optimize
 
