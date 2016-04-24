@@ -172,11 +172,11 @@ $ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.png
 
 |元画像 |フレーム最適化
 ---|---
-<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optframe-0.gif">
-<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optframe-1.gif">
-<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optframe-2.gif">
-<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optframe-3.gif">
-<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optframe-4.gif">
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optframe-0.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optframe-1.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optframe-2.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optframe-3.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optframe-4.gif" style="border: 1px #ff0000 solid;">
 ＜以下 5-7 は省略＞
 
 ### Optimize Transparency
@@ -195,14 +195,27 @@ $ convert Opaopa-anime-dot1-opttrans.gif Opaopa-anime-dot1-opttrans-%d.gif
 
 |元画像 |透明最適化
 ---|---
-<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-opttrans-0.png" style="background-color:black">
-<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-opttrans-1.png" style="background-color:black">
-<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-opttrans-2.png" style="background-color:black">
-<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-opttrans-3.png" style="background-color:black">
-<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-opttrans-4.png" style="background-color:black">
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-opttrans-0.png" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-opttrans-1.png" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-opttrans-2.png" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-opttrans-3.png" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-opttrans-4.png" style="border: 1px #ff0000 solid;">
 ＜以下 5-7 は省略＞
 (分かりやすくする為に透明部を黒にしてます)
 １つ前のコマと色が変わらないピクセルを透明にする事で、色数を減らして圧縮の効率が上がるのが期待出来ます。
+
+尚、透明にするだけで画像のクリップはしません。
+```
+$ identify -format "size=%wx%h geom:%g\n" Opaopa-anime-dot1-opttrans.gif
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+size=41x18 geom:41x18+0+0
+```
 
 ### (最強の) Optimize
 
@@ -218,12 +231,28 @@ $ convert Opaopa-anime-dot1.gif -layers Optimize Opaopa-anime-dot1-optimize.gif
 
 |元画像 |最適化
 ---|---
-<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optimize-0.gif">
-<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optimize-1.gif">
-<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optimize-2.gif">
-<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optimize-3.gif">
-<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optimize-4.gif">
+<img src="../Opaopa-anime-dot8-0.png"> | <img src="../Opaopa-anime-dot8-optimize-0.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-1.png"> | <img src="../Opaopa-anime-dot8-optimize-1.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-2.png"> | <img src="../Opaopa-anime-dot8-optimize-2.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-3.png"> | <img src="../Opaopa-anime-dot8-optimize-3.gif" style="border: 1px #ff0000 solid;">
+<img src="../Opaopa-anime-dot8-4.png"> | <img src="../Opaopa-anime-dot8-optimize-4.gif" style="border: 1px #ff0000 solid;">
 ＜以下 5-7 は省略＞
+
+見た目は透明Optimizeと同じですが、画像のサイズがフレーム最適化と同様小さくなっています。
+
+```
+% identify -format "size=%wx%h geom:%g\n" Opaopa-anime-dot1-optimize.gif
+size=41x18 geom:41x18+0+0
+size=15x5 geom:41x18+4+7
+size=14x7 geom:41x18+3+6
+size=8x7 geom:41x18+6+6
+size=8x7 geom:41x18+6+6
+size=5x3 geom:41x18+5+8
+size=15x3 geom:41x18+4+8
+size=16x5 geom:41x18+3+7
+```
+
+とりあえず GIF 画像のサイズを減らしたい場合には -layers optimize 指定するのがお勧めです。
 
 # 参考 URL
 
