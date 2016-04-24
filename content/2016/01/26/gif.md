@@ -151,15 +151,15 @@ $ giftext Opaopa-anime-dot8.gif | grep "Color Map"
 
 ```
 $ convert  Opaopa-anime-dot1.gif  -layers OptimizeFrame Opaopa-anime-dot1-optframe.gif
-$ identify Opaopa-anime-dot1-optframe.gif
-Opaopa-anime-dot1-optframe.gif[0] GIF 41x18 41x18+0+0 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[1] GIF 15x5 41x18+4+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[2] GIF 14x7 41x18+3+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[3] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[4] GIF 8x7 41x18+6+6 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[5] GIF 5x3 41x18+5+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[6] GIF 15x3 41x18+4+8 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
-Opaopa-anime-dot1-optframe.gif[7] GIF 16x5 41x18+3+7 8-bit sRGB 16c 16.4KB 0.000u 0:00.000
+% identify -format "size=%wx%h geom:%g\n" Opaopa-anime-dot1-optframe.gif
+size=41x18 geom:41x18+0+0
+size=15x5 geom:41x18+4+7
+size=14x7 geom:41x18+3+6
+size=8x7 geom:41x18+6+6
+size=8x7 geom:41x18+6+6
+size=5x3 geom:41x18+5+8
+size=15x3 geom:41x18+4+8
+size=16x5 geom:41x18+3+7
 ```
 <center> <img src="../Opaopa-anime-dot1-optframe.gif"> </center>
 <center> <img src="../Opaopa-anime-dot8-optframe.gif"> </center>
