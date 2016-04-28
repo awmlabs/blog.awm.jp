@@ -22,7 +22,19 @@ JPEG が本エントリの主眼なので YUV の U を Cb、V を Cr に当て�
 
 <center> <img src="../yuvyab.png" /> </center>
 
+
 ※ YUV410 だけ変則的です
+
+## ImageMagick での作り方
+
+```
+$ convert orig.jpg -sampling-factor "1x1,1x1,1x1" yuv444.jpg
+$ convert orig.jpg -sampling-factor "2x1,1x1,1x1" yuv422.jpg
+$ convert orig.jpg -sampling-factor "4x1,1x1,1x1" yuv411.jpg
+$ convert orig.jpg -sampling-factor "1x2,1x1,1x1" yuv440.jpg
+$ convert orig.jpg -sampling-factor "2x2,1x1,1x1" yuv420.jpg
+$ convert orig.jpg -sampling-factor "4x4,1x1,1x1" yuv410.jpg # yuv9
+```
 
 # YUVabc の種類
 
