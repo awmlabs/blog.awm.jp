@@ -82,8 +82,8 @@ $ ffmpeg -i image1.jpg -i image2.gif -filter_complex ssim -an -f null -
 
 １つ目に渡した入力画像が JPEG なので YUV 別の SSIM 値と合わせた SSIM 値が表示されています。これが GIF や PNG だと RGB 別になります。
 
-あと、未検証ですが、ImageMagick のフィルタを駆使して SSIM を算出するスクリプトがあります。
+あと、ImageMagick のフィルタを駆使して SSIM を算出するスクリプトがあります。詳細は未検証ですが確かにそれっぽい値が出ます。
 
  * http://www.fmwconcepts.com/imagemagick/ssim/index.php
 
-SSIM アルゴリズム実装は有名なのが沢山あるので、無理に ImageMagick を使わなくても良いのかなと思います。
+SSIM アルゴリズムは有名な実装が沢山あるので、無理に ImageMagick を使わなくても良いとは思います。
