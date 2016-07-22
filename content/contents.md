@@ -21,7 +21,8 @@ title = "目次"
           * https://blog.awm.jp/2016/01/06/orient/
  *  透明度を含む画像を JPEG に変換する時の背景色
     * https://blog.awm.jp/2016/01/25/flatten/
-
+ * RGBA4444 変換で劣化しない画像を ImageMagick で作る
+    * https://blog.awm.jp/2016/07/22/rgba4444/
 
 # JPEG
 
@@ -46,7 +47,6 @@ title = "目次"
 
  * ImageMagick で PNG の形式を変換
     * http://blog.awm.jp/2016/01/26/png/
-
 
 # GIF
 
