@@ -75,7 +75,7 @@ CMYK 色空間の ICC プロファイルは検索すると以下のが見つか�
 ```
 Japan Color, US SWOP, FOGRA, ...
 ```
-(境境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)
+(環境によってインクの発色が変わってくるので印刷所ごととか機器ごとにプロファイルを持ってそうですが。。)
 
 RGB と CMYK は大雑把に以下の関係にあります。
 
@@ -97,17 +97,19 @@ yellow  = 1.0 - blue;
 (一番小さな値を black にしてその分補正)
 ```
 
-しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。
+しかしながら、実際の CMYK はインクの量を表すので、その値に補正する必要があります。以下の図はグレースケールを作るのに必要な CMYK の値だそうです。
 <center>
  Japan Color 2001 Coated <br />
  <img src="../10993-04-JapanColor-crop.jpg" /> <br />
    (引用元: https://www.jagat.or.jp/past_archives/content/view/3083.html )
 </center>
 
+リニアな CMYK と違って、灰色を作るのに Y, C, M が同量ではありません。また直線でもガンマ曲線でもない曲線になります。
+
 ## CMYK のデフォルト(?)
 
 RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated [^3] を使えば大体は大丈夫でしょう。
+日本に限って言えば、Japan Color 2001 Coated を使えば大体 [^3] は大丈夫でしょう。
 
 [^3]: Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) https://www.jagat.or.jp/past_archives/content/view/3083.html
 
@@ -118,6 +120,7 @@ MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補�
 ```
 /System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 ```
+
 Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK => RGB 処理を行うようで、話が少し面倒だったりします。
 
 # 参考
