@@ -9,7 +9,9 @@ title = "JPEG と ICC プロファイル"
 
 # JPEG と ICC プロファイル
 
-JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値(内部的にはYCbCr)や CMYK値でも モニタ(又はプリンタ)に出力する色が変わります。
+JPEG は APP2 チャンクに埋め込んだ ICC プロファイル次第で、同じ RGB値[^1]や CMYK 値でも モニタ(又はプリンタ)に出力する色が変わります。
+
+[^1]:JPEG は RGB 値をYCbCrに変換して保存します
 
 <center>
 <img src="../jpeg-profile-icc.png" /> </br>
@@ -64,7 +66,9 @@ ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙�
 # CMYK 色空間
 
 プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK で各々インクの量です。
+Cyan, Magenta, Yellow, blacK [^2] で各々インクの量です。
+
+[^2]: blacK の K という説より、Key の略という方が多勢のようです。
 
 CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。
 
@@ -100,10 +104,12 @@ yellow  = 1.0 - blue;
    (引用元: https://www.jagat.or.jp/past_archives/content/view/3083.html )
 </center>
 
-## CMYK のデフォルト
+## CMYK のデフォルト(?)
 
 RGB における sRGB と違って CMYK には世界的なデファクトがありません。
-日本に限って言えば、Japan Color 2001 Coated (マット紙用プロファイル) を使えば大体は大丈夫でしょう。(オフ輪だと japan Web Coated の方が良いらしい)
+日本に限って言えば、Japan Color 2001 Coated [^3] を使えば大体は大丈夫でしょう。
+
+[^3]: Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) https://www.jagat.or.jp/past_archives/content/view/3083.html
 
 モニタ表示の時、CMYK JPEG に ICC プロファイルが入っていない場合にどうするかは環境によって異なります。
 
