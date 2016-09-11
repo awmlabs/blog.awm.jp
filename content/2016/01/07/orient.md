@@ -14,6 +14,12 @@ title = "JPEG Exif Orientation の操作"
 JPEG には画像データそのものと別に Exif 形式で日付、撮影条件、場所といった情報をタグ形式で入れる事が出来ます。
 その中に、画像を表示する時に行う回転を表す Orientation タグがあります。
 
+<center>
+<img src="../jpeg-exif-orient.png" /> </br>
+引用: https://speakerdeck.com/yoya/jpegmeta
+ </center>
+
+
 例えばカメラを横倒しにして撮影した場合は、カメラに映る画像データも横倒しに映ります。
 撮影した時のカメラの向きを元に Orientation タグを付与する事で、表示する時に画像の向きを直す事ができます。
 <center> <img src="/2016/01/07/digicame.png" /> </center>
