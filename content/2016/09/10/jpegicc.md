@@ -110,7 +110,7 @@ yellow  = 1.0 - blue;
 
 ## CMYK のデフォルト(?)
 
-RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので環境によって異なるので、そもそも無理でしょう。
+RGB における sRGB と違って CMYK には世界的なデファクトがありません。インクの色のノリ具合まで加味されるので温度や湿度といった環境によっても異なりますし、そもそも無理でしょう。
 
 ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。
 
@@ -121,8 +121,7 @@ RGB における sRGB と違って CMYK には世界的なデファクトがあ�
 ```
 [^3]: この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
 
-
-上記の理由で、CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 [^4] は大丈夫でしょう。
+CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 [^4] は大丈夫でしょう。
 
 [^4]: Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) https://www.jagat.or.jp/past_archives/content/view/3083.html
 
