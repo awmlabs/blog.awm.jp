@@ -43,12 +43,14 @@ sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
   ( 引用元: http://wiki.nuaj.net/index.php?title=Color_Profile )
 </center>
 
-又、昔のディスプレイは出力に対して明るさを線形に出力出来なかったので、それに合わせたガンマ補正も入ります。
+又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。
 
 <center>
 <img src="../Gamma06_300.png" /> <br />
 引用元: <a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E5%80%A4"> https://ja.wikipedia.org/wiki/ガンマ値 </a>
  </center>
+
+あえてその逆補正した値を持つ事で、そのまま値を渡すとちょうど線形に戻る。という理屈です。
 
 ## RGB のデフォルト
 
