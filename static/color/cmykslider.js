@@ -38,17 +38,17 @@ function rgb2cmyk(rgb) {
     if (k === 255) {
         return [0, 0, 0, 255];
     }
-    var c = (255 - r - k) / (255 - k)
-    var m = (255 - g - k) / (255 - k)
-    var y = (255 - b - k) / (255 - k)
+    var c = 255 * (255 - r - k) / (255 - k)
+    var m = 255 * (255 - g - k) / (255 - k)
+    var y = 255 * (255 - b - k) / (255 - k)
     return [Math.round(c), Math.round(m), Math.round(y), Math.round(k)];
 }
 
 function cmyk2rgb(cmyk) {
     var c = cmyk[0], m = cmyk[1], y = cmyk[2], k = cmyk[3];
-    var r = 255 - Math.min(255, c * (255 - k) + k)
-    var g = 255 - Math.min(255, m * (255 - k) + k)
-    var b = 255 - Math.min(255, y * (255 - k) + k)
+    var r = 255 - Math.min(255, c * (255 - k)/255 + k)
+    var g = 255 - Math.min(255, m * (255 - k)/255 + k)
+    var b = 255 - Math.min(255, y * (255 - k)/255 + k)
     return [Math.round(r), Math.round(g), Math.round(b)];
 }
 
