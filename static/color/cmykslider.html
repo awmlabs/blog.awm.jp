@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title> CMYK naively convert </title>
+</head>
+<body bgcolor="#f8f8f8">
+
+<table border="1" width="500">
+<tr><td colspan="3">
+<center> <canvas width="400", height="200" id="paint"> </canvas> </center>
+</td>
+<tr>
+  <td width="32%"> <div> RED:   <span id="red_num"> _ </span>
+      <canvas width="32" height="16" id="red_paint">   </canvas>
+    </div>
+    <input type="range" id="red"   min="0" max="255" />
+  </td>
+  <td width="35%"> <div> GREEN: <span id="green_num"> _ </span>
+      <canvas width="32" height="16" id="green_paint"> </canvas>
+    </div>
+    <input type="range" id="green" min="0" max="255" />
+  </td>
+  <td width="33%"> <div> BLUE:  <span id="blue_num"> _ </span>
+      <canvas width="32" height="16" id="blue_paint">  </canvas>
+    </div>
+    <input type="range" id="blue"  min="0" max="255" />
+  </td>
+</tr>
+<tr>
+  <td> <div> Cyan:  <span id="cyan_num"> _ </span>
+      <canvas width="32" height="16" id="cyan_paint">  </canvas>
+    </div>
+    <input type="range" id="cyan"  min="0" max="255" />
+  </td>nn
+  <td> <div> Magenta: <span id="magenta_num"> _ </span>
+      <canvas width="32" height="16" id="magenta_paint"> </canvas>
+    </div>
+    <input type="range" id="magenta" min="0" max="255" />
+  </td>
+  <td> <div> Yellow: <span id="yellow_num"> _ </span>
+      <canvas width="32" height="16" id="yellow_paint"> </canvas>
+    </div>
+    <input type="range" id="yellow" min="0" max="255" />
+  </td>
+  <td> <div> Key(black): <span id="key_num"> _ </span>
+      <canvas width="32" height="16" id="key_paint"> </canvas>
+    </div>
+    <input type="range" id="key" min="0" max="255" />
+  </td>
+</tr>
+</table>
+
+<pre border="1">
+* CMYK => RGB
+    R = 1 - min(1, C * (1 - K) + K)
+    G = 1 - min(1, M * (1 - K) + K)
+    B = 1 - min(1, Y * (1 - K) + K)
+
+* RGB = CMYK
+    K = 1 - max(R, G, B)
+    if ( K == 1) {
+        C, M, Y = 0
+    } else {
+        C = ( 1 - R - K) / (1 - K)
+        M = ( 1 - G - K) / (1 - K)
+        Y = ( 1 - B - K) / (1 - K)
+    }
+</pre>
+ref) <a href="https://www.w3.org/TR/css-color-4/#cmyk-rgb"> Converting Between Uncalibrated CMYK and RGB-Based Colors @w3.org </a>
+
+<script type="text/javascript" src="./cmykslider.js"> </script>
+</body>
+</html>
