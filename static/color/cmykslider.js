@@ -184,10 +184,11 @@ function slideChange(e) {
 	var rgb = [r, g, b];
 	showColorRGB(rgb);
 	var cmyk = rgb2cmyk(rgb);
-	getById("cyan").value    = cmyk[0];
-	getById("magenta").value = cmyk[1];
-	getById("yellow").value  = cmyk[2];
-	getById("key").value     = cmyk[3];
+	var [c, m, y, k] = cmyk;
+	getById("cyan").value    = c;
+	getById("magenta").value = m;
+	getById("yellow").value  = y;
+	getById("key").value     = k;
 	showColorCMYK(cmyk);
 	break;
     case "cyan":
@@ -201,12 +202,14 @@ function slideChange(e) {
         var cmyk = [c, m, y, k];
 	showColorCMYK(cmyk);
 	var rgb = cmyk2rgb(cmyk);
-	getById("red").value   = rgb[0];
-	getById("green").value = rgb[1];
-	getById("blue").value  = rgb[2];
+	var [r, g, b] = rgb;
+	getById("red").value   = r;
+	getById("green").value = g;
+	getById("blue").value  = b;
 	showColorRGB(rgb);
 	break;
     }
+    getById("paint").style.background  = cssColor("rgb", r, g, b);
 }
 
 for (var i in RGBCMYK) {
