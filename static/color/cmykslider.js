@@ -31,9 +31,13 @@ function strN6(n) {
     return strNN(n[0]) + strNN(n[1]) + strNN(n[2]);
 }
 
+function cssColor(cspace, r, g, b) {
+    return cspace + "("+r+","+g+","+b+")";
+}
+
 // https://www.w3.org/TR/css-color-4/#cmyk-rgb
 function rgb2cmyk(rgb) {
-    var r = rgb[0], g = rgb[1], b = rgb[2];
+    var [r, g, b] = rgb;
     var k = 255 - Math.max(r, g, b);
     if (k === 255) {
         return [0, 0, 0, 255];
@@ -45,17 +49,46 @@ function rgb2cmyk(rgb) {
 }
 
 function cmyk2rgb(cmyk) {
-    var c = cmyk[0], m = cmyk[1], y = cmyk[2], k = cmyk[3];
+    var [c, m, y, k] = cmyk;
     var r = 255 - Math.min(255, c * (255 - k)/255 + k)
     var g = 255 - Math.min(255, m * (255 - k)/255 + k)
     var b = 255 - Math.min(255, y * (255 - k)/255 + k)
     return [Math.round(r), Math.round(g), Math.round(b)];
 }
 
+function showColorRGBpaint(rgb) {
+    var [r, g, b] = rgb;
+    var r_style = cssColor("rgb", r, 0, 0);
+    var g_style = cssColor("rgb", 0, g, 0);
+    var b_style = cssColor("rgb", 0, 0, b);
+    var rgb_paint = getById("rgb_paint");
+    rgb_paint.style.backgroundColor = "black";
+    var ctx = rgb_paint.getContext("2d");
+    var width = rgb_paint.width, height = rgb_paint.height;
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalCompositeOperation = "lighter"; // 加法混色
+    ctx.beginPath();
+    ctx.fillStyle = r_style;
+    ctx.arc(150, 110, 110, 0, 2 * Math.PI, false);
+    ctx.fill();
+    //
+    ctx.beginPath();
+    ctx.fillStyle = g_style;
+    ctx.arc(110, 190, 110, 0, 2 * Math.PI, false);
+    ctx.fill();
+    //
+    ctx.beginPath();
+    ctx.fillStyle = b_style
+    ctx.arc(190, 190, 110, 0, 2 * Math.PI, false);
+    ctx.fill();
+    // #" + strN6([r, g, b], true);
+}
+
+
 function showColorRGB(rgb) {
     // console.debug("showColorRGB:", rgb);
-    var r = rgb[0], g = rgb[1], b = rgb[2];
-    getById("paint").style.backgroundColor = "#" + strN6([r, g, b], true);
+    var [r, g, b] = rgb;
+    showColorRGBpaint(rgb);
     getById("red_paint").style.backgroundColor   = "#" + strN6([r, 0, 0]);
     getById("green_paint").style.backgroundColor = "#" + strN6([0, g, 0]);
     getById("blue_paint").style.backgroundColor  = "#" + strN6([0, 0, b]);
@@ -70,9 +103,52 @@ function showColorRGB(rgb) {
     blue_num.style.backgroundColor  = outOfRange(b)?"red":null;
 }
 
+function distance2(x1, y1, x2, y2) {
+    var dx = x2 - x1, dy = y2 - y1;
+    return dx*dx + dy*dy;
+}
+
+function showColorCMYKpaint(cmyk) {
+    var [c, m, y, k] = cmyk;
+    var cmyk_paint = getById("cmyk_paint");
+    cmyk_paint.style.backgroundColor = "white";
+    var ctx = cmyk_paint.getContext("2d");
+    var width = cmyk_paint.width, height = cmyk_paint.height;
+    ctx.clearRect(0, 0, width, height);
+    var data = ctx.createImageData(width, height);
+    var d = data.data;
+    var o = 0;
+    for (var j = 0 ; j < height ; j++) {
+	for (var i = 0 ; i < width ; i++) {
+	    var cc = 0, mm = 0, yy = 0, kk = 0;
+	    if (distance2(i, j, 110, 110) <= 110*110) {
+		cc = c;
+	    }
+	    if (distance2(i, j, 110, 190) <= 110*110) {
+		mm = m;
+	    }
+	    if (distance2(i, j, 190, 110) <= 110*110) {
+		yy = y;
+	    }
+	    if (distance2(i, j, 190, 190) <= 110*110) {
+		kk = k;
+	    }
+	    //
+	    var [r, g, b] = cmyk2rgb([cc, mm, yy, kk]);
+	    // console.debug(r, g, b);
+	    d[o++] = r;
+	    d[o++] = g;
+	    d[o++] = b;
+	    d[o++] = 255;
+	}
+    }
+    ctx.putImageData(data, 0, 0);
+}
+
 function showColorCMYK(cmyk) {
     // console.debug("showColorCMYK:", ycbcr);
-    var c = cmyk[0], m = cmyk[1], y = cmyk[2], k = cmyk[3];
+    var [c, m, y, k] = cmyk;
+    showColorCMYKpaint(cmyk);
     var rgb1 = cmyk2rgb([c, 0, 0, 0]),
 	rgb2 = cmyk2rgb([0, m, 0, 0]),
 	rgb3 = cmyk2rgb([0, 0, y, 0]),
