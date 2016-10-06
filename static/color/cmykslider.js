@@ -73,10 +73,10 @@ function showColorRGB(rgb) {
 function showColorCMYK(cmyk) {
     // console.debug("showColorCMYK:", ycbcr);
     var c = cmyk[0], m = cmyk[1], y = cmyk[2], k = cmyk[3];
-    var rgb1 = cmyk2rgb([255 - c, 0, 0, 0]),
-	rgb2 = cmyk2rgb([0, 255 - m, 0, 0]),
-	rgb3 = cmyk2rgb([0, 0, 255 - y, 0]),
-	rgb4 = cmyk2rgb([255 - k, 255 - k, 255 - k, 0]);
+    var rgb1 = cmyk2rgb([c, 0, 0, 0]),
+	rgb2 = cmyk2rgb([0, m, 0, 0]),
+	rgb3 = cmyk2rgb([0, 0, y, 0]),
+	rgb4 = cmyk2rgb([0, 0, 0, k]);
     getById("cyan_paint").style.backgroundColor    = "#" + strN6(rgb1);
     getById("magenta_paint").style.backgroundColor = "#" + strN6(rgb2);
     getById("yellow_paint").style.backgroundColor  = "#" + strN6(rgb3);
