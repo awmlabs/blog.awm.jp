@@ -169,8 +169,12 @@ function showColorCMYK(cmyk) {
 }
 
 function slideChange(e) {
-    var elem = e.target;
-    var id = elem.id;
+    if (typeof e === "string") {
+	var id = e;
+    } else {
+	var elem = e.target;
+	var id = elem.id;
+    }
     switch(id) {
     case "red":
     case "green":
@@ -213,3 +217,11 @@ for (var i in RGBCMYK) {
     var elem = getById(RGBCMYK[i]);
     elem.addEventListener("input", slideChange);
 }
+
+document.addEventListener("DOMContentLoaded", function(e) {
+    getById("cyan").value    = 64;
+    getById("magenta").value = 64;
+    getById("yellow").value  = 64;
+    getById("key").value     = 64;
+    slideChange("key");
+});
