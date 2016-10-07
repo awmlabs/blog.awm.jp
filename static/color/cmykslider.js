@@ -233,6 +233,7 @@ key_lock.addEventListener("click", function(e) {
     if (key_lock_checked) {
 	key_num.innerHTML = 0;
 	getById("key").value = 0;
+	slideChange("key");
     }
 });
 
