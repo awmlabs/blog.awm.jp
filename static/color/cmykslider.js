@@ -4,6 +4,9 @@ var RGB   = ["red", "green", "blue"];
 var CMYK = ["cyan", "magenta", "yellow", "key"];
 var RGBCMYK = RGB.concat(CMYK);
 
+var key_lock = getById("key_lock");
+var key_lock_checked = null;
+
 function getById(id) {
     return document.getElementById(id);
 }
@@ -36,9 +39,11 @@ function cssColor(cspace, r, g, b) {
 }
 
 // https://www.w3.org/TR/css-color-4/#cmyk-rgb
-function rgb2cmyk(rgb) {
+function rgb2cmyk(rgb, k) {
     var [r, g, b] = rgb;
-    var k = 255 - Math.max(r, g, b);
+    if (k === null) {
+	k = 255 - Math.max(r, g, b);
+    }
     if (k === 255) {
         return [0, 0, 0, 255];
     }
@@ -184,7 +189,12 @@ function slideChange(e) {
 	    b = parseInt(getById("blue").value);
 	var rgb = [r, g, b];
 	showColorRGB(rgb);
-	var cmyk = rgb2cmyk(rgb);
+	if (key_lock_checked) {
+	    var k = parseInt(getById("key").value);
+	    var cmyk = rgb2cmyk(rgb, k);
+	} else {
+	    var cmyk = rgb2cmyk(rgb, null);
+	}
 	var [c, m, y, k] = cmyk;
 	getById("cyan").value    = c;
 	getById("magenta").value = m;
@@ -218,10 +228,19 @@ for (var i in RGBCMYK) {
     elem.addEventListener("input", slideChange);
 }
 
+key_lock.addEventListener("click", function(e) {
+    key_lock_checked = key_lock.checked;
+    if (key_lock_checked) {
+	key_num.innerHTML = 0;
+	getById("key").value = 0;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function(e) {
     getById("cyan").value    = 64;
     getById("magenta").value = 64;
     getById("yellow").value  = 64;
     getById("key").value     = 64;
     slideChange("key");
+    key_lock_checked = key_lock.checked;
 });
