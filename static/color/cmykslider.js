@@ -45,7 +45,7 @@ function rgb2cmyk(rgb) {
     var c = 255 * (255 - r - k) / (255 - k)
     var m = 255 * (255 - g - k) / (255 - k)
     var y = 255 * (255 - b - k) / (255 - k)
-    return [Math.round(c), Math.round(m), Math.round(y), Math.round(k)];
+    return [c >>> 0, m >>> 0, y >>> 0, k >>> 0];
 }
 
 function cmyk2rgb(cmyk) {
@@ -53,14 +53,11 @@ function cmyk2rgb(cmyk) {
     var r = 255 - Math.min(255, c * (255 - k)/255 + k)
     var g = 255 - Math.min(255, m * (255 - k)/255 + k)
     var b = 255 - Math.min(255, y * (255 - k)/255 + k)
-    return [Math.round(r), Math.round(g), Math.round(b)];
+    return [r >>> 0, g >>> 0, b >>> 0];
 }
 
 function showColorRGBpaint(rgb) {
     var [r, g, b] = rgb;
-    var r_style = cssColor("rgb", r, 0, 0);
-    var g_style = cssColor("rgb", 0, g, 0);
-    var b_style = cssColor("rgb", 0, 0, b);
     var rgb_paint = getById("rgb_paint");
     rgb_paint.style.backgroundColor = "black";
     var ctx = rgb_paint.getContext("2d");
@@ -68,17 +65,17 @@ function showColorRGBpaint(rgb) {
     ctx.clearRect(0, 0, width, height);
     ctx.globalCompositeOperation = "lighter"; // 加法混色
     ctx.beginPath();
-    ctx.fillStyle = r_style;
+    ctx.fillStyle = cssColor("rgb", r, 0, 0);
     ctx.arc(150, 110, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     //
     ctx.beginPath();
-    ctx.fillStyle = g_style;
+    ctx.fillStyle = cssColor("rgb", 0, g, 0);
     ctx.arc(110, 190, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     //
     ctx.beginPath();
-    ctx.fillStyle = b_style
+    ctx.fillStyle = cssColor("rgb", 0, 0, b);
     ctx.arc(190, 190, 110, 0, 2 * Math.PI, false);
     ctx.fill();
     // #" + strN6([r, g, b], true);
