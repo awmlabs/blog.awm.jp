@@ -19,7 +19,7 @@ title = "iPhone7 Plus で撮影した DNG 画像を取り出す方法"
 
 # 全体の流れ
 
-<img src="../dng/figure1.png" />
+<img src="../figure1.png" />
 
 # 手順
 
