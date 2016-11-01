@@ -12,7 +12,7 @@ title = "iPhone7 Plus で撮影した DNG 画像を取り出す方法"
 - iPhone7 Plus (iPhone7 は所持してないので試してません)
 - PC (MacBook Pro で確認)
 
-- Adobe CC アカウント (ID 自体は無料だけど、Lightroom を使うのに有料サブスクリプションが要る)
+- Adobe CC アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有料サブスクリプションが要る)
 
 - Adobe Lightroom for iPhone (無料)
 - Adobe Photoshop Lightroom CC (有料)
