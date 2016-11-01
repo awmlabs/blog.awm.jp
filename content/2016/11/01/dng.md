@@ -9,13 +9,14 @@ title = "iPhone7 Plus で撮影した DNG 画像を取り出す方法"
 
 # 必要なもの
 
-- iPhone7 Plus (iPhone7 は所持してないので試してません)
-- PC (MacBook Pro で確認)
-
-- Adobe CC アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有料サブスクリプションが要る)
-
-- Adobe Lightroom for iPhone (無料)
-- Adobe Photoshop Lightroom CC (有料)
+- 実機
+  - iPhone7 Plus (iPhone7 は試してません。所持してないので)
+  - PC (MacBook Pro で確認しました)
+- アカウント
+  - Adobe CC アカウント (ID 自体は無料だけど、PC で Lightroom を使うのに有料サブスクリプションが要る)
+- アプリ
+  - Adobe Lightroom for iPhone (無料)
+  - Adobe Photoshop Lightroom CC (有料)
 
 # 全体の流れ
 
@@ -30,14 +31,15 @@ title = "iPhone7 Plus で撮影した DNG 画像を取り出す方法"
 - Lightroom のカメラを使って撮影 (画面右下からアクセス)
   - DNG の(フラット)ボタンがあるので有効にする
   - 撮影する
-- 雲のアイコンをタッチする
-  - 同期が終わるまで待つ
+- 同期が終わるまで待つ
+  - 雲のアイコンをタッチすると進捗が分かる
 
 ## MacBook Pro
 
 - Adobe Lightroom for iPhone をインストールする (有料)
 - Adobe CC アカウントでログインする。(覚えてないけど操作があったかも)
-- 左上の Lr ログをクリックして、Lightroom mobile と同期が動いているのを確認
+- Lightroom mobile との同期するまで待つ
+  - 左上の Lr ログをクリックすれば同期しているか確認出来る。
 - 画像の一覧が出るので、DNG が欲しい画像を選択する。
 - 右クリックで Lightroom プリセット => DNG に書き出しを実行。
 
