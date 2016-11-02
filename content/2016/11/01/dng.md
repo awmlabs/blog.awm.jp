@@ -3,7 +3,7 @@ categories = ["DNG"]
 date = "2016-11-01"
 draft = false
 tags = ["DNG", "iPhone7", "JPEG"]
-title = "iPhone7 Plus で撮影した DNG 画像を取り出す方法"
+title = "iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法"
 
 +++
 
