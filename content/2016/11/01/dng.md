@@ -34,7 +34,7 @@ title = "iPhone7 Plus で撮影した DNG 画像を PC に取り出す方法"
 - 同期が終わるまで待つ
   - 雲のアイコンをタッチすると進捗が分かる
 
-## MacBook Pro
+## PC (MacBook Pro)
 
 - Adobe Lightroom CC をインストールする (有料)
 - Adobe CC アカウントでログインする。(覚えてないけど操作があったかも)
