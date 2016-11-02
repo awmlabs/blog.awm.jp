@@ -33,27 +33,36 @@ iPhone7 Plus から DNG 画像を取り出す方法はこちらにまとめま�
 
 # Adobe Lightroom を使う場合
 
-Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択。
-<center> <img src="../lightroom01-h.png"> </center>
+Adobe Cloud で同期するとコレクションに画像が入るので、そこから選択する。
+
+<center>
+  <a href="../lightroom01.png"> <img src="../lightroom02-1.png"> </a>
+</center>
 
 メニューのウィンドウからプリントを選択して、
-右はじののスクロールを一番したまで下げると、カラーマネジメントのパネルが出てくる。
+右端のスクロールバーを一番下まで下げると、カラーマネジメントのパネルが出てくる。
 
-<center> <img src="../lightroom02-h.png"> </center>
+<center>
+  <a href="../lightroom02.png"> <img src="../lightroom02-h.png"> </a>
+</center>
 
-あとは、プロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK
+あとは、カラーマネジメントのプロファイルを適当に選択して、右下の「ファイルへ出力」ボタンを押して保存すればOK
 
 # Adobe Photoshop を使う場合
 
 DNG 画像を開いて、左下の「画像を保存」ボタンを押します。
 
-<center> <img src="../photoshop01-45p.png"> </center>
+<center>
+  <a href="../photoshop01.png"> <img src="../photoshop01-45p.png"> </a>
+</center>
 
 以下の保存オプションで選択
 
 - ファイル形式に JPEG
 - カラースペースに適当なプロファイル
 
-<center> <img src="../photoshop02-30p.png"> </center>
+<center>
+  <a href="../photoshop02.png"> <img src="../photoshop02-30p.png"> </a>
+</center>
 
 あとは右上の保存を押すだけ。
