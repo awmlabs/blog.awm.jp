@@ -59,7 +59,9 @@ Web の世界では sRGB が標準です。
 - A Standard Default Color Space for the Internet - sRGB
   - https://www.w3.org/Graphics/Color/sRGB.html
 
-ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。
+ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。[^2]
+
+[^2]: 最近の FireFox のデフォルト設定だと、ICC プロファイルが入っていないと何も補正しないそうです。そのままディスプレイのプロファイルで解釈されます。辛い。。
 
 <center> <img src="../figure-noicc.png" /> </center>
 
@@ -68,9 +70,9 @@ ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙�
 # CMYK 色空間
 
 プリンタに出力する色は CMYK で表現します。
-Cyan, Magenta, Yellow, blacK [^2] で各々インクの量です。
+Cyan, Magenta, Yellow, blacK [^3] で各々インクの量です。
 
-[^2]: blacK の K という説より、Key の略という方が多勢のようです。
+[^3]: blacK の K という説より、Key の略という方が多勢のようです。
 
 CMYK 色空間の ICC プロファイルは検索すると以下のが見つかります。
 
@@ -114,16 +116,16 @@ RGB における sRGB と違って CMYK には世界的なデファクトがあ�
 
 ですので、ICC プロファイルが入っていない CMYK JPEG をモニタやプリンタに出力する時に、どうするかは環境によって異なってきます。
 
-例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル[^3]を用いるようです。
+例えば、MacOS の標準ビューアや Safari は、ColorSync の仕組みで色を補正していて、以下の ICC プロファイル[^4]を用いるようです。
 
 ```
 /System/Library/ColorSync/Profiles/Generic\ CMYK\ Profile.icc
 ```
-[^3]: この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
+[^4]: この Generic CMYK Profile は Japan Color 2001 corted , US Sheetred Coated , FOGRA39 のいずれとも一致しませんでした。無難なプロファイルに見えます。
 
-CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 [^4] は大丈夫でしょう。
+CMYK JPEG は必ず ICC プロファイルを埋める必要があると言えます。とりあえず日本に限って言えば、Japan Color 2001 Coated を使えば大体 [^5] は大丈夫でしょう。
 
-[^4]: Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) https://www.jagat.or.jp/past_archives/content/view/3083.html
+[^5]: Japan Color 2001 Coated はマット紙用プロファイルで、オフ輪だと japan Web Coated の方が良いそうです。参考) https://www.jagat.or.jp/past_archives/content/view/3083.html
 
 Chrome や Firefox など、CMYK のカラープロファイルを解釈しないブラウザだと、インク特性を無視してリニアの CMYK => RGB 処理を行うようで、話が少し面倒だったりします。
 
