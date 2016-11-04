@@ -31,6 +31,8 @@ exiftool は DNGタグに対応している為、以下のように解釈でき�
 <center> <img src="../exiftool01.png" /> </center>
 <center> <img src="../exiftool02.png" /> </center>
 
+尚、GPSInfoの座標は神奈川県の相模原公園です。
+
 # 編集の設定値
 
 Lightroom や Photoshop で"現像"する際に、色温度やホワイトバランス、露光量等を指定できますが。保存時のダイヤログを見ると DNG 自体に設定値を保存するようです。
