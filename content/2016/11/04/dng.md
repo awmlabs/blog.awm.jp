@@ -5,7 +5,7 @@ draft = false
 tags = ["DNG" ,"TIFF", "RAW"]
 title = "DNG 画像のフォーマット (コンテナ編)"
 
-+++   
++++
 
 # DNG 仕様書
 
@@ -22,11 +22,13 @@ Negative specification and the TIFF-EP standard.
 ```
 
 TIFF のフォーマットを用いて、新たな DNG 用タグを追加する方式です。
-例えば、ImageMagick に TIFF として読ませようとすると。以下のように知らないタグの警告が出ます。
+例えば、ImageMagick に TIFF として読ませようとすると。以下のように知らないタグの警告が出ます。(DNG として読ませようとすると PNG に変換して identify するので駄目です)
 
 <center> <img src="../identity-dngAsTiff.png" /> </center>
 
-exiftool は DNGタグに対応している為、以下のように解釈できます。
+尚、ExifTool は DNG のタグに対応しています。
+
+- http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/DNG.html
 
 <center> <img src="../exiftool01.png" /> </center>
 <center> <img src="../exiftool02.png" /> </center>
@@ -39,11 +41,11 @@ Lightroom や Photoshop で"現像"する際に、色温度やホワイトバラ
 
 <center> <img src="../saveMetadata.png" /> </center>
 
-試してみます。
+Lightroom で編集して実験してみます。
 
 <center> <a href="../photoshop-colortemp.png"> <img src="../photoshop-colortemp-h.png" /> </a> </center>
 
-さて TIFF タグを確認。
+さて ExifTool で DNG タグを確認。
 
 <center> <img src="../exiftool-colortemp.png" /> </center>
 
