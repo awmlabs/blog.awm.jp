@@ -33,7 +33,7 @@ Exif は TIFF のフォーマットを利用していて、先頭 6byte "Exif\0\
 
 - count が指定する数分 offset が後ろに何個も並ぶ
 - type が使うバイト数xcount が 4byte に収まる場合は、offset フィールドに実データを入れてしまう。
-- 治らない場合は、offset として IFD 以外のエリアに置かれたデータの場所を指す
+- 4byte に入りきらない場合は、offset 値として IFD 以外のエリアに置かれたデータの場所を指す
 - DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。
 
 # PHP で分解
