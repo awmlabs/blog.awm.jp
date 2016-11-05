@@ -94,5 +94,7 @@ ufraw-batch -create-id=yoya --out-type=png --out-depth=16 --output=out.png input
 
 # 参考 URL
 
+- 解説！「RAW」ってなに？
+  - http://photo-mini.com/raw-files/
 - RAW画像はどのように圧縮されているか
   - http://cygx.mydns.jp/blog/?arti=431
