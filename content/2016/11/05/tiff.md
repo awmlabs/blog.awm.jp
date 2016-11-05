@@ -13,10 +13,10 @@ DNG は TIFF として分解出来るので、折角なので TIFF を分解し�
 
 # TIFF フォーマット仕様
 
-仕様はこちらですが、いきなり読むのは辛いと思います。
+仕様はこちらですが、いきなり読むのは辛いはずです。
 - https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf
 
-こちらの Exif 解説の方がイメージが掴めると思います。
+こちらの Exif 解説の方がイメージが掴めるでしょう。 klab さん有難う。
 
 - Exif データにアクセスするコードを自作してみる
   - http://dsas.blog.klab.org/archives/52123322.html
@@ -34,11 +34,13 @@ Exif は TIFF のフォーマットを利用していて、先頭 6byte "Exif\0\
 - 治らない場合は、offset として IFD 以外のエリアに置かれたデータの場所を指す
 - DNG は新しい TIFF の仕様を使っていて、Exif にない type (11:float, 12:double) を使う。
 
+# PHP で分解
+
 という訳で、作りました。
 
 - https://github.com/yoya/IO_TIFF
 
-DNG のタグIDと名前の対応表を入れていないので中途半端ですが、一応、分解はできます。
+DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。
 
 ```
 $ php sample/tiffdump.php  -nf test/APC_0025.dng
