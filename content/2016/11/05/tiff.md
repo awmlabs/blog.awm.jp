@@ -9,7 +9,9 @@ title = "TIFF フォーマットの分解"
 
 # TIFF フォーマットの分解
 
-DNG は TIFF として分解出来るので、折角なので TIFF を分解してみます。(PHP で)
+最近調べている DNG が TIFF の形式という事で、折角なので TIFF を分解してみました。(PHP で)
+
+- https://github.com/yoya/IO_TIFF
 
 # TIFF フォーマット仕様
 
@@ -36,7 +38,7 @@ Exif は TIFF のフォーマットを利用していて、先頭 6byte "Exif\0\
 
 # PHP で分解
 
-という訳で、作りました。
+という訳で、こちらが成果物です。
 
 - https://github.com/yoya/IO_TIFF
 
