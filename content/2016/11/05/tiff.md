@@ -16,6 +16,7 @@ title = "TIFF フォーマットの分解"
 # TIFF フォーマット仕様
 
 仕様はこちらですが、いきなり読むのは辛いはずです。
+
 - https://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf
 
 こちらの Exif 解説の方がイメージが掴めるでしょう。 klab さん有難う。
@@ -24,6 +25,7 @@ title = "TIFF フォーマットの分解"
   - http://dsas.blog.klab.org/archives/52123322.html
 
 Exif は TIFF のフォーマットを利用していて、先頭 6byte "Exif\0\0" を除けば、TIFF として読めます。
+但し、古いバージョンを使うので TIFF としては少しだけ物足りないです。(特に浮動小数点を扱わないとこ)
 
 # 大雑把なイメージ
 
@@ -42,7 +44,11 @@ Exif は TIFF のフォーマットを利用していて、先頭 6byte "Exif\0\
 
 - https://github.com/yoya/IO_TIFF
 
-DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。
+例によって IO_Bit を使ってます。
+
+- https://github.com/yoya/IO_Bit
+
+DNG で追加されたタグIDと名前の対応表がないので表示が中途半端ですが、一応、分解はできてます。(Raw IFD が見えてないですが。。)
 
 ```
 $ php sample/tiffdump.php  -nf test/APC_0025.dng
