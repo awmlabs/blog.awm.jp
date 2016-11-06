@@ -55,7 +55,7 @@ Exit ファイルが渡された場合は、先頭6バイトを読み飛ばし�
         $marker2 = $jpegBit->getUI8();
         $len = $jpegBit->getUI16BE();
         if ($marker2 === 0xe1) { // APP1
-               if ($jpegBit->getData(6) === "Exif\0\0") {
+            if ($jpegBit->getData(6) === "Exif\0\0") {
                 $found = true;
                 break;
             }
