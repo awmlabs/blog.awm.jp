@@ -64,7 +64,7 @@ Exit ファイルが渡された場合は、先頭6バイトを読み飛ばし�
     }
     list($offset, $dummy) = $jpegBit->getOffset();
     if ($found === false) {
-        throw new Exception("Illegal JPEG format. offset: $offset");
+        throw new Exception("Wrong JPEG format. offset: $offset");
     }
     $bit->input(substr($tiffData, $offset));
 ```
