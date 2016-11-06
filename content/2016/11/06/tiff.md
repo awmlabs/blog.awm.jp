@@ -15,7 +15,7 @@ TIFF は独立した画像フォーマットの一種ですが、メタ構造を
 
 <center> <img src="../figure01.png" /> </center>
 
-昨日作った IO_TIFF はこの構造を理解するので、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。
+昨日作った IO_TIFF ライブラリは、JPEG, Exif, TIFF のいずれのファイルを渡されても、TIFF の部分だけ参照してダンプします。
 
 # 実装
 
