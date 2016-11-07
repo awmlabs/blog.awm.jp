@@ -70,6 +70,23 @@ convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
 
 ## magick/policy.xml
 
+- エラーの発生箇所はここで
+
+```
+domain=CoderPolicyDomain;
+rights=ReadPolicyRights;
+if (IsRightsAuthorized(domain,rights,read_info->magick) == MagickFalse)
+  {
+    errno=EPERM;
+    (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
+      "NotAuthorized","`%s'",read_info->filename);
+    read_info=DestroyImageInfo(read_info);
+    return((Image *) NULL);
+  }
+```
+
+- IsRightsAuthorized の処理はこれです。
+
 ```
 p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 while ((p != (PolicyInfo *) NULL) && (authorized != MagickFalse))
@@ -92,21 +109,6 @@ while ((p != (PolicyInfo *) NULL) && (authorized != MagickFalse))
 ```
 
 先勝ちでも後がちでもなく False 勝ちルールのようです。。
-
-あと、呼び元はこんな感じです。
-
-```
-domain=CoderPolicyDomain;
-rights=ReadPolicyRights;
-if (IsRightsAuthorized(domain,rights,read_info->magick) == MagickFalse)
-  {
-    errno=EPERM;
-    (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
-      "NotAuthorized","`%s'",read_info->filename);
-    read_info=DestroyImageInfo(read_info);
-    return((Image *) NULL);
-  }
-```
 
 # True は何のため？
 
