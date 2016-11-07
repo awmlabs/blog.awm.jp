@@ -23,6 +23,7 @@ magic.xml		type-apple.xml
 ```
 
 policy.xml で何が出来るかについては、こちらの記事が詳しいので、どうぞ。
+
 - ImageMagickのピクセルキャッシュとリソース制限
   -  http://techlife.cookpad.com/entry/2016/05/18/180703
 
@@ -35,26 +36,36 @@ policy.xml で何が出来るかについては、こちらの記事が詳しい
 
 policy.xml で domain="coder" を指定して並べれば、ブラックリスト的に禁止する事は可能ですが、出来ればホワイトリストとして設定したいですよね。
 
-結論を先にいうと無理でしたが。一応調べた事を以下にメモします。
+結論を先にいうと無理でしたが。調べた事を以下にメモします。
 
 ## policy.xml を書き換えて実験
 
 以下のように実験しました。
 
-- 先勝ちルールでは？
+### 先勝ちルールでは？
 ```
   <policy domain="coder" rights="read|write" pattern="PNG" />
   <policy domain="coder" rights="none" pattern="*" />
 ```
- => PNG 処理できず
+```
+ $ convert t.png t2.png
+convert: not authorized `t.png' @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
+```
 
-- 後勝ちルールでは？
+### 後勝ちルールでは？
 ```
   <policy domain="coder" rights="none" pattern="*" />
   <policy domain="coder" rights="read|write" pattern="PNG" />
 ```
+```
+$ convert t.png t2.png
+convert: not authorized `t.png' @ error/constitute.c/ReadImage/412.
+convert: no images defined `t2.png' @ error/convert.c/ConvertImageCommand/3257.
+```
 
-どちらも駄目です。コードを見てみましょう。
+どちらも駄目でした。
+さて、コードを見てみましょう。
 
 
 ## magick/policy.xml
@@ -99,9 +110,9 @@ if (IsRightsAuthorized(domain,rights,read_info->magick) == MagickFalse)
 
 例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。
 
-# じゃぁ、True は何のため？
+# True は何のため？
 
-write だけとか、read だけとかの区別で使っているようです。
+False が一つでもマッチすると拒否するのだったら、True は何の為にあるの？と一瞬戸惑いましたが、write だけ、read だけといった区別で使っているようです。
 
 # 結論
 
