@@ -93,7 +93,7 @@ while ((p != (PolicyInfo *) NULL) && (authorized != MagickFalse))
 
 先勝ちでも後がちでもなく False 勝ちルールのようです。。
 
-呼び元を見ると。
+あと、呼び元はこんな感じです。
 
 ```
 domain=CoderPolicyDomain;
@@ -107,8 +107,6 @@ if (IsRightsAuthorized(domain,rights,read_info->magick) == MagickFalse)
     return((Image *) NULL);
   }
 ```
-
-例えば、オプションなりでデフォルト True ルールを設定できればホワイトルールも実現出来るかと思ったのですが、この関数の呼び方を見ると無理そうです。
 
 # True は何のため？
 
