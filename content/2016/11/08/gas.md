@@ -11,7 +11,7 @@ title = "GAS で GoogleDrive のフォルダ一覧"
 
 まずは Google Drive 上で Apps Script のファイルを作成します。
 
-<img src="../menu-log.png" />
+<img src="../menu-appsscript.png" />
 
 # フォルダの ID を調べます
 
