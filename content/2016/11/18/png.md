@@ -16,11 +16,11 @@ Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内
 
 # カラー絵文字
 
-カラー絵文字フォントには以下の方式があります。
+カラー絵文字フォントには以下のような種類があります。
 
-- a) SVG 画像を入れる
-- b) フォントにPNG画像を入れる
-- c) 色数分の文字データをもってレイヤー合成で表示
+- a) フォントにSVG 画像で絵文字を入れる
+- b) ＜同上＞PNG画像で絵文字を入れる (Apple,Google 方式)
+- c) ＜同上＞色数分の文字データをもってレイヤー合成で絵文字表示 (Microsoft方式)
 
 今回はこのうち b) 方式のフォントファイル形式を対象にします。
 
@@ -176,3 +176,10 @@ function searchText($fp, $needle) {
 以上。
 
 フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式からでも PNG データを吸い出せるので便利です。ご活用下さい。
+
+# 参考 URL
+
+- http://wontfix.blogspot.jp/2014/04/firefox-developers-conference-2014-in.html
+- https://en.wikipedia.org/wiki/Apple_Color_Emoji
+- https://opensource.googleblog.com/2013/05/open-standard-color-font-fun-for.html
+- http://blog.fontlab.com/font-tech/color-fonts/color-font-format-proposals/
