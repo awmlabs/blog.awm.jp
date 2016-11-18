@@ -7,13 +7,12 @@ title = "任意のファイルから PNG を抜き出す"
 
 +++
 
-# ツールを作ったきっかけ
+# はじめに
 
-カラー絵文字用フォントには色んな方式がありまして、その中でも Apple のカラー絵文字と、 Google のNotoColorEmoji のフォントは、ファイルの中に絵文字のPNG画像データが埋め込まれています。
+
+Apple Color Emoji や Google のNotoColorEmoji のフォントファイルに内包されている絵文字の PNG 画像データを抽出する事が目的です。
 
 <center> <img src="../figure-ttf.png" /> </center>
-
-この PNG 画像を抽出するのが目的です。
 
 # カラー絵文字
 
@@ -23,7 +22,7 @@ title = "任意のファイルから PNG を抜き出す"
 - b) フォントにPNG画像を入れる
 - c) 色数分の文字データをもってレイヤー合成で表示
 
-今回はこのうち b) 方式のフォントファイルから絵文字の画像を抜きだします。
+今回はこのうち b) 方式のフォントファイル形式を対象にします。
 
 参考)
 
@@ -32,21 +31,21 @@ title = "任意のファイルから PNG を抜き出す"
 - Google Noto Color Emoji spec
   - https://rawgit.com/behdad/color-emoji/master/specification/v1.html
 
-本来であれば上記仕様書に従って分解するべきですが、面倒なので PNG の先頭シグネチャを目印に抜き出す(フォントに限定しない)汎用的なツールを作りました。
+上記仕様書に従って分解するのが面倒なので、PNG の先頭シグネチャを目印に抜き出す、フォント以外でも利用出来る汎用的なツールを作りました。
 絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。
 
 # PNG の構造
 
 <center> <img src="../figure-png.png" /> </center>
 
-# 処理概要
+# ツール処理概要
 
 - 1) フォントファイルの先頭から PNG のシグネチャを探す。
 - 2) 見つけたら、その後ろのチャンクを順番に見る。
    - len + name + payload + crc の構造
-   - len は UInt32(4byte) BigEndiana
-   - name は4文字(4byte)。IHDR チャンクで始まり IEND チャンクで終わる
-   - チャンクの最後 4byte に crc 値がある事に注意
+       - len は UInt32(4byte) BigEndian
+       - name は4文字(4byte)。最初のチャンクが IHDR で、最後が IEND
+       - チャンクの末尾 4byte に crc 値がある事に注意
 - 3) IEND のチャンクにたどり着いたら、そこまでを一つの PNGファイルとして出力する。
 - 4) 1 に戻る
 
@@ -60,7 +59,8 @@ PNG の先頭シグネチャは以下の8バイトです。
 ```
 $pngSignature = "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A";
 ```
-このシグネチャを探して、チャンクを IEND まで辿る処理は以下の通りです。
+このシグネチャを strpos で探して、その後ろに続くチャンクを IEND まで辿る処理を作りました。
+
 ```
 $startOffset = strpos($data, $pngSignature, $offset);
 $offset = $startOffset + strlen($pngSignature);
@@ -104,15 +104,16 @@ appleemoji009538.png
 appleemoji009539.png
 appleemoji009540.png
 OK
+$
 ```
 
 <center> <img src="../appleemoji-ss.png" /> </center>
 
-Apple の方が PNG ファイルの数(5974 > 2387)が多いけれど、画像サイズが Google の方が大きい(136x128 > 20x20)という違いがありますね。
+Apple の方が PNG ファイルの数(5974 > 2387)が多いけれど、Google の方が画像サイズが大きい(136x128 > 20x20)という違いがありますね。
 
 # ツール take2 (ストリーム方式)
 
-上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性があります。
+上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性が出てきます。
 
 ファイルストリームで処理する版に改良しました。
 
@@ -143,7 +144,7 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
 ＜略＞
 ```
 
-要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。
+要するに、入力したデータをなるべく即出力する事で、使用メモリを節約できます。
 
 なお、strpos が使えなくなるので、ベタな方法で代価してます。(標準関数で欲しい。。)
 
