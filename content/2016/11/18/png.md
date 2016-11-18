@@ -13,6 +13,8 @@ title = "任意のファイルから PNG を抜き出す"
 
 <center> <img src="../figure-ttf.png" /> </center>
 
+この PNG 画像を抽出するのが目的です。
+
 # カラー絵文字
 
 カラー絵文字フォントには以下の方式があります。
@@ -30,7 +32,7 @@ title = "任意のファイルから PNG を抜き出す"
 - Google Noto Color Emoji spec
   - https://rawgit.com/behdad/color-emoji/master/specification/v1.html
 
-本来であれば上記仕様書に従って分解するべきでしょうけど、面倒なので PNG の先頭シグネチャを目印に抜き出しました。
+本来であれば上記仕様書に従って分解するべきですが、面倒なので PNG の先頭シグネチャを目印に抜き出す(フォントに限定しない)汎用的なツールを作りました。
 絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。
 
 # PNG の構造
