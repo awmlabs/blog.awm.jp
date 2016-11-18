@@ -78,7 +78,7 @@ while (($offset + 8) < $dataLen) {
 
 ## 実行例
 
-- (Google) NotoSans Color Emoji
+- (Google) NotoColorEmoji
 ```
 $ php pngextract.php  -f NotoColorEmoji.ttf -p notoemoji
 notoemoji000000.png
