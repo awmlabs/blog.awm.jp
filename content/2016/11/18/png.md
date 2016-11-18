@@ -9,13 +9,13 @@ title = "任意のファイルから PNG を抜き出す"
 
 # ツールを作ったきっかけ
 
-絵文字用フォントには色んな方式がありまして、その中でも Apple の標準カラー絵文字フォントと Google のNotoColorEmoji フォントは、フォントファイルの中に絵文字のPNG画像データが埋め込まれています。
+カラー絵文字用フォントには色んな方式がありまして、その中でも Apple のカラー絵文字と、 Google のNotoColorEmoji のフォントは、ファイルの中に絵文字のPNG画像データが埋め込まれています。
 
 <center> <img src="../figure-ttf.png" /> </center>
 
 # カラー絵文字
 
-カラー絵文字フォントの方式は大雑把に以下の種類に分けられます。
+カラー絵文字フォントには以下の方式があります。
 
 - a) SVG 画像を入れる
 - b) フォントにPNG画像を入れる
@@ -31,6 +31,7 @@ title = "任意のファイルから PNG を抜き出す"
   - https://rawgit.com/behdad/color-emoji/master/specification/v1.html
 
 本来であれば上記仕様書に従って分解するべきでしょうけど、面倒なので PNG の先頭シグネチャを目印に抜き出しました。
+絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。。
 
 # PNG の構造
 
@@ -49,7 +50,7 @@ title = "任意のファイルから PNG を抜き出す"
 
 # ツール take1
 
-(すみません、PHP で。。)
+すみません、PHP で。。。
 
 - https://github.com/yoya/misc/blob/96452d7ddbe797685728a5825df2cf3ca863c80c/php/pngextract.php
 
@@ -57,7 +58,7 @@ PNG の先頭シグネチャは以下の8バイトです。
 ```
 $pngSignature = "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A";
 ```
-このシグネチャを探して、チャンクを IEND まで辿る処理
+このシグネチャを探して、チャンクを IEND まで辿る処理は以下の通りです。
 ```
 $startOffset = strpos($data, $pngSignature, $offset);
 $offset = $startOffset + strlen($pngSignature);
@@ -75,7 +76,7 @@ while (($offset + 8) < $dataLen) {
 
 ## 実行例
 
-- NotoSans Color Emoji
+- (Google) NotoSans Color Emoji
 ```
 $ php pngextract.php  -f NotoColorEmoji.ttf -p notoemoji
 notoemoji000000.png
@@ -105,11 +106,11 @@ OK
 
 <center> <img src="../appleemoji-ss.png" /> </center>
 
-無条件で PNG を吸い出しているので、絵文字以外の画像も取れるかもしれませんが、ご愛嬌という事で。
+Apple の方が PNG ファイルの数(5974 > 2387)が多いけど、画像サイズが Google の方が大きい(136x128 > 20x20)という違いがありますね。
 
-## ファイルストリーム方式
+# ツール take2 (ストリーム方式)
 
-上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、数GB といったファイルの処理には適しません。動かない可能性も高いです。
+上記のプログラムでは file_get_contents でファイルの全データをメモリに載せているので、ファイルが数GB になると動かない可能性があります。
 
 ファイルストリームで処理する版に改良しました。
 
@@ -138,11 +139,36 @@ for ($i = 0 ; searchText($fp, $pngSignature); $i++) {
         }
     }
 ＜略＞
-
 ```
 
 要するに、入力したデータをなるべく即出力する事で、メモリを省エネ出来ます。
 
+なお、strpos が使えなくなるので、ベタな方法で代価してます。(標準関数で欲しい。。)
+
+```
+function searchText($fp, $needle) {
+    $len = strlen($needle);
+    $buff = fread($fp, $len);
+    if ($buff === false)  {
+        return false;
+    }
+    while (($buff !== $needle)) {
+        if (feof($fp)) {
+            return false;
+        }
+        $c = fread($fp, 1);
+        if ($c === false) {
+            return false;
+        }
+        $buff = substr($buff, 1) . $c;
+    }
+    return true;
+}
+```
+
+文字列検索はアルゴリズム的に頑張る余地があるのですが、今後の課題にしておきますね。
+
 # 最後に
 
-フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、それがどんな形式であれ PNG を吸い出せるので便利です。ご活用下さい。
+以上。
+フォントファイルに限らず、PNG データが生のまま埋め込まれているバイナリであれば、どんな形式であれ PNG データを吸い出せるので便利です。ご活用下さい。
