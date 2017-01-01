@@ -13,7 +13,7 @@ go-thumber は Pivix さんの公開している画像リサイズプロキシ�
 
 - https://github.com/pixiv/go-thumber
 
-yoya-thumber は、go-thumber を魔改造して ImageMagick に繋げたものです。
+yoya-thumber は SmartNews さんの公開しているプロダクトで、go-thumber を魔改造して ImageMagick に繋げたものです。
 
 - https://github.com/smartnews/yoya-thumber
 - http://developer.smartnews.com/blog/2016/12/19/yoya-thumber/
