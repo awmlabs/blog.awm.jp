@@ -1,5 +1,5 @@
 +++
-categories = ["ImageMagick"]
+categories = ["Graphics"]
 draft = false
 tags = ["Golang", "ImageMagick"]
 date = "2017-01-02T14:15:26+09:00"
@@ -7,16 +7,20 @@ title = "Go Imagick について"
 
 +++
 
-# GoImagick
+# Go Imagick
 
-Go言語で ImageMagick の機能を使えるようにする MagickWand ライブラリの thin(薄い)ラッパーです。
+Go言語で ImageMagick の機能を使えるようにするパッケージです。
 
 - https://github.com/gographics/imagick
 
-以前、GoImagick の紹介スライドを作りました、参考にして下さい。
+以前、Go Imagick の紹介スライドを作りました、参考にして下さい。
 
 - GoImagick でサムネール作成
    - https://speakerdeck.com/yoya/goimagickthumbnail
+
+ImageMagick の上位層ライブラリである MagickWand に cgo で繋いだ thin(薄い)ラッパーです。
+
+<center> <img src="../goimagick.png" /> </center>
 
 # 導入(インストール)
 
@@ -26,10 +30,11 @@ $ sudo yum install ImageMagick-devel
 $ go get gopkg.in/gographics/imagick.v1/imagick
 ```
 
-yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。
+yum や dpkg の ImageMagick はかなり古いので、自分でソースからインストールするのをお勧めします。ちなみに、macports はほぼ最新に近い状態で素晴らしいです。
 
 ```
-$ (cd ImageMagick-6.9.3-8 ; ./configure ; make install)
+$ tar xfz ImageMagick-6.9.6-6.tar.gz
+$ (cd ImageMagick-6.9.6-6 ; ./configure ; make install)
     # ImageMagick v6.8.9-9以降 (最近の ImageMagick はこっち)
 $ go get gopkg.in/gographics/imagick.v2/imagick
 ```
@@ -45,7 +50,7 @@ $ go get gopkg.in/gographics/imagick.v2/imagick
 ```
 package main
 import (
-        "gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v1
+        "gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v
 )
 func main() {
         imagick.Initialize()
@@ -57,10 +62,11 @@ func main() {
 ```
 
 - 実行
+
 ```
 $ ls
-imagick_resize.go       input.png               output.png
-$ go run imagick_resize.go
+resize640x480.go        input.png               output.png
+$ go run resize640x480.go
 $ identify *.png
 input.png PNG 1600x1200 1600x1200+0+0 8-bit sRGB 1.512MB 0.000u 0:00.000
 output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
@@ -74,4 +80,3 @@ output.png PNG 640x480 640x480+0+0 8-bit sRGB 350KB 0.000u 0:00.000
   - https://github.com/gographics/imagick/pull/37
 
 今は多分大丈夫だと思います。
-
