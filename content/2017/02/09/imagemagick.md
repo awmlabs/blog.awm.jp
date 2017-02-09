@@ -113,4 +113,4 @@ while (p != (PolicyInfo *) NULL)
 
 自分には嬉しい機能変更ですが、明確に挙動が変わっているので公式のアナウンスがあった方が良いと考えます。
 
-[^1]: 具体的には以下の場所にファイルがあります → &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
+[^1]: 具体的には以下の場所にファイルがあります → &lt;prefix&gt;/etc/ImageMagick-[67]/policy.xml
