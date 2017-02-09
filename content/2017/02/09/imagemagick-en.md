@@ -9,7 +9,7 @@ draft = false
 
 # Introduction
 
-ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml [^1] in the setting file to instruct permission(OK)/non-permission(NG) for each image format(codec).
+ImageMagick supports over hundred types of image formats. Even if one of them is vulnerable, it will be vulnerable to ImageMagick, so we need care to avoid accepting unnecessary image formats. Normally, we use policy.xml [^1] in the setting file to instruct permission(OK)/non-permission(NG) for each image format(domain=coder).
 
 From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.
 
