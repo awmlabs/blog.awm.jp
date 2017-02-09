@@ -9,10 +9,10 @@ draft = false
 
 # はじめに
 
-ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然、ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
-通常、設定ファイルの policy.xml[^1] を使って画像形式毎に許可/不許可を指示します。
+ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
+通常は設定ファイルの policy.xml[^1] を使って画像形式(codec)毎に許可(OK)/不許可(NG)を指示します。
 
-そして、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が、変わりました。
+そして本題ですが、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が変わりました。
 
 - ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)
 - ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)
@@ -25,7 +25,7 @@ ImageMagick は100種類以上の大量の画像形式をサポートしてい�
 
 しかし今回、後勝ち NG ルールになった事で、始めに *(ワイルドカード)で全部 NG にして、その後ろで許可したい画像(PNG, JPEG, GIF など？)だけ OK のルールを書けば、それ以外の画像は処理しなくなる。安心という訳です。
 
-今までブラックリストを大量に列挙するか、それだと漏れがあったり、ImageMagick 自体が新しい形式が追加されたら困るので、自前で画像先頭バイナリを見てホワイトリスト形式で弾く前処理を入れる。等といった面倒な対策を強いられていました。
+今までブラックリストを大量に列挙するか、それだと漏れがあったり、ImageMagick 自体に新しい形式が追加されても漏れるので、自前で画像バイナリの先頭を走査してホワイトリスト形式で弾く前処理を入れる。等といった手間をかけてきました。
 
 # ルール例
 
@@ -38,7 +38,7 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 <policy domain="coder" rights="read|write" pattern="GIF" />
 {{< /highlight >}}
 
-尚、ImageMagick-6.9.7-6 では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。
+尚、ImageMagick-6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。
 
 また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。
 
@@ -53,7 +53,7 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 
 magick/policy.c の IsRightsAuthorized 関数に差分があります。
 
-policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットします。
+policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットれます。
 
 この MagickFalse のセットの仕方が変更されています。
 
