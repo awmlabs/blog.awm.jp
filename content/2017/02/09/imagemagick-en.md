@@ -109,6 +109,6 @@ while (p != (PolicyInfo *) NULL)
 
 # Conclusion
 
-It's a nice feature change to me, but I think that it was better to have an official announcement because the behavior has changed clearly.
+It's a nice feature change to us, but I think that it was better to have an official announcement because the behavior has changed clearly.
 
 [^1]: Specifically, there are files in the following places -> &lt;prefix&gt;/etc/ImageMagick-6/policy.xml
