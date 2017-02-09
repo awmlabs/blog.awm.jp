@@ -85,7 +85,7 @@ p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 
 ## ImageMagick-6.9.7-7
 
-First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites every entry found, so it will be the winning rule.
+First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.
 
 {{< highlight c >}}
 authorized=MagickTrue;
