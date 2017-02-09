@@ -53,7 +53,7 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 
 magick/policy.c の IsRightsAuthorized 関数に差分があります。
 
-policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に MagickFalse をセットれます。
+policy_cache は設定エントリのリストです。GlobExpression で対応するエントリに絞って、read, write, execute といった権限をもたない場合に authorized に MagickFalse をセットします。
 
 この MagickFalse のセットの仕方が変更されています。
 

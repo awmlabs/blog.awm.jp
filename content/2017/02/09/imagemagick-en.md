@@ -52,13 +52,13 @@ Also, definition "all" has been added from 6.9.7-7. It represents all authoritie
 
 There is a difference in the IsRightsAuthorized function of magick/policy.c.
 
-Policy_cache is a list of configuration entries. MagickFalse will be set if we do not have read, write, execute privileges, focusing on the corresponding entry in GlobExpression.
+Policy_cache has a list of configuration entries. MagickFalse is set if you do not have authority to read, write, execute, etc., by focusing on the matching entry in GlobExpression.
 
 The way of setting this MagickFalse has been changed.
 
 ## ImageMagick-6.9.7-6
 
-First, as authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it's NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.
+First, let authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it's NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.
 
 {{< highlight c >}}
 authorized=MagickTrue;
@@ -85,7 +85,7 @@ p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 
 ## ImageMagick-6.9.7-7
 
-First, as authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.
+First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the winning rule.
 
 {{< highlight c >}}
 authorized=MagickTrue;
