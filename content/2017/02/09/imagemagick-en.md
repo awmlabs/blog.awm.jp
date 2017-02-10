@@ -57,10 +57,12 @@ Also, definition "all" has been added from 6.9.7-7. It represents all authoritie
 {{< /highlight >}}
 
 I will also apply it like this.
+and it's better disable delegate, also add WEBP.
 
 {{< highlight xml >}}
+<policy domain="delegate" rights="none" pattern="*" />
 <policy domain="coder" rights="none" pattern="*" />
-<policy domain="coder" rights="all" pattern="{PNG|JPEG|GIF}" />
+<policy domain="coder" rights="all" pattern="{PNG,JPEG,GIF,WEBP}" />
 {{< /highlight >}}
 
 It is convenient.

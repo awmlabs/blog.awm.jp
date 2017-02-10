@@ -58,10 +58,12 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 {{< /highlight >}}
 
 更にこんな風にもかけます。
+delegate も無効にした方が良いですね。あと、WEBP も追加します。
 
 {{< highlight xml >}}
+<policy domain="delegate" rights="none" pattern="*" />
 <policy domain="coder" rights="none" pattern="*" />
-<policy domain="coder" rights="all" pattern="{PNG|JPEG|GIF}" />
+<policy domain="coder" rights="all" pattern="{PNG,JPEG,GIF,WEBP}" />
 {{< /highlight >}}
 
 便利ですね。
