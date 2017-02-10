@@ -19,6 +19,14 @@ ImageMagick は100種類以上の大量の画像形式をサポートしてい�
 
 尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。
 
+## 追記 (2017/02/10)
+
+この件は掲示板で取り上げていてマニュアルも更新されています。
+
+- ImageMagick Security Policy
+  - http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
+- https://www.imagemagick.org/script/security-policy.php
+
 # 改善点
 
 今まで NG ルールが一つでもあると NG 扱いでした。この場合はブラックリスト方式でしか使えません。例えば読みたくない画像形式がある場合は、それを全て列挙します。面倒ですし漏れがありそうですよね。。
@@ -48,6 +56,15 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 <policy domain="coder" rights="all" pattern="JPEG" />
 <policy domain="coder" rights="all" pattern="GIF" />
 {{< /highlight >}}
+
+更にこんな風にもかけます。
+
+{{< highlight xml >}}
+<policy domain="coder" rights="none" pattern="*" />
+<policy domain="coder" rights="all" pattern="{PNG|JPEG|GIF}" />
+{{< /highlight >}}
+
+便利ですね。
 
 # ソース差分
 

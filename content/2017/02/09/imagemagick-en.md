@@ -18,6 +18,14 @@ From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has 
 
 It's not listed in ChangeLog of ImageMagick 6.9.7-7.
 
+## Additional notes (2017/02/10)
+
+This topic is taken up in the board and the manual has also been updated.
+
+- ImageMagick Security Policy
+  - http://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
+- https://www.imagemagick.org/script/security-policy.php
+
 # Improvement
 
 Until now, there was even one NG rule and it was treated as NG. In this case, it can only be used with the blacklist method. For example, if there are image formats we do not want to read, list them all. It is troublesome and there seems to be a leak.
@@ -47,6 +55,15 @@ Also, definition "all" has been added from 6.9.7-7. It represents all authoritie
 <policy domain="coder" rights="all" pattern="JPEG" />
 <policy domain="coder" rights="all" pattern="GIF" />
 {{< /highlight >}}
+
+I will also apply it like this.
+
+{{< highlight xml >}}
+<policy domain="coder" rights="none" pattern="*" />
+<policy domain="coder" rights="all" pattern="{PNG|JPEG|GIF}" />
+{{< /highlight >}}
+
+It is convenient.
 
 # Source code diff
 
