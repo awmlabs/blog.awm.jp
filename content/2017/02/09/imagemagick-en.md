@@ -13,8 +13,8 @@ ImageMagick supports over hundred types of image formats. Even if one of them is
 
 From ImageMagick 6.9.7-7, how to apply the condition rule set in policy.xml has changed.
 
-- ImageMagick-6.9.7-6 NG if there is even one NG (false winning) 
-- ImageMagick-6.9.7-7 NG if the last matching rule is NG (after winning)
+- ImageMagick 6.9.7-6 NG if there is even one NG (false winning) 
+- ImageMagick 6.9.7-7 NG if the last matching rule is NG (after winning)
 
 It's not listed in ChangeLog of ImageMagick 6.9.7-7.
 
@@ -36,7 +36,7 @@ Even if we enumerate a large number of black lists until now, there is a leak, e
 
 # Rule example
 
-From ImageMagick - 6.9.7-7 we can make the following settings in policy.xml.
+From ImageMagick 6.9.7-7 we can make the following settings in policy.xml.
 
 {{< highlight xml >}}
 <policy domain="coder" rights="none" pattern="*" />
@@ -45,7 +45,7 @@ From ImageMagick - 6.9.7-7 we can make the following settings in policy.xml.
 <policy domain="coder" rights="read|write" pattern="GIF" />
 {{< /highlight >}}
 
-In ImageMagick - 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.
+In ImageMagick 6.9.7-6 and earlier, NG is determined by the * rule, and all image formats can not be processed.
 
 Also, definition "all" has been added from 6.9.7-7. It represents all authorities. Specifically, it is the same as "read|write|execute".
 
@@ -75,7 +75,7 @@ Policy_cache has a list of configuration entries. MagickFalse is set if you do n
 
 The way of setting this MagickFalse has been changed.
 
-## ImageMagick-6.9.7-6
+## ImageMagick 6.9.7-6
 
 First, let authorized = MagickTrue, check the authority if it matches the rule (eg PNG) and assign MagickFalse if it's NG. Since there is no process to return to MagickTrue, if there is only one entry to be NG, it can not be flipped behind.
 
@@ -102,7 +102,7 @@ p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 }
 {{< /highlight >}}
 
-## ImageMagick-6.9.7-7
+## ImageMagick 6.9.7-7
 
 First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the "after winning" NG rule.
 

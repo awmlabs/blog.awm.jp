@@ -9,13 +9,13 @@ draft = false
 
 # はじめに
 
-ImageMagick は100種類以上の大量の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
+ImageMagick は100種類以上の画像形式をサポートしています。この中の一つでも脆弱性があれば当然 ImageMagick の脆弱性となるので、必要のない画像形式を受け取らない為のケアが必要です。
 通常は設定ファイルの policy.xml[^1] を使って画像形式(domain=coder)毎に許可(OK)/不許可(NG)を指示します。
 
 そして本題ですが、ImageMagick 6.9.7-7 から policy.xml で設定した条件ルールの適用方法が変わりました。
 
-- ImageMagick-6.9.7-6 では NG が1つでもあると NG (false 勝ち)
-- ImageMagick-6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)
+- ImageMagick 6.9.7-6 では NG が1つでもあると NG (false 勝ち)
+- ImageMagick 6.9.7-7 最後にマッチしたルールが NG なら NG (後勝ち)
 
 尚、ImageMagick 6.9.7-7 の ChangeLog には記載されていません。
 
@@ -37,7 +37,7 @@ ImageMagick は100種類以上の大量の画像形式をサポートしてい�
 
 # ルール例
 
-ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます。
+ImageMagick 6.9.7-7 から policy.xml で以下のような設定ができます。
 
 {{< highlight xml >}}
 <policy domain="coder" rights="none" pattern="*" />
@@ -46,7 +46,7 @@ ImageMagick-6.9.7-7 から policy.xml で以下のような設定ができます
 <policy domain="coder" rights="read|write" pattern="GIF" />
 {{< /highlight >}}
 
-尚、ImageMagick-6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。
+尚、ImageMagick 6.9.7-6 以前では * のルールで NG が決定してしまい、全ての画像形式が処理できなくなります。
 
 また、6.9.7-7 から定義 all が追加されました。全権限を表します。具体的には read|write|execute と同じです。
 
@@ -76,7 +76,7 @@ policy_cache は設定エントリのリストです。GlobExpression で対応�
 
 この MagickFalse のセットの仕方が変更されています。
 
-## ImageMagick-6.9.7-6
+## ImageMagick 6.9.7-6
 
 始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし NG の場合は MagickFalse を代入します。
 MagickTrue に戻す処理がないので、NG とするエントリが一つあれば後ろでひっくり返す事が出来ません。
@@ -104,7 +104,7 @@ p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 }
 {{< /highlight >}}
 
-## ImageMagick-6.9.7-7
+## ImageMagick 6.9.7-7
 
 始めに authorized=MagickTrue として、ルールに一致した場合(例えば PNG かどうか)に権限をチェックし OK なら MagickTrue 、NG なら MagickFalse を代入します。エントリが見つかる毎に上書きするので、後勝ちルールになります。
 
