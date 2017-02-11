@@ -30,7 +30,7 @@ This topic is taken up in the board and the manual has also been updated.
 
 Until now, there was even one NG rule and it was treated as NG. In this case, it can only be used with the blacklist method. For example, if there are image formats we do not want to read, list them all. It is troublesome and there seems to be a leak.
 
-But this time, because it became the winning NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) We want to allow behind that Other images will not be processed. It's very safe.
+But this time, because it became the "false winning" NG rule, if we first write * (wild card) to NG all and write a rule of OK only for images (PNG, JPEG, GIF etc.?) we want to allow behind that Other images will not be processed. It's very safe.
 
 Even if we enumerate a large number of black lists until now, there is a leak, even if a new format is added to ImageMagick itself, or scanning the signature of the image binary, etc...
 
@@ -104,7 +104,7 @@ p=(PolicyInfo *) GetNextValueInLinkedList(policy_cache);
 
 ## ImageMagick-6.9.7-7
 
-First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the after winning rule.
+First, let authorized = MagickTrue, check the authority if it matches the rule (for example PNG) and if it's OK it will be MagickTrue, if NG then we will assign MagickFalse. It overwrites each entry found, so it will be the "after winning" NG rule.
 
 {{< highlight c >}}
 authorized=MagickTrue;
