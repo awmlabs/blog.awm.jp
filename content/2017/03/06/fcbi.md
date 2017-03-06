@@ -9,7 +9,7 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 # はじめに
 
-インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。
+インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(需要があれば次回アルゴリズム詳説を書く予定)
 
 あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。
 
@@ -28,7 +28,7 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
  https://twitter.com/rityulate/status/772006898279120896
 
-(1) 画像をドロップする。
+### (1) 画像をドロップして渡す
 
 ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。
 
@@ -37,27 +37,27 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 初期状態では画像の一片を320pxに制限しています。
 
 
-(2) edge モードで輪郭が期待通りに出るよう TM 値をいじる。
+### (2) edge モードで輪郭が期待通りに出るよう TM 値を調整
 
 <center> <a href="../demo01.png"> <img src="../demo01-h.png" /> </a> </center>
 
 尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。
 
-(3) maxWidthHeight を最大値にする。
+### (3) maxWidthHeight を最大値にする
 
 <center> <a href="../demo02.png"> <img src="../demo02-h.png" /> </a> </center>
 
 輪郭が期待と違う場合は TM を再調整。
 
-(3) edge を外して完成。
+### (4) edge を外して完成
 
 <center> <a href="../demo03.png"> <img src="../demo03-h.png" /> </a> </center>
 
 # 既存の方法と比較
 
-画像の一部を拡大して比較してみます。
+画像の一部を拡大して拡大結果を比較してみます。
 
-<img src="../miku.png" />
+<img src="../miku.png" /> (クリップ画像)
 
 ```
 % convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
@@ -74,7 +74,7 @@ Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 Lanczoz | Mitchell | FCBI |
 <img src="../miku-lanczos.png"/>|<img src="../miku-mitchell.png"/>|<img src="../miku-fcbi.png"/>|
 
-FCBI の線がよく繋がっていて、いい感じです。
+FCBI だとぼやけが少ないですし、線もよく繋がっていて、いい感じです。
 
 # 最後に
 
