@@ -16,7 +16,7 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 # デモ
 
 - http://app.awm.jp/image.js/fcbi.html
-  - ソースコード: https://github.com/yoya/image.js/blob/master/fcbi.js
+  - ソースコード: https://github.com/yoya/image.js/blob/master/fcbi.js (アルゴリズムに対応する function は drawFCBI_Phase[123] です)
 
 仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。
 
