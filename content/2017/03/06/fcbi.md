@@ -9,7 +9,7 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 # はじめに
 
-インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(需要があれば次回アルゴリズム詳説を書く予定)
+インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に JavaScript で FCBI のデモを実装したので、今回はその使い方の解説です。(次回はアルゴリズム詳解の予定)
 
 あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。
 
@@ -35,7 +35,6 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 <center> <a href="../demo00.png"> <img src="../demo00-h.png" /> </a></center>
 
 初期状態では画像の一片を320pxに制限しています。
-
 
 ### (2) edge モードで輪郭が期待通りに出るよう TM 値を調整
 
@@ -74,7 +73,7 @@ Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 Lanczoz | Mitchell | FCBI |
 <img src="../miku-lanczos.png"/>|<img src="../miku-mitchell.png"/>|<img src="../miku-fcbi.png"/>|
 
-FCBI だと明瞭さがそこそこ、線もよく繋がっていて、いい感じです。
+Lanczos も良い勝負してますが、FCBI の方がドット感が消えて線が自然に繋がっているように見えます。
 
 # 最後に
 
