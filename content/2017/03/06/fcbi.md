@@ -55,9 +55,9 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 # 既存の方法と比較
 
-画像の一部を拡大して拡大結果を比較してみます。
+画像の一部に注目して拡大結果を比較します。
 
-<img src="../miku.png" /> (クリップ画像)
+<img src="../miku.png" />
 
 ```
 % convert miku.png -filter box      -resize 200%x200% miku-box.png # N-Neighbor
@@ -74,7 +74,7 @@ Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 Lanczoz | Mitchell | FCBI |
 <img src="../miku-lanczos.png"/>|<img src="../miku-mitchell.png"/>|<img src="../miku-fcbi.png"/>|
 
-FCBI だとぼやけが少ないですし、線もよく繋がっていて、いい感じです。
+FCBI だと明瞭さがそこそこ、線もよく繋がっていて、いい感じです。
 
 # 最後に
 
