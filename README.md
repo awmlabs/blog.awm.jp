@@ -6,6 +6,7 @@
 $ git clone git@github.com:awmlabs/blog.awm.jp.git
 $ cd blog.awm.jp
 $ git submodule update --init --recursive
+$ go get github.com/spf13/hugo
 $ go install github.com/spf13/hugo
 $ pip install Pygments # for syntax highlight
 ```
