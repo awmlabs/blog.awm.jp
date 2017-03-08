@@ -66,15 +66,15 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 % convert Opaopa.png -filter box      -resize 400%x400% Opaopa-box.png # N-Neighbor
 % convert Opaopa.png -filter triangle -resize 400%x400% Opaopa-triangle.png # Bi-Linear
 % convert Opaopa.png -filter cubic    -resize 400%x400% Opaopa-cubic.png
-% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
 % convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
+% convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
 ```
 ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。
 
 Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 ----------------|----------|----------|
 <img src="../Opaopa-box.png"/>|<img src="../Opaopa-triangle.png"/>|<img src="../Opaopa-cubic.png"/>|
-Lanczoz | Mitchell | FCBI (TM:4 で2回) |
+Lanczoz | Mitchell | FCBI (TM:4 で2回拡大) |
 <img src="../Opaopa-lanczos.png"/>|<img src="../Opaopa-mitchell.png"/>|<img src="../Opaopa-fcbi.png"/>|
 
 線がいい感じにつながってます。
@@ -93,8 +93,8 @@ Lanczoz | Mitchell | FCBI (TM:4 で2回) |
 % convert Kyo.png -filter box      -resize 200%x200% Kyo-box.png # N-Neighbor
 % convert Kyo.png -filter triangle -resize 200%x200% Kyo-triangle.png # Bi-Linear
 % convert Kyo.png -filter cubic    -resize 200%x200% Kyo-cubic.png
-% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
 % convert Kyo.png -filter lanczos  -resize 200%x200% Kyo-lanczos.png
+% convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
 ```
 
 Nearest-Neighbor | Bi-Liner | Bi-Cubic |
