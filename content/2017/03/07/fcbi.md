@@ -3,7 +3,7 @@ draft = false
 tags = ["FCBI", "SuperResolution"]
 categories = ["Graphics"]
 date = "2017-03-07"
-title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方"
+title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方"
 
 +++
 
