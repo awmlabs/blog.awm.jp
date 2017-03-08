@@ -16,8 +16,9 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 # デモ
 
 - http://app.awm.jp/image.js/fcbi.html
-  - ソースコード: https://github.com/yoya/image.js/blob/master/fcbi.js (アルゴリズムに対応する function は drawFCBI_Phase[123] です)
-
+  - ソースコード: https://github.com/yoya/image.js/blob/master/fcbi.js
+    - (アルゴリズムに対応する function は drawFCBI_Phase[123] です)
+    
 仕様: (w) x (h) サイズの画像を (2w-1) x (2h-1) にします。例えば100x100画像は 199x199に拡大します。
 
 制限事項: 画像の一片は maxWidthHeight で指定できますが、 その最大値を 1000px 制限してます。そのうち上限を増やすかも。
@@ -32,16 +33,18 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 初期状態では画像の一片を320pxに制限しています。
 
-### (2) edge モードで輪郭が期待通りに出るよう TM 値を調整
+### (2) edge モードで TM 値を調整
+
 
 <center> <img src="../demo01.png" /> </center>
 
-尚、イラストだと大抵は小さい値にすれば良いのですが、自然画だと調整が難しいです。
+輪郭が期待通りに出るよう TM 値を調整します。
+イラストだと大抵は小さい値にすれば良いのですが、自然画だと丁度良い値を探すのが難しいです。
 
 ### (3) maxWidthHeight を最大値にする
 
-
-輪郭が期待と違う場合は TM を再調整。
+大きなサイズの画像は320以下に制限しているので、その制限値を引き上げます。
+輪郭が期待と違っている場合は TM を再調整します。
 
 <center> <img src="../demo02.png" /> </center>
 
@@ -51,7 +54,9 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 <center> <img src="../demo03.png" /> </center>
 
-# 既存の方法と比較
+# 既存のリサイズ手法と比較
+
+ドット絵とイラスト絵で実験しました。
 
 ## ドット絵
 
@@ -64,7 +69,7 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 % convert Opaopa.png -filter mitchell -resize 400%x400% Opaopa-mitchell.png
 % convert Opaopa.png -filter lanczos  -resize 400%x400% Opaopa-lanczos.png
 ```
-ちなみに ImageMagick の -resize デフォルトは Mitchell フィルタです。
+ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。
 
 Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 ----------------|----------|----------|
