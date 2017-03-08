@@ -24,10 +24,6 @@ title = "エッジ補完アルゴリズム FCBI (Fast curvature based interpolat
 
 ## 使い方
 
-同じ実験するのならできる限り可愛い絵の方が頑張れるので、こちらの世界一可愛いミクさん絵で綺麗な拡大を試みます。
-
- https://twitter.com/rityulate/status/772006898279120896
-
 ### (1) 画像をドロップして渡す
 
 ブラウザに PNG, JPEG, GIF あたりの画像をドロップすると、とりあえず変換されます。
