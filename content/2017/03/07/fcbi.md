@@ -99,7 +99,7 @@ Lanczoz | Mitchell | FCBI (TM:46) |
 <img src="../Kyo-lanczos.png"/>|<img src="../Kyo-mitchell.png"/>|<img src="../Kyo-fcbi.png"/>|
 
 画像の一部に注目して拡大結果を比較します。
-Lanczos も良い勝負してますが、FCBI の方がドット感が消えて線が自然に繋がっているように見えます。
+FCBI の方がドット感が消えて線が自然に繋がっているように見えます。
 
 # 最後に
 
