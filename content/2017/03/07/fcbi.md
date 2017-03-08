@@ -119,3 +119,5 @@ Bi-Cubic や Lanczos はパラメータで色々特徴を変えられるので�
   -  http://www.kumikomi.net/interface/contents/201506.php
 - Comparative Analysis of Edge Based Single Image Superresolution
   - http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf
+- Parameter Optimization Of Fast Curvature Based Interpolation Using Genetic Algorithm
+--  https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf
