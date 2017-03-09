@@ -26,7 +26,7 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 
 - エッジが残るように勾配の少ない軸方向で補間する。
 - 倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可。
-  -  尚、公式の参照実装(icbi.m)は 2*n-1 倍)に対応してます。
+  -  尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています。
 - 画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり。
 - モノクロ画像のアルゴリズム。つまり色差は見ない。
 - イラスト画像は少し苦手 (最後の方で解説)
@@ -62,14 +62,14 @@ function convolveFilter(imageData, x, y, posi, filter) {
 }
 {{< /highlight >}}
 
-### abs - H1, H2
+### abs - h1, h2
 
-インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、H1 < H2 でなく abs(H1) < abs(H2) です。
+インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたな数式)
 直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L234
 {{< highlight javascript >}}
-if (Math.abs(H1) < Math.abs(H2)) {
+if (Math.abs(h1) < Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
 } else {
 	var rgba = meanRGBA(rgba2, rgba3);
@@ -139,31 +139,13 @@ Phase2| Phase3 |
   - エッジの場合
      - 上下、左右の２軸のうち勾配が少ない方の２ピクセルを混ぜる
 
-## サンプル画像
-
-実際の画像に適用するとこんな感じです。
-
-<img src="../Opaopa-Dotize.png" />
-
-### Phase1: ピクセルを拡げる
-
-<img src="../OpaopaPhase1-Dotize.png" />
-
-### Phase2: 斜め方向からピクセルを埋める
-
-<img src="../OpaopaPhase2-Dotize.png" />
-
-### Phase3: 縦横方向からピクセルを埋める
-
-<img src="../OpaopaPhase3-Dotize.png" />
-
 # 各 Phase の詳細
 
 ## Phase1: ピクセルを拡げる
 
 単純にピクセルを2倍の座標で配置し直します。
 
-<img src="../3x3test-Dotty.png" />  <img src="../3x3testPhase1-Dotty.png" />
+<img src="../3x2test-Dotty.png" />  <img src="../5x3testPhase1-Dotty.png" />
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L181
    - 読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
@@ -203,7 +185,19 @@ srcImage と dstImage の座標変換が整数倍じゃない時に破綻する�
 
 ## Phase2: 斜め方向からピクセルを埋める
 
+<img src="../3x3phase1-l1234-Dotty.png" />
+
+最終的には、この l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。
+
+<img src="../3x3phase1-l1234-Dotty-14.png" align="center"/> or <img src="../3x3phase1-l1234-Dotty-23.png" align="center" />
 ### エッジ判定
+
+
+- v1 = abs(l1 - l4)
+
+- v2 = abs(l1 - l4)
+
+- abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2;
 
 隣り合うピクセルの輝度に急激な変化がなければ、非エッジだと判定します。
 
@@ -221,11 +215,11 @@ var l1 = lumaFromRGBA(rgba1); // RGBA から輝度 Y を算出
 var l2 = lumaFromRGBA(rgba2);
 var l3 = lumaFromRGBA(rgba3);
 var l4 = lumaFromRGBA(rgba4);
-var V1 = Math.abs(l1 - l4);   // 斜め方向の勾配
-var V2 = Math.abs(l2 - l3);
+var v1 = Math.abs(l1 - l4);   // 斜め方向の勾配
+var v2 = Math.abs(l2 - l3);
 var p1 = (l1 + l4) / 2;       // 斜め隣の平均
 var p2 = (l2 + l3) / 2;       // つまり p1 - p2 は斜め２軸の勾配
-if ((V1 < TM) && (V2 < TM) && (Math.abs(p1 - p2) < TM)) {
+if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
    // 非エッジとして処理
 } else {
    // エッジとして処理
@@ -239,7 +233,7 @@ if ((V1 < TM) && (V2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L244
 {{< highlight javascript >}}
-if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
+if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
     var rgba = meanRGBA(rgba1, rgba4); // l1, l4 の中間の値
 } else{
     var rgba = meanRGBA(rgba2, rgba3);
@@ -253,17 +247,17 @@ if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L224
 {{< highlight javascript >}}
-var H1 = convolveFilter(dstImageData, dstX, dstY,
+var h1 = convolveFilter(dstImageData, dstX, dstY,
 			    [[-3, 1], [-1,-1], [1, -3],  // 1, 2, 3
 			     [-1, 1],          [1, -1],  // 4,    5
 			     [-1, 3], [ 1, 1], [3, -1]], // 6, 7, 8
 			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-var H2 = convolveFilter(dstImageData, dstX, dstY,
+var h2 = convolveFilter(dstImageData, dstX, dstY,
 			    [[-1, -3], [1, -1], [3, 1],  // 1, 2, 3
 			     [-1, -1],          [1, 1],  // 4,    5
 			     [-3, -1], [-1, 1], [1, 3]], // 6, 7, 8
 			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-if (Math.abs(H1) < Math.abs(H2)) {
+if (Math.abs(h1) < Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
 } else {
 	var rgba = meanRGBA(rgba2, rgba3);
@@ -290,11 +284,11 @@ var l1 = lumaFromRGBA(rgba1);
 var l2 = lumaFromRGBA(rgba2);
 var l3 = lumaFromRGBA(rgba3);
 var l4 = lumaFromRGBA(rgba4);
-var V1 = Math.abs(l1 - l4);
-var V2 = Math.abs(l2 - l3);
+var v1 = Math.abs(l1 - l4);
+var v2 = Math.abs(l2 - l3);
 var p1 = (l1 + l4) / 2;
 var p2 = (l2 + l3) / 2;
-if ((V1 < TM) && (V2 < TM) && (Math.abs(p1 - p2) < TM)) {
+if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
    // 非エッジとして処理
 } else {
    // エッジとして処理
@@ -305,7 +299,7 @@ if ((V1 < TM) && (V2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L303
 {{< highlight javascript >}}
-if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
+if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 	var rgba = meanRGBA(rgba1, rgba4);
 } else{
 	var rgba = meanRGBA(rgba2, rgba3);
@@ -316,22 +310,40 @@ if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L283
 {{< highlight javascript >}}
-var H1 = convolveFilter(dstImageData, dstX, dstY,
+var h1 = convolveFilter(dstImageData, dstX, dstY,
 			    [[1, -2], [1, 0], [1, 2],    // 1, 2, 3
 			     [0, -1],         [0, 1],    // 4,    5
 			     [-1,-2], [-1,0], [-1, 2]],  // 6, 7, 8
 			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-var H2 = convolveFilter(dstImageData, dstX, dstY,
+var h2 = convolveFilter(dstImageData, dstX, dstY,
 			    [[-2,-1], [0,-1], [2, -1],   // 1, 2, 3
 			     [-1, 0],         [1,  0],   // 4,    5
 			     [-2, 1], [0, 1], [2,  1]],  // 6, 7, 8
 			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-if (Math.abs(H1) <= Math.abs(H2)) {
+if (Math.abs(h1) <= Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
 } else {
 	var rgba = meanRGBA(rgba2, rgba3);
 }
 {{< /highlight >}}
+
+# サンプル画像でテスト
+
+実際の画像に適用するとこんな感じです。
+
+<img src="../Opaopa-Dotize.png" />
+
+## Phase1: ピクセルを拡げる
+
+<img src="../OpaopaPhase1-Dotize.png" />
+
+## Phase2: 斜め方向からピクセルを埋める
+
+<img src="../OpaopaPhase2-Dotize.png" />
+
+## Phase3: 縦横方向からピクセルを埋める
+
+<img src="../OpaopaPhase3-Dotize.png" />
 
 # FCBI の弱点
 
@@ -350,7 +362,7 @@ FCBI は width:1 の線が苦手です。実写の画像だと殆ど問題ない
  *      x  
  *  l3     l4
  */
-if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
+if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 	var rgba = meanRGBA(rgba1, rgba4);
 } else{
 	var rgba = meanRGBA(rgba2, rgba3);
@@ -358,7 +370,7 @@ if (V1 < V2) { // V1:abs(l1 - l4),  V2:abs(l2 - l3)
 {{< /highlight >}}
 
 単色塗りに width:1 の線が斜めに伸びる時、
-V1(上記の例だと白-白) と V2（黒-黒) が同じ為に、
+v1(上記の例だと白-白) と v2（黒-黒) が同じ為に、
 どちらを補間すれば良いのか判断がつきません。
 
 (図、2x2 の白黒チェックを 3x3 に引き伸ばした図)
@@ -371,7 +383,7 @@ V1(上記の例だと白-白) と V2（黒-黒) が同じ為に、
 
 思った事をつらつらと。
 - 輝度Yでなく色差も使った方が良い気がする
-- 単色塗りの上に width:1 の線があると破綻するので、V1 == V2 の時は非エッジのようなもう少し広い範囲のピクセルから判断するか。いっその事 Bi-Linear にように4方を混ぜる方がマシなのでは
+- 単色塗りの上に width:1 の線があると破綻するので、v1 == v2 の時は非エッジのようなもう少し広い範囲のピクセルから判断するか。いっその事 Bi-Linear にように4方を混ぜる方がマシなのでは
 - FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に見えるようになって、悲しい事もある
 
 漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。
