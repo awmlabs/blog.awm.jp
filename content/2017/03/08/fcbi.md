@@ -8,14 +8,15 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 
 # はじめに
 
-インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説します。
+インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説し直します。
 
 ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので、知っておいて損はないです。
 
 尚、こちらのエントリの続きです。
 
 - エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
-  - http://blog.awm.jp/2017/03/07/fcbi/
+  - https://blog.awm.jp/2017/03/07/fcbi/
+     - https://app.awm.jp/image.js/fcbi.html (デモ)
 
 デモを見た方が実感が湧くはずですので、この記事を読む前に出来ればお試しください。
 
@@ -32,7 +33,9 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 
 ## 実装のポイント
 
-モノクロ画像のアルゴリズムなので、RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。
+### カラー対応
+
+FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L75
 {{< highlight javascript >}}
@@ -43,7 +46,9 @@ function lumaFromRGBA(rgba) {
 }
 {{< /highlight >}}
 
-インターフェース誌の記事だと非エッジの勾配を調べる演算がテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されていますが、単なる畳み込みの計算なのでプログラム的には簡単です。
+### フィルタ行列
+
+インターフェース誌の記事だと非エッジの勾配を調べる演算がフィルタ行列とのテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L85
 {{< highlight javascript >}}
@@ -57,8 +62,19 @@ function convolveFilter(imageData, x, y, posi, filter) {
 }
 {{< /highlight >}}
 
+### abs - H1, H2
+
 インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、H1 < H2 でなく abs(H1) < abs(H2) です。
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのを確認しました。
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。
+
+- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L234
+{{< highlight javascript >}}
+if (Math.abs(H1) < Math.abs(H2)) {
+	var rgba = meanRGBA(rgba1, rgba4);
+} else {
+	var rgba = meanRGBA(rgba2, rgba3);
+}
+{{< /highlight >}}
 
 ## 既存のメソッドとの比較
 
@@ -359,3 +375,16 @@ V1(上記の例だと白-白) と V2（黒-黒) が同じ為に、
 - FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に見えるようになって、悲しい事もある
 
 漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。
+
+# 参考
+
+- Interface 2015年6月号 (CQ出版)
+  -  http://www.kumikomi.net/interface/contents/201506.php
+- ICBI page
+  -  http://www.andreagiachetti.it/icbi/
+- Real time artifact-free image upscaling
+   -  http://www.andreagiachetti.it/icbi/InterTIPmod2c.pdf
+- Comparative Analysis of Edge Based Single Image Superresolution
+  - http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf
+- Parameter Optimization Of Fast Curvature Based Interpolation Using Genetic Algorithm
+   - https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf
