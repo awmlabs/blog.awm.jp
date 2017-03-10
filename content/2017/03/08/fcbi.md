@@ -141,7 +141,7 @@ Phase2| Phase3 |
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173
    - (読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 {{< highlight javascript >}}
-function drawFCBI_Phase1(srcImageData, dstImageData, edge) {
+function drawFCBI_Phase1(srcImageData, dstImageData, edgeMode) {
     var dstWidth = dstImageData.width, dstHeight = dstImageData.height;
     for (var dstY = 0 ; dstY < dstHeight ; dstY+=2) {
         for (var dstX = 0 ; dstX < dstWidth ; dstX+=2) {
@@ -159,7 +159,7 @@ function drawFCBI_Phase1(srcImageData, dstImageData, edge) {
 
 - もう一つの方法
 {{< highlight javascript >}}
-function drawFCBI_Phase1(srcImageData, dstImageData, edge) {
+function drawFCBI_Phase1(srcImageData, dstImageData, edgeMode) {
     var srcWidth = srcImageData.width, srcHeight = srcImageData.height;
     for (var srcY = 0 ; srcY < srcHeight ; srcY+=1) {
         for (var srcX = 0 ; srcX < srcWidth ; srcX+=1) {
