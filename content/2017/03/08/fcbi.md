@@ -375,11 +375,8 @@ Copyright: https://twitter.com/myuton0407/status/693361955000549376
 Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 ----------------|----------|----------|
 <img src="../Kotori-box.png"/>|<img src="../Kotori-triangle.png"/>|<img src="../Kotori-cubic.png"/>|
-Lanczoz | Mitchell | FCBI (TM:46) |
+Lanczoz | Mitchell | FCBI (TM:12) |
 <img src="../Kotori-lanczos.png"/>|<img src="../Kotori-mitchell.png"/>|<img src="../Kotori-fcbi.png"/>|
-
-
-
 
 # FCBI の弱点
 
@@ -411,14 +408,13 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為�
 
 <img src="../fail-l1234-3x3-Dotty.png" />
 
-とりあえず l2, l3 (右肩上がりの斜め)を使ってしまいます。
+この場合、l2, l3 (右肩上がりの斜め)を使ってしまいます。
 
-つまり、フラットな塗りの上に右肩下がりの細い線があると、そこをうまく補間できないという事です。
+つまり、フラットな塗りの上に右肩下がりの細い線があると、うまく補間できないという事です。
 
 ## 対処
 
-単色塗りの上に width:1 の線があると破綻する件。
-我慢できないので少し改造しました。
+単色塗りの上に width:1 の線があると破綻する件。少し改善しました。
 
 v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜます。
 
