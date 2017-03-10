@@ -78,10 +78,10 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 ```
 ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。
 
-Nearest-Neighbor | Bi-Linear | Bi-Cubic |
+Nearest-Neighbor | Bi-Linear | Bi-Cubic (B,C = 1,0) |
 ----------------|----------|----------|
 <img src="../Opaopa-box.png"/>|<img src="../Opaopa-triangle.png"/>|<img src="../Opaopa-cubic.png"/>|
-Lanczoz | Mitchell | FCBI (TM:4 で2回拡大) |
+Lanczoz (lobes:3) | Mitchell | FCBI (TM:4 で2回拡大) |
 <img src="../Opaopa-lanczos.png"/>|<img src="../Opaopa-mitchell.png"/>|<img src="../Opaopa-fcbi.png"/>|
 
 線がいい感じにつながってます。
@@ -104,10 +104,10 @@ Lanczoz | Mitchell | FCBI (TM:4 で2回拡大) |
 % convert Kyo.png -filter mitchell -resize 200%x200% Kyo-mitchell.png
 ```
 
-Nearest-Neighbor | Bi-Liner | Bi-Cubic |
+Nearest-Neighbor | Bi-Liner | Bi-Cubic (B,C = 1,0) |
 ----------------|----------|----------|
 <img src="../Kyo-box.png"/>|<img src="../Kyo-triangle.png"/>|<img src="../Kyo-cubic.png"/>|
-Lanczoz | Mitchell | FCBI (TM:46) |
+Lanczoz (lobes:3) | Mitchell | FCBI (TM:46) |
 <img src="../Kyo-lanczos.png"/>|<img src="../Kyo-mitchell.png"/>|<img src="../Kyo-fcbi.png"/>|
 
 FCBI の方がドット感が消えて線が自然に繋がっているように見えます。

@@ -56,7 +56,7 @@ function lumaFromRGBA(rgba) {
 ### abs - h1, h2
 
 インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、参照実装(icbi.m)で abs で括っているのを確認済みです。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231
 {{< highlight javascript >}}
@@ -139,7 +139,7 @@ Phase2| Phase3 |
 <img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173
-   - 読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
+   - (読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 {{< highlight javascript >}}
 function drawFCBI_Phase1(srcImageData, dstImageData, edge) {
     var dstWidth = dstImageData.width, dstHeight = dstImageData.height;
@@ -217,13 +217,13 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 ### 非エッジの場合
 
-補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。
+補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。
 
 h1 のフィルタ: <img src="../phase2-h1Filter-7x7Dotty.png" align="top" />
 
 h2 のフィルタ: <img src="../phase2-h2Filter-7x7Dotty.png" align="top" />
 
-補間したいピクセルの周辺の輝度を、上記の重み付けで計算を行い、h1 と h2 の大小で、勾配の向きを判定します。
+補間したいピクセルの周辺の輝度を上記の重み付けで計算を行い、h1 と h2 の大小で勾配の向きを判定します。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216
 {{< highlight javascript >}}
@@ -373,10 +373,10 @@ Copyright: https://twitter.com/myuton0407/status/693361955000549376
 % convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
 % convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
 ```
-Nearest-Neighbor | Bi-Linear | Bi-Cubic |
+Nearest-Neighbor | Bi-Linear | Bi-Cubic (B,C = 1,0) |
 ----------------|----------|----------|
 <img src="../Kotori-box.png"/>|<img src="../Kotori-triangle.png"/>|<img src="../Kotori-cubic.png"/>|
-Lanczoz | Mitchell | FCBI (TM:12) |
+Lanczoz (lobes:3) | Mitchell | FCBI (TM:12) |
 <img src="../Kotori-lanczos.png"/>|<img src="../Kotori-mitchell.png"/>|<img src="../Kotori-fcbi.png"/>|
 
 ぱっと見では Mitchell フィルタが良い勝負をしていますが、細かいところをみると FCBI に分配があがります。
