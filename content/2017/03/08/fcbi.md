@@ -263,6 +263,8 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 ## Phase3: 縦横方向からピクセルを埋める
 
+<img src="../phase3-l1234-3x3Dotty-14.png" align="center"/> or <img src="../phase3-l1234-3x3Dotty-23.png" align="center" />
+
 左45度傾けて、斜め方向を縦横に変えただけの処理です。
 Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。
 
