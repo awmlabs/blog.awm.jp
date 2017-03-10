@@ -359,10 +359,27 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 # イラストでのテスト
 
-既存のリサイズ方式との比較表が、前編の後ろの方にあります。参考までに。
+既存のリサイズ方式との比較表が、<a href="https://blog.awm.jp/2017/03/07/fcbi/"> 前編</a>の後ろの方にありますが、改めて実験。
 
-- エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
-  - https://blog.awm.jp/2017/03/07/fcbi/
+
+<img src="../Kotori.png" />
+Copyright: https://twitter.com/myuton0407/status/693361955000549376
+
+```
+% convert Kotori.png -filter box      -resize 200%x200% Kotori-box.png # N-Neighbor
+% convert Kotori.png -filter triangle -resize 200%x200% Kotori-triangle.png # Bi-Linear
+% convert Kotori.png -filter cubic    -resize 200%x200% Kotori-cubic.png
+% convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
+% convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
+```
+Nearest-Neighbor | Bi-Liner | Bi-Cubic |
+----------------|----------|----------|
+<img src="../Kotori-box.png"/>|<img src="../Kotori-triangle.png"/>|<img src="../Kotori-cubic.png"/>|
+Lanczoz | Mitchell | FCBI (TM:46) |
+<img src="../Kotori-lanczos.png"/>|<img src="../Kotori-mitchell.png"/>|<img src="../Kotori-fcbi.png"/>|
+
+
+
 
 # FCBI の弱点
 
