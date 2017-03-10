@@ -31,13 +31,13 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 - モノクロ画像のアルゴリズム。つまり色差は見ない。
 - イラスト画像は少し苦手 (最後の方で解説)
 
-## 実装のポイント
+## 注意点
 
 ### カラー対応
 
 FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L75
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75
 {{< highlight javascript >}}
 function lumaFromRGBA(rgba) {
     var [r,g,b,a] = rgba;
@@ -50,24 +50,14 @@ function lumaFromRGBA(rgba) {
 
 インターフェース誌の記事だと非エッジの勾配を調べる演算がフィルタ行列とのテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L85
-{{< highlight javascript >}}
-function convolveFilter(imageData, x, y, posi, filter) {
-    var h = 0;
-    for (var i = 0, n = posi.length ; i < n ; i++) {
-	var [dx, dy] = posi[i];
-	h += getLuma(imageData, x + dx, y + dy) * filter[i];
-    }
-    return h;
-}
-{{< /highlight >}}
+つまり、フィルターで場所に応じた重み付けをした足し算です。
 
 ### abs - h1, h2
 
 インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたな数式)
 直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わりますし、参照実装(icbi.m)で abs で括っているのも確認済みです。
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L234
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231
 {{< highlight javascript >}}
 if (Math.abs(h1) < Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
@@ -147,7 +137,7 @@ Phase2| Phase3 |
 
 <img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L181
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173
    - 読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
 {{< highlight javascript >}}
 function drawFCBI_Phase1(srcImageData, dstImageData, edge) {
@@ -185,25 +175,21 @@ srcImage と dstImage の座標変換が整数倍じゃない時に破綻する�
 
 ## Phase2: 斜め方向からピクセルを埋める
 
-<img src="../phase2-l1234-3x3Dotty.png" />
-
-最終的には、この l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。
-
 <img src="../phase2-l1234-3x3Dotty-14.png" align="center"/> or <img src="../phase2-l1234-3x3Dotty-23.png" align="center" />
+
+l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。以下の長々とした解説は、このどちらから埋めるかを判断する処理についてです。
 
 ### エッジ判定
 
-- v1 = abs(l1 - l4)
+<img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> v1 = abs(l1 - l4) 
 
-<img src="../phase2-l14-3x3Dotty.png" align="center" />
+<img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> v2 = abs(l2 - l3) 
 
-- v2 = abs(l1 - l4)
+<img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2; 
 
-- abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2;
+隣り合うピクセルの輝度に急激な変化があればエッジで、それ以外を非エッジだと判定します。
 
-隣り合うピクセルの輝度に急激な変化がなければ、非エッジだと判定します。
-
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L204
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L196
 {{< highlight javascript >}}
 /*  l1     l2
  *      x  
@@ -228,12 +214,46 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 }
 {{< /highlight >}}
 
+### 非エッジの場合
+
+
+補完するピクセルをどれにするか判断するのに、斜め２軸の隣どうしだけでなく、少し多めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので、仕方ないです。
+
+h1 のフィルタ: <img src="../phase2-h1Filter-7x7Dotty.png" align="top" />
+
+h2 のフィルタ: <img src="../phase2-h2Filter-7x7Dotty.png" align="top" />
+
+補間したいピクセルの周辺の輝度を、上記の重み付けで計算を行い、h1 と h2 の大小で、勾配の向きを判定します。
+
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216
+{{< highlight javascript >}}
+var l_m1m3 = getLuma(dstImageData, dstX-1, dstY-3);
+var l_p1m3 = getLuma(dstImageData, dstX+1, dstY-3);
+var l_m3m1 = getLuma(dstImageData, dstX-3, dstY-1);
+// l_m1m1 = l1;
+// l_p1m1 = l2;
+var l_p3m1 = getLuma(dstImageData, dstX+3, dstY-1);
+var l_m3p1 = getLuma(dstImageData, dstX-3, dstY+1);
+// l_m1p1 = l3;
+// l_p1p1 = l4;
+var l_p3p1 = getLuma(dstImageData, dstX+3, dstY+1);
+var l_m1p3 = getLuma(dstImageData, dstX-1, dstY+3);
+var l_p1p3 = getLuma(dstImageData, dstX+1, dstY+3);
+
+var h1 = (l_m3p1 + l1 + l_p1m3) - 3 * (l3 + l2) + (l_m1p3 + l4 + l_p3m1);
+var h2 = (l_m1m3 + l2 + l_p3p1) - 3 * (l1 + l4) + (l_m3m1 + l3 + l_p1p3);
+if (Math.abs(h1) < Math.abs(h2)) {
+    var rgba = meanRGBA(rgba1, rgba4);
+} else {
+    var rgba = meanRGBA(rgba2, rgba3);
+}
+{{< /highlight >}}
 
 ### エッジの場合
 
-斜め２軸の隣どうしを見て、その勾配が少ない方の２ピクセルを線形補完します。
+エッジであれば、斜め２軸の隣どうしを見て、その差が少ない方の２ピクセルを線形補完するだけです。
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L244
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L267
 {{< highlight javascript >}}
 if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
     var rgba = meanRGBA(rgba1, rgba4); // l1, l4 の中間の値
@@ -242,37 +262,14 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 }
 {{< /highlight >}}
 
-### 非エッジの場合
-
-エッジの場合より少し複雑です。
-補完するピクセルをどれにするか判断するのに、斜め２軸の隣どうしだけでなく、少し多めのピクセルを見ます。
-
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L224
-{{< highlight javascript >}}
-var h1 = convolveFilter(dstImageData, dstX, dstY,
-			    [[-3, 1], [-1,-1], [1, -3],  // 1, 2, 3
-			     [-1, 1],          [1, -1],  // 4,    5
-			     [-1, 3], [ 1, 1], [3, -1]], // 6, 7, 8
-			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-var h2 = convolveFilter(dstImageData, dstX, dstY,
-			    [[-1, -3], [1, -1], [3, 1],  // 1, 2, 3
-			     [-1, -1],          [1, 1],  // 4,    5
-			     [-3, -1], [-1, 1], [1, 3]], // 6, 7, 8
-			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-if (Math.abs(h1) < Math.abs(h2)) {
-	var rgba = meanRGBA(rgba1, rgba4);
-} else {
-	var rgba = meanRGBA(rgba2, rgba3);
-}
-{{< /highlight >}}
-
 ## Phase3: 縦横方向からピクセルを埋める
 
-Phase2 とほぼ同じ処理です。斜め方向を縦横に変えただけ。
+左45度傾けて、斜め方向を縦横に変えただけの処理です。
+Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。
 
 ### エッジ判定
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L263
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L268
 {{< highlight javascript >}}
 /*     l2
  *  l1  x  l4
@@ -297,9 +294,40 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 }
 {{< /highlight >}}
 
+### 非エッジの場合
+
+h1 のフィルタ: <img src="../phase3-h1Filter-3x5Dotty.png" align="top" />
+
+h2 のフィルタ: <img src="../phase3-h2Filter-5x3Dotty.png" align="top" />
+
+
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L292
+{{< highlight javascript >}}
+var l_m1m2 = getLuma(dstImageData, dstX-1, dstY-2);
+var l_p1m2 = getLuma(dstImageData, dstX+1, dstY-2);
+var l_m2m1 = getLuma(dstImageData, dstX-2, dstY-1);
+// l_z0m1 = l2
+var l_p2m1 = getLuma(dstImageData, dstX+2, dstY-1);
+// l_m1z0 = l1
+// l_p1z0 = l4
+var l_m2p1 = getLuma(dstImageData, dstX-2, dstY+1);
+// l_z0p1 = l3
+var l_p2p1 = getLuma(dstImageData, dstX+2, dstY+1);
+var l_m1p2 = getLuma(dstImageData, dstX-1, dstY+2);
+var l_p1p2 = getLuma(dstImageData, dstX+1, dstY+2);
+
+var h1 = (l_p1m2 + l4 + l_p1p2) + 3 * (l2 + l3) + (l_m1m2 + l1 + l_m1p2)
+var h2 = (l_m2m1 + l2 + l_p2m1) + 3 * (l1 + l4) + (l_m2p1 + l3 + l_p2p1);
+if (Math.abs(h1) <= Math.abs(h2)) {
+	var rgba = meanRGBA(rgba1, rgba4);
+} else {
+	var rgba = meanRGBA(rgba2, rgba3);
+}
+{{< /highlight >}}
+
 ### エッジの場合
 
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L303
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L312
 {{< highlight javascript >}}
 if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 	var rgba = meanRGBA(rgba1, rgba4);
@@ -308,30 +336,9 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 }
 {{< /highlight >}}
 
-### 非エッジの場合
-
-- https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L283
-{{< highlight javascript >}}
-var h1 = convolveFilter(dstImageData, dstX, dstY,
-			    [[1, -2], [1, 0], [1, 2],    // 1, 2, 3
-			     [0, -1],         [0, 1],    // 4,    5
-			     [-1,-2], [-1,0], [-1, 2]],  // 6, 7, 8
-			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-var h2 = convolveFilter(dstImageData, dstX, dstY,
-			    [[-2,-1], [0,-1], [2, -1],   // 1, 2, 3
-			     [-1, 0],         [1,  0],   // 4,    5
-			     [-2, 1], [0, 1], [2,  1]],  // 6, 7, 8
-			    [1, 1, 1, -3, -3, 1, 1, 1]); // filter
-if (Math.abs(h1) <= Math.abs(h2)) {
-	var rgba = meanRGBA(rgba1, rgba4);
-} else {
-	var rgba = meanRGBA(rgba2, rgba3);
-}
-{{< /highlight >}}
-
 # サンプル画像でテスト
 
-実際の画像に適用するとこんな感じです。
+実際の画像に適用するとこうなります。
 
 <img src="../Opaopa-Dotize.png" />
 
@@ -381,11 +388,50 @@ v1(上記の例だと白-白) と v2（黒-黒) が同じ為に、
 
 つまり、フラットな塗りの上に右肩下がりの細い線があると、そこをうまく補間できないという事です。
 
+## 対処
+
+単色塗りの上に width:1 の線があると破綻する件。
+我慢できないので少し改造しました。
+
+v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜます。
+
+- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241
+{{< highlight javascript >}}
+if (Math.abs(v1 - v2) < TM)  { // yoya custom
+    var rgba = meanRGBA(meanRGBA(rgba1, rgba4), meanRGBA(rgba2, rgba3));
+} else {
+    if (v1 < v2) {
+        var rgba = meanRGBA(rgba1, rgba4);
+    } else {
+        var rgba = meanRGBA(rgba2, rgba3);
+    }
+}
+{{< /highlight >}}
+
+結果。
+
+   テスト画像                |     ドット拡大表示        |
+-----------------------------|---------------------------|
+ <img src="../test00.png" /> | <img src="../test00-dotty.png" /> |
+ <img src="../testYoya-Phase1.png" /> | <img src="../testYoya-Phase1-Dotty.png" /> |
+ <img src="../testYoya-Phase2.png" /> | <img src="../testYoya-Phase2-Dotty.png" /> |
+ <img src="../testYoya-Phase3.png" /> | <img src="../testYoya-Phase3-Dotty.png" /> |
+
+実際のイラストでも線が千切れる割合が減っています。
+
+
+   元画像                |   オリジナル     | 改造版 |
+-------------------------|---------------------------|---|
+<img src="../miku.png" />|<img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" />
+- copyright: https://twitter.com/rityulate/status/772006898279120896
+
 # さいごに
 
 思った事をつらつらと。
-- 輝度Yでなく色差も使った方が良い気がする
-- 単色塗りの上に width:1 の線があると破綻するので、v1 == v2 の時は非エッジのようなもう少し広い範囲のピクセルから判断するか。いっその事 Bi-Linear にように4方を混ぜる方がマシなのでは
+
+- h1, h2 は行列表現で考えた方が良いかも。
+- 輝度Yでなく色差も使った方が良いはず。イラストだと特に。
+
 - FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に見えるようになって、悲しい事もある
 
 漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。
