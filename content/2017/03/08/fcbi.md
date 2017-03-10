@@ -80,23 +80,23 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 画像の拡大では、ピクセルを広げて出来た隙間をどう埋めるのかが勝負です。
 
-<img src="../3x2test-Dotty.png" />  <img src="../5x3testPhase1-Dotty.png" />
+<img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
 
 ### Nearest-Neighbor
 
 近隣(Nearest-Neighbor)のピクセルをコピーします。
 
-<img src="../5x3test-NN-Dotty.png" />
+<img src="../test-NN-5x3Dotty.png" />
 
 ちなみに丁度2倍の 6x4 だとこうなります。
 
-<img src="../6x4test-NN-Dotty.png" />
+<img src="../test-NN-6x4Dotty.png" />
 
 ### Bi-Linear
 
 線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。この例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。
 
-<img src="../5x3test-BL-Dotty.png" />
+<img src="../test-BL-5x3Dotty.png" />
 
 RGB 値が色味に対して線形では無いので違和感のある結果ですが、そこは目を瞑って頂ければ。。RGB の数値的にはちゃんと平均、真ん中の値です。
 
@@ -111,9 +111,9 @@ Phase1 と Phase2 は同時に実行できますが、分かりやすいよう�
 
 元画像 | Phase1 |
 ---|---|
-<img src="../3x2test-Dotty.png" /> | <img src="../5x3testPhase1-Dotty.png" /> |
+<img src="../test-3x2Dotty.png" /> | <img src="../testPhase1-5x3Dotty.png" /> |
 Phase2| Phase3 |
-<img src="../5x3testPhase2-Dotty.png" /> | <img src="../5x3testPhase3-Dotty.png" /> |
+<img src="../testPhase2-5x3Dotty.png" /> | <img src="../testPhase3-5x3Dotty.png" /> |
 
 ## 大まかなアルゴリズム
 
@@ -145,7 +145,7 @@ Phase2| Phase3 |
 
 単純にピクセルを2倍の座標で配置し直します。
 
-<img src="../3x2test-Dotty.png" />  <img src="../5x3testPhase1-Dotty.png" />
+<img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
 
 - https://github.com/yoya/image.js/blob/v1.2/fcbi.js#L181
    - 読み易くする為、エッジ表示モード(edgeMode) の処理は外してます
@@ -185,15 +185,17 @@ srcImage と dstImage の座標変換が整数倍じゃない時に破綻する�
 
 ## Phase2: 斜め方向からピクセルを埋める
 
-<img src="../3x3phase1-l1234-Dotty.png" />
+<img src="../phase2-l1234-3x3Dotty.png" />
 
 最終的には、この l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。
 
-<img src="../3x3phase1-l1234-Dotty-14.png" align="center"/> or <img src="../3x3phase1-l1234-Dotty-23.png" align="center" />
+<img src="../phase2-l1234-3x3Dotty-14.png" align="center"/> or <img src="../phase2-l1234-3x3Dotty-23.png" align="center" />
+
 ### エッジ判定
 
-
 - v1 = abs(l1 - l4)
+
+<img src="../phase2-l14-3x3Dotty.png" align="center" />
 
 - v2 = abs(l1 - l4)
 
