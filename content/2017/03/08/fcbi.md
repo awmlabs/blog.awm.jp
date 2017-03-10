@@ -17,6 +17,7 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 - エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 前編:デモプログラムの使い方
   - https://blog.awm.jp/2017/03/07/fcbi/
      - https://app.awm.jp/image.js/fcbi.html (デモ)
+     - https://github.com/yoya/image.js/blob/master/fcbi.js (ソースコード)
 
 デモを見た方が実感が湧くはずですので、この記事を読む前に出来ればお試しください。
 
