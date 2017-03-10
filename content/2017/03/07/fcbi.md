@@ -13,6 +13,13 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 
 あと、エッジ判定型の超解像だと ICBI や iNEDI といったより良い手法もありますが、とりあえず今回は FCBI です。アルゴリズムが単純なのでソースコードを読むには良いと思います。
 
+## 追記
+
+続きを書きました。
+
+- エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解
+  - https://blog.awm.jp/2017/03/08/fcbi/
+
 # デモ
 
 - http://app.awm.jp/image.js/fcbi.html
