@@ -71,23 +71,23 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 画像の拡大では、ピクセルを広げて出来た隙間をどう埋めるのかが勝負です。
 
-<img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
+<center> <img src="../test-3x2Dotty.png" align="top"/> <span style="padding: 1em;"> => </span> <img src="../testPhase1-5x3Dotty.png" align="center"/> </center>
 
 ### Nearest-Neighbor
 
 近隣(Nearest-Neighbor)のピクセルをコピーします。
 
-<img src="../test-NN-5x3Dotty.png" />
+<center> <img src="../test-NN-5x3Dotty.png" /> </center>
 
 ちなみに丁度2倍の 6x4 だとこうなります。
 
-<img src="../test-NN-6x4Dotty.png" />
+<center> <img src="../test-NN-6x4Dotty.png" /> </center>
 
 ### Bi-Linear
 
 線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。この例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。
 
-<img src="../test-BL-5x3Dotty.png" />
+<center> <img src="../test-BL-5x3Dotty.png" /> </center>
 
 RGB 値が色味に対して線形では無いので違和感のある結果ですが、そこは目を瞑って頂ければ。。RGB の数値的にはちゃんと平均、真ん中の値です。
 
@@ -136,8 +136,7 @@ Phase2| Phase3 |
 
 単純にピクセルを2倍の座標で配置し直します。
 
-<img src="../test-3x2Dotty.png" />  <img src="../testPhase1-5x3Dotty.png" />
-
+<center> <img src="../test-3x2Dotty.png" align="top"/> <span style="padding: 1em;"> => </span> <img src="../testPhase1-5x3Dotty.png" align="center"/> </center>
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173
    - (読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 {{< highlight javascript >}}
@@ -176,17 +175,17 @@ srcImage と dstImage の座標変換が整数倍じゃない時に破綻する�
 
 ## Phase2: 斜め方向からピクセルを埋める
 
-<img src="../phase2-l1234-3x3Dotty-14.png" align="center"/> or <img src="../phase2-l1234-3x3Dotty-23.png" align="center" />
+<center> <img src="../phase2-l1234-3x3Dotty-14.png" align="center"/> <span style="padding: 1em;"> or </span> <img src="../phase2-l1234-3x3Dotty-23.png" align="center" /> </center>
 
 l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。ここからの長々とした解説は、このどちらのピクセルを埋めるかを判断する処理についてです。
 
 ### エッジ判定
 
-<img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> v1 = abs(l1 - l4) 
+<center>
+  <img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> v1 = abs(l1 - l4) <span style="padding:1em;">  </span> <img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> v2 = abs(l2 - l3)
 
-<img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> v2 = abs(l2 - l3) 
-
-<img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2; 
+  <img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2;
+</center>
 
 隣り合うピクセルの輝度に急激な変化があればエッジで、それ以外を非エッジだと判定します。
 
@@ -219,9 +218,9 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。
 
-h1 のフィルタ: <img src="../phase2-h1Filter-7x7Dotty.png" align="top" />
-
-h2 のフィルタ: <img src="../phase2-h2Filter-7x7Dotty.png" align="top" />
+h1 のフィルタ | h2 のフィルタ |
+--------------|---------------|
+<img src="../phase2-h1Filter-7x7Dotty.png" /> | <img src="../phase2-h2Filter-7x7Dotty.png" /> |
 
 補間したいピクセルの周辺の輝度を上記の重み付けで計算を行い、h1 と h2 の大小で勾配の向きを判定します。
 
@@ -253,6 +252,8 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 エッジであれば、斜め２軸の隣どうしを見て、その差が少ない方の２ピクセルを線形補完するだけです。
 
+<center> v1:<img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> <span style="padding:1em;"> </span> v2:<img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> </center>
+
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L267
 {{< highlight javascript >}}
 if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
@@ -264,7 +265,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 ## Phase3: 縦横方向からピクセルを埋める
 
-<img src="../phase3-l1234-3x3Dotty-14.png" align="center"/> or <img src="../phase3-l1234-3x3Dotty-23.png" align="center" />
+<center> <img src="../phase3-l1234-3x3Dotty-14.png" align="center"/>  <span style="padding:1em;"> or </span> <img src="../phase3-l1234-3x3Dotty-23.png" align="center" /> </center>
 
 左45度傾けて、斜め方向を縦横に変えただけの処理です。
 Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。
@@ -298,9 +299,9 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 ### 非エッジの場合
 
-h1 のフィルタ: <img src="../phase3-h1Filter-3x5Dotty.png" align="top" />
-
-h2 のフィルタ: <img src="../phase3-h2Filter-5x3Dotty.png" align="top" />
+h1 のフィルタ | h2 のフィルタ |
+--------------|---------------|
+|<img src="../phase3-h1Filter-3x5Dotty.png" /> | <img src="../phase3-h2Filter-5x3Dotty.png" /> |
 
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L292
@@ -409,7 +410,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がない為に、
 どちらを補間すれば良いのか判断がつきません。
 
-<img src="../fail-l1234-3x3-Dotty.png" />
+<center> <img src="../fail-l1234-3x3-Dotty.png" /> </center>
 
 この場合、l2, l3 (右肩上がりの斜め)を使ってしまいます。
 
