@@ -372,7 +372,7 @@ Copyright: https://twitter.com/myuton0407/status/693361955000549376
 % convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
 % convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
 ```
-Nearest-Neighbor | Bi-Liner | Bi-Cubic |
+Nearest-Neighbor | Bi-Linear | Bi-Cubic |
 ----------------|----------|----------|
 <img src="../Kotori-box.png"/>|<img src="../Kotori-triangle.png"/>|<img src="../Kotori-cubic.png"/>|
 Lanczoz | Mitchell | FCBI (TM:12) |

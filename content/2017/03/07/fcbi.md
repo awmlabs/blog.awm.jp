@@ -71,7 +71,7 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 ```
 ちなみに ImageMagick の -resize 拡大のデフォルトは Mitchell フィルタです。
 
-Nearest-Neighbor | Bi-Liner | Bi-Cubic |
+Nearest-Neighbor | Bi-Linear | Bi-Cubic |
 ----------------|----------|----------|
 <img src="../Opaopa-box.png"/>|<img src="../Opaopa-triangle.png"/>|<img src="../Opaopa-cubic.png"/>|
 Lanczoz | Mitchell | FCBI (TM:4 で2回拡大) |
