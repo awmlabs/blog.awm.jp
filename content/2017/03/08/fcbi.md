@@ -378,6 +378,8 @@ Nearest-Neighbor | Bi-Liner | Bi-Cubic |
 Lanczoz | Mitchell | FCBI (TM:12) |
 <img src="../Kotori-lanczos.png"/>|<img src="../Kotori-mitchell.png"/>|<img src="../Kotori-fcbi.png"/>|
 
+ぱっと見では Mitchell フィルタが良い勝負をしていますが、細かいところをみると FCBI に分配があがります。
+
 # FCBI の弱点
 
 FCBI は width:1 の線が苦手です。実写の画像だと殆ど問題ないのですが、イラストだと結構このパターンが出てきます。
