@@ -8,9 +8,9 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 
 # はじめに
 
-インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、全面的に*自分が*分かりやすいように解説し直します。
+インターフェース誌2015年6月号「超解像アルゴリズム」の記事を元に、分かりにくかった点を補足しつつ、全面的に一から解説し直します。
 
-ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので、知っておいて損はないです。
+ICBI や iNEDI といったより良い手法もありますが、FCBI はそれらより処理が軽いので使い道はありますし、ICBI は FCBI をベースにしているので知っておいて損はないです。
 
 尚、こちらのエントリの続きです。
 
@@ -19,24 +19,24 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
      - https://app.awm.jp/image.js/fcbi.html (デモ)
      - https://github.com/yoya/image.js/blob/master/fcbi.js (ソースコード)
 
-デモを見た方が実感が湧くはずですので、この記事を読む前に出来ればお試しください。
+デモを見た方が実感が湧くはずですので、出来ればこの記事の前に前編をお読み下さい。
 
 # アルゴリズム概要
 
 ## ポイント
 
-- エッジが残るように勾配の少ない軸方向で補間する。
-- 倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可。
-  -  尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています。
-- 画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり。
-- モノクロ画像のアルゴリズム。つまり色差は見ない。
+- エッジが残るように勾配の少ない軸方向で補間する
+- 倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可
+  -  尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています
+- 画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり
+- モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない
 - イラスト画像は少し苦手 (最後の方で解説)
 
 ## 注意点
 
 ### カラー対応
 
-FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式を元にしてます。
+FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為にサンプルコードでは RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式に alpha を乗算します。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75
 {{< highlight javascript >}}
@@ -49,14 +49,14 @@ function lumaFromRGBA(rgba) {
 
 ### フィルタ行列
 
-インターフェース誌の記事だと非エッジの勾配を調べる演算がフィルタ行列とのテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。
+インターフェース誌の記事では非エッジの勾配を調べるフィルタ行列との演算がテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。
 
-つまり、フィルターで場所に応じた重み付けをした足し算です。
+つまり、ピクセルの場所に応じて重み付けをした足し算です。
 
 ### abs - h1, h2
 
-インターフェース誌の記事も FCBI を説明する様々な論文も端折ってますが非エッジの勾配を比較するのは、h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、参照実装(icbi.m)で abs で括っているのを確認済みです。
+インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231
 {{< highlight javascript >}}
@@ -69,13 +69,13 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 ## 既存のメソッドとの比較
 
-画像の拡大では、ピクセルを広げて出来た隙間をどう埋めるのかが勝負です。
+画像の拡大はピクセルを広げて出来た隙間をどう埋めるのかが勝負です。色んな方法があります。
 
 <center> <img src="../test-3x2Dotty.png" align="top"/> <span style="padding: 1em;"> => </span> <img src="../testPhase1-5x3Dotty.png" align="center"/> </center>
 
 ### Nearest-Neighbor
 
-近隣(Nearest-Neighbor)のピクセルをコピーします。
+恐らくもっとも速い方法です。近隣(Nearest-Neighbor)のピクセルをコピーします。
 
 <center> <img src="../test-NN-5x3Dotty.png" /> </center>
 
@@ -85,15 +85,16 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 ### Bi-Linear
 
-線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。この例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。
+線形(Linear)の計算で補間します。中学校で習う a と b の間の p 点 みたいな計算です。
+丁度２倍にする例だと隣のピクセルを足して割る。つまり4隅または隣2つの平均値を用います。
 
 <center> <img src="../test-BL-5x3Dotty.png" /> </center>
 
-RGB 値が色味に対して線形では無いので違和感のある結果ですが、そこは目を瞑って頂ければ。。RGB の数値的にはちゃんと平均、真ん中の値です。
+RGB 値が色味に対して線形では無いので違和感がありますが、そこは目を瞑って頂ければ。。RGB の数値はちゃんと平均、真ん中の値です。
 
 ### FCBI
 
-Bi-Linear の亜種とも言えます。Bi-Linear だと単純に上下左右の４つから混ぜますが、FCBI ではエッジをなるべく残すよう、４つのうち２つを選択して混ぜます。
+Bi-Linear の亜種とも言えます。Bi-Linear だと単純に上下左右の４つから混ぜますが、FCBI はエッジをなるべく残すよう、４つのうち２つを選択して混ぜます。
 
 # FCBI の全体的な流れ
 
@@ -108,7 +109,7 @@ Phase2| Phase3 |
 
 ## 大まかなアルゴリズム
 
-詳細は後で、まず処理の大雑把な流れです。
+詳細は後にして、まず処理の大雑把な流れです。
 
 ### Phase1
 
@@ -124,7 +125,7 @@ Phase2| Phase3 |
      
 ### Phase3
 
-- 上下左右を見てエッジかどうか判定する
+- 上下左右の隣を見てエッジかどうか判定する
   - 非エッジの場合
      - 周辺８ピクセルから上下左右の勾配を判断して、勾配が少ない方の２ピクセルを混ぜる
   - エッジの場合
@@ -216,7 +217,7 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 ### 非エッジの場合
 
-補完するピクセルをどれにするか判断するのに、斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。すぐ隣のピクセルとは差分があまりないので仕方ないです。
+補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないです。
 
 h1 のフィルタ | h2 のフィルタ |
 --------------|---------------|
@@ -267,8 +268,8 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 <center> <img src="../phase3-l1234-3x3Dotty-14.png" align="center"/>  <span style="padding:1em;"> or </span> <img src="../phase3-l1234-3x3Dotty-23.png" align="center" /> </center>
 
-左45度傾けて、斜め方向を縦横に変えただけの処理です。
-Phase2 とほぼ同じですので、図だけにして細かい説明は省きます。
+Phase2 で参照するピクセルのあった斜め方向を左45度傾けて縦横にしただけです。
+Phase2 とほぼ同じですので、図だけつけて細かい説明は省きます。
 
 ### エッジ判定
 
@@ -302,7 +303,6 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 h1 のフィルタ | h2 のフィルタ |
 --------------|---------------|
 |<img src="../phase3-h1Filter-3x5Dotty.png" /> | <img src="../phase3-h2Filter-5x3Dotty.png" /> |
-
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L292
 {{< highlight javascript >}}
@@ -341,28 +341,27 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 # ドット画像でテスト
 
-実際の画像に適用するとこうなります。
+実際の画像に適用してみます。
 
-<img src="../Opaopa-Dotize.png" />
+<img src="../Opaopa.png" /> <img src="../Opaopa-Dotize.png" align="top" />
 
 ## Phase1: ピクセルを拡げる
 
-<img src="../OpaopaPhase1-Dotize.png" />
+<img src="../OpaopaPhase1.png" /> <img src="../OpaopaPhase1-Dotize.png" align="top" />
 
 ## Phase2: 斜め方向からピクセルを埋める
 
-<img src="../OpaopaPhase2-Dotize.png" />
+<img src="../OpaopaPhase2.png" /> <img src="../OpaopaPhase2-Dotize.png" align="top" />
 
 ## Phase3: 縦横方向からピクセルを埋める
 
-<img src="../OpaopaPhase3-Dotize.png" />
+<img src="../OpaopaPhase3.png" /> <img src="../OpaopaPhase3-Dotize.png" align="top" />
 
 気持ち悪いくらい、なめらかに補間されてます。
 
 # イラストでのテスト
 
-既存のリサイズ方式との比較表が、<a href="https://blog.awm.jp/2017/03/07/fcbi/"> 前編</a>の後ろの方にありますが、改めて実験。
-
+既存のリサイズ方式との比較表が、<a href="https://blog.awm.jp/2017/03/07/fcbi/">前編</a>の後半にありますが、改めて別のイラストで実験します。
 
 <img src="../Kotori.png" />
 Copyright: https://twitter.com/myuton0407/status/693361955000549376
@@ -374,17 +373,19 @@ Copyright: https://twitter.com/myuton0407/status/693361955000549376
 % convert Kotori.png -filter lanczos  -resize 200%x200% Kotori-lanczos.png
 % convert Kotori.png -filter mitchell -resize 200%x200% Kotori-mitchell.png
 ```
+ちなみに、ImageMagick の画像拡大のデフォルトが Mitchell です。
+
 Nearest-Neighbor | Bi-Linear | Bi-Cubic (B,C = 1,0) |
 ----------------|----------|----------|
 <img src="../Kotori-box.png"/>|<img src="../Kotori-triangle.png"/>|<img src="../Kotori-cubic.png"/>|
-Lanczoz (lobes:3) | Mitchell | FCBI (TM:12) |
+Lanczoz (lobes:3) | Mitchell-Netravali | FCBI (TM:12) |
 <img src="../Kotori-lanczos.png"/>|<img src="../Kotori-mitchell.png"/>|<img src="../Kotori-fcbi.png"/>|
 
-ぱっと見では Mitchell フィルタが良い勝負をしていますが、細かいところをみると FCBI に分配があがります。
+ぱっと見では Mitchell-Netravali  フィルタが良い勝負をしていますが、細かいところまで見ると FCBI に分配があがります。
 
 # FCBI の弱点
 
-FCBI は width:1 の線が苦手です。実写の画像だと殆ど問題ないのですが、イラストだと結構このパターンが出てきます。
+FCBI はベタ塗りの上に引いた width:1 の線が苦手です。実写の画像だと殆ど問題ないのですが、イラストだと結構このパターンが出てきます。
 
    テスト画像                |     ドット拡大表示        |
 -----------------------------|---------------------------|
@@ -414,11 +415,11 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 (v1 < v2) の条件式なので、 l2, l3 (右肩上がりの斜め)を使ってしまいます。
 
-つまり、フラットな塗りの上に右肩下がりの細い線があると、うまく補間できないという事です。
+つまり、グラデーションの少ないベタ塗り部分に右肩下がりの細い線があると、うまく補間できないという事です。
 
 ## 改善
 
-v1 と v2 の値が近い時は、Bi-Linear にように4隅を混ぜると良い感じになりました。
+v1 と v2 の値が近い時は、単純な Bi-Linear にように4隅を混ぜると良い感じになりました。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241
 {{< highlight javascript >}}
@@ -442,8 +443,7 @@ if (Math.abs(v1 - v2) < TM)  { // yoya custom
  <img src="../testYoya-Phase2.png" /> | <img src="../testYoya-Phase2-Dotty.png" /> |
  <img src="../testYoya-Phase3.png" /> | <img src="../testYoya-Phase3-Dotty.png" /> |
 
-実際のイラストでも線が千切れる割合が減っています。
-
+実際のイラストでも線が途切れる箇所が減っています。
 
    元画像                |   オリジナル     | 改造版 |
 -------------------------|---------------------------|---|
@@ -454,11 +454,11 @@ if (Math.abs(v1 - v2) < TM)  { // yoya custom
 
 思った事をつらつらと。
 
-- h1, h2 は行列表現で考えた方が良いかも
+- h1, h2 のフィルタは行列表現で考えた方が良いかも
 - 輝度Yでなく色差も使った方が良いはず。イラストだと特に
-- FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って、悲しい事もある
+- FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って悲しい事もある
 
-漏れや間違いに気付き次第、全部直します。ご指摘頂けると幸いです。
+漏れや間違いに気付き次第、なるべく全部直します。ご指摘頂けると幸いです。
 
 # 参考
 
