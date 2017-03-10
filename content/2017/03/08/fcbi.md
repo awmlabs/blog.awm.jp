@@ -35,7 +35,7 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 
 ### カラー対応
 
-FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。JPEG の YCbCr の計算式を元にしました。
+FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為に RGBA から計算した輝度 Y を用います。 今回は JPEG の YCbCr の計算式を元にしてみます。
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75
 {{< highlight javascript >}}
