@@ -3,7 +3,7 @@ date = "2017-03-08T14:11:00+09:00"
 draft = false
 tags = ["FCBI", "SuperResolution"]
 categories = ["Graphics"]
-title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解"
+title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解"
 +++
 
 # はじめに
@@ -19,16 +19,25 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
      - https://app.awm.jp/image.js/fcbi.html (デモ)
      - https://github.com/yoya/image.js/blob/master/fcbi.js (ソースコード)
 
-デモを見た方が実感が湧くはずですので、出来ればこの記事の前に前編をお読み下さい。
+デモを見た方が実感が湧くので、出来ればこの記事の前に前編をお読み下さい。
 
 # アルゴリズム概要
 
+本家はこちらです。
+
+- ICBI page
+  - http://www.andreagiachetti.it/icbi/
+     - http://www.andreagiachetti.it/icbi/icbi.zip (matlab 実装)
+
+ICBI の 1st step が FCBI なので、その解説や実装も見つかります。
+
 ## ポイント
 
-- エッジが残るように勾配の少ない軸方向で補間する
-- エッジ以外の場所は勾配の変化が少ない軸方向で補完
+- エッジを残しつつエネルギーが最小になるよう選択的に補間する
+  - エッジの場所は勾配(輝度の微分)の少ない軸方向で補間する
+  - 非エッジは勾配の変化(輝度の2次微分)が少ない軸方向で補完
 - 倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可
-  -  尚、本家の参照実装(icbi.m)は 2*n-1 倍に対応しています
+  -  尚、本家の参照実装(icbi.m)の拡大は (SIZE * 2^ZK) - (2^ZK-1) に対応しています。(ZK は zoom factor)
 - 画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり
 - モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない
 - イラスト画像は少し苦手 (最後の方で解説)
@@ -52,7 +61,7 @@ function lumaFromRGBA(rgba) {
 
 インターフェース誌の記事では非エッジの勾配を調べるフィルタ行列との演算がテンソル積(<img src="../tensor_product.png" alt="バツをマルで囲う記号" align=center />)で示されますが、単なる畳み込みの計算なのでプログラム的には簡単です。
 
-つまり、ピクセルの場所に応じて重み付けをした足し算です。
+つまり、近辺のピクセルの場所に応じて重み付けをした足し算です。
 
 ### abs - h1, h2
 
@@ -186,7 +195,7 @@ l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。
 <center>
   <img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> v1 = abs(l1 - l4) <span style="padding:1em;">  </span> <img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> v2 = abs(l2 - l3)
 
-  <img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2); p1 = (l1 + l4) / 2; p2 = (l2 + l3) / 2;
+  <img src="../phase2-p1-p2-3x3Dotty.png" align="center" /> abs(p1 - p2) ; p1=(l1+l4)/2, p2=(l2+l3)/2;
 </center>
 
 隣り合うピクセルの輝度に急激な変化があればエッジで、それ以外を非エッジだと判定します。
@@ -218,7 +227,7 @@ if ((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) {
 
 ### 非エッジの場合
 
-補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないです。
+補完するピクセルをどれにするか判断するのに斜め隣のピクセルだけでなく、もう少し広めのピクセルを見ます。非エッジの時は隣のピクセルの差分が少ないので仕方がないのと、単なる勾配でなく勾配の変化をみる為です。
 
 h1 のフィルタ | h2 のフィルタ |
 --------------|---------------|
