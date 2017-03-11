@@ -466,7 +466,7 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がります。
 
-<img src="../star01.jpg" align="center"/> => <img src="../star02.png" align="top"/>
+<img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.4.png" align="top"/>(改造後)
 
 これはどうしようもないかも。。
 
