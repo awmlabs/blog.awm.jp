@@ -8,7 +8,24 @@ title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature base
 
 # はじめに
 
-弱点として指摘した部分を改良したので、その件です。
+この記事の続きです。
+
+- エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解
+  - https://blog.awm.jp/2017/03/08/fcbi/
+
+弱点の部分を改造したら、なんとなく良い結果を得られたので、その説明です。
+
+# 弱点
+
+勾配のないフラットな塗りに、width:1 の線があると補間が崩れます。
+
+   テスト画像                |     ドット拡大表示        |
+-----------------------------|---------------------------|
+ <img src="../test00.png" /> | <img src="../test00-dotty.png" /> |
+ <img src="../test01.png" /> | <img src="../test01-dotty.png" /> |
+ <img src="../test02.png" /> | <img src="../test02-dotty.png" /> |
+ <img src="../test03.png" /> | <img src="../test03-dotty.png" /> |
+
 
 ## 改造 take1
 
@@ -74,4 +91,9 @@ if (((v1 < TM) && (v2 < TM) && (Math.abs(p1 - p2) < TM)) ||
 
 - copyright: https://twitter.com/rityulate/status/772006898279120896
 
+# まとめ
+
+- イラストだとそのままのアルゴリズムより、少し弄って使った方が良さそう
+- 非エッジの処理でもエッジは残せるので、おそらく高速化の為に分けてると思われる
+- 分岐がもったいない環境だと、全部非エッジとして処理した方が速いかも。
 
