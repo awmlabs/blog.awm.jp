@@ -3,7 +3,7 @@ date = "2017-03-08T14:11:00+09:00"
 draft = false
 tags = ["FCBI", "SuperResolution"]
 categories = ["Graphics"]
-title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリ ズム詳解"
+title = "エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) 後編:アルゴリズム詳解"
 +++
 
 # はじめに
@@ -446,35 +446,18 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 
 ## 改善
 
-v1 と v2 の値が近い時は、単純な Bi-Linear にように4隅を混ぜると良い感じになりました。
+改善のエントリが長くなったので、別にしました。
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L241
-{{< highlight javascript >}}
-if (Math.abs(v1 - v2) < TM)  { // yoya custom
-    var rgba = meanRGBA(meanRGBA(rgba1, rgba4), meanRGBA(rgba2, rgba3));
-} else {
-    if (v1 < v2) {
-        var rgba = meanRGBA(rgba1, rgba4);
-    } else {
-        var rgba = meanRGBA(rgba2, rgba3);
-    }
-}
-{{< /highlight >}}
+- エッジ判定型超解像アルゴリズム FCBI (Fast curvature based interpolation) おまけ:アルゴリズム改造
+  - https://blog.awm.jp/2017/03/11/fcbi/
 
-結果。
+結果
 
-   テスト画像                |     ドット拡大表示        |
------------------------------|---------------------------|
- <img src="../test00.png" /> | <img src="../test00-dotty.png" /> |
- <img src="../testYoya-Phase1.png" /> | <img src="../testYoya-Phase1-Dotty.png" /> |
- <img src="../testYoya-Phase2.png" /> | <img src="../testYoya-Phase2-Dotty.png" /> |
- <img src="../testYoya-Phase3.png" /> | <img src="../testYoya-Phase3-Dotty.png" /> |
+元画像: <img src="../miku.png" />
 
-実際のイラストでも線が途切れる箇所が減っています。
-
-   元画像                |   オリジナル     | 改造版 |
--------------------------|---------------------------|---|
-<img src="../miku.png" />|<img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" />
+  FCBI オリジナル     | 改造 take1 | 改造 take2 |
+-------------------------|------------------|---|
+<img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" /> |  <img src="../miku-v1.4.png" />|
 - copyright: https://twitter.com/rityulate/status/772006898279120896
 
 # さいごに
