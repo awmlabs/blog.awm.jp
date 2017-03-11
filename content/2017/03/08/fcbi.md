@@ -28,6 +28,7 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 - ICBI page
   - http://www.andreagiachetti.it/icbi/
      - http://www.andreagiachetti.it/icbi/icbi.zip (matlab 実装)
+     - https://github.com/yoya/icbi.m (zip を展開したもの。GPLv2 です)
 
 ICBI の 1st step が FCBI なので、その解説や実装も見つかります。
 
@@ -499,3 +500,6 @@ if (Math.abs(v1 - v2) < TM)  { // yoya custom
   - http://ijcttjournal.org/Volume10/number-5/IJCTT-V10P146.pdf
 - Parameter Optimization Of Fast Curvature Based Interpolation Using Genetic Algorithm
    - https://pdfs.semanticscholar.org/a61c/d74eefae6283f5d88ade1e241890f192d458.pdf
+- Performance Evaluation of Edge‐Directed Interpolation Methods for Images Abstract
+   - https://arxiv.org/abs/1303.6455v1
+      - https://arxiv.org/pdf/1303.6455v1.pdf
