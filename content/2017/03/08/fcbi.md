@@ -28,7 +28,7 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
 - ICBI page
   - http://www.andreagiachetti.it/icbi/
      - http://www.andreagiachetti.it/icbi/icbi.zip (matlab 実装)
-     - https://github.com/yoya/icbi.m (zip を展開したもの。GPLv2 です)
+     - https://github.com/yoya/ICBI/tree/master/icbi (zip を展開したもの。GPLv2 です)
 
 ICBI の 1st step が FCBI なので、その解説や実装も見つかります。
 
