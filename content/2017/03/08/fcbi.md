@@ -29,6 +29,8 @@ ICBI や iNEDI といったより良い手法もありますが、FCBI はそれ
   - http://www.andreagiachetti.it/icbi/
      - http://www.andreagiachetti.it/icbi/icbi.zip (matlab 実装)
      - https://github.com/yoya/ICBI/tree/master/icbi (zip を展開したもの。GPLv2 です)
+         - [icbi/icbi.m](https://github.com/yoya/ICBI/blob/master/icbi/icbi.m)
+         - [ICBICUDA/interpolation_fcbi_kernel.cu](https://github.com/yoya/ICBI/blob/master/ICBICUDA/interpolation_fcbi_kernel.cu)
 
 ICBI の 1st step が FCBI なので、その解説や実装も見つかります。
 
@@ -39,7 +41,7 @@ ICBI の 1st step が FCBI なので、その解説や実装も見つかりま�
   - 非エッジは勾配の変化(輝度の2次微分)が少ない軸方向で補完
 - 倍のサイズ(正確には倍-1)への拡大のみ。スケール微調整は不可
   -  尚、本家の参照実装(icbi.m)の拡大は (SIZE * 2^ZK) - (2^ZK-1) に対応しています。(ZK は zoom factor)
-- 画像によって適切な値が異なる閾値 TM を調整する必要がある。手動なり自動なり
+- 画像によって適切な値が異なる閾値 TM(Maximun edge step) を調整する必要がある。手動なり自動なり
 - モノクロ画像のアルゴリズムなので、色差によるエッジは処理に反映されない
 - イラスト画像は少し苦手 (最後の方で解説)
 
@@ -66,8 +68,7 @@ function lumaFromRGBA(rgba) {
 
 ### abs - h1, h2
 
-インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式)
-直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。
+インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式、論文だと I<sub>11</sub>, I<sub>22</sub>)
 
 - https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231
 {{< highlight javascript >}}
@@ -76,6 +77,15 @@ if (Math.abs(h1) < Math.abs(h2)) {
 } else {
 	var rgba = meanRGBA(rgba2, rgba3);
 }
+{{< /highlight >}}
+
+直感的にも abs を取らないと白い塗りと黒い塗りで結果が変わるでしょうし、本家の参照実装(icbi.m)では abs で括っています。
+
+- https://github.com/yoya/ICBI/blob/master/icbi/icbi.m#L289
+{{< highlight javascript >}}
+if( abs(IMGEXP(i-1-s,j-3+(2*s)) + IMGEXP(i-3+s,j-1+(2*s)) + IMGEXP(i+1+s,j+3-(2*s)) + IMGEXP(i+3-s,j+1-(2*s)) + (2 * p2) - (6 * p1)) > ...
+        abs(IMGEXP(i-3+(2*s),j+1+s) + IMGEXP(i-1+(2*s),j+3-s) + IMGEXP(i+3-(2*s),j-1-s) + IMGEXP(i+1-(2*s),j-3+s) + (2 * p1) - (6 * p2)) )
+    IMGEXP(i,j) = p1;
 {{< /highlight >}}
 
 ## 既存のメソッドとの比較
@@ -423,7 +433,8 @@ FCBI はグラデーションの無いベタ塗りの上に引いた width:1 の
  <img src="../test02.png" /> | <img src="../test02-dotty.png" /> |
  <img src="../test03.png" /> | <img src="../test03-dotty.png" /> |
 
-これは補間するピクセルを決定する際に、
+これはエッジの時は近隣の４ピクセルしか見ない為です。
+
 {{< highlight javascript >}}
 /*  l1     l2
  *      x  
@@ -436,8 +447,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 }
 {{< /highlight >}}
 
-エッジの時は近隣の４ピクセルしか見ないので、このケースだと
-v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくなって、
+このケースだと v1(上記の例だと白-白) と v2（黒-黒) の差がなくなるので、
 どちらを補間すれば良いのか判断がつかなくなります。
 
 <center> <img src="../fail-l1234-3x3-Dotty.png" /> </center>
@@ -462,20 +472,22 @@ v1(上記の例だと白-白) と v2（黒-黒) のどちらも差がなくな�
 <img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" /> |  <img src="../miku-v1.4.png" />|
 - copyright: https://twitter.com/rityulate/status/772006898279120896
 
+途切れ途切れになっていた線が、スムーズに繋がりました。
+
 ## 問題2) 星空
 
-こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がります。
+こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がる事があります。
 
 <img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.4.png" align="top"/>(改造後)
 
-これはどうしようもないかも。。
+ただ、元の写真に無視できないレベルの歪みがあるので、高精度な写真だとまた話が違うかもしれません。
 
 # さいごに
 
 思った事をつらつらと。
 
-- h1, h2 のフィルタは行列表現で考えた方が良いかも
-- 画像全体の明るさ次第で TM が極端に変わるので、ヒストグラム平均化した方がよいかも
+- h1, h2 のフィルタは今後 ICBI に話を繋げる為に行列表現で考えた方が良いかも。
+- 画像全体の明るさ次第で TM が極端に変わるので、ヒストグラム平均化した方がよさそう
 - 輝度Yでなく色差も使った方が良いはず。イラストだと特に
 - FCBI のせいでは無いけれど、JPEG 画像のモアレが余計に目立って悲しい事もある
 
