@@ -51,7 +51,7 @@ ICBI の 1st step が FCBI なので、その解説や実装も見つかりま�
 
 FCBI はモノクロ画像のアルゴリズムなので、カラフルな画像に対応する為にサンプルコードでは RGBA から計算した輝度 Y を用いました。JPEG の YCbCr の計算式に alpha を乗算します。
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L75
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L75
 {{< highlight javascript >}}
 function lumaFromRGBA(rgba) {
     var [r,g,b,a] = rgba;
@@ -70,7 +70,8 @@ function lumaFromRGBA(rgba) {
 
 インターフェース誌の記事も FCBI を説明する様々な論文でも端折ってますが、非エッジの勾配を比較するのは h1 < h2 でなく abs(h1) < abs(h2) です。 (このh1,h2 はインターフェース誌だと H1, H2。本家の参照実装だと展開されたベタな数式、論文だと I<sub>11</sub>, I<sub>22</sub>)
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L231
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L232
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L297
 {{< highlight javascript >}}
 if (Math.abs(h1) < Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
@@ -159,7 +160,7 @@ Phase2| Phase3 |
 単純にピクセルを2倍の座標で配置し直します。
 
 <center> <img src="../test-3x2Dotty.png" align="top"/> <span style="padding: 1em;"> => </span> <img src="../testPhase1-5x3Dotty.png" align="center"/> </center>
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L173
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L173
    - (読み易くする為、エッジ表示モード(edgeMode) の処理は省略)
 {{< highlight javascript >}}
 function drawFCBI_Phase1(srcImageData, dstImageData, edgeMode) {
@@ -211,7 +212,7 @@ l1, l4、又は l2, l3 の平均値を真ん中のピクセルに埋めます。
 
 隣り合うピクセルの輝度に急激な変化があればエッジで、それ以外を非エッジだと判定します。
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L196
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L196
 {{< highlight javascript >}}
 /*  l1     l2
  *      x  
@@ -262,7 +263,7 @@ h2 = (3 + 3 + 3) - 3 * (4 + 4) + (5 + 5 + 5) = 0
 
 この例だとグラデーションの勾配が全領域で一定なので変化率は h1, h2 で変わりません。(悪い例でした、すみません)
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L216
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L217
 {{< highlight javascript >}}
 var l_m1m3 = getLuma(dstImageData, dstX-1, dstY-3);
 var l_p1m3 = getLuma(dstImageData, dstX+1, dstY-3);
@@ -292,7 +293,7 @@ if (Math.abs(h1) < Math.abs(h2)) {
 
 <center> v1:<img src="../phase2-l1-l4-3x3Dotty.png" align="center" /> <span style="padding:1em;"> </span> v2:<img src="../phase2-l2-l3-3x3Dotty.png" align="center" /> </center>
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L267
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L267
 {{< highlight javascript >}}
 if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
     var rgba = meanRGBA(rgba1, rgba4); // l1, l4 の中間の値
@@ -310,7 +311,7 @@ Phase2 とほぼ同じですので、図だけつけて細かい説明は省き�
 
 ### エッジ判定
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L268
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L268
 {{< highlight javascript >}}
 /*     l2
  *  l1  x  l4
@@ -341,7 +342,7 @@ h1 のフィルタ | h2 のフィルタ |
 --------------|---------------|
 |<img src="../phase3-h1Filter-3x5Dotty.png" /> | <img src="../phase3-h2Filter-5x3Dotty.png" /> |
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L292
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L292
 {{< highlight javascript >}}
 var l_m1m2 = getLuma(dstImageData, dstX-1, dstY-2);
 var l_p1m2 = getLuma(dstImageData, dstX+1, dstY-2);
@@ -356,8 +357,8 @@ var l_p2p1 = getLuma(dstImageData, dstX+2, dstY+1);
 var l_m1p2 = getLuma(dstImageData, dstX-1, dstY+2);
 var l_p1p2 = getLuma(dstImageData, dstX+1, dstY+2);
 
-var h1 = (l_p1m2 + l4 + l_p1p2) + 3 * (l2 + l3) + (l_m1m2 + l1 + l_m1p2)
-var h2 = (l_m2m1 + l2 + l_p2m1) + 3 * (l1 + l4) + (l_m2p1 + l3 + l_p2p1);
+var h1 = (l_p1m2 + l4 + l_p1p2) - 3 * (l2 + l3) + (l_m1m2 + l1 + l_m1p2)
+var h2 = (l_m2m1 + l2 + l_p2m1) - 3 * (l1 + l4) + (l_m2p1 + l3 + l_p2p1);
 if (Math.abs(h1) <= Math.abs(h2)) {
 	var rgba = meanRGBA(rgba1, rgba4);
 } else {
@@ -367,7 +368,7 @@ if (Math.abs(h1) <= Math.abs(h2)) {
 
 ### エッジの場合
 
-- https://github.com/yoya/image.js/blob/v1.3/fcbi.js#L312
+- https://github.com/yoya/image.js/blob/v1.5/fcbi.js#L312
 {{< highlight javascript >}}
 if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 	var rgba = meanRGBA(rgba1, rgba4);
@@ -469,7 +470,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
   FCBI オリジナル     | 改造 take1 | 改造 take2 |
 -------------------------|------------------|---|
-<img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" /> |  <img src="../miku-v1.4.png" />|
+<img src="../miku-v1.0.png" /> |<img src="../miku-v1.2.png" /> |  <img src="../miku-v1.5.png" />|
 - copyright: https://twitter.com/rityulate/status/772006898279120896
 
 途切れ途切れになっていた線が、スムーズに繋がりました。
@@ -478,7 +479,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がる事があります。
 
-<img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.4.png" align="top"/>(改造後)
+<img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.5.png" align="top"/>(改造後)
 
 ただ、元の写真に無視できないレベルの歪みがあるので、高精度な写真だとまた話が違うかもしれません。
 
