@@ -32,8 +32,12 @@ categories = ["JPEG"]
 
 quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。 (ちなみにデフォルトは 95)
 
-{{< highlight php >}}
-(processor.cc => Processor::ProcessJpegData)
+- guetzli/processor.cc
+{{< highlight cpp >}}
+bool Processor::ProcessJpegData(const Params& params, const JPEGData& jpg_in,
+                                Comparator* comparator, GuetzliOutput* out,
+                                ProcessStats* stats) {
+＜略＞
 if (params.butteraugli_target > 2.0f) {
     fprintf(stderr,
             "Guetzli should be called with quality >= 84, otherwise the\n"
@@ -49,8 +53,12 @@ YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
 
 - 参考) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
 
-{{< highlight php >}}
-(processor.cc => Processor::ProcessJpegData)
+- guetzli/processor.cc
+{{< highlight cpp >}}
+bool Processor::ProcessJpegData(const Params& params, const JPEGData& jpg_in,
+                                Comparator* comparator, GuetzliOutput* out,
+                                ProcessStats* stats) {
+＜略＞
 if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
   fprintf(stderr, "Only YUV color space input jpeg is supported\n");
   return false;
@@ -63,8 +71,12 @@ YUV444, 420 のみ対応。422,411,440 は駄目。
 
 - 参考) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
 
-{{< highlight php >}}
-(processor.cc => Processor::ProcessJpegData)
+- guetzli/processor.cc
+{{< highlight cpp >}}
+bool Processor::ProcessJpegData(const Params& params, const JPEGData& jpg_in,
+                                Comparator* comparator, GuetzliOutput* out,
+                                ProcessStats* stats) {
+＜略＞
   if (jpg_in.Is444()) {
     input_is_420 = false;
   } else if (jpg_in.Is420()) {
@@ -79,8 +91,8 @@ YUV444, 420 のみ対応。422,411,440 は駄目。
 
 あと、ICC プロファイルを引き継がないという噂がありますが、自分が試した限りではちゃんと引き継ぎます。ソースコードを見ても APPn を 丸々コピーする処理があります。
 
-{{< highlight php >}}
-(jpeg_data_reader.cc => ReadJpeg)
+- guetzli/jpeg_data_reader.cc
+{{< highlight cpp >}}
 // Saves the APP marker segment as a string to *jpg.
 bool ProcessAPP(const uint8_t* data, const size_t len, size_t* pos,
                 JPEGData* jpg) {
@@ -96,6 +108,9 @@ bool ProcessAPP(const uint8_t* data, const size_t len, size_t* pos,
   return true;
 }
 ＜略＞
+bool ReadJpeg(const uint8_t* data, const size_t len, JpegReadMode mode,
+              JPEGData* jpg) {
+ ＜略＞
 case 0xe0:
       case 0xe1:
       case 0xe2:
@@ -118,8 +133,11 @@ case 0xe0:
         break;
 {{< /highlight >}}
 
-{{< highlight php >}}
-(jpeg_data_writer.cc => EncodeMetadata)
+- guetzli/jpeg_data_writer.cc
+{{< highlight cpp >}}
+bool EncodeMetadata(const JPEGData& jpg, bool strip_metadata, JPEGOutput out) {
+  if (strip_metadata) {
+＜略＞
   bool ok = true;
   for (int i = 0; i < jpg.app_data.size(); ++i) {
     uint8_t data[1] = { 0xff };
