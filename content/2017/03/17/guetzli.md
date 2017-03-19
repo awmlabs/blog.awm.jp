@@ -87,18 +87,26 @@ sys	0m0.212s
 
 - 集計スクリプト
 {{< highlight php >}}
+<?php
+
 foreach (file($argv[1]) as $line) {
-    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)KB/",
+    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)KB/",\
  $line, $matches)) {
-        list($all, $file, $width, $height, $time) = $matches;
+        list($all, $file, $width, $height, $filesize) = $matches;
         $nPixel = $width * $height;
         $size = (int) sqrt($nPixel);
     } else if (preg_match("/^user\s+(\d+)m([\d\.]+)s/", $line, $matches)) {
         list($all, $minutes, $seconds) = $matches;
         $t = 60 * $minutes + $seconds;
-        if ($t > 0.01) {
-	    echo "$size,$t\n";
+        if ($t === 0.01) {
+        // echo "ERROR: $size $t\n";
+        } else {
+         //  echo "$size,$t\n";
         }
+    } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \\
+S+ ([0-9\.]+)KB/", $line, $matches)) {
+        list($all, $file, $width, $height, $filesize2) = $matches;
+        echo "$filesize,$filesize2\n";
     }
 }
 {{< /highlight >}}
