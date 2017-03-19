@@ -1,0 +1,122 @@
++++
+date = "2017-03-17T17:34:14+09:00"
+title = "Guetzli - Perceptual JPEG encoder"
+draft = false
+tags = ["JPEG", "Graphics", "Guetzli"]
+categories = ["JPEG"]
++++
+
+# 公式サイト
+
+- https://github.com/google/guetzli
+- Announcing Guetzli: A New Open Source JPEG Encoder
+   - https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html
+
+# はじめに
+
+- Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで画像を劣化させるチキンレース技術です。
+- 人間が見ても。という部分は画質評価ツールの Butteraugli を使います。論文では MSE, PNSR, SSIM をよく見かけますが、これらは結構雑な評価で、Butteraugli は人間の視覚特性(例えば輝度と色味は別指標、色味も反対色説の色差軸)を考慮した計算をします
+<center>
+<img src="../opponent-color.jpg" /> <br />
+(c) http://ieeexplore.ieee.org/ieee_pilot/articles/06/ttg2009061291/article.html
+</center>
+
+- JPEG quality を色々弄って画像サイズと画質のトレードオフで決める事はよくありますが、それの全自動版だと考えて良いです。DQT (周波数成分毎の量子化パラメータ) を細かくいじります
+
+- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく処理に時間がかかります。libjpeg の代わりという訳にはいかないでしょう。zopfli のようにアクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。という場合に有益です
+
+# 制限事項
+
+ソースを読んでいて気づいた制限事項です。
+
+- YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
+   - 参考1) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
+- YUV444, 420 のみ。422,411,440 は駄目。
+   - 参考2) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
+
+うーん。YUV422 の JPEG は世に溢れてるはずだけど、大丈夫なのでしょうか。420 なんかよりずっと多そうだけど。デジカメで普通の画質設定だと 422 になりそうです。(自分は高画質しか興味ないので、よく分からない)
+
+あと、ICC プロファイルを引き継がないという噂がありますが、自分が試した限りでは引き継ぎます。ソースコードを見ても確かにコピーする処理があります。
+
+- 参考) https://twitter.com/yoya/status/843085874036334593
+
+どなたか引き継がない JPEG ファイルをお持ちでしたら頂けないでしょうか。(直してコントリビュータに紛れ込みたい！)
+
+# インストール
+
+macOS だと brew install guetzli で入りますが、一応 git レポジトリを使う方法のメモです。
+libpng(libpng-dev) と gflags (libgflags-dev) のパッケージを入れて make するだけです。macOS Sierra と Linux Ubuntu16 で動作しました。
+
+```
+% git clone git@github.com:google/guetzli.git
+% cd guetzli
+% make
+==== Building guetzli (release) ====
+Creating bin/Release
+Creating obj/Release
+＜略＞
+butteraugli.cc
+Linking guetzli
+ld: warning: option -s is obsolete and being ignored
+% ls -l bin/Release/guetzli
+-rwxr-xr-x  1 yoya  staff  280856  3 17 17:34 bin/Release/guetzli
+% 
+```
+
+# 実験
+
+```
+% ls illust | wc
+   1406    1406   26445
+% mkdir tmp
+% cd illust
+% (for i in *.jpg ; do o="../tmp/$i" ; identify $i ; time guetzli $i $o ; identify $o ; done >& ../log.txt ) &
+```
+
+- ログデータ
+
+```
+3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 59.4KB 0.000u 0:00.000
+
+real	0m7.194s
+user	0m6.976s
+sys	0m0.212s
+../tmp/3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 56KB 0.000u 0:00.000
+```
+
+- ログ集計
+
+{{< highlight php >}}
+foreach (file($argv[1]) as $line) {
+    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)KB/",
+ $line, $matches)) {
+        list($all, $file, $width, $height, $time) = $matches;
+        $nPixel = $width * $height;
+        $size = (int) sqrt($nPixel);
+    } else if (preg_match("/^user\s+(\d+)m([\d\.]+)s/", $line, $matches)) {
+        list($all, $minutes, $seconds) = $matches;
+        $t = 60 * $minutes + $seconds;
+        if ($t > 0.01) {
+           echo "$size,$t\n";
+        }
+    }
+}
+{{< /highlight >}}
+
+# かかる時間の目安
+
+手元にある2Dイラスト画像1360枚で Guetzli を動かして計測したグラフです。
+
+<center> <img src="../time-graph-small.png" /> </center>
+
+- 横がsqrt(width*height) 。正方形と仮定した場合の一辺の長さ相当
+- 縦が user 時間の秒数
+
+一辺2000px で100秒弱〜200秒が目安になりそうです。
+
+ちなみにそこそこ高性能なゲームPCで実験してます。
+
+# 最後に
+
+Guetzli で処理するとデータの劣化はするので、例えば画像を引き伸ばした時や画像にフィルタをかけた時に、違いが目に見える可能性があります。チキンレースで崖の位置が変われば当然落ちますし。画質評価で設定するその崖の位置は、モニタのDPI、視距離、測色標準観察者の種類といった想定する視聴環境のモデル次第です。
+
