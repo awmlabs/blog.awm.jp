@@ -15,15 +15,14 @@ categories = ["JPEG"]
 # はじめに
 
 - Guetzli は知覚的(Perceptual)に人間が見ても分からないだろうギリギリまで画像を劣化させるチキンレース技術です。
-- 人間が見ても。という部分は画質評価ツールの Butteraugli を使います。論文では MSE, PNSR, SSIM をよく見かけますが、これらは結構雑な評価で、Butteraugli は人間の視覚特性(例えば輝度と色味は別指標、色味も反対色説の色差軸)を考慮した計算をします
+- 人間が見ても。という部分は画質評価ツールの Butteraugli を使います。論文では MSE, PNSR, SSIM をよく見かけますが、これらは結構雑な評価で、Butteraugli は人間の視覚特性(例えば輝度と色味は別指標、色味も反対色説の色差軸)を考慮します。
 <center>
 <img src="../opponent-color.jpg" /> <br />
 (c) http://ieeexplore.ieee.org/ieee_pilot/articles/06/ttg2009061291/article.html
 </center>
 
-- JPEG quality を色々弄って画像サイズと画質のトレードオフで決める事はよくありますが、それの全自動版だと考えて良いです。DQT (周波数成分毎の量子化パラメータ) を細かくいじります
-
-- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく処理に時間がかかります。libjpeg の代わりという訳にはいかないでしょう。zopfli のようにアクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。という場合に有益です
+- JPEG quality を色々弄って画像サイズと画質のトレードオフで決める事はよくありますが、それの全自動版です。更に DQT (周波数成分毎の量子化パラメータ) を細かくいじります。
+- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく時間がかかります。libjpeg の代わりという訳にはいかないでしょう。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方になりそうです。
 
 # 制限事項
 
@@ -40,7 +39,7 @@ categories = ["JPEG"]
 
 - 参考) https://twitter.com/yoya/status/843085874036334593
 
-どなたか引き継がない JPEG ファイルをお持ちでしたら頂けないでしょうか。(直してコントリビュータに紛れ込みたい！)
+どなたか引き継がない JPEG ファイルをお持ちでしたら頂けないでしょうか。(修正コミットしてコントリビュータに紛れ込みたい！)
 
 # インストール
 
@@ -97,8 +96,14 @@ foreach (file($argv[1]) as $line) {
         list($all, $minutes, $seconds) = $matches;
         $t = 60 * $minutes + $seconds;
         if ($t > 0.01) {
-           echo "$size,$t\n";
+	    // echo "$size,$t\n";
         }
+    } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \\
+S+ ([0-9\.]+)KB/", $line, $matches)) {
+        list($all, $file, $width, $height, $time2) = $matches;
+        $nPixel2 = $width * $height;
+        $size2 = (int) sqrt($nPixel2);
+        echo "$time,$time2\n";
     }
 }
 {{< /highlight >}}
