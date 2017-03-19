@@ -217,7 +217,7 @@ function filesizeUnit($filesize, $unit) { // to KB
 }
 
 foreach (file($argv[1]) as $line) {
-    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/\", $line, $matches)) {
+    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/", $line, $matches)) {
         list($all, $file, $width, $height, $filesize, $unit) = $matches;
         $nPixel = $width * $height;
         $size = (int) sqrt($nPixel);
