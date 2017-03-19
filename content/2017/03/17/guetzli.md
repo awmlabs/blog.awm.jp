@@ -65,9 +65,9 @@ if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
 }
 {{< /highlight >}}
 
-## YUV 制限
+## YUV 444,420 only
 
-YUV444, 420 のみ対応。422,411,440 は駄目。
+YUV444, 420 のみ対応。422,411,440 は NG。
 
 - 参考) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
 
