@@ -22,16 +22,49 @@ categories = ["JPEG"]
 </center>
 
 - JPEG quality を色々変えて画像サイズと画質のトレードオフを探る事はよくありますが、それの全自動版です。更に DQT (周波数成分毎の量子化パラメータ) を細かくいじります。
-- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく時間がかかります。libjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。
+- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく時間がかかります。libjpeg や mozjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。
 
 # 制限事項
 
-ソースを読んで気づいた制限事項です。(おかしい。。README に記述されるべきのような。。)
+ソースを読んで気づいた制限事項です。(README に記述して欲しいなぁ。)
+
+- quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。
+   - ちなみにデフォルトは 95
+
+{{< highlight php >}}
+(processor.cc => Processor::ProcessJpegData)
+if (params.butteraugli_target > 2.0f) {
+    fprintf(stderr,
+            "Guetzli should be called with quality >= 84, otherwise the\n"
+            "output will have noticeable artifacts. If you want to\n"
+            "proceed anyway, please edit the source code.\n");
+    return false;
+  }
+{{< /highlight >}}
 
 - YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
    - 参考1) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
+
+{{< highlight php >}}
+(processor.cc => Processor::ProcessJpegData)
+if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
+  fprintf(stderr, "Only YUV color space input jpeg is supported\n");
+  return false;
+}
+{{< /highlight >}}
+
 - YUV444, 420 のみ。422,411,440 は駄目。
    - 参考2) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
+
+{{< highlight php >}}
+(processor.cc => Processor::ProcessJpegData)
+  if (jpg_in.Is444()) {
+    input_is_420 = false;
+  } else if (jpg_in.Is420()) {
+    input_is_420 = true;
+  } else {
+    fprintf(stderr, "Unsupported sampling factors:");
+{{< /highlight >}}
 
 うーん。YUV422 の JPEG は世に溢れてるはずだけど、大丈夫なのでしょうか。420 なんかよりずっと多そうだけど。デジカメで普通の画質設定だと 422 になりそうですし。(自分は高画質しか興味ないので、よく分からない)
 
@@ -149,7 +182,7 @@ foreach (file($argv[1]) as $line) {
 
 横軸が元サイズ、縦軸が圧縮後のサイズです。どちらも KB 単位。
 
-ちょっと異常な削減率です。半分以下になることさえあります。
+期待以上の異常なレベルでの削減率です。半分以下になることさえあります。
 
 <center> <img src="../filesize-graph-small.png" /> </center>
 (参考のため、サイズが変わらない時の場所にピンクの線を引いておきます)
@@ -161,3 +194,5 @@ foreach (file($argv[1]) as $line) {
 イラスト画像は線(周波数高)とグラデーション(周波数低)が命だと考えると周波数の中域は荒くて良さそうで、視覚特性以外でも削れる情報があって実な効果が大きいのかもしれません。
 
 Guetzli で処理するとデータの劣化はするので、例えば画像を引き伸ばした時や画像にフィルタをかけた時に、違いが目に見える可能性があります。チキンレースで崖の位置が変われば当然落ちますし。画質評価で設定するその崖の位置は、モニタのDPI、視距離、測色標準観察者の種類といった想定する視聴環境のモデル次第です。
+
+MozJPEG と比較してたりはするけど、土俵が違うのであんまりまとめても意味なさそうかな。。
