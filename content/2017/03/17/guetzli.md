@@ -22,7 +22,7 @@ categories = ["JPEG"]
 </center>
 
 - JPEG quality を色々変えて画像サイズと画質のトレードオフを探る事はよくありますが、それの全自動版みたいな感じです。更に DQT (周波数成分毎の量子化パラメータ) を細かくいじります。
-- 良い結果が出るよう何度も繰り返し JPEG 生成処理をする方式なので、とにかく時間がかかります。libjpeg や mozjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。
+- 良い結果に当たるよう何度も繰り返し JPEG 生成する方式なので、とにかく時間がかかります。libjpeg や mozjpeg の代わりという訳にはいきません。アクセスが特別多い重要な画像に対してサイズを少しでも減らしたい。zopflipng のような使い方が良さそうです。
 
 # 制限事項
 
@@ -70,7 +70,54 @@ if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
 
 あと、ICC プロファイルを引き継がないという噂がありますが、自分が試した限りではちゃんと引き継ぎます。ソースコードを見ても APPn を 丸々コピーする処理があります。
 
-- 参考) https://twitter.com/yoya/status/843085874036334593
+{{< highlight php >}}
+(jpeg_data_reader.cc => ReadJpeg)
+// Saves the APP marker segment as a string to *jpg.
+bool ProcessAPP(const uint8_t* data, const size_t len, size_t* pos,
+                JPEGData* jpg) {
+  VERIFY_LEN(2);
+  size_t marker_len = ReadUint16(data, pos);
+  VERIFY_INPUT(marker_len, 2, 65535, MARKER_LEN);
+  VERIFY_LEN(marker_len - 2);
+  // Save the marker type together with the app data.
+  std::string app_str(reinterpret_cast<const char*>(
+      &data[*pos - 3]), marker_len + 1);
+  *pos += marker_len - 2;
+  jpg->app_data.push_back(app_str);
+  return true;
+}
+＜略＞
+case 0xe0:
+      case 0xe1:
+      case 0xe2:
+      case 0xe3:
+      case 0xe4:
+      case 0xe5:
+      case 0xe6:
+      case 0xe7:
+      case 0xe8:
+      case 0xe9:
+      case 0xea:
+      case 0xeb:
+      case 0xec:
+      case 0xed:
+      case 0xee:
+      case 0xef:
+        if (mode != JPEG_READ_TABLES) {
+          ok = ProcessAPP(data, len, &pos, jpg);
+        }
+        break;
+{{< /highlight >}}
+
+{{< highlight php >}}
+(jpeg_data_writer.cc => EncodeMetadata)
+  bool ok = true;
+  for (int i = 0; i < jpg.app_data.size(); ++i) {
+    uint8_t data[1] = { 0xff };
+    ok = ok && JPEGWrite(out, data, sizeof(data));
+    ok = ok && JPEGWrite(out, jpg.app_data[i]);
+  }
+{{< /highlight >}}
 
 どなたか Exif や ICC プロファイルを引き継がない JPEG ファイルをお持ちでしたら頂けないでしょうか。(修正コミットしてコントリビュータに紛れ込みたい！)
 
@@ -98,9 +145,11 @@ ld: warning: option -s is obsolete and being ignored
 
 # 実験
 
-手元にある2Dイラスト画像1406枚で Guetzli を動かして計測しました。
-何枚か制限事項に引っかかるようで、実際に処理できたのは 1360枚です。
+様々なサイズの2Dイラスト画像1406枚で Guetzli を動かして計測しました。
+何枚かは制限事項に引っかかるようで、実際に処理できたのは 1360枚です。
 
+
+## 実行
 ```
 % ls illust | wc
    1406    1406   26445
@@ -122,7 +171,7 @@ sys	0m0.212s
 ../tmp/3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 56KB 0.000u 0:00.000
 ```
 
-##  集計スクリプト
+## 集計スクリプト
 
 {{< highlight php >}}
 <?php
@@ -165,7 +214,7 @@ foreach (file($argv[1]) as $line) {
 }
 {{< /highlight >}}
 
-## グラフ
+## 集計結果のグラフ
 
 ### 処理時間
 
