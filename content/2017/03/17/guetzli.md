@@ -28,8 +28,9 @@ categories = ["JPEG"]
 
 ソースを読んで気づいた制限事項です。(README に記述して欲しいなぁ。)
 
-- quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。
-   - ちなみにデフォルトは 95
+## quality 指定
+
+quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。 (ちなみにデフォルトは 95)
 
 {{< highlight php >}}
 (processor.cc => Processor::ProcessJpegData)
@@ -42,8 +43,11 @@ if (params.butteraugli_target > 2.0f) {
   }
 {{< /highlight >}}
 
-- YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
-   - 参考1) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
+## CMYK 未対応
+
+YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
+
+- 参考) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
 
 {{< highlight php >}}
 (processor.cc => Processor::ProcessJpegData)
@@ -53,8 +57,11 @@ if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
 }
 {{< /highlight >}}
 
-- YUV444, 420 のみ。422,411,440 は駄目。
-   - 参考2) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
+## YUV 制限
+
+YUV444, 420 のみ対応。422,411,440 は駄目。
+
+- 参考) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
 
 {{< highlight php >}}
 (processor.cc => Processor::ProcessJpegData)
@@ -67,6 +74,8 @@ if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
 {{< /highlight >}}
 
 うーん。YUV422 の JPEG は世に溢れてるはずだけど、大丈夫なのでしょうか。420 なんかよりずっと多そうだけど。デジカメで普通の画質設定だと 422 になりそうですし。(自分は高画質しか興味ないので、よく分からない)
+
+## 噂話 (ICC プロファイル)
 
 あと、ICC プロファイルを引き継がないという噂がありますが、自分が試した限りではちゃんと引き継ぎます。ソースコードを見ても APPn を 丸々コピーする処理があります。
 
