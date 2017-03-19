@@ -108,8 +108,7 @@ function filesizeUnit($filesize, $unit) { // to KB
 }
 
 foreach (file($argv[1]) as $line) {
-    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/\
-", $line, $matches)) {
+    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/\", $line, $matches)) {
         list($all, $file, $width, $height, $filesize, $unit) = $matches;
         $nPixel = $width * $height;
         $size = (int) sqrt($nPixel);
@@ -122,8 +121,7 @@ foreach (file($argv[1]) as $line) {
         } else {
             //  echo "$size,$t\n";
         }
-    } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \\
-S+ ([0-9\.]+)(.B)/", $line, $matches)) {
+    } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/", $line, $matches)) {
         list($all, $file, $width, $height, $filesize2, $unit) = $matches;
         $filesize2 = filesizeUnit($filesize2, $unit);
         echo "$filesize,$filesize2\n";
@@ -159,6 +157,6 @@ S+ ([0-9\.]+)(.B)/", $line, $matches)) {
 
 # 最後に
 
-イラスト画像は線とグラデーションが命だと考えるとは周波数の中域は荒くて良さそうで、視覚特性以外でも削れる情報があるとかで実な効果が大きいのかもしれません。
+イラスト画像は線(周波数高)とグラデーション(周波数低)が命だと考えると周波数の中域は荒くて良さそうで、視覚特性以外でも削れる情報があって実な効果が大きいのかもしれません。
 
 Guetzli で処理するとデータの劣化はするので、例えば画像を引き伸ばした時や画像にフィルタをかけた時に、違いが目に見える可能性があります。チキンレースで崖の位置が変われば当然落ちますし。画質評価で設定するその崖の位置は、モニタのDPI、視距離、測色標準観察者の種類といった想定する視聴環境のモデル次第です。
