@@ -83,35 +83,57 @@ sys	0m0.212s
 ../tmp/3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 56KB 0.000u 0:00.000
 ```
 
-## かかる時間の目安
+##  集計スクリプト
 
-- 集計スクリプト
 {{< highlight php >}}
 <?php
 
+function filesizeUnit($filesize, $unit) { // to    KB
+    if ($unit === "KB") {
+        ;
+    } else if ($unit === "MB") {
+        $filesize *= 1024;
+    } else if ($unit === "GB") {
+        $filesize *= 1024 * 1024;
+    } else {
+    echo "ERROR: $filesize, $unit\n"; exit(1);
+    }
+    return $filesize;
+}
+
 foreach (file($argv[1]) as $line) {
-    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)KB/",\
- $line, $matches)) {
-        list($all, $file, $width, $height, $filesize) = $matches;
+    if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)(.B)/\
+", $line, $matches)) {
+        list($all, $file, $width, $height, $filesize, $unit) = $matches;
         $nPixel = $width * $height;
         $size = (int) sqrt($nPixel);
-    } else if (preg_match("/^user\s+(\d+)m([\d\.]+)s/", $line, $matches)) {
+    $filesize = filesizeUnit($filesize, $unit);
+} else if (preg_match("/^user\s+(\d+)m([\d\.]+)s/", $line, $matches)) {
         list($all, $minutes, $seconds) = $matches;
         $t = 60 * $minutes + $seconds;
         if ($t === 0.01) {
-        // echo "ERROR: $size $t\n";
+            // echo "ERROR: $size $t\n";
         } else {
-         //  echo "$size,$t\n";
+            //  echo "$size,$t\n";
         }
     } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \\
-S+ ([0-9\.]+)KB/", $line, $matches)) {
-        list($all, $file, $width, $height, $filesize2) = $matches;
+S+ ([0-9\.]+)(.B)/", $line, $matches)) {
+        list($all, $file, $width, $height, $filesize2, $unit) = $matches;
+        $filesize2 = filesizeUnit($filesize2, $unit);
         echo "$filesize,$filesize2\n";
+          if ($filesize < $filesize2) {
+               exit(1);
+        }
     }
 }
 {{< /highlight >}}
 
 手元にある2Dイラスト画像1360枚で Guetzli を動かして計測したグラフです。
+
+## グラフ
+
+
+### 処理時間
 
 <center> <img src="../time-graph-small.png" /> </center>
 
@@ -121,6 +143,14 @@ S+ ([0-9\.]+)KB/", $line, $matches)) {
 一辺2000px で100秒弱〜200秒が目安になりそうです。
 
 ちなみにそこそこ高性能なゲームPCで実験してます。
+
+### ファイルサイズ削減
+
+ちょっと異常な削減率ですね。半分以下になることさえあります。
+
+<center> <img src="../filesize-graph-small.png" /> </center>
+
+削減率の多い画像を目視で確認したところぱっと見で違いは分かりませんでした。
 
 # 最後に
 
