@@ -107,7 +107,7 @@ Lanczoz (lobes:3) | Mitchell | FCBI (TM:4 で2回拡大) |
 Nearest-Neighbor | Bi-Liner | Bi-Cubic (B,C = 1,0) |
 ----------------|----------|----------|
 <img src="../Kyo-box.png"/>|<img src="../Kyo-triangle.png"/>|<img src="../Kyo-cubic.png"/>|
-Lanczoz (lobes:3) | Mitchell | FCBI (TM:46) |
+Lanczoz (lobes:3) | Mitchell | FCBI (TM:20) |
 <img src="../Kyo-lanczos.png"/>|<img src="../Kyo-mitchell.png"/>|<img src="../Kyo-fcbi.png"/>|
 
 FCBI の方がドット感が消えて線が自然に繋がっているように見えます。
