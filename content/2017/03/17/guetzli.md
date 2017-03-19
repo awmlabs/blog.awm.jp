@@ -83,8 +83,9 @@ sys	0m0.212s
 ../tmp/3b689cd9.jpg JPEG 500x375 500x375+0+0 8-bit sRGB 56KB 0.000u 0:00.000
 ```
 
-- ログ集計
+## かかる時間の目安
 
+- 集計スクリプト
 {{< highlight php >}}
 foreach (file($argv[1]) as $line) {
     if (preg_match("/^([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \S+ ([0-9\.]+)KB/",
@@ -96,19 +97,11 @@ foreach (file($argv[1]) as $line) {
         list($all, $minutes, $seconds) = $matches;
         $t = 60 * $minutes + $seconds;
         if ($t > 0.01) {
-	    // echo "$size,$t\n";
+	    echo "$size,$t\n";
         }
-    } else if (preg_match("/^\.\.\/tmp\/([^\/]+.jpg) JPEG (\d+)x(\d+) \S+ \S+ \\
-S+ ([0-9\.]+)KB/", $line, $matches)) {
-        list($all, $file, $width, $height, $time2) = $matches;
-        $nPixel2 = $width * $height;
-        $size2 = (int) sqrt($nPixel2);
-        echo "$time,$time2\n";
     }
 }
 {{< /highlight >}}
-
-# かかる時間の目安
 
 手元にある2Dイラスト画像1360枚で Guetzli を動かして計測したグラフです。
 
