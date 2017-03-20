@@ -6,11 +6,15 @@ tags = ["JPEG", "Graphics", "Guetzli"]
 categories = ["JPEG"]
 +++
 
-# 公式サイト
+# 公式情報
 
 - https://github.com/google/guetzli
 - Announcing Guetzli: A New Open Source JPEG Encoder
    - https://research.googleblog.com/2017/03/announcing-guetzli-new-open-source-jpeg.html
+- Guetzli: Perceptually Guided JPEG Encoder
+   - https://arxiv.org/abs/1703.04421v1
+- Users prefer Guetzli JPEG over same-sized libjpeg
+   - https://arxiv.org/abs/1703.04416v1
 
 # はじめに
 
@@ -30,7 +34,7 @@ categories = ["JPEG"]
 
 ## quality >= 84
 
-quality は 84 以上しか指定できません。それ以下だと目に見えるレベルの劣化するそうです。 (ちなみにデフォルトは 95)
+quality は 84 以上しか指定できません。それ以下だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)
 
 - guetzli/processor.cc
 {{< highlight cpp >}}
@@ -49,7 +53,7 @@ if (params.butteraugli_target > 2.0f) {
 
 ## CMYK 未対応
 
-YCbCr JPEG のみ対応です。CMYK や CYYK は未対応。
+YCbCr JPEG のみ対応です。CMYK や (Adobe)CYYK は未対応。
 
 - 参考) https://blog.awm.jp/2016/02/06/ycbcr/ YCbCr について
 
@@ -67,7 +71,7 @@ if (jpg_in.components.size() != 3 || !HasYCbCrColorSpace(jpg_in)) {
 
 ## YUV 444,420 only
 
-YUV444, 420 のみ対応。422,411,440 は NG。
+YUV444, 420 のみ対応。422,411,440 は未対応。
 
 - 参考) https://blog.awm.jp/2016/02/10/yuv/ YUV の種類
 
