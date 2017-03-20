@@ -34,7 +34,7 @@ categories = ["JPEG"]
 
 ## quality >= 84
 
-quality は 84 以上しか指定できません。それ以下だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)
+quality は 84 以上しか指定できません。それ未満だと目に見えて劣化するそうです。 (ちなみにデフォルトは 95)
 
 - guetzli/processor.cc
 {{< highlight cpp >}}
