@@ -18,16 +18,16 @@ categories = ["JPEG"]
 
 # Introduction
 
-- Guetzli is a chicken race technology that degrades JPEG images until it is unlikely that people will perceive perceptually.
-- Even if people see it. Butteraugli is used for the evaluation. Although it often sees MSE, PNSR, SSIM in the paper of image processing, these are pretty good estimates, but Butteraugli has human visual characteristics (for example, luminance and color tone are different indicators, color tone is the color difference axis of opposite color theory) Calculate to original.
+- Guetzli is a chicken race technology that degrades JPEG image data until it is unlikely that people will perceive perceptually.
+- Butteraugli is used for the evaluation instead of human eyes. Although it often sees MSE, PNSR, SSIM in the paper of image processing, these are pretty good estimates, Butteraugli has human visual characteristics (for example, luminance and color tone are different indicators, color tone is the color difference axis of opposite color theory).
 
 <center>
 <img src="../opponent-color.jpg" /> <br />
 (c) http://ieeexplore.ieee.org/ieee_pilot/articles/06/ttg2009061291/article.html
 </center>
 
-- It is common to change the JPEG quality to find trade-offs between image size and image quality, but it seems like a fully automatic version of it. In addition, it tinkers DQT (quantization parameter for each frequency component) in detail.
-- It is a method of generating JPEG repeatedly and repeatedly so as to hit a good result, so it takes time anyway. I can not translate libjpeg or mozjpeg. I want to reduce even a little size for important images with a lot of access. Usage like zopflipng looks good.
+- It is common to change the JPEG quality to find trade-offs between image size and image quality, but it seems like a fully automatic version of it. In addition, it fine tuning DQT (quantization parameter for each frequency component).
+- It is a method of generating JPEG repeatedly and repeatedly so as to hit a good result, so it takes very long time anyway. I can not supersede libjpeg or mozjpeg. We can reduce image size effective for important images with a lot of access. Usage like zopflipng looks good.
 
 # Spec limitetions
 
@@ -272,10 +272,10 @@ It is a reduction rate at an unusual level higher than expected. It may even be 
 
 Even if I visually checked the image with a large reduction rate, I did not know the difference at first glance. great. .
 
-# Finally
+# Impression
 
 In the illustration image, when considering the line (frequency high) and the gradation (frequency low) are the lives, the mid range of the frequency seems to be rough and good, maybe it is easy to cut off other than visual characteristics.
 
 Processing with Guetzli will degrade the data, so it may be visible, for example, when stretching the image or filtering the image. When setting a threshold in the image quality evaluation, it is inevitable that the viewing environment model such as the DPI of the monitor, the viewing distance, and the colorimetric standard to be adopted is on the premise, and it is inevitable that roughness can be seen when the situation is substantially deviated from that .
 
-Although it compares with MozJPEG, since it is different in the ring, it seems to make sense even if it is put together a lot. .
+The comparison with MozJPEG seems to make no sense even if it is summarized because the ring is different in the first place.
