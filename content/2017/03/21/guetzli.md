@@ -16,7 +16,7 @@ categories = ["JPEG"]
 - Users prefer Guetzli JPEG over same-sized libjpeg
    - https://arxiv.org/abs/1703.04416v1
 
-# はじめに
+# Introduction
 
 - Guetzli is a chicken race technology that degrades JPEG images until it is unlikely that people will perceive perceptually.
 - Even if people see it. Butteraugli is used for the evaluation. Although it often sees MSE, PNSR, SSIM in the paper of image processing, these are pretty good estimates, but Butteraugli has human visual characteristics (for example, luminance and color tone are different indicators, color tone is the color difference axis of opposite color theory) Calculate to original.
