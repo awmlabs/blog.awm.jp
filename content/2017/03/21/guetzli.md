@@ -81,7 +81,7 @@ Only YUV 444, 420 correspond. 422, 411, 440 are not supported.
 bool Processor::ProcessJpegData(const Params& params, const JPEGData& jpg_in,
                                 Comparator* comparator, GuetzliOutput* out,
                                 ProcessStats* stats) {
-＜略＞
+(omit...)
   if (jpg_in.Is444()) {
     input_is_420 = false;
   } else if (jpg_in.Is420()) {
@@ -90,11 +90,14 @@ bool Processor::ProcessJpegData(const Params& params, const JPEGData& jpg_in,
     fprintf(stderr, "Unsupported sampling factors:");
 {{< /highlight >}}
 
-Well. The JPEG of YUV 422 is supposed to be full of world, but is it all right? It seems to be much more than 420 something. It seems to be 422 if it is an ordinary image quality setting with a digital camera. (I am not interested only because I am interested only in high picture quality)
+Well. The JPEG of YUV 422 is supposed to be full of world, but is it all right? It seems to be much more than 420 something.
+It seems to be 422 if it is an ordinary image quality setting with a digital camera.
+(I am not interested only because I am interested only in high picture quality)
 
-## Gossip (ICC profile)
+## Rumor (ICC profile)
 
-There is a rumor that it does not inherit the ICC profile, but as long as I tried it I will take over properly. Even if you look at the source code there is a process of copying APPn in its entirety.
+There is a rumor that it does not inherit the ICC profile, but as long as I tried it I will take over properly.
+Even if you look at the source code there is a process of copying APPn in its entirety.
 
 - guetzli/jpeg_data_reader.cc
 {{< highlight cpp >}}
@@ -112,10 +115,10 @@ bool ProcessAPP(const uint8_t* data, const size_t len, size_t* pos,
   jpg->app_data.push_back(app_str);
   return true;
 }
-＜略＞
+(omit...)
 bool ReadJpeg(const uint8_t* data, const size_t len, JpegReadMode mode,
               JPEGData* jpg) {
- ＜略＞
+(omit...)
 case 0xe0:
       case 0xe1:
       case 0xe2:
@@ -142,7 +145,7 @@ case 0xe0:
 {{< highlight cpp >}}
 bool EncodeMetadata(const JPEGData& jpg, bool strip_metadata, JPEGOutput out) {
   if (strip_metadata) {
-＜略＞
+1
   bool ok = true;
   for (int i = 0; i < jpg.app_data.size(); ++i) {
     uint8_t data[1] = { 0xff };
@@ -166,7 +169,7 @@ Just get the package of libpng (libpng - dev) and gflags (libgflags - dev) and m
 ==== Building guetzli (release) ====
 Creating bin/Release
 Creating obj/Release
-＜略＞
+(omit...)
 butteraugli.cc
 Linking guetzli
 ld: warning: option -s is obsolete and being ignored
