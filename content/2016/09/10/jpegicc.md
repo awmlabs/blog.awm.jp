@@ -42,6 +42,7 @@ sRGB, Apple RGB, Adobe RGB, DCI-P3, ProPhoto RGB, scRGB, ...
   <img src="../StandardProfilesGamutCoverage.jpg" aligh="center" /> <br/>
   ( 引用元: http://wiki.nuaj.net/index.php?title=Color_Profile )
 </center>
+(CMYKの形が怪しいので、後で差し替えるかも)
 
 又、昔の CRT モニタは入力電圧に対して実際の明るさが比例せず、gamma 2.2 曲線に近い特性があったので、それに合わせたガンマ補正も入ります。
 
@@ -59,7 +60,7 @@ Web の世界では sRGB が標準です。
 - A Standard Default Color Space for the Internet - sRGB
   - https://www.w3.org/Graphics/Color/sRGB.html
 
-ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。[^2]
+ICC プロファイルが入っていない JPEG 画像は sRGB として暗黙的に解釈します。(少なくとも Safari では) [^2] 
 
 [^2]: 最近の FireFox のデフォルト設定だと、ICC プロファイルが入っていないと何も補正しないそうです。そのままディスプレイのプロファイルで解釈されます。辛い。。
 
