@@ -46,6 +46,9 @@ P3 |  PPM | ASCII | カラー画像 <img src="/2016/01/04/color.png" />
 P4 |  PBM | Binary | 白黒画像 <img src="/2016/01/04/wb.png" />
 P5 |  PGM | Binary | グレー画像 <img src="/2016/01/04/gray.png" />
 P6 |  PPM | Binary | カラー画像 <img src="/2016/01/04/color.png" />
+P7 |  PAM | Binary | アルファ付きカラー画像
+Pf |  PFM | Binary | 浮動小数点形式グレースケール画像
+PF |  PFM | Binary | 浮動小数点形式カラー画像
 
 データ表現が ASCII の場合は以下のフォーマットをとります。
 ```
