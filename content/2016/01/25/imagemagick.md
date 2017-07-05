@@ -44,7 +44,8 @@ $ convert -limit <u>memory 256MB</u> -limit <u>disk 0</u> src.jpg dst.png
 補間の問題なのでドットが疎らに入っている画像で特に暗くなる傾向があります。
 <!-- 色数少なめでディザをかけた画像で実験すると顕著に差が出ます。 -->
 
-厳密に処理したい場合は RGB にしてから処理すると良いでしょう。
+厳密に処理したい場合は以下のページを参考にすると良いでしょう。
+尚、ImageMagick は sRGB の gamma=1 相当を "RGB" で指示できます。
 
  * Resizing with Colorspace Correction
   * http://www.imagemagick.org/Usage/resize/#resize_colorspace
