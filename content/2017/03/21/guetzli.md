@@ -1,7 +1,7 @@
 +++
 date = "2017-03-21"
 title = "Guetzli - Perceptual JPEG encoder (english)"
-draft = false
+draft = true
 tags = ["JPEG", "Graphics", "Guetzli"]
 categories = ["JPEG"]
 +++
@@ -187,9 +187,11 @@ I measured Guesszli with 1406 2D-illustration images of various sizes and measur
 ```
 % ls illust | wc
    1406    1406   26445
-% mkdir tmp
+% mkdir illust-out
 % cd illust
-% (for i in *.jpg ; do o="../tmp/$i" ; identify $i ; time guetzli $i $o ; identify $o ; done >& ../log.txt )
+% (for i in *.jpg ; do o="../illust-out/$i" ;
+     identify "$i" ; time guetzli "$i" "$o" ; identify "$o" ;
+   done >& ../log-illust.txt )
 % ls -l ../tmp | wc
    1360   12233   86837
 ```
