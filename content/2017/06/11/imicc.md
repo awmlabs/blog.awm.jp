@@ -69,7 +69,7 @@ $ convert in.jpg -strip out.jpg
 
 撮影した時の向きを Exif の Orientation タグに記録して、表示の時に回転させる方式です。画像のメタデータを単純に削除すると、今までと画像の表示する向きが変わってしまう事があります。
 
-<img src="../../../../2016/01/07/digicame.png">
+<img src="../digicame2.png">
 
 ImageMagick には Orientationタグに応じて画像を回転させて、このタグを削除するオプションがあります。
 
