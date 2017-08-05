@@ -13,6 +13,8 @@ tags = ["ICC", "JPEG"]
 - ImageMagick で ICC プロファイルを扱う #2 コマンド実例行
    - http://blog.awm.jp/2017/06/11/imicc/
 
+尚、当エントリでは ImageMagick の使い方は一切解説しません。
+
 # 色域と ICC プロファイルと JPEG
 
 コンピュータ画像が色を表現するのに用いるRGB(red,gree,blue)の数値。例えば、RGB=(<font color="#F44">255</font>,<font color="#0C0"> 0</font>,<font color="#68F">0</font>)は赤色を表しますが、実際にどこまで鮮やかな赤を出せるのかはモニタや印刷機によります。
