@@ -111,6 +111,11 @@ ICC プロファイルを単純に消すと色味が変わる可能性があり�
 ```
 $ convert in.jpg +profile '!icc,*' out.jpg
 ```
+<center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig3.2-prefinal.png" />
+</center>
 
 ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除する命令です。* (ワイルドカード)指定で全て削除を意味しますが、!icc をつける事で ICC だけ残せます。
 
