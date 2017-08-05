@@ -46,11 +46,11 @@ $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
   <img src="../fig3-final.png" />
 </center>
 
-ここからは、このコマンドに至るまでの解説になります。
+ここから先の文章は、このコマンドに至るまでの解説です。
 
 ## メタデータを全て削除
 
-ImageMagick だと strip でメタデータを全て削除できます。
+ImageMagick は -strip オプションで画像のメタデータを全て削除できます。
 検索すると見つかるのは大体この方法です。
 
 ```
@@ -79,18 +79,35 @@ $ convert in.jpg -auto-orient out.jpg
 <center>
   <img src="../fig2.png" /> <br />
   ↓ ↓ ↓ <br>
-  <img src="../fig5-auto-orient.png" />
+  <img src="../fig5.2-auto-orient.png" />
 </center>
 
 こうすれば、その後で strip をしても大丈夫です。
+
+
+```
+$ convert in.jpg -auto-orient -strip out.jpg
+```
+<center>
+  <img src="../fig2.png" /> <br />
+  ↓ ↓ ↓ <br>
+  <img src="../fig5-auto-orient.png" />
+</center>
+
 
 ただし、-strip をすると ICC プロファイルまで削除してしまいます。
 
 ## ICC プロファイル
 
+ICC プロファイルを単純に消すと色味が変わる可能性があります。
+対処としては以下の２つの方法が考えられます。
+
+- ICC プロファイルを残す (最近の環境)
+- 画像のピクセルデータ自体の RGB 値を ICC プロファイルの色空間から sRGB 相当の数値に変換して、ICC プロファイルを削除する
+
 ### 理想的な環境
 
-画像ファイルの閲覧環境がきちんと ICC プロファイルに対応しているのであれば、このコマンドで、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残せます。
+今時の PC 環境や、新し目のスマートフォンであれば、ICC プロファイルに対応するカラーマネジメントいシステムが搭載されているので、このコマンドで、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残すと良いです。
 
 ```
 $ convert in.jpg +profile '!icc,*' out.jpg
@@ -98,7 +115,7 @@ $ convert in.jpg +profile '!icc,*' out.jpg
 
 ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除する命令です。* (ワイルドカード)指定で全て削除を意味しますが、!icc をつける事で ICC だけ残せます。
 
-単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、こうすると良いでしょう。
+単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、こちらの方が良いでしょう。(お勧めコマンド)
 
 ```
 $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
@@ -109,11 +126,7 @@ $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
   <img src="../fig3-final.png" />
 </center>
 
-今時の PC 環境や、新し目のスマートフォンでも恐らくこれで大丈夫です。
-
-### 古い環境
-
-## ICC プロファイルを無視する環境対策
+### ICC プロファイルを無視する環境
 
 古い PC やスマートフォンだと、ICC プロファイルで RGB を補正せずそのままモニタに出力する環境があります。具体的にはモニタが sRGB なら sRGBとして、AdobeRGB なら AdobeRGB として RGB を解釈して表示します。
 
