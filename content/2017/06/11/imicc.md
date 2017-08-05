@@ -26,15 +26,16 @@ JPEG ファイルは画像データ以外にメタデータとして、プライ
 - カメラの機種、レンズ。
 - カメラの撮影設定詳細。露光とか
 - サムネール画像 (上書き保存前の画像の事もある。。こわい。。)
+- その他諸々。。。
 
 JPEG 画像を不特定多数に公開する時は、これらを削除する方が良いでしょう。
-尚、大手の画像投稿サービスであれば、少なくとも GPS 情報は自動で削除してくれるはずです。
+尚、大手の画像投稿サービスであれば、少なくとも GPS 情報は自動で削除してくれるはずです。(自宅の住所を全世界に公開するのは怖すぎます)
 
 # ImageMagick で JPEG メタデータを削除
 
 ## お勧めコマンド
 
-完璧な方法は無いのは後述しますが、先に結論を言うと、このコマンドがお勧めです。
+完璧な方法が無いのは後述しますが、先に結論を言うと、このコマンドがお勧めです。
 
 ```
 $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
@@ -67,11 +68,11 @@ $ convert in.jpg -strip out.jpg
 
 ## Exif Orientation
 
-撮影した時の向きを Exif の Orientation タグに記録して、表示の時に回転させる方式です。画像のメタデータを単純に削除すると、今までと画像の表示する向きが変わってしまう事があります。
+撮影時にカメラの向きを Exif の Orientation タグに記録して、表示する際に画像を回転させる方式です。画像のメタデータを単純に削除すると、画像を表示する向きが意図しない方向に変わってしまう事があります。
 
 <img src="../digicame2.png">
 
-ImageMagick には Orientationタグに応じて画像を回転させて、このタグを削除するオプションがあります。
+ImageMagick には Orientationタグに応じて画像データ自体を回転させた上で、このタグを削除するオプションがあります。
 
 ```
 $ convert in.jpg -auto-orient out.jpg
@@ -82,7 +83,7 @@ $ convert in.jpg -auto-orient out.jpg
   <img src="../fig5.2-auto-orient.png" />
 </center>
 
-こうすれば、その後で strip をしても大丈夫です。
+こうしておけば、その後で -strip をしても大丈夫です。
 
 ```
 $ convert in.jpg -auto-orient -strip out.jpg
@@ -94,7 +95,7 @@ $ convert in.jpg -auto-orient -strip out.jpg
   <img src="../fig5-auto-orient.png" />
 </center>
 
-ただし、-strip をすると ICC プロファイルまで削除してしまいます。
+ただし、-strip をすると ICC プロファイルまで削除してしまう問題があります。
 
 ## ICC プロファイル
 
@@ -102,11 +103,11 @@ ICC プロファイルを単純に消すと色味が変わる可能性があり�
 対処としては以下の２つの方法が考えられます。
 
 - メタデータのうち ICC プロファイルだけ残す (最近の環境向け)
-- 画像のピクセルデータ自体の RGB 値を ICC プロファイルの色空間から sRGB 相当の数値に変換して、ICC プロファイルを削除する (古い環境向け)
+- 画像のピクセルデータ自体の RGB 値を ICC プロファイルの色空間から sRGB 相当の RGB 値に変換した上で、ICC プロファイルを削除する (古い環境向け)
 
 ### 最近の環境
 
-今時の PC 環境や、新し目のスマートフォンであれば、ICC プロファイルに対応するカラーマネジメントいシステムが搭載されているので、このコマンドで、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残すと良いです。
+今どきの PC 環境や新し目のスマートフォンであれば ICC プロファイルに対応したカラーマネジメントシステムが搭載されているはずなので、Exif 等の余計なメタデータを削除しつつ、ICC プロファイルだけ残すと良いです。
 
 ```
 $ convert in.jpg +profile '!icc,*' out.jpg
@@ -117,9 +118,9 @@ $ convert in.jpg +profile '!icc,*' out.jpg
   <img src="../fig3.2-prefinal.png" />
 </center>
 
-ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除する命令です。* (ワイルドカード)指定で全て削除を意味しますが、!icc をつける事で ICC だけ残せます。
+ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除するオプションです。* (ワイルドカード)指定で全て削除しますが、!icc をつける事で ICC だけ残せます。
 
-単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、こちらの方が良いでしょう。(お勧めコマンド)
+また、単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、-auto-orient も付けた方が良いでしょう。
 
 ```
 $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
@@ -130,11 +131,13 @@ $ convert in.jpg -auto-orient +profile '!icc,*' out.jpg
   <img src="../fig3-final.png" />
 </center>
 
+これが冒頭で紹介したお勧めコマンドです。
+
 ### 古い環境 (ICC プロファイルが無視される場合)
 
-古い PC やスマートフォンだと、ICC プロファイルで RGB を補正せずそのままモニタに出力する環境があります。具体的にはモニタが sRGB なら sRGBとして、AdobeRGB なら AdobeRGB として RGB を解釈して表示します。
+古い PC やスマートフォンだと、ICC プロファイルで RGB を補正せずそのままモニタに出力する環境があります。具体的にはモニタが sRGB なら sRGBとして、AdobeRGB なら AdobeRGB として RGB の色を表示します。
 
-このケースへの完璧な対策はありませんが、世の中のディスプレイは sRGB 対応が多いので、sRGB の RGB に変換し、sRGB の ICC プロファイルを埋め込むのが無難です。
+このケースへの完璧な対策はありませんが、世の中のディスプレイは sRGB 対応が多い事を考慮すると、画像データを埋め込まれた ICC プロファイルの色空間から sRGB 相当の RGB 値に変換した上で、sRGB の ICC プロファイルを埋め込むのが無難です。
 
 ```
 $ convert in.jpg -auto-orient +profile '!icc,*' -profile sRGB.icc out.jpg
@@ -145,11 +148,11 @@ $ convert in.jpg -auto-orient +profile '!icc,*' -profile sRGB.icc out.jpg
   <img src="../fig6-auto-orient-srgb.png" />
 </center>
 
-AdobeRGB  や P3 で撮影した画像だと sRGB の色域に押し込められて犠牲になる色も出ますが、どのみち古い環境だと表示できない事が多いと思って諦めるのも手です。
+AdobeRGB  や P3 で撮影した画像だと sRGB の色域に押し込められて犠牲になる色も出ますが、どのみち古い環境だと表示できない事が多いと思って妥協するという状況になります。
 
 # 最後に
 
-これら以外にも DCF オプション色空間という規格ががあり、これでも色空間を指定できるのですが、今回は割愛させて下さい。
+これら以外にも DCF オプション色空間という規格があり、これでも色空間を指定できるのですが、今回は割愛させて下さい。
 
 # 参考URL
 
