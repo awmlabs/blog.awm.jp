@@ -6,19 +6,30 @@ draft = false
 tags = ["ICC", "JPEG"]
 +++
 
-# ICC 操作コマンド
+# はじめに
+
+
+このエントリの続きです。
+
+-  ImageMagick で ICC プロファイルを扱う #2 コマンド実行例
+   - http://blog.awm.jp/2017/06/10/imicc/
+
+JPEG のメタデータを消す時に ICC プロファイルを残す方法で、タイトルが不適切だったので、タイトルに合った解説を作りました。
+
+# ImageMagick で ICC を操作する
+
+JPEG ファイルは ICC プロファイルを埋め込めます。ImageMagick でその ICC プロファイルを操作するコマンドについて整理しました。
 
 ## 存在チェック (check)
 
-
-### ICC が入っている場合
+### ICC プロファイルが入っている場合
 ```
 % identify -format "%[profiles]\n" test.jpg
 icc
 ```
 <center> <img src="../fig1.png" /> </center>
 
-### ICC が入っていない場合
+### ICC プロファイルが入っていない場合
 ```
 % identify -format "%[profiles]\n" test2.jpg
 identify: unknown image property "%[profiles]" @ warning/property.c/InterpretImageProperties/3888.
