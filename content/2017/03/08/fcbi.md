@@ -479,7 +479,7 @@ if (v1 < v2) { // v1:abs(l1 - l4),  v2:abs(l2 - l3)
 
 こちらの方が本質的な問題ですが、星空のように眩しい点が沢山ある時に勝手に繋がる事があります。
 
-<img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.5.png" align="top"/>(改造後)
+<img src="../star01.jpg" align="center"/> => <img src="../star02-v1.0.png" align="top"/>(改造前) <span style="padding:1em;"> </span> <img src="../star02-v1.4.png" align="top"/>(改造後)
 
 ただ、元の写真に無視できないレベルの歪みがあるので、高精度な写真だとまた話が違うかもしれません。
 
