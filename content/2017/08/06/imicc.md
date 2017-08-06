@@ -12,7 +12,7 @@ tags = ["ICC", "JPEG"]
 このエントリの続きです。
 
 -  ImageMagick で ICC プロファイルを扱う #2 コマンド実行例
-   - http://blog.awm.jp/2017/06/10/imicc/
+   - http://blog.awm.jp/2017/06/11/imicc/
 
 JPEG のメタデータを消す時に ICC プロファイルを残す方法の図解であって、タイトルが不適切だったので、タイトルに合った解説を作りました。
 
