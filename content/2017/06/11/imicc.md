@@ -88,7 +88,7 @@ $ convert in.jpg -auto-orient out.jpg
   <img src="../fig5.2-auto-orient.png" />
 </center>
 
-こうしておけば、その後で -strip をしても大丈夫です。
+こうしておけば、その後で -strip をしても(向きに関しては)大丈夫です。
 
 ```
 $ convert in.jpg -auto-orient -strip out.jpg
@@ -123,7 +123,7 @@ $ convert in.jpg +profile '!icc,*' out.jpg
   <img src="../fig3.2-prefinal.png" />
 </center>
 
-ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除するオプションです。* (ワイルドカード)指定で全て削除しますが、!icc をつける事で ICC だけ残せます。
+ImageMagick はメタデータを profile というカテゴリで管理していて、+profile はそのメタデータを削除するオプションです。* (ワイルドカード)指定で全て削除しますが、!icc をつける事で ICC プロファイルだけ残せます。
 
 また、単純に Exif を削除すると Orientation の値次第で画像の向きが変わってしまうので、-auto-orient も付けた方が良いでしょう。
 

@@ -10,7 +10,7 @@ tags = ["ICC", "JPEG"]
 
 前置きは要らない。ImageMagick コマンドの実行例を知りたいという人は、次のエントリをどうぞ。
 
-- ImageMagick で ICC プロファイルを扱う #2 コマンド実例行
+- ImageMagick で ICC プロファイルを扱う #2 コマンド実例行 〜 JPEG のメタデータ削除
    - http://blog.awm.jp/2017/06/11/imicc/
 
 尚、当エントリでは ImageMagick の使い方は一切解説しません。
