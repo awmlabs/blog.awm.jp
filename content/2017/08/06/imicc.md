@@ -80,3 +80,8 @@ icc
 - JPEG に ICC プロファイルが入っている場合 > ICC プロファイルを差し替えると同時に、画像データの RGB値を、元の ICC から新しい ICC 相当に補正する。
 
 といったところが注意点で、他は素直な使い方だと思います。
+
+# 参考 URL
+
+- RGB画像をCMYKに変換する（ImageMagick）
+   - http://blog.livedoor.jp/yamma_ma/archives/3368542.html
