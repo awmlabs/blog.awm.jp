@@ -17,7 +17,7 @@ tags = ["ICC", "JPEG"]
 
 ImageMagick を使った ICC プロファイルの操作については、以下のエントリをどうぞ。(タイトルが不適切だったので、タイトルにあったエントリを作りました)
 
--  ImageMagick で ICC プロファイルを扱う #1 前置き
+-  ImageMagick で ICC プロファイルを扱う #3 コマンド解説
    - http://blog.awm.jp/2017/08/06/imicc/
 
 # JPEG メタデータ
