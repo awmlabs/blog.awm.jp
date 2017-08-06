@@ -1,6 +1,6 @@
 +++
 date = "2017-06-11T01:13:05+09:00"
-title = "ImageMagick で ICC プロファイルを扱う #2 コマンド実行例"
+title = "ImageMagick で ICC プロファイルを扱う #2 コマンド実行例 〜  JPEG のメタデータ削除"
 draft = false
 categories = ["ImageMagick"]
 tags = ["ICC", "JPEG"]
@@ -13,7 +13,12 @@ tags = ["ICC", "JPEG"]
 -  ImageMagick で ICC プロファイルを扱う #1 前置き
    - http://blog.awm.jp/2017/06/10/imicc/
 
-本エントリでは、ImageMagick コマンドの具体的な使い方を説明します。
+本エントリでは、ImageMagick コマンドで JPEG のメタデータを消す時の ICC プロファイルへの配慮について説明します
+
+ImageMagick を使った ICC プロファイルの操作については、以下のエントリをどうぞ。(タイトルが不適切だったので、タイトルにあったエントリを作りました)
+
+-  ImageMagick で ICC プロファイルを扱う #1 前置き
+   - http://blog.awm.jp/2017/08/06/imicc/
 
 # JPEG メタデータ
 
