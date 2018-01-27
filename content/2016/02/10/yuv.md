@@ -36,6 +36,23 @@ $ convert orig.jpg -sampling-factor "2x2,1x1,1x1" yuv420.jpg
 $ convert orig.jpg -sampling-factor "4x4,1x1,1x1" yuv410.jpg # yuv9
 ```
 
+### もう一つの YUV 指定方法
+
+もっと直接的にも指定できます。ただし、YUV9 は表現できなさそうです。
+
+```
+$ convert orig.jpg -sampling-factor 4:4:4 yuv444.jpg
+$ convert orig.jpg -sampling-factor 4:2:0 yuv422.jpg
+$ convert orig.jpg -sampling-factor 4:1:1 yuv411.jpg
+$ convert orig.jpg -sampling-factor 4:4:0 yuv440.jpg
+$ convert orig.jpg -sampling-factor 4:2:0 yuv420.jpg
+$ convert orig.jpg -sampling-factor 4:1:0 yuv410.jpg # yuv9
+% identify -format "%f %[jpeg:sampling-factor]\n" popu-unity-410.jpg
+popu-unity-410.jpg 4x2,1x1,1x1
+```
+
+本来、4:1:0 のように :0 を指定すれば縦方向に1/2になる訳で、これだと縦の 1/4 が表現できません。
+
 # YUVabc の種類
 
 よく見る表現として、YUV444 、YUV422 の２つがあります。
