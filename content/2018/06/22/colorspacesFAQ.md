@@ -11,43 +11,72 @@ draft= false
 - http://www.ilkeratalay.com/colorspacesfaq.php
 
 
-> Original document can be reached at: http://www.rmbwoc.com/vidpage/color_faq.html. Document background is normalized to 'White' so that it's easier to read now :) 
+> Original document can be reached at: http://www.rmbwoc.com/vidpage/color_faq.html. Document background is normalized to 'White' so that it's easier to read now :)
+
+元のドキュメントは  http://www.rmbwoc.com/vidpage/color_faq.html から辿れます。
+ドキュメントの背景が白を基準にしているので、今は読み易いです :-)
 
 ## 1 - Purpose of this FAQ
 
 
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-
+私はビデオドメイン（ビデオカード、画像ファイルフォーマットなど）で長年の研究を行っており、そのことに関する情報が必要なすべての人々に提供することを決めました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
+私は、ビデオ作品のFAQ（Frequently Asked Questions）の一部をカバーすることを目指しています。それは、色、特に色空間に関するいくつかの（有用な）情報を提供することを意味します。
+
 > If you have some informations to ask/add to this document, please read section 11.
+
+この文書を尋ねる/追加する情報がある場合は、セクション11を参照してください。
 
 ## 2 - Some definitions
 
 
 > Color is defined as an experience in human perception.
 
+色は人間の知覚における経験として定義されます。
+
 > In physics terms, a color is the result of an observed light on the retina of the eye.
+
+物理学用語としての色は、眼の網膜上の観察された光の結果です。
 
 > The light must have a wavelength in the range of 400 to 700 nm.
 
+光は、400〜700nmの範囲の波長を持たなければなりません。
+
 > The radient flux of observed light at each wavelength in the visible spectrum is associated to a Spectral Power Distribution (SPD).
+
+可視スペクトルの各波長における観測光の放射束はスペクトルパワー配分（SPD）に関連します。
 
 > A SPD is created by cascading the SPD of the light source with the Spectral Reflectance of the object in the scene.
 
+SPDは、シーン内のオブジェクトのスペクトル反射率で光源のSPDをカスケード接続することによって作成されます。
+
 > In addition the optics of any imaging device will have an effect.
+
+さらに、任意の撮像装置の光学系がエフェクトを持ちます。
 
 > Strictly though, color is a visual sensation, so a `color' is created when we observe a specific SPD.
 
+厳密には、色は視覚的感覚であるため、特定のSPDを観察すると「色」が作成されます。
+
 > We see color by means of cones in the retina.
+
+我々は、網膜の錐体(cones)によって色を見ます。
 
 > There are three types of cones sensitive to wavelengths that approximately correspond to red, green and blue lights.
 
+赤、緑、青の光にだいたい対応する波長に感応する3種類の錐体があります。
+
 > Together with information from rod cells (which are not sensitive to color) the cone information is encoded and sent to higher brain centres along the optic nerve.
 
+錐体の情報は、（色に敏感でない）桿体細胞からの情報と共に、符号化され、視神経を辿ってより高位の脳の中心に送られます。
+
 > The encoding, known as opponent process theory, consists of three opponent channels, these are:
+
+opponent process theory(反対過程理論)として知られるこの符号化は、3つの反対チャンネルで構成されます。
 
 ```
 	Red     -       Green
@@ -58,75 +87,154 @@ draft= false
 
 > Note: Actually, recent studies show that eyes use addtionnal cone types. (cf. "La Recherche", n.272, january, 1995)
 
+注：実際には、目は加色の錐体タイプだと最近の研究では示しています。(参照. "La Recherche", n.272, january, 1995)
+
 > This is different to tri-chromatic theory (e.g. Red, Green, Blue additive color) which you may be used to, but when we describe colors we do not say "it is a reddy green" or "that's a bluey yellow".
+
+これはあなた方が使っていそうな3色理論（例えば、赤、緑、青の加法色）とは異なりますが、色を記述するとき、「それは赤い緑です」または「青い黄です」とは言いません。
 
 > Perceptually we require three attributes to describe a color.
 
+知覚的に、我々が色を記述するのに3つの属性を要求します。
+
 > Generally any three will do, but there need's to be three.
+
+？？？
 
 > For human purpose color descriptions these attributes have been made by the CIE recommendations.
 
+人が目的とする色を記述する、それらの属性はCIE勧告により作成されています。
+
 > (CIE is a French acronym for Commission Internationale de l'Eclairage.)
+
+(CIE は国際照明委員会(Commission Internationale de l'Eclairage) のフランス語の頭文字です）
 
 > The recommendations of the CIE are as follows:
 
+CIE の勧告は次のとおりです。
+
 > Brightness.
-The attribute of a visual sensation according to which an area appears to exhibit more or less light.
+
+輝度(Brightness)
+
+> The attribute of a visual sensation according to which an area appears to exhibit more or less light.
+
+ある領域での光の多寡を示すような視覚感覚の属性です。
 
 > [You can blurry or enhance an image by modifying this attribute.]
 
+[この属性を変更すると、画像がぼやけたり強調されたりすることがあります。]
+
 > Hue.
+
+色相(Hue)
 
 > The attribute of a visual sensation according to which an area appears to be similar to one, or to proportions of two, of the perceived colors red, yellow, green and blue.
 
+赤、黄、緑、青の知覚される色の1つまたは2つの割合に似た視覚感覚の属性。
+
 > Colorfulness.
 
- The attribute of a visual sensation according to which an area appears to exhibit more or less of its hue.
+彩度(Colorfulness)
+
+> The attribute of a visual sensation according to which an area appears to exhibit more or less of its hue.
+
+ある程度
+
+ある領域での色相の多寡を示すような視覚感覚の属性です。
 
 > [You can go from a sky blue to a deep blue by changing this attribute.]
-So, a color is a visual sensation produced by a stimulus which is a specific SPD.
+
+[この属性を変更することで、空色から濃い青まで動かせます]
+
+> So, a color is a visual sensation produced by a stimulus which is a specific SPD.
+
+したがって、色は特定のSPDである刺激によって生成される視覚的感覚です。
 
 > It should be noted however, that two different SPD's may produce the same visual sensation - an effect known as metarmerism.
 
+しかしながら、2つの異なる SPD が同じ視覚的感覚を生み出し得るす事がある事に注目すべきです。これは、メタメリズム(metarmerism) として知られている効果です。
+
 > What is a color space?
+
+色空間とは何でしょう？
 
 > A color space is a method by which we can specify, create and visualise color.
 
+色空間は、色を特定し、作成、視覚化する手段です。
+
 > As human's, we may define a color by its attributes of brightness, hue and colorfulness.
+
+人のように、輝度、色相、彩度の属性によって色を定義することができます。
 
 > A computer will define a color in terms of the excitations of red, green and blue phosphors on the CRT faceplate.
 
+コンピュータは、CRT 画面上の赤色、緑色および青色の蛍光体の励起表現で色を定義します。
+
 > A printing press defines a color in terms of the reflectance and absorbance of cyan, magenta, yellow and black inks on the paper.
+
+印刷機は、用紙上のシアン、マゼンタ、イエローおよびブラックのインクの反射率および吸光度によって色を定義します。
 
 > If we imagine that each of the three attributes used to describe a color are axes in a three dimensional space then this defines a color space.
 
+色を記述するために使用する3つの属性の各々が3次元空間の軸であると考えれば、それが色空間を定義します。
+
 > The colors that we can percieve can be represented by the CIE system, other color spaces are subsets of this perceptual space.
+
+私たちが見ることができる色は、CIEシステムで表現することができ、他の色空間は、この知覚空間のサブセットです。
 
 > For instance RGB color space, as used by television displays, can be visualised as a cube with red, green and blue axes.
 
+例えば、テレビのディスプレイが使用する RGB色空間は、赤、緑および青の軸を持つ立方体として視覚化出来ます。
+
 > This cube lies within our perceptual space, since the RGB space is smaller and represents less colors than we can see.
+
+この立方体は、RGB空間が私たちが見る事の出来る色より小さく、より少ない表現で、知覚空間内にあります。
 
 > CMY space would be represented by a second cube, with a different orientation and a different position within the perceptual space.
 
+CMY空間は、知覚空間内の異なる向きおよび異なる位置を持つ第2の立方体によって表されます。
+
 > So, a color space is a mathematical representation of our perceptions.
+
+それゆえ、色空間は我々の知覚の数学的表現です。
 
 > It's useful to think so because computers are in fond of numbers and equations...
 
+コンピュータが数や方程式等を好むので、その考えは有用です。
+
 > Why is there more than one color space?
+
+なぜ1つ以上の色空間があるのでしょう？
 
 > Different color spaces are better for different applications, some equipment has limiting factors that dictate the size and type of color space that can be used.
 
+異なる色空間はその応用先ごとに優れていますが、利用可能な色空間のサイズと種類を制限する要因があります。
+
 > Some color spaces are perceptually linear, i.e. a 10 unit change in stimulus will produce the same change in perception wherever it is applied.
+
+いくつかの色空間は知覚的に線形です。つまり、刺激の10単位の変化は、それをどこに適用しても同じ知覚変化を生じます。
 
 > Many color spaces, particularly in computer graphics are not linear in this way.
 
+多くの色空間、特にコンピュータグラフィックスは、そのような線形ではありません。
+
 > Some color spaces are intuitive to use, i.e. it is easy for the user to navigate within them and creating desired colors is relativly easy.
+
+一部の色空間は直感的に利用できます。すなわち、ユーザーが簡単にナビゲートが出来て、求める色を作るのが比較的簡単です。
+
 
 > Finally, some color spaces are device dependent while others are not (so called device independent).
 
+最後に、一部の色空間はデバイスに依存し、それ以外の色空間は依存しません。（いわゆるデバイス非依存）。
+
 > What's the difference between device dependent and device independent?
 
+デバイス依存とデバイス非依存の違いは何ですか？
+
 > A device dependent color space is a color space where the color produced depends on the equipment and the set-up used to produce it.
+
+デバイス依存の色空間は、装置(デバイス)および設定に依存して色が生成される色空間である。
 
 > For example the color produced using pixel values of [rgb = 250,134,67] will alter as you change the brightness and contrast on your display.
 
