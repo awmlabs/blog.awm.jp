@@ -21,18 +21,17 @@ draft= false
 
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-私はビデオドメイン（ビデオカード、画像ファイルフォーマットなど）で長年の研究を行っており、そのことに関する情報が必要なすべての人々に提供することを決めました。;-)
+私はビデオの領域（ビデオカード、画像ファイルフォーマットなど）で長年研究を行っており、それに関する情報を必要とする全ての人々に提供することにしました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
-私は、ビデオ作品のFAQ（Frequently Asked Questions）の一部をカバーすることを目指しています。それは、色、特に色空間に関するいくつかの（有用な）情報を提供することを意味します。
+私は、ビデオ作品のFAQ（Frequently Asked Questions）の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの（有用な?）情報を提供することを意味します。
 
 > If you have some informations to ask/add to this document, please read section 11.
 
 この文書を尋ねる/追加する情報がある場合は、セクション11を参照してください。
 
 ## 2 - Some definitions
-
 
 > Color is defined as an experience in human perception.
 
@@ -48,11 +47,11 @@ draft= false
 
 > The radient flux of observed light at each wavelength in the visible spectrum is associated to a Spectral Power Distribution (SPD).
 
-可視スペクトルの各波長における観測光の放射束はスペクトルパワー配分（SPD）に関連します。
+可視スペクトルの各波長における観測光の放射束は スペクトルパワー分布（SPD）に関連します。
 
 > A SPD is created by cascading the SPD of the light source with the Spectral Reflectance of the object in the scene.
 
-SPDは、シーン内のオブジェクトのスペクトル反射率で光源のSPDをカスケード接続することによって作成されます。
+SPD は、シーン内のオブジェクトのスペクトル反射率で光源の SPD をカスケードする事で生成されます。
 
 > In addition the optics of any imaging device will have an effect.
 
@@ -60,7 +59,7 @@ SPDは、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > Strictly though, color is a visual sensation, so a `color' is created when we observe a specific SPD.
 
-厳密には、色は視覚的感覚であるため、特定のSPDを観察すると「色」が作成されます。
+厳密には色は視覚的感覚であるため、特定のSPDを観察すると「色」が作成されます。
 
 > We see color by means of cones in the retina.
 
@@ -72,7 +71,7 @@ SPDは、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > Together with information from rod cells (which are not sensitive to color) the cone information is encoded and sent to higher brain centres along the optic nerve.
 
-錐体の情報は、（色に敏感でない）桿体細胞からの情報と共に、符号化され、視神経を辿ってより高位の脳の中心に送られます。
+錐体の情報は、（色に敏感でない）桿体細胞からの情報と共に、符号化され、視神経を通り高次脳の中心に送られます。
 
 > The encoding, known as opponent process theory, consists of three opponent channels, these are:
 
@@ -87,11 +86,11 @@ opponent process theory(反対過程理論)として知られるこの符号化�
 
 > Note: Actually, recent studies show that eyes use addtionnal cone types. (cf. "La Recherche", n.272, january, 1995)
 
-注：実際には、目は加色の錐体タイプだと最近の研究では示しています。(参照. "La Recherche", n.272, january, 1995)
+注：実際には、目は加色の錐体タイプだと最近の研究で示されています。(参照. "La Recherche", n.272, january, 1995)
 
 > This is different to tri-chromatic theory (e.g. Red, Green, Blue additive color) which you may be used to, but when we describe colors we do not say "it is a reddy green" or "that's a bluey yellow".
 
-これはあなた方が使っていそうな3色理論（例えば、赤、緑、青の加法色）とは異なりますが、色を記述するとき、「それは赤い緑です」または「青い黄です」とは言いません。
+これはあなた方が使っているであろう 3色理論（例えば、赤、緑、青の加法色）とは異なりますが、色を記述するとき、「それは赤い緑です」または「青い黄です」とは言いません。
 
 > Perceptually we require three attributes to describe a color.
 
@@ -234,59 +233,109 @@ CMY空間は、知覚空間内の異なる向きおよび異なる位置を持�
 
 > A device dependent color space is a color space where the color produced depends on the equipment and the set-up used to produce it.
 
-デバイス依存の色空間は、装置(デバイス)および設定に依存して色が生成される色空間である。
+デバイス依存の色空間は、装置(デバイス)および設定に依存して色が生成される色空間です。
 
 > For example the color produced using pixel values of [rgb = 250,134,67] will alter as you change the brightness and contrast on your display.
 
+例えば、[rgb = 250,134,67] のピクセル値を使って生成した色は、ディスプレイ上の明るさやコントラストを変更すると別のものになります。
+
 > In the same way if you change your monitor the red, green and blue phosphors will have slightly different SPD's and the color produced will change.
+
+同じように、モニターを替えると、赤、緑、青の蛍光体はわずかに異なる SPD を持ち、生成する色は変化します。
 
 > Thus RGB is a color space that is dependent on the system being used, it is device dependent.
 
+したがって、RGBは、使用されるシステムに依存する色空間であり、デバイスに依存します。
+
 > A device independent color space is one where the coordinates used to specify the color will produce the same color wherever they are applied.
+
+置に依存しない色空間は、色の指定に使用する座標が適用されるどこでも同じ色を生成するでしょう。
 
 > An example of a device independent color space (if it has been implemented properly) is the CIE L*a*b* color space (known as CIELab).
 
+デバイスに依存しない色空間 (適切に実装されている場合) の例は、CIE L*a*b 色空間です。（CIELab として知られます）
+
 > This is based on the HVS (Hue/Value/Saturation) as described by the CIE system (see below to know what CIE stands for).
+
+これは、CIEシステムで記述されている HVS（Hue(色相)/Value(値)/Saturation(彩度)）に基づきます。（CIEが何を意味するかを知るには以下を参照）。
 
 > Another way of looking a device dependancy is to imagine our RGB cube within our perceptual color space.
 
+デバイスの依存性を調べるもう1つの方法は、知覚的色空間内のRGB立方体をイメージすることです。
+
 > We define a color by the values on the three axes.
+
+我々は、3つの軸の値によって色を定義します。
 
 > However the exact color will depend on the position of the cube within the perceptual color space.
 
+しかしながら、正確な色は知覚的色空間内の立方体の位置に依存します。
+
 > Move the cube (by changing the set-up) and the color will change even if the RGB values remain the same.
+
+立方体を（設定を変更して）動かすと、RGB値 が変わらなくても色は変わります。
 
 > Some device dependent color spaces have their position within CIE space defined These are known as device callibrated color spaces and are a kind of half way house between dependent and independent color spaces.
 
+デバイスに依存する色空間の中には、定義された CIE 空間内での位置があります。これらは device callibrated(校正された) 色空間として知られており、依存する空間と非依存空間の中間にあります。
+
 > For example, a graphics file that contains colorimetric information, i.e. the white point, transfer functions, and phosphor chromaticities, would enable device dependent RGB data to be modified for whatever device was being used - i.e. callibrated to specific devices.
+
+例えば、測色情報、すなわち白色点、伝達関数、および燐光体の色度を含むグラフィックスファイルは、使用する装置（すなわち、特定の装置に合わせた）に対してデバイス依存 RGB データを修正することが出来ます。
 
 > In other words, if you have a device independent color space, you must adapt your device as defined in the color space and not the color space to the device.
 
+言い換えると、デバイス非依存の色空間を持っている場合、そのデバイス向け色空間とそうでない色空間の定義をもってデバイスを適合させるべきです。
+
 > What is a color gamut?
+
+色域(color gamut)とは何でしょう？
 
 > A color gamut is the boundary of the color space.
 
+色域(color gamut)は色空間の境界です。
+
 > Gamut's are best shown and evaluated using the CIE system, a system we will see later and in section 8.3.
+
+Gamut は、CIEシステムを使って最もよく示され評価されます。このシステムは、後のセクション8.3 で分かります。
 
 > What color space should I use?
 
+どの色空間を使用すべきでしょう？
+
 > That depends on what you want to do, but here is a list of the pros and cons of some of the more common, computer related, color spaces - we will see in section 8 how to convert the (most common) color spaces between themselves and which references to use - :
+
+それはあなたのやりたい事次第ですが、コンピュータ関連の色空間をより一般化したものの幾つかのメリット、デメリットのリストがこれです。
 
 > RGB (Red Green Blue)
 
+RGB (赤 緑 青)
+
 > Additive color system based on trichromatic theory, commonly used by CRT displays where proportions of excitation of red, green and blue emmiting phosphors produce colors when visually fused.
 
+CRTディスプレイで一般的に使われる3色理論に基づく加色システムで、赤、緑および青色発光蛍光体の励起の割合が視覚的に融合して色を生成する、
+
 > Easy to implement, non linear, device dependent, unintuitive, common (used in television cameras, computer graphics, etc).
+
+実装が容易、非線形、デバイス依存、非直感的、一般的 (テレビカメラ、コンピュータグラフィックス等で使用)
 
 > CMY(K) (Cyan Magenta Yellow (Black))
 
 > Subtractive color.
 
+減色混合
+
 > Used in printing and photography.
+
+印刷や写真撮影に使われます。
 
 > Printers often include the fourth component, black ink, to improve the color gamut (by increasing the density range), improving blacks, saving money and speeding drying (less ink to dry).
 
+プリンタはしばしば第4の成分で黒インクを含む、密度範囲の増加による)色域の改善、黒の改善、費用を節約、（乾かすインクを減らす事で）乾燥を速める
+
 > Fairly easy to implement, difficult to transfer *properly* from RGB (simple transforms are, well, simple), device dependent, non-linear, unintuitive.
+
+実装が簡単、RGBから正しく変換するのは難しい（簡易的な変換はまぁ簡単です）、デバイス依存、非線形で直観的では無いです。
 
 > HSL (Hue Saturation and Lightness)
 
