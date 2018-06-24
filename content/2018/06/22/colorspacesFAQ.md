@@ -21,11 +21,11 @@ draft= false
 
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-私はビデオの領域（ビデオカード、画像ファイルフォーマットなど）で長年研究を行っており、それに関する情報を必要とする全ての人々に提供することにしました。;-)
+私はビデオの領域 (ビデオカード、画像ファイルフォーマットなど) で長年研究を行っており、それに関する情報を必要とする全ての人々に提供することにしました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
-私は、ビデオ作品のFAQ（Frequently Asked Questions）の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの（有用な?）情報を提供することを意味します。
+私は、ビデオ作品のFAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
 
 > If you have some informations to ask/add to this document, please read section 11.
 
@@ -47,7 +47,7 @@ draft= false
 
 > The radient flux of observed light at each wavelength in the visible spectrum is associated to a Spectral Power Distribution (SPD).
 
-可視スペクトルの各波長における観測光の放射束は スペクトルパワー分布（SPD）に関連します。
+可視スペクトルの各波長における観測光の放射束は スペクトルパワー分布 (SPD) に関連します。
 
 > A SPD is created by cascading the SPD of the light source with the Spectral Reflectance of the object in the scene.
 
@@ -71,7 +71,7 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > Together with information from rod cells (which are not sensitive to color) the cone information is encoded and sent to higher brain centres along the optic nerve.
 
-錐体の情報は、（色に敏感でない）桿体細胞からの情報と共に、符号化され、視神経を通り高次脳の中心に送られます。
+錐体の情報は、 (色に敏感でない) 桿体細胞からの情報と共に、符号化され、視神経を通り高次脳の中心に送られます。
 
 > The encoding, known as opponent process theory, consists of three opponent channels, these are:
 
@@ -90,7 +90,7 @@ opponent process theory(反対過程理論)として知られるこの符号化�
 
 > This is different to tri-chromatic theory (e.g. Red, Green, Blue additive color) which you may be used to, but when we describe colors we do not say "it is a reddy green" or "that's a bluey yellow".
 
-これはあなた方が使っているであろう 3色理論（例えば、赤、緑、青の加法色）とは異なりますが、色を記述するとき、「それは赤い緑です」または「青い黄です」とは言いません。
+これはあなた方が使っているであろう 3色理論 (例えば、赤、緑、青の加法色) とは異なりますが、色を記述するとき、「それは赤い緑です」または「青い黄です」とは言いません。
 
 > Perceptually we require three attributes to describe a color.
 
@@ -106,7 +106,7 @@ opponent process theory(反対過程理論)として知られるこの符号化�
 
 > (CIE is a French acronym for Commission Internationale de l'Eclairage.)
 
-(CIE は国際照明委員会(Commission Internationale de l'Eclairage) のフランス語の頭文字です）
+(CIE は国際照明委員会(Commission Internationale de l'Eclairage) のフランス語の頭文字です) 
 
 > The recommendations of the CIE are as follows:
 
@@ -225,7 +225,7 @@ CMY空間は、知覚空間内の異なる向きおよび異なる位置を持�
 
 > Finally, some color spaces are device dependent while others are not (so called device independent).
 
-最後に、一部の色空間はデバイスに依存し、それ以外の色空間は依存しません。（いわゆるデバイス非依存）。
+最後に、一部の色空間はデバイスに依存し、それ以外の色空間は依存しません。 (いわゆるデバイス非依存) 。
 
 > What's the difference between device dependent and device independent?
 
@@ -253,11 +253,11 @@ CMY空間は、知覚空間内の異なる向きおよび異なる位置を持�
 
 > An example of a device independent color space (if it has been implemented properly) is the CIE L*a*b* color space (known as CIELab).
 
-デバイスに依存しない色空間 (適切に実装されている場合) の例は、CIE L*a*b 色空間です。（CIELab として知られます）
+デバイスに依存しない色空間 (適切に実装されている場合) の例は、CIE L*a*b 色空間です。 (CIELab として知られます) 
 
 > This is based on the HVS (Hue/Value/Saturation) as described by the CIE system (see below to know what CIE stands for).
 
-これは、CIEシステムで記述されている HVS（Hue(色相)/Value(値)/Saturation(彩度)）に基づきます。（CIEが何を意味するかを知るには以下を参照）。
+これは、CIEシステムで記述されている HVS (Hue(色相)/Value(値)/Saturation(彩度)) に基づきます。 (CIEが何を意味するかを知るには以下を参照) 。
 
 > Another way of looking a device dependancy is to imagine our RGB cube within our perceptual color space.
 
@@ -273,7 +273,7 @@ CMY空間は、知覚空間内の異なる向きおよび異なる位置を持�
 
 > Move the cube (by changing the set-up) and the color will change even if the RGB values remain the same.
 
-立方体を（設定を変更して）動かすと、RGB値 が変わらなくても色は変わります。
+立方体を (設定を変更して) 動かすと、RGB値 が変わらなくても色は変わります。
 
 > Some device dependent color spaces have their position within CIE space defined These are known as device callibrated color spaces and are a kind of half way house between dependent and independent color spaces.
 
@@ -281,7 +281,7 @@ CMY空間は、知覚空間内の異なる向きおよび異なる位置を持�
 
 > For example, a graphics file that contains colorimetric information, i.e. the white point, transfer functions, and phosphor chromaticities, would enable device dependent RGB data to be modified for whatever device was being used - i.e. callibrated to specific devices.
 
-例えば、測色情報、すなわち白色点、伝達関数、および燐光体の色度を含むグラフィックスファイルは、使用する装置（すなわち、特定の装置に合わせた）に対してデバイス依存 RGB データを修正することが出来ます。
+例えば、測色情報、すなわち白色点、伝達関数、および燐光体の色度を含むグラフィックスファイルは、使用する装置 (すなわち、特定の装置に合わせた) に対してデバイス依存 RGB データを修正することが出来ます。
 
 > In other words, if you have a device independent color space, you must adapt your device as defined in the color space and not the color space to the device.
 
@@ -331,21 +331,31 @@ CRTディスプレイで一般的に使われる3色理論に基づく加色シ�
 
 > Printers often include the fourth component, black ink, to improve the color gamut (by increasing the density range), improving blacks, saving money and speeding drying (less ink to dry).
 
-プリンタはしばしば第4の成分で黒インクを含む、密度範囲の増加による)色域の改善、黒の改善、費用を節約、（乾かすインクを減らす事で）乾燥を速める
+プリンタはしばしば第4の成分で黒インクを含む、密度範囲の増加による)色域の改善、黒の改善、費用を節約、 (乾かすインクを減らす事で) 乾燥を速める
 
 > Fairly easy to implement, difficult to transfer *properly* from RGB (simple transforms are, well, simple), device dependent, non-linear, unintuitive.
 
-実装が簡単、RGBから正しく変換するのは難しい（簡易的な変換はまぁ簡単です）、デバイス依存、非線形で直観的では無いです。
+実装が簡単、RGBから正しく変換するのは難しい (簡易的な変換はまぁ簡単です) 、デバイス依存、非線形で直観的では無いです。
 
 > HSL (Hue Saturation and Lightness)
 
+SL (色相(Hue)、彩度(Saturation)、明度(Lightness))
+
 > This represents a wealth of similar color spaces, alternatives include HSI (intensity), HSV (value), HCI (chroma/colorfulness/intensity), HVC, TSD (hue saturation and darkness) etc etc.
+
+HSI (強度) 、HSV (値) 、HCI (色度(chroma)/彩度(colorfulness)/強度(intensity)) 、HVC、TSD (hue saturation そして darkness) などを含む類似の色空間が豊富にあります。
 
 > All these color spaces are non-linear transforms from RGB and thus, device dependent, non-linear but very intuitive.
 
+これらの色空間はすべて、RGB からの非線形変換で、デバイス依存、非線形ですが非常に直感的です。
+
 > In addition the seperation of the luminance component has advantages in image processing and other applications.
 
+加えて、輝度成分の分離は、画像処理および他の用途においてアドバンテージがあります。
+
 > (But take care, the complete isolation of the separate components will require a space optimised for your device. See later notes on CIE color spaces)
+
+（ただし注意する事として、別々のコンポーネントを完全に分離するのに、使っているデバイス用に最適化された空間が必要です。後述の CIE 色空間に関する注意事項を参照してください）
 
 > YIQ, YUV, YCbCr, YCC (Luminance - Chrominance)
 
