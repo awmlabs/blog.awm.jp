@@ -10,22 +10,20 @@ draft= false
 
 - http://www.ilkeratalay.com/colorspacesfaq.php
 
-
 > Original document can be reached at: http://www.rmbwoc.com/vidpage/color_faq.html. Document background is normalized to 'White' so that it's easier to read now :)
 
 元のドキュメントは  http://www.rmbwoc.com/vidpage/color_faq.html から辿れます。
-ドキュメントの背景が白を基準にしているので、今は読み易いです :-)
+ドキュメントの背景を白ベースにしている今は読み易いです :-)
 
 ## 1 - Purpose of this FAQ
 
-
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-私はビデオの領域 (ビデオカード、画像ファイルフォーマットなど) で長年研究を行っており、それに関する情報を必要とする全ての人々に提供することにしました。;-)
+私はビデオの領域 (ビデオカード、画像ファイル形式など) で長年研究を行っており、それらの情報を必要とする全ての人々に提供することにしました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
-私は、ビデオ作品のFAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
+私は、ビデオ作業の FAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
 
 > If you have some informations to ask/add to this document, please read section 11.
 
@@ -63,7 +61,7 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > We see color by means of cones in the retina.
 
-我々は、網膜の錐体(cones)によって色を見ます。
+我々は、網膜の錐体(cones)を使って色を見ます。
 
 > There are three types of cones sensitive to wavelengths that approximately correspond to red, green and blue lights.
 
@@ -75,7 +73,7 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > The encoding, known as opponent process theory, consists of three opponent channels, these are:
 
-opponent process theory(反対過程理論)として知られるこの符号化は、3つの反対チャンネルで構成されます。
+反対過程理論(opponent process theory)として知られるこの符号化は、3つの反対チャンネルで構成されます。
 
 ```
 	Red     -       Green
@@ -1667,3 +1665,212 @@ a) this results in RGB values from 0 to 346 (instead of the more usual 0 to 255)
 > (The conversions into grayscale or bi-level images are explained in the next section.) There are several means to do so.
 
 > I suggest you read the references given in comp.graphics FAQ stored on rtfm.mit.edu:/pub/usenet/news.answers/graphics/faq maintened by John T. Grieggs (grieggs@netcom.com)
+
+```
+   +---------------------------------+-----------------+
+    | Scheme                          | Luminancy level |
+    +---------------------------------+-----------------+
+    | Gray = Green                    |        1        |
+    | Gray = ITU (D65)                |        2        |
+    | Gray = Rec 709 (D65)            |        3        |
+    | Gray = Rec 601-1 (C illuminant) |        4        |
+    | Gray = (Red+Green+Blue)/3       |        5        |
+    +---------------------------------+-----------------+
+```
+
+> So softwares with Gray=Rec 709 (D65) produce a more dark picture than with Gray=Green. Even if you theorically lose many details with Gray=Green scheme, in fact, and with the 64-gray levels of a VGA card of a PC it is hard to distinguish the loss.
+
+### 9.3 - Gray scales to black and white
+
+> Usually, you need to convert a color picture into black and white for printer output device.
+
+> To do so, you must do it into two steps.
+
+> The first step is to convert your color picture into a gray level picture, as explained in section 9.2.>  In the second step you have to convert your grey level picture into a black and white picture.
+
+> This second stage can be done by several ways depending on your output device.
+
+> All the ways are based on the fact that human eye is unable to distinguish small displayed/printed informations.
+
+> So, if two points are very close to each other, they are mixed to a single point.
+
+> Of course, there is a limit from which your eye will be able to see a pattern.
+
+> That is why your output device must be as precise as possible.
+
+> The first way to produce monochrome pictures is the halftoning scheme.
+
+> In this scheme, a point is output as big as the input gray level is dark, and, at the opposite, a point is output as small as the input gray level is light.
+
+> The size of the output point can be produced by using more or less ink or by writting several dots closely in an aggregate but unable to distinguish as a pattern by the eye.
+
+> The rules to make aggregates are given as follows:
+
+> Two aggregates of two successive gray scales must differ by adding/removing one dot.
+
+> A nxn matrix of dots produce n^2+1 different gray levels.
+
+> Two aggregates placed side by side must not appear as a pattern.
+
+> The aggregate must be built by addding step by step dots from the center of the aggregate.
+
+> For example, a 2x2 aggregate is (D means a black dot to place):
+
+```
+       +-+-+         +-+-+         +-+-+         +-+-+         +-+-+
+       | | |         |D| |         |D| |         |D|D|         |D|D|
+       +-+-+         +-+-+         +-+-+         +-+-+         +-+-+
+       | | |         | | |         | |D|         | |D|         |D|D|
+       +-+-+         +-+-+         +-+-+         +-+-+         +-+-+
+    Aggregate 1   Aggregate 2   Aggregate 3   Aggregate 4   Aggregate 5
+You can express it as the following matrix:
+         | 0 2 |
+    M  = | 3 1 |
+     2
+```
+
+> Note that the numbers in M2 are such that first dot is placed at the top left hand corner (value 0), the second dot is placed at the bottom right hand corner (value 1), and so on.
+
+> You can generalize that by the following algorithm (which produces Mn such that n=2^k):
+
+```
+    Mn[0;0] <- 0
+    Mn[0;1] <- 2
+    Mn[1;0] <- 3
+    Mn[1;1] <- 1
+    for I <- 2 to k
+    do J <- 1 binary_shift_left (I-1)
+       for X <- 0 to J-1
+       do for Y <- 0 to J-1
+          do Mn[Y;X] <- Mn[Y;X] binary_shift_left 2
+             Mn[Y;X+J] <- Mn[Y;X]+2
+             Mn[Y+J;X] <- Mn[Y;X]+3
+             Mn[Y+J;X+J] <- Mn[Y;X]+1
+          end loop
+       end loop
+    end loop
+```
+
+> Halftoning is good with high definition output device as laser printer but it is hard to apply for displaying or in graphics files because each point is output as a set of dots => You enlarge the bitmapped picture!
+After halftoning, we can consider thresholding schemes.
+
+> In these schemes, you take a single value or a set of values and each gray level is compared to the threshold value(s).
+
+> If the gray level is lesser than the threshold then you output a black dot otherwise you output white.
+
+```
+    for X <- 0 to Image_Size_in_X-1
+    do for Y <- 0 to Image_Size_in_Y-1
+       do if Read_Gray_Level(X,Y)<128
+          then Write_Dot(X,Y,Black)
+          else Write_Dot(X,Y,White)
+          end if
+       end loop
+    end loop
+```
+
+> I assume that Read_Gray_Level function gives a gray level within the range 0 to 255.
+> We can generalize the single threshold by using a set of thresholds, as defined in Bayer's scheme.
+
+> In this scheme we take the Mn matrices we saw previously.
+
+> For examples, with a 4-bit gray level picture you use M2 and with an 8-bit gray level picture we use M16 (n=16, and k=4):
+
+```
+    for X <- 0 to Image_Size_in_X-1
+    do for Y <- 0 to Image_Size_in_Y-1
+       do if Read_Gray_Level(X,Y)<M16[X logical_binary_and 15;Y logical_binary_and 15]
+          then Write_Dot(X,Y,Black)
+          else Write_Dot(X,Y,White)
+          end if
+       end loop
+    end loop
+```
+
+> Note that the "logical binary and" operation is made to avoid X and Y value to be beyond the range [0;15].
+
+> This is equivalent to a modulo 16 operation, but faster on computers.
+
+> Thresholding schemes are simple and produce quick good results but they can be replaced by the very good schemes called dithering.
+
+> The principle of dithering is simple.
+
+> We re-adjust the error made on a dot in output by diffusing the error to the neighbouring dots.
+
+> That's why we also call this scheme error diffusion.
+
+> For example, let's consider X as the analysed point.
+
+> The neighbouring points are re-adjusted by the following coefficients presented in the following matrix.
+
+```
+    +-+-+-+
+    | |X|7|
+    +-+-+-+
+    |3|5|1|
+    +-+-+-+
+```
+
+> around X, only four points are adjusted with the error.
+
+> The sum of the adjustment is 7+3+5+1=16.
+
+> For example, the pixel to the right of X is adjusted by 7/16 of the error made on X (the error can be positive as well negative!).
+
+> This filter is very popular because it is the Floyd-Steinberg's filter.
+
+> To have more information about that, have a look in ULICHNEY (see section 11).
+
+> The problem of halftoning is that you need input gray levels as well readable as writeable.
+
+> The process can be slow but it produces nicest results compared to fast thresholding scheme.
+
+## 10 - References (most of them are provided by Adrian Ford)
+
+- "An inexpensive scheme for calibration of a color monitor in terms of CIE standard coordinates" W.B. Cowan, Computer Graphics, Vol. 17 No. 3, 1983
+- "Calibration of a computer controlled color monitor", Brainard, D.H, Color Research & Application, 14, 1, pp 23-34 (1989).
+- "Color Monitor Colorimetry", SMPTE Recommended Practice RP 145-1987
+- "Color Temperature for Color Television Studio Monitors", SMPTE Recommended Practice RP 37
+- SPROSON: "Color Science in Television and Display Systems" Sproson, W, N, Adam Hilger Ltd, 1983. ISBN 0-85274-413-7 (Color measuring from soft displays. It as a reference.)
+- CIE 1: "CIE Colorimetry" Official recommendations of the International Commission on Illumination, Publication 15.2 1986
+- BERNS: "CRT Colorimetry:Part 1 Theory and Practice, Part 2 Metrology", Berns, R.S., Motta, R.J. and Gorzynski, M.E., Color Research and Appliation, 18, (1993). (Adrian Ford talks about it as a must about CIE implementations on CRT's)
+- "Effective Color Displays. Theory and Practice", Travis, D, Academic Press, 1991. ISBN 0-12-697690-2 (Color applications in computer graphics)
+FIELD: Field, G.G., Color and Its Reproduction, Graphics Arts Technical Foundation, 1988, pp. 320-9 (Read this about CMY/CMYK)
+- POYNTON: "Gamma and its disguises: The nonlinear mappings of intensity in perception, CRT's, Film and Video" C. A. Poynton, SMPTE Journal, December 1993
+- HUNT 1: "Measuring Color" second edition, R. W. G. Hunt, Ellis Horwood 1991, ISBN 0-13-567686-x (Calculation of CIE Luv and other CIE standard colors spaces)
+- "On the Gun Independance and Phosphor Consistancy of Color Video Monitors" W.B. Cowan N. Rowell, Color Research and Application, V.11 Supplement 1986
+- "Precision requirements for digital color reproduction", M Stokes MD Fairchild RS Berns, ACM Transactions on graphics, v11 n4 1992
+- CIE 2: "The colorimetry of self luminous displays - a bibliography" CIE Publication n.87, Central Bureau of the CIE, Vienna 1990
+- HUNT 2: "The Reproduction of Color in PhotoGraphy, Printing and Television", R. W. G. Hunt, Fountain Press, Tolworth, England, 1987
+- "Fully Utilizing Photo CD Images, Article No. 4, PhotoYCC Color Encoding and Compression Schemes" Eastman Kodak Company, Rochester NY (USA) (1993).
+- ULICHNEY: "Digital halftoning", Robert Ulichney, MIT Press, 1987, ISBN 0-262-21009-6
+-
+
+> Comments and thanks
+
+## 11 - Comments and thanks
+
+> Whenever you would like to comment or suggest me some informations about this or about the color space transformations in general, please use email: dbourgin@ufrima.imag.fr (David Bourgin) if, and only if, this e-mail appears to be unavailable, please use email: bourgin@obs-besancon.fr (David Bourgin) (I preferr the first email for several reasons, such as good tools at imag.)
+
+> Special thanks to the following persons (there are actually many other people to cite) for contributing to valid, see even to write some part of the sections:
+
+- Adrian Ford (ajoec1@westminster.ac.uk) for help in sections 2, 4
+- Tom Lane (Tom_Lane@G.GP.CS.CMU.EDU) for general help when I started this FAQ
+- Alan Roberts and Richard Salmon (Alan.Roberts@rd.bbc.co.uk, Richard.Salmon@rd.eng.bbc.co.uk) for help in sections 5, 6, 6.1, 6.2, 8.3
+- Grant Sayer (grants@research.canon.oz.au) for help in sections 8.8, 8.9, 8.10
+- Steve Westland (coa23@potter.cc.keele.ac.uk) for general help
+- Christian Steyaert (steyaert@vvs.innet.be) for help in section 8.2
+- Glenn Davis (glennd@starconn.com) for help in section 8.10
+
+> If you have no ftp access but e-mail access and want to get a file (such as an update of this faq) you can do it via e-mail.
+
+> There are several servers able to do so.
+
+> For example, an ftp mail server exists with the e-mail: mailto:ftpmail@ftp-gw-1.pa.dec.comSend "help" in the "Subject:" line of your mail.
+
+HTML translation by:
+
+Last HTML update: 29/5/95 
+Posted Date: 18/4/95 
+Last update: 3/4/95 
+mailto:rld@sgi.com~
