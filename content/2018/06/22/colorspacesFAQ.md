@@ -1,12 +1,12 @@
 +++
-title= "Color Spaces FAQ"
+title= "色空間 (Color Spaces) FAQ"
 date= 2018-06-22T22:57:43+09:00
 categories = []
 tags = []
 draft= false
 +++
 
-# Color Spaces FAQ
+# 色空間 (Color Spaces) FAQ
 
 - http://www.ilkeratalay.com/colorspacesfaq.php
 
@@ -15,21 +15,21 @@ draft= false
 元のドキュメントは  http://www.rmbwoc.com/vidpage/color_faq.html から辿れます。
 ドキュメントの背景を白ベースにしている今は読み易いです :-)
 
-## 1 - Purpose of this FAQ
+## 1 - この FAQ の目的 (Purpose of this FAQ)
 
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-私はビデオの領域 (ビデオカード、画像ファイル形式など) で長年研究を行っていて、その情報を必要とする全ての人々に提供することにしました。;-)
+私はビデオの分野 (ビデオカード、画像ファイル形式など) で長年研究を行っていて、その情報を必要とする全ての人々に提供することにしました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
-ビデオ作業の FAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
+ビデオ作業の FAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供するという意味です。
 
 > If you have some informations to ask/add to this document, please read section 11.
 
 このドキュメントに質問や追加する情報がある場合は、セクション11を参照してください。
 
-## 2 - Some definitions
+## 2 - 定義を幾つか (Some definitions)
 
 > Color is defined as an experience in human perception.
 
@@ -428,32 +428,19 @@ HSI (強度) 、HSV (値) 、HCI (色度(chroma)/彩度(colorfulness)/強度(int
 
 > Other definitions.
 
-```
-    Photometric terms:  illuminance   - luminous flux per unit area incident on
-					a surface
-			luminance     - luminous flux per unit solid angle and
-					per unit projected area, in a given
-					direction, at a point on a surface.
-			luminous flux - radient flux weighted by the V(landa)
-					function.
-					I.e. weighted by the eye's sensitivity.
-			luminosity    - ability to appear luminous
-			radient flux  - total power / energy of the incident
-					radiation.
+|   |   |    |
+|----|----|----|
+| Photometric terms: |  illuminance   | luminous flux per unit area incident on a surface |
+|		|	luminance     | luminous flux per unit solid angle and per unit projected area, in a given direction, at a point on a surface. |
+|		|	luminous flux | radient flux weighted by the V(landa) function. I.e. weighted by the eye's sensitivity.
+|		|	luminosity    | ability to appear luminous |
+|		|	radient flux  | total power / energy of the incident radiation. |
+|  Other terms: |       brightness    | the human sensation by which an area exhibits more or less light. |
+|		|	lightness     | the sensation of an area's brightness relative to a reference white in the scene. |
+|		|	luma          | Luminance component corrected by a gamma function and often noted Y'. See section 4 about gamma and section 8.3 about Y. |
+|		|	chroma        | the colorfulness of an area relative to the brightness of a reference white. |
+|		|	saturation    | the colorfulness of an area relative to	its brightness. |
 
-    Other terms:        brightness    - the human sensation by which an area
-					exhibits more or less light.
-			lightness     - the sensation of an area's brightness
-					relative to a reference white in the
-					scene.
-			luma          - Luminance component corrected by a gamma
-					function and often noted Y'. See section
-					4 about gamma and section 8.3 about Y.
-			chroma        - the colorfulness of an area relative to
-					the brightness of a reference white.
-			saturation    - the colorfulness of an area relative to
-					its brightness. 
-```
 
 > Note: This list is not exhaustive, some terms have alternative meanings but we assume these to be the fundamentals.
 
@@ -1663,17 +1650,25 @@ a) this results in RGB values from 0 to 346 (instead of the more usual 0 to 255)
 
 > I suggest you read the references given in comp.graphics FAQ stored on rtfm.mit.edu:/pub/usenet/news.answers/graphics/faq maintened by John T. Grieggs (grieggs@netcom.com)
 
-```
-   +---------------------------------+-----------------+
-    | Scheme                          | Luminancy level |
-    +---------------------------------+-----------------+
-    | Gray = Green                    |        1        |
-    | Gray = ITU (D65)                |        2        |
-    | Gray = Rec 709 (D65)            |        3        |
-    | Gray = Rec 601-1 (C illuminant) |        4        |
-    | Gray = (Red+Green+Blue)/3       |        5        |
-    +---------------------------------+-----------------+
-```
+## 9.2 - Color look-up table to a gray scales
+
+> It is really easy to convert a picture into its grayscale representation.
+
+> To do so, you take your RGB picture (if you don't have a RGB picture, have a look into section 8 and subsections) and you translate each RGB value into the luminancy value.
+
+> Old softwares used Rec 601-1 and produced: Gray scale = Y = (299*Red+587*Green+114*Blue)/1000 With Rec 709, we have: Gray scale = Y = (213*Red+715*Green+72*Blue)/1000 Some others do as if: Gray scale = Green (They don't consider the red and blue components at all) Or, alternativly, you can average the three color components so: Gray scale = (Red+Green+Blue)/3 But now all people *should* use the most accurate, it means ITU standard: Gray scale = Y = (222*Red+707*Green+71*Blue)/1000 (That is very close to Rec 709!) I performed some personal tests and have sorted them in regard with the global resulting luminancy of the picture (from my eye point of view!).
+
+> The following summary gives what I found ordered increasingly:
+
+
+ Scheme                          | Luminancy level |
+---------------------------------|:---------------:|
+ Gray = Green                    |        1        |
+ Gray = ITU (D65)                |        2        |
+ Gray = Rec 709 (D65)            |        3        |
+ Gray = Rec 601-1 (C illuminant) |        4        |
+ Gray = (Red+Green+Blue)/3       |        5        |
+
 
 > So softwares with Gray=Rec 709 (D65) produce a more dark picture than with Gray=Green. Even if you theorically lose many details with Gray=Green scheme, in fact, and with the 64-gray levels of a VGA card of a PC it is hard to distinguish the loss.
 
@@ -1720,7 +1715,11 @@ a) this results in RGB values from 0 to 346 (instead of the more usual 0 to 255)
        | | |         | | |         | |D|         | |D|         |D|D|
        +-+-+         +-+-+         +-+-+         +-+-+         +-+-+
     Aggregate 1   Aggregate 2   Aggregate 3   Aggregate 4   Aggregate 5
-You can express it as the following matrix:
+```
+
+> You can express it as the following matrix:
+
+```
          | 0 2 |
     M  = | 3 1 |
      2
