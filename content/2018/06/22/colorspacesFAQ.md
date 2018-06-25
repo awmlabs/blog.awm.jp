@@ -19,25 +19,25 @@ draft= false
 
 > I did a (too) long period of research in the video domain (video cards, image file formats, and so on) and I've decided to provide to all people who need some informations about that. ;-)
 
-私はビデオの領域 (ビデオカード、画像ファイル形式など) で長年研究を行っており、それらの情報を必要とする全ての人々に提供することにしました。;-)
+私はビデオの領域 (ビデオカード、画像ファイル形式など) で長年研究を行っていて、その情報を必要とする全ての人々に提供することにしました。;-)
 
 > I aim to cover a part of the Frequently Asked Questions (FAQ) in the video works, it means to provide some (useful?) informations about the colors, and more especially about color spaces.
 
-私は、ビデオ作業の FAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
+ビデオ作業の FAQ (Frequently Asked Questions) の一部をカバーすることを目指します。それは、色、特に色空間に関するいくつかの (有用な?) 情報を提供することを意味します。
 
 > If you have some informations to ask/add to this document, please read section 11.
 
-この文書を尋ねる/追加する情報がある場合は、セクション11を参照してください。
+このドキュメントに質問や追加する情報がある場合は、セクション11を参照してください。
 
 ## 2 - Some definitions
 
 > Color is defined as an experience in human perception.
 
-色は人間の知覚における経験として定義されます。
+色は人間の知覚における経験と定義されます。
 
 > In physics terms, a color is the result of an observed light on the retina of the eye.
 
-物理学用語としての色は、眼の網膜上の観察された光の結果です。
+物理学用語としての色は、眼の網膜上に観察された光の結果です。
 
 > The light must have a wavelength in the range of 400 to 700 nm.
 
@@ -53,11 +53,11 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > In addition the optics of any imaging device will have an effect.
 
-さらに、任意の撮像装置の光学系がエフェクトを持ちます。
+加えて、任意の撮像装置の光学系がエフェクトを持ちます。
 
 > Strictly though, color is a visual sensation, so a `color' is created when we observe a specific SPD.
 
-厳密には色は視覚的感覚であるため、特定のSPDを観察すると「色」が作成されます。
+厳密には色は視覚的感覚であるため、特定のSPDを観察した時に「色」が生まれます。
 
 > We see color by means of cones in the retina.
 
@@ -80,7 +80,6 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 	Blue    -       Yellow
 	Black   -       White
 ```
-
 
 > Note: Actually, recent studies show that eyes use addtionnal cone types. (cf. "La Recherche", n.272, january, 1995)
 
@@ -108,7 +107,7 @@ SPD は、シーン内のオブジェクトのスペクトル反射率で光源�
 
 > The recommendations of the CIE are as follows:
 
-CIE の勧告は次のとおりです。
+CIE の勧告は以下の通りです。
 
 > Brightness.
 
@@ -136,8 +135,6 @@ CIE の勧告は次のとおりです。
 
 > The attribute of a visual sensation according to which an area appears to exhibit more or less of its hue.
 
-ある程度
-
 ある領域での色相の多寡を示すような視覚感覚の属性です。
 
 > [You can go from a sky blue to a deep blue by changing this attribute.]
@@ -146,11 +143,11 @@ CIE の勧告は次のとおりです。
 
 > So, a color is a visual sensation produced by a stimulus which is a specific SPD.
 
-したがって、色は特定のSPDである刺激によって生成される視覚的感覚です。
+よって、色は特定のSPDである刺激によって生成される視覚的感覚です。
 
 > It should be noted however, that two different SPD's may produce the same visual sensation - an effect known as metarmerism.
 
-しかしながら、2つの異なる SPD が同じ視覚的感覚を生み出し得るす事がある事に注目すべきです。これは、メタメリズム(metarmerism) として知られている効果です。
+しかしながら、2つの異なる SPD が同じ視覚的感覚を生み出し得る事に注目すべきです。これは、メタメリズム(metarmerism) として知られる効果です。
 
 > What is a color space?
 
@@ -162,7 +159,7 @@ CIE の勧告は次のとおりです。
 
 > As human's, we may define a color by its attributes of brightness, hue and colorfulness.
 
-人のように、輝度、色相、彩度の属性によって色を定義することができます。
+人間らしくとしては、輝度、色相、彩度の属性によって色を定義することができます。
 
 > A computer will define a color in terms of the excitations of red, green and blue phosphors on the CRT faceplate.
 
