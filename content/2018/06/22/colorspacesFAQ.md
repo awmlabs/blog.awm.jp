@@ -356,29 +356,53 @@ HSI (強度) 、HSV (値) 、HCI (色度(chroma)/彩度(colorfulness)/強度(int
 
 > These are the television transmission color spaces (YIQ and YUV analogue (NTSC and PAL) and YCbCr digital).
 
+これらは、テレビ送信の色空間です。（YIQ 、YUVアナログ（NTSCおよびPAL）、YCbCr デジタル）
+
 > They separate luminance from chrominance (lightness from color) and are useful in compression and image processing applications.
+
+これらは、輝度(luminance)を色度(chrominance)　(色(color)からの明度(lightness)) から分離します。圧縮や画像処理アプリケーションで有用です。
 
 > YIQ and YUV are, if used according to their relative specifications, linear.
 
+YIQ と YUVは、それらの相対的な仕様に従って使われる場合は線形です、
+
 > They are all device dependent and, unless you are a TV engineer, unintuitive.
 
+それらは全てデバイス依存で、テレビエンジニアでなければ直感的ではありません。
+
 > Kodaks PhotoCD system uses a type of YCC color space, PhotoYCC, which is a device calibrated color space.
+
+Kodaks PhotoCD システムは YCC 色空間のタイプの一つ、機器校正された(device calibrated) 色空間 PhotoYCC を使います。
 
 > CIE
 
 > What is the CIE System?
 
+CIEシステムとは何ですか？
+
 > The CIE has defined a system that classifies color according to the HVS (it started producing specifications in 1931).
+
+CIE は、HVS(1931年に仕様を作成し始めました) に従って色を分類するシステムを定義します、
 
 > Using this system we can specify any color in terms of its CIE coordinates.
 
+このシステムを使い、その CIE 座標で任意の色を指定できます。
+
 > The CIE system works by weighting the SPD of an object in terms of three color matching functions.
+
+CIE システムは、3つの等色関数(color matching functions)をベースに対象の SPD を重み付けすることによって機能します。
 
 > These functions are the sensitivities of a standard observer to light of different wavelengths.
 
+これらの関数(functions)は、異なる波長の光に対する標準観測者(standard observer)の感度です。
+
 > The weighting is performed over the visual spectrum, from around 360nm to 830nm in 1nm intervals.
 
+重み付けは、1nm間隔で約360nmから830nmまでの視覚スペクトルに渡ってなされます。
+
 > However, the illuminant, lighting, and viewing geometry are carefully defined.
+
+しかしながら、光源、照明、および観測ジオメトリは慎重に定義されています。
 
 > This process produces three CIE tri-stimulus values, XYZ, which describe the color.
 
