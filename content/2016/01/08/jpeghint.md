@@ -19,7 +19,7 @@ title = "JPEG の size hinting について"
 
 注意する点ではありますが、この結論では「JPEG size hinting は危険なので使わない方が良い」と誤解する人が出そうなので勝手に補足します。
 
-# -define jpeg:size とは？
+# 前提知識
 
 ## JPEG のデータの持ち方
 
@@ -37,7 +37,7 @@ JPEG は画像の周波数成分のデータを保持していて、JPEG の Dec
 
 (ImageMagick から利用する libjpeg で 2,4,8 のように 2^n に限っているのは、波の合成(iDCT)の高速化で FFT を使う都合か。もしくは波のループの端が合わないか。)
 
-## やっている事
+##  やりたい事
 
 リサイズ後の大きさに近くなるよう scale factor を指定して JPEG を Decode し。そこからリサイズする事で、メモリやCPUを節約します。
 
@@ -49,6 +49,7 @@ JPEG は画像の周波数成分のデータを保持していて、JPEG の Dec
   * http://blog.mirakui.com/entry/20110123/1295795409
 
 ## 小さくリサイズする場合
+
  * 普通にリサイズ (-define jpeg:size 無し)
 <center> <img src="/2016/01/08/resize1.png" /> </center>
 
