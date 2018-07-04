@@ -29,7 +29,7 @@ JPEG はマクロブロック(8x8)毎に画像の周波数成分のデータを�
 <center> <img src="/2016/01/08/dct8x8-600.png" /> </center>
 引用) https://www.cl.cam.ac.uk/teaching/1011/R08/jpeg/acs10-jpeg.pdf
 
-左上の方低周波、右下の方が高周波成分です。
+左上の方が低周波、右下の方が高周波成分です。
 
 ## scaling 指定で decode
 
