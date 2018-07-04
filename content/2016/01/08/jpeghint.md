@@ -150,6 +150,9 @@ ZZZ: jpeg_info:image_width,height:8,8 output_width,height:16,16 scale_num:1 scal
 
 # 使用上の注意
 
+ * scaling decode は libjpeg8c の新機能なので、libjpeg6 とかだと使えません。
+    * libjpeb-turbo は API は v8 互換だけど、どうだろう。(誰か教えて)
+    * mozjpeg も知らない。(誰か教えて)
  * 拡大時に size hint を使うとメモリを沢山使って逆効果なので、縮小時だけ使った方が良い。
     * 拡大処理が殆ど使われない。その場合の最大サイズでもメモリが十分足りる。といったケースだと無視しても良い。
  * 縮小時だけ動かす場合、デコード前にファイルの縦横サイズを調べる処理が必要なので、少し面倒。
