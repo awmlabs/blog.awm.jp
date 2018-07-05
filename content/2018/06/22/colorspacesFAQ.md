@@ -406,15 +406,27 @@ CIE システムは、3つの等色関数(color matching functions)をベース�
 
 > This process produces three CIE tri-stimulus values, XYZ, which describe the color.
 
+このプロセスは、色を表す 3つの CIE 3刺激値(CIE tri-stimulus values) XYZ を生成します。
+
 > There are many measures that can be derived from the tri-stimulus values, these include chromaticity coordinates and color spaces.
+
+3刺激値から導出できる尺度が数多くあり、それらに色度座標や色空間が含まれます。
 
 > There are two CIE based color spaces, CIELuv and CIELab.
 
+CIE ベースの色空間が2つあります、CIELuv と CIELab です。
+
 > They are near linear (as close as any color space is expected to sensibly get), device independent (unless your in the habit of swapping your eye balls with aliens), but not very intuitive to use.
+
+それらは線形に近く（あたかも知覚から得られる任意の色空間のように）、デバイス非依存（あなたの眼球を宇宙人と交換する習慣がない限り）、但し、かなり非直感的です。
 
 > From CIELuv you can derive CIELhs or CIELhc where h is the hue (an angle), s the saturation and c the chroma.
 
+CIELuv から CIELhs や CIELhc が得られます。ここで、h は色相(hue)（角度）、彩度(saturation)、c は色味(chrome)です。
+
 > CIELuv has an associated chromaticity diagram, a two dimensional chart which makes additive color mixing very easy to visualise, hence CIELuv is widely used in additive color applications, like television.
+
+CIELuv には、加法混色をとても容易に視覚化する2次元チャートである関連した色度図(chromaticity diagram)を持ちます。よって CIELuv は、テレビのような加法混色アプリケーションに広く利用されています。
 
 > CIELab has no associated two dimensional chromaticity diagram and no correlate of saturation so only Lhc can be used.
 
