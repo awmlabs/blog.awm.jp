@@ -3,7 +3,7 @@ title = "Validating the black point compensation standardization"
 date = 2018-07-06T11:09:17+09:00
 categories = []
 tags = []
-draft = false
+draft = true
 +++
 
 # Validating the black point compensation standardization
