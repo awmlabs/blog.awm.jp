@@ -300,7 +300,7 @@ Gamut は、CIEシステムを使って最もよく示され評価されます�
 
 > That depends on what you want to do, but here is a list of the pros and cons of some of the more common, computer related, color spaces - we will see in section 8 how to convert the (most common) color spaces between themselves and which references to use - :
 
-それはあなたのやりたい事次第ですが、コンピュータ関連の色空間をより一般化したものの幾つかのメリット、デメリットのリストがこれです。
+それはやりたい事次第ですが、コンピュータ関連の色空間をより一般化したものの幾つかのメリット、デメリットのリストがこちらです。
 
 > RGB (Red Green Blue)
 
@@ -422,13 +422,15 @@ CIE ベースの色空間が2つあります、CIELuv と CIELab です。
 
 > From CIELuv you can derive CIELhs or CIELhc where h is the hue (an angle), s the saturation and c the chroma.
 
-CIELuv から CIELhs や CIELhc が得られます。ここで、h は色相(hue)（角度）、彩度(saturation)、c は色味(chrome)です。
+CIELuv から CIELhs や CIELhc が得られます。ここでの h は色相(hue) (角度)、s は彩度(saturation)、c は色味(chrome)です。
 
 > CIELuv has an associated chromaticity diagram, a two dimensional chart which makes additive color mixing very easy to visualise, hence CIELuv is widely used in additive color applications, like television.
 
 CIELuv には、加法混色をとても容易に視覚化する2次元チャートである関連した色度図(chromaticity diagram)を持ちます。よって CIELuv は、テレビのような加法混色アプリケーションに広く利用されています。
 
 > CIELab has no associated two dimensional chromaticity diagram and no correlate of saturation so only Lhc can be used.
+
+CIELab は2次元色度図に結びつかず、彩度との相関もないので、Lhc のみを使用できます。 [要見直し]
 
 > Since there is such a wide variet of color spaces, it is useful to understand a bit more about them and how to convert between them.
 
