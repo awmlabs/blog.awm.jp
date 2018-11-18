@@ -10,7 +10,9 @@ draft = false
 
 # ImageMagick7 negate(nega/posi-trans) invert transparency as default
 
-When using the -negate option with ImageMagick7, images may disappear sometimes.
+When using the -negate option with ImageMagick7, images may disappear sometimes
+.
+This is the intended behavior, not a bug.
 
 ## Actual operation
 
@@ -49,7 +51,7 @@ ImageMagick6 negate, there is no problem.
 |---|---|
 | <img src="../rose-matte.png" /> |<img src="../rose-matte-negate6.png" /> |
 
-## Workaround or Expcted Usage ?
+## Expcted Usage
 
 By specifying -channel RGB, negate only RGB, A can go through.
 ImageMagick6 can also behave like ImageMagick7 by specifying -channel RGBA.
@@ -73,16 +75,93 @@ Also, it seems that it is possible to specify all color components except A.
 |---|
 | <img src="../rose-matte-negate-all-A.png" /> |
 
+## Examination
+
+negate execution code is here.
+
+- ImageMagick-7 MagickCore/enhance.c
+
+```
+MagickExport MagickBooleanType NegateImage(Image *image,
+  const MagickBooleanType grayscale,ExceptionInfo *exception)
+＜略＞
+          for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+          {
+            PixelChannel channel = GetPixelChannelChannel(image,j);
+            PixelTrait traits = GetPixelChannelTraits(image,channel);
+            if ((traits & UpdatePixelTrait) == 0)
+              continue;
+            q[j]=QuantumRange-q[j];
+          }
+```
+
+- ImageMagick6 magick/enhance.c
+
+```
+MagickExport MagickBooleanType NegateImage(Image *image,
+  const MagickBooleanType grayscale)
+{
+  MagickBooleanType
+    status;
+
+  status=NegateImageChannel(image,DefaultChannels,grayscale);
+  return(status);
+}
+
+MagickExport MagickBooleanType NegateImageChannel(Image *image,
+  const ChannelType channel,const MagickBooleanType grayscale)
+{
+(omit)
+          if ((channel & RedChannel) != 0)
+            SetPixelRed(q,QuantumRange-GetPixelRed(q));
+          if ((channel & GreenChannel) != 0)
+            SetPixelGreen(q,QuantumRange-GetPixelGreen(q));
+          if ((channel & BlueChannel) != 0)
+            SetPixelBlue(q,QuantumRange-GetPixelBlue(q));
+          if ((channel & OpacityChannel) != 0)
+            SetPixelOpacity(q,QuantumRange-GetPixelOpacity(q));
+          if (((channel & IndexChannel) != 0) &&
+              (image->colorspace == CMYKColorspace))
+            SetPixelIndex(indexes+x,QuantumRange-GetPixelIndex(indexes+x));
+          q++;
+```
+
+The definition of DefaultChannels affecting these operations has changed to ImageMagick7.
+
+- ImageMagick7 MagickCore/pixel.h
+
+```
+  AllChannels = 0x7ffffff,
+  DefaultChannels = AllChannels
+```
+
+- ImageMagick6 magick/magick-type.h
+
+```
+  DefaultChannels = ((AllChannels | SyncChannels) &~ OpacityChannel)
+```
+
+ImageMagick6 does not include A with DefaultChannels "RGB, Sync", but ImageMagick7 definition has been changed to AllChannels and all RGBA is included in processing target as default.
+
 ## Consideration
 
-It is probably because ImageMagick7 abstracts color components as "channel" and does not distinguish between RGB and A, but there is a documentual discrepancy.
+It is the intended behavior, as shown in the porting manual, to handle alpha values by negate by default.
+
+- https://imagemagick.org/script/porting.php#cli
+
+```
+Most algorithms update the red, green, blue, black (for CMYK), and alpha channels. Most operators will blend alpha the other color channels, but other operators (and situations) may require this blending to be disabled, and is currently done by removing alpha from the active channels via -channel option. (e.g. convert castle.gif -channel RGB -negate castle.png).
+```
+
+It seems that it is more convenient for most image processing algorithms to deal with four RGBAs equally, ImageMagick7 has changed DefaultChannels to include A. There are also inconvenient things like this negate, but on the whole it will be judged that this one is better.
 
 - https://imagemagick.org/script/command-line-options.php#negate
 
 ```
 The red, green, and blue intensities of an image are negated.
 ```
-What about calling alpha values ​​as intensities(color component strength)? But I can not say anything.
+What about calling alpha values as intensities(color component strength)?
+But I can't say anything.
 However, the explanation of color_mods is clearly different from the actual operation.
 
 - https://www.imagemagick.org/Usage/color_mods/#negate
@@ -95,5 +174,4 @@ This is the behavior of ImageMagick6.
 
 ## Lastly
 
-I can't guess the intentional behavior, so I'd like to ask the official side for a while.
-It is hard to use A as it invert by default, and even if it's intentional, I want a note in the manual.
+I also want other notes in the manual other than porting so it seems good to ask them on the official side.
