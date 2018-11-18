@@ -6,9 +6,9 @@ tags = []
 draft = false
 +++
 
-- https://qiita.com/yoya/items/9301c447093354d92185 (original text as japanese)
-
 # ImageMagick7 negate(nega/posi-trans) invert transparency as default
+
+- (original text in japanese) https://qiita.com/yoya/items/9301c447093354d92185
 
 When using the -negate option with ImageMagick7, images may disappear sometimes
 .
