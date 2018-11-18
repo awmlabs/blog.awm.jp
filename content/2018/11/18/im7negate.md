@@ -1,5 +1,5 @@
 +++
-title = "ImageMagick7 negate (negative / positive conversion) invert transparency as default"
+title = "ImageMagick7 negate(nega/posi-trans) invert transparency as default"
 date = 2018-11-18T01:45:11+09:00
 categories = []
 tags = []
@@ -8,7 +8,7 @@ draft = false
 
 - https://qiita.com/yoya/items/9301c447093354d92185 (original text as japanese)
 
-# ImageMagick7 negate (nega/posi-trans) is wrong
+# ImageMagick7 negate(nega/posi-trans) invert transparency as default
 
 When using the -negate option with ImageMagick7, images may disappear sometimes.
 
@@ -93,7 +93,7 @@ by default ignores the alpha channel.
 
 This is the behavior of ImageMagick6.
 
-## Last
+## Lastly
 
 I can't guess the intentional behavior, so I'd like to ask the official side for a while.
 It is hard to use A as it invert by default, and even if it's intentional, I want a note in the manual.
