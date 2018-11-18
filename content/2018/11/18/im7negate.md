@@ -1,5 +1,5 @@
 +++
-title = "ImageMagick7 negate (negative / positive conversion) is wrong"
+title = "ImageMagick7 negate (negative / positive conversion) invert transparency as default"
 date = 2018-11-18T01:45:11+09:00
 categories = []
 tags = []
@@ -43,7 +43,7 @@ This is because the alpha value is also negated from A: 255(opaque) to A:0 (tran
 ImageMagick6 negate, there is no problem.
 
 ```
-% convert6 rose-matte.png -negate rose-matte-negate.png
+% convert6 rose-matte.png -negate rose-matte-negate6.png
 ```
 |rose-matte.png | rose-matte-negate6.png|
 |---|---|
