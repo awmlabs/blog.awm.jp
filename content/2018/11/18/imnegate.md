@@ -1,0 +1,1 @@
+content/2018/11/18/im7negate.md

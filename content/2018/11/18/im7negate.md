@@ -8,7 +8,7 @@ draft = false
 
 - https://qiita.com/yoya/items/9301c447093354d92185 (original text as japanese)
 
-# ImageMagick7 negate (negative / positive conversion) is wrong
+# ImageMagick7 negate (nega/posi-trans) is wrong
 
 When using the -negate option with ImageMagick7, images may disappear sometimes.
 
