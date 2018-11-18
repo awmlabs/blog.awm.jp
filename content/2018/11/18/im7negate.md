@@ -149,26 +149,21 @@ It is the intended behavior, as shown in the porting manual, to handle alpha val
 
 - https://imagemagick.org/script/porting.php#cli
 
-```
-Most algorithms update the red, green, blue, black (for CMYK), and alpha channels. Most operators will blend alpha the other color channels, but other operators (and situations) may require this blending to be disabled, and is currently done by removing alpha from the active channels via -channel option. (e.g. convert castle.gif -channel RGB -negate castle.png).
-```
+> Most algorithms update the red, green, blue, black (for CMYK), and alpha channels. Most operators will blend alpha the other color channels, but other operators (and situations) may require this blending to be disabled, and is currently done by removing alpha from the active channels via -channel option. (e.g. convert castle.gif -channel RGB -negate castle.png).
 
 It seems that it is more convenient for most image processing algorithms to deal with four RGBAs equally, ImageMagick7 has changed DefaultChannels to include A. There are also inconvenient things like this negate, but on the whole it will be judged that this one is better.
 
 - https://imagemagick.org/script/command-line-options.php#negate
 
-```
-The red, green, and blue intensities of an image are negated.
-```
+> The red, green, and blue intensities of an image are negated.
+
 What about calling alpha values as intensities(color component strength)?
 But I can't say anything.
 However, the explanation of color_mods is clearly different from the actual operation.
 
 - https://www.imagemagick.org/Usage/color_mods/#negate
 
-```
-by default ignores the alpha channel.
-```
+> by default ignores the alpha channel.
 
 This is the behavior of ImageMagick6.
 
