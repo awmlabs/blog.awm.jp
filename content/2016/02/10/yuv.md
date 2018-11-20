@@ -46,7 +46,7 @@ $ convert orig.jpg -sampling-factor 4:2:0 yuv422.jpg
 $ convert orig.jpg -sampling-factor 4:1:1 yuv411.jpg
 $ convert orig.jpg -sampling-factor 4:4:0 yuv440.jpg
 $ convert orig.jpg -sampling-factor 4:2:0 yuv420.jpg
-$ convert orig.jpg -sampling-factor 4:1:0 yuv410.jpg # yuv9
+$ convert orig.jpg -sampling-factor 4:1:0 yuv410.jpg # yuv9 ???
 % identify -format "%f %[jpeg:sampling-factor]\n" popu-unity-410.jpg
 popu-unity-410.jpg 4x2,1x1,1x1
 ```
