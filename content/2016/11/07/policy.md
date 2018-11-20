@@ -9,7 +9,7 @@ title = "ImageMagick の policy.xml でホワイトリスト？"
 
 # 追記 (2018/11/20)
 
-ImageMagick 6.9.7-7 で policy.xml のホワイトリスト対応されました。
+ImageMagick 6.9.7-7 で policy.xml がホワイトリストに対応しました。
 
 - ImageMagick 6.9.7-7 から policy の挙動が変わりました
   - https://blog.awm.jp/2017/02/09/imagemagick/
