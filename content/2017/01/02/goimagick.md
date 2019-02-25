@@ -50,7 +50,8 @@ $ go get gopkg.in/gographics/imagick.v2/imagick
 ```
 package main
 import (
-        "gopkg.in/gographics/imagick.v2/imagick”// v6.8.9-8以前は v
+        // "gopkg.in/gographics/imagick.v1/imagick" // ImageMagick-6.8.9-8 以前
+        "gopkg.in/gographics/imagick.v2/imagick"
 )
 func main() {
         imagick.Initialize()
