@@ -80,6 +80,21 @@ tRNS チャンクをつける事で透明度も表現できます。
 <center> <img src="../png-type3-tRNS.png" /> </center>
 <center> <img src="../Opaopa-png8-trns.png" /> </center>
 
+### パレット形式 の Bit Depth について
+
+Type:3 パレットの Bit Depth は特殊で、RGB 値の Bit Depth ではありません。
+RGB の色パレットを指すインデックスの Bit  幅を示します。
+具体的な影響としては、Bit Depth によりパレット数が制限されます。
+
+| Bit Depths | Max Palette Number |
+|----|----|
+| 1|  2^1 = 2 |
+| 2|  2^2 = 4 |
+| 4|  2^4 = 16 |
+| 8|  2^8 = 256 |
+
+Bit Depth に何を指定しても RGB 色パレットは 8bit 固定の色深度を持つ事に注意して下さい。
+
 ## Type:4 透明度つきグレースケール
 
 グレースケールの値と透明度のセットで表現します。
