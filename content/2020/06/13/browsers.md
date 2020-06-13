@@ -1,16 +1,21 @@
 +++
-title = "ブラウザーの画像形式対応"
+title = "各種ブラウザーの画像フォーマット対応"
 date = 2020-06-13T15:44:39+09:00
 categories = ["Browser"]
 tags = ["Browser", "Image"]
 draft = false
 +++
 
-# ブラウザーの画像形式対応
+# 各種ブラウザーの画像フォーマット対応
+
+## はじめに
 
 - http://yosbits.com/wordpress/?p=1683 画像のブラウザ対応
 
 こちらの最新版が欲しかったので、2020年版を作りました。Wikipedia からのほぼコピペです。
+
+
+## 対応テーブル
 
 <style>
 tr { color: white; background-color:#666; }
@@ -21,7 +26,7 @@ td { color: black; text-align: center; }
 
 <table>
 <tr>
-<th>Br \ Im</th><th> JPEG</th><th> JPEG2000 </th><th> JPEG_XR </th><th> WebP </th><th> GIF </th><th> PNG </th><th> APNG </th><th> TIFF </th><th> BMP </th><th> HEIF </th>
+<th>  </th><th> JPEG</th><th> JPEG2000 </th><th> JPEG_XR </th><th> WebP </th><th> GIF </th><th> PNG </th><th> APNG </th><th> TIFF </th><th> BMP </th><th> HEIF </th>
 </tr><tr>
 <th> Chrome </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
