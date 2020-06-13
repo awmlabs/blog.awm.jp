@@ -54,7 +54,6 @@ td { color: black; text-align: center; }
 - https://imagemagick.org/
 - https://gif2apng.sourceforge.net/
 
-
 ```
 % for f in jpg jp2 jxr webp png tif bmp heif ;
     do convert rose: rose.$f ;
