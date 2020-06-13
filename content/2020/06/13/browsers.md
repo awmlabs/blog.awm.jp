@@ -55,23 +55,56 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 
 参考までに。ImageMagick と gif2apng を使った各形式の画像作成方法です。
 
+
+大体の形式は ImageMagick で生成できます。
+
 - https://imagemagick.org/
-- https://gif2apng.sourceforge.net/
 
 ```
-% for f in jpg jp2 jxr webp png tif bmp ;
+% for f in jpg jp2 jxr webp png bmp ;
     do convert rose: rose.$f ;
     done
 % identify  rose.*
 rose.bmp BMP 70x46 70x46+0+0 8-bit sRGB 9890B 0.000u 0:00.000
-
 rose.jp2 JP2 70x46 70x46+0+0 8-bit sRGB 0.000u 0:00.000
 rose.jpg JPEG 70x46 70x46+0+0 8-bit sRGB 2663B 0.000u 0:00.000
 rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
 rose.png PNG 70x46 70x46+0+0 8-bit sRGB 6975B 0.000u 0:00.000
-rose.tif TIFF 70x46 70x46+0+0 8-bit sRGB 9924B 0.000u 0:00.000
 %
 ```
+
+identify で rose.jxr が PPM と表示されますが、これは変換に失敗したので無く Delegate の事情です。
+
+## JPEG XR
+
+ImageMagick は自前で JPEG XR を処理出来ず、外部コマンドを使って変換します。これを Delegate と呼びます。
+
+JPEG XR を以下のようにして生成する場合、
+
+```
+% convert rose: rose.jxr
+```
+
+内部的には jxrlib の JxrEncApp コマンドを以下のように呼び出します。
+
+```
+% convert rose: rose.bmp
+% JxrEncApp -i rose.bmp -o rose.jxr
+```
+
+逆にデコードする際は、JxrDecApp コマンドが呼ばれます。
+
+```
+% JxrDecApp  -i rose.jxr -o rose.pnm
+```
+
+identify は JPEG XR を理解できないので、代わりに PPM を解析表示するという事です。
+なお、拡張子の PNM は PPM 以外にも PBM, PGM 等を含めたいくつかの画像形式の総称です。
+
+(参考)
+
+- PNM と ImageMagick で画像ファイルを手作り生成
+  - https://blog.awm.jp/2016/01/04/pnm/ 
 
 ## animation GIF
 
@@ -92,6 +125,10 @@ rose.gif[4] GIF 70x46 70x46+0+0 8-bit sRGB 256c 20982B 0.000u 0:00.000
 ちなみに、ImageMagick の modulate のhue(色相)は 360でなく 300 で一回転します。
 
 ##  APNG
+
+- https://gif2apng.sourceforge.net/
+
+こちらの gif2png を使えば楽です。
 
 ```
 % gif2apng  rose.gif  rose.apng
@@ -133,4 +170,6 @@ rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
 rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
 ```
 
-rose: は内部的に PPM 形式なので、つまり何も変換しなかったという事です。
+先ほど、JPEG XR が PPM と表示されるのは Delegate の都合と説明しましたが、
+HEIF の場合は、rose: は内部的に PPM 形式で、つまり何も変換しなかったという事です。
+
