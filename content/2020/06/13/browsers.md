@@ -164,7 +164,7 @@ macOS のプレビュー.app を使うと簡単に作成できます。
 rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
 ```
 
-尚、拡張子は .heic です。ImageMagick で .heif 指定ですると、エラーを出さずに失敗します。
+尚、拡張子は .heic です。ImageMagick で .heif 指定すると、エラーを出さずに失敗します。
 
 ```
 % convert rose: rose.heif
@@ -174,4 +174,3 @@ rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
 
 先ほど、JPEG XR が PPM と表示されるのは Delegate の都合と説明しましたが、
 HEIF の場合は rose: は内部的に PPM 形式で、つまり何も変換しなかったという事です。
-
