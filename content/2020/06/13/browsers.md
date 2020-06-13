@@ -12,14 +12,16 @@ draft = false
 
 - http://yosbits.com/wordpress/?p=1683 画像のブラウザ対応
 
-こちらの最新版が欲しかったので、2020年版を作りました。Wikipedia からのほぼコピペです。
+こちらのテーブルの最新版が欲しかったので、2020年版を作りました。Wikipedia からのほぼコピペです。
 
+- https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support
 
 ## 対応テーブル
 
 <style>
-tr { color: white; background-color:#666; }
-td { color: black; text-align: center; }
+table { }
+tr { color: white; background-color:#666;  }
+td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 .OK { background-color:#0F4; }
 .NG { background-color:#F24; }
 </style>
