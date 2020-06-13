@@ -43,6 +43,12 @@ td { color: black; text-align: center; }
 
 # 画像ファイル作成
 
+参考までに。ImageMagick と gif2apng を使った各形式の画像作成方法です。
+
+- https://imagemagick.org/
+- https://gif2apng.sourceforge.net/
+
+
 ```
 % for f in jpg jp2 jxr webp png tif bmp heif ;
     do convert rose: rose.$f ;
@@ -64,8 +70,7 @@ rose.tif TIFF 70x46 70x46+0+0 8-bit sRGB 9924B 0.000u 0:00.000
 % for h in  60 120 180 240 ;
     do convert rose.png -modulate 100,100,$h $h.png ;
     done
-
-convert -delay 100 rose.png ??.png ???.png  rose.gif
+% convert -delay 100 rose.png ??.png ???.png  rose.gif
 % identify rose.gif
 rose.gif[0] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
 rose.gif[1] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
@@ -90,5 +95,3 @@ Writing 'rose.apng'...
 5 frames.
 % 
 ```
-
-
