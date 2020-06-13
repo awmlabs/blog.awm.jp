@@ -32,9 +32,9 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 </tr><tr>
 <th> Chrome </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th> Safari </th> <td class="OK">O</td> <td class="OK">O</td><td class="NG">x</td> <td class="NG">X</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
-</tr><tr>
 <th>Firefox </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
+</tr><tr>
+<th> Safari </th> <td class="OK">O</td> <td class="OK">O</td><td class="NG">x</td> <td class="NG">X</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
 <th>旧 Edge </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
