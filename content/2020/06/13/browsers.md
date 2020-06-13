@@ -38,7 +38,7 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 </tr><tr>
 <th>IE 11 </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.tiff"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heif"></td>
+<th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.tiff"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heic"></td>
 </tr>
 </table>
 
@@ -57,12 +57,12 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 - https://gif2apng.sourceforge.net/
 
 ```
-% for f in jpg jp2 jxr webp png tif bmp heif ;
+% for f in jpg jp2 jxr webp png tif bmp ;
     do convert rose: rose.$f ;
     done
 % identify  rose.*
 rose.bmp BMP 70x46 70x46+0+0 8-bit sRGB 9890B 0.000u 0:00.000
-rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+
 rose.jp2 JP2 70x46 70x46+0+0 8-bit sRGB 0.000u 0:00.000
 rose.jpg JPEG 70x46 70x46+0+0 8-bit sRGB 2663B 0.000u 0:00.000
 rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
@@ -102,3 +102,33 @@ Writing 'rose.apng'...
 5 frames.
 % 
 ```
+
+## HEIF
+
+ImageMagick が HEIF 生成の為に利用する libheif は 64x64 を下回るサイズの HEIF は作れません。(空ファイルが出来ます)
+
+```
+% convert rose.png rose.heic
+convert: Encoder plugin generated an error: Invalid parameter value: Images smaller than 16 pixels are not supported `rose.heic' @ error/heic.c/IsHeifSuccess/136.
+% ls -l  rose.heic
+-rw-r--r--  1 yoya  devel  0  6 13 22:29 rose.heic
+```
+
+macOS のプレビュー.app を使うと簡単に作成できます。
+
+<img src="../rose-heic-making.png">
+
+```
+% identify  rose.heic
+rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
+```
+
+尚、拡張子は heic です。ImageMagick で heif 指定で変換すると、エラーを出さずに失敗します。
+
+```
+% convert rose: rose.heif
+% identify  rose.heif
+rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+```
+
+rose: は内部的に PPM 形式なので、つまり何も変換しなかったという事です。
