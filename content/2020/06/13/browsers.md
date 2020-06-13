@@ -126,9 +126,11 @@ rose.gif[4] GIF 70x46 70x46+0+0 8-bit sRGB 256c 20982B 0.000u 0:00.000
 
 ##  APNG
 
+ImageMagick は APNG に対応していません。
+
 - https://gif2apng.sourceforge.net/
 
-こちらの gif2png を使えば楽です。
+こちらの gif2png を使うと楽です。
 
 ```
 % gif2apng  rose.gif  rose.apng
@@ -171,5 +173,5 @@ rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
 ```
 
 先ほど、JPEG XR が PPM と表示されるのは Delegate の都合と説明しましたが、
-HEIF の場合は、rose: は内部的に PPM 形式で、つまり何も変換しなかったという事です。
+HEIF の場合は rose: は内部的に PPM 形式で、つまり何も変換しなかったという事です。
 
