@@ -37,9 +37,10 @@ td { color: black; text-align: center; }
 
 # 備考
 
-- Wikipedia では Safari が JPEG2000 対応を辞めたとありますが、恐らく Windows 版の話でかつ Windows 版はもう停止してます。 macOS 版は表示されます。
-- Wikipedia では Safari が HEIF 対応のように書いてますが実際には表示できません。WWDC17 で JPEG は終わり次は HEIF だみたいなノリで話してたので誤解したのかも？
+- Wikipedia では Safari が JPEG2000 対応をやめたとありますが、実際には表示できます。恐らく Windows 版の話でかつ Windows 版 Safari はもう存在しません。
+- Wikipedia では Safari が HEIF 対応とありなすが実際には表示できません。WWDC2017 で JPEG は終わり次は HEIF みたいなノリで話してたので誤解したのかも？
 - IE 11 の WebP 表示は、1809 更新で対応しました。1803 以前だと表示しません。
+- IE 11 の APNG 表示は、最初の一コマ目だけ表示します。恐らく普通の PNG 扱いです。
 
 # 画像ファイル作成
 
