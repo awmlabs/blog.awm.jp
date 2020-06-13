@@ -23,7 +23,7 @@ table { }
 tr { color: white; background-color:#666;  }
 td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 .OK { background-color:#0F4; }
-.NG { background-color:#F24; }
+.NG { background-color:#F48; }
 </style>
 
 <table>
