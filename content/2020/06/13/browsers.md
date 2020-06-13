@@ -28,17 +28,19 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 
 <table>
 <tr>
-<th>  </th><th> JPEG</th><th> JPEG2000 </th><th> JPEG_XR </th><th> WebP </th><th> GIF </th><th> PNG </th><th> APNG </th><th> TIFF </th><th> BMP </th><th> HEIF </th>
+<th>  </th><th> JPEG</th><th> JPEG2000 </th><th> JPEG_XR </th><th> WebP </th><th> GIF </th><th> PNG </th><th> APNG </th> <th> BMP </th><th> HEIF </th>
 </tr><tr>
-<th> Chrome </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
+<th> Chrome </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th> Safari </th> <td class="OK">O</td> <td class="OK">O</td><td class="NG">x</td> <td class="NG">X</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
+<th> Safari </th> <td class="OK">O</td> <td class="OK">O</td><td class="NG">x</td> <td class="NG">X</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th>Firefox </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
+<th>Firefox </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th>IE 11 </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
+<th>旧 Edge </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.tiff"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heic"></td>
+<th>IE11 </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>  <td class="OK">O</td> <td class="NG">x</td>
+</tr><tr>
+<th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heic"></td>
 </tr>
 </table>
 
@@ -46,8 +48,8 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 
 - Wikipedia では Safari が JPEG2000 対応をやめたとありますが、実際には表示できます。恐らく Windows 版の話でかつ Windows 版 Safari はもう存在しません。
 - Wikipedia では Safari は HEIF 対応としてますが実際には表示できません。WWDC2017 で JPEG は終わり次は HEIF みたいなノリで話してたので誤解したのかも？
-- IE 11 の WebP 表示は Win10 1809 更新で対応しました。1803 以前だと表示しません。
-- IE 11 の APNG 表示は最初の一コマ目だけ表示します。恐らく普通の PNG 扱いでしょう。
+- IE11 の WebP 表示は Win10 1809 更新で対応しました。1803 以前だと表示しません。
+- IE11 の APNG 表示は最初の一コマ目だけ表示します。恐らく普通の PNG 扱いでしょう。
 
 # 画像ファイル作成
 
@@ -123,7 +125,7 @@ macOS のプレビュー.app を使うと簡単に作成できます。
 rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
 ```
 
-尚、拡張子は heic です。ImageMagick で heif 指定で変換すると、エラーを出さずに失敗します。
+尚、拡張子は .heic です。ImageMagick で .heif 指定ですると、エラーを出さずに失敗します。
 
 ```
 % convert rose: rose.heif
