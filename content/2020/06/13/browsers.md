@@ -29,7 +29,7 @@ td { color: black; text-align: center; }
 </tr><tr>
 <th>Firefox </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
-<th>IE 11 </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
+<th>IE 11 </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
 <th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.tiff"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heif"></td>
 </tr>
@@ -38,10 +38,57 @@ td { color: black; text-align: center; }
 # 備考
 
 - Wikipedia では Safari が JPEG2000 対応を辞めたとありますが、恐らく Windows 版の話でかつ Windows 版はもう停止してます。 macOS 版は表示されます。
-- Wikipedia では Safari が HEIF 対応のように書いてますが、実際には対応していません。WWDC17 では JPEG は終わりみたいな話してましたし、iOS11 対応予定を Safari11 対応と見間違えたのかも？
+- Wikipedia では Safari が HEIF 対応のように書いてますが実際には表示できません。WWDC17 で JPEG は終わり次は HEIF だみたいなノリで話してたので誤解したのかも？
+- IE 11 の WebP 表示は、1809 更新で対応しました。1803 以前だと表示しません。
 
+# 画像ファイル作成
 
+```
+% for f in jpg jp2 jxr webp png tif bmp heif ;
+    do convert rose: rose.$f ;
+    done
+% identify  rose.*
+rose.bmp BMP 70x46 70x46+0+0 8-bit sRGB 9890B 0.000u 0:00.000
+rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+rose.jp2 JP2 70x46 70x46+0+0 8-bit sRGB 0.000u 0:00.000
+rose.jpg JPEG 70x46 70x46+0+0 8-bit sRGB 2663B 0.000u 0:00.000
+rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+rose.png PNG 70x46 70x46+0+0 8-bit sRGB 6975B 0.000u 0:00.000
+rose.tif TIFF 70x46 70x46+0+0 8-bit sRGB 9924B 0.000u 0:00.000
+%
+```
 
+## animation GIF
 
+```
+% for h in  60 120 180 240 ;
+    do convert rose.png -modulate 100,100,$h $h.png ;
+    done
+
+convert -delay 100 rose.png ??.png ???.png  rose.gif
+% identify rose.gif
+rose.gif[0] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[1] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[2] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[3] GIF 70x46 70x46+0+0 8-bit sRGB 256c 0.000u 0:00.000
+rose.gif[4] GIF 70x46 70x46+0+0 8-bit sRGB 256c 20982B 0.000u 0:00.000
+%
+```
+
+ちなみに、ImageMagick の modulate のhue(色相)は 360でなく 300 で一回転します。
+
+##  APNG
+
+```
+% gif2apng  rose.gif  rose.apng
+
+gif2apng 1.9 using 7ZIP with 15 iterations
+
+Reading 'rose.gif'...
+5 frames.
+Writing 'rose.apng'...
+5 frames.
+% 
+```
 
 
