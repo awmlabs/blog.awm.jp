@@ -98,7 +98,13 @@ JPEG XR を以下のようにして生成する場合、
 % JxrDecApp  -i rose.jxr -o rose.pnm
 ```
 
-identify は JPEG XR を理解できないので、代わりに PPM を解析表示するという事です。
+ImageMagick は JPEG XR を理解できないので、代わりに PPM を解析表示するという事です。
+
+```
+% identify  rose.jxr
+rose.jxr PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
+```
+
 なお、拡張子の PNM は PPM 以外にも PBM, PGM 等を含めたいくつかの画像形式の総称です。
 
 (参考)
