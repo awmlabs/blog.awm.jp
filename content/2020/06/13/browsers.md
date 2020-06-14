@@ -34,6 +34,8 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 </tr><tr>
 <th>Firefox </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
+<th>新 Edge </th> <td class="OK">O</td> <td class="NG">x</td><td class="NG">x</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
+</tr><tr>
 <th> Safari </th> <td class="OK">O</td> <td class="OK">O</td><td class="NG">x</td> <td class="NG">X</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td>
 </tr><tr>
 <th>旧 Edge </th> <td class="OK">O</td> <td class="NG">x</td><td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="OK">O</td> <td class="NG">x</td> <td class="OK">O</td> <td class="NG">x</td>
@@ -43,6 +45,8 @@ td { color: black; text-align: center;  padding 0.25rem 0.25rem !important; }
 <th> image </th> <td><img src="../rose.jpg"></td> <td><img src="../rose.jp2"></td> <td><img src="../rose.jxr"></td> <td><img src="../rose.webp"></td> <td><img src="../rose.gif"></td> <td><img src="../rose.png"></td> <td><img src="../rose.apng"></td> <td><img src="../rose.bmp"></td> <td><img src="../rose.heic"></td>
 </tr>
 </table>
+
+- ここでいう、新 Edge は Chromium 版 Edge 、旧 Edge はそれ以前の MS 独自実装のブラウザを示します。
 
 # 備考
 
