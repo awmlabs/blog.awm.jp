@@ -73,11 +73,11 @@ rose.png PNG 70x46 70x46+0+0 8-bit sRGB 6975B 0.000u 0:00.000
 %
 ```
 
-identify で rose.jxr が PPM と表示されますが、これは変換に失敗したので無く Delegate の事情です。
+identify で rose.jxr が PPM と表示されますが、これは変換に失敗したので無く Delegate の都合です。
 
 ## JPEG XR
 
-ImageMagick は自前で JPEG XR を処理出来ず、外部コマンドを使って変換します。これを Delegate と呼びます。
+ImageMagick は自前で JPEG XR を処理出来ず、外部コマンドを使って変換します。この仕組みを Delegate と呼びます。
 
 JPEG XR を以下のようにして生成する場合、
 
@@ -172,5 +172,5 @@ rose.heic HEIC 70x46 70x46+0+0 8-bit YCbCr 0.000u 0:00.000
 rose.heif PPM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000
 ```
 
-先ほど、JPEG XR が PPM と表示されるのは Delegate の都合と説明しましたが、
-HEIF の場合は rose: は内部的に PPM 形式で、つまり何も変換しなかったという事です。
+先ほど、JPEG XR が PPM と表示されるのは Delegate の都合でしたが、
+HEIF の場合は rose: が内部的に PPM 形式で、そのまま何も変換しなかったという事です。
