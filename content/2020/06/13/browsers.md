@@ -146,7 +146,7 @@ Writing 'rose.apng'...
 
 ## HEIF
 
-ImageMagick が HEIF 生成の為に利用する libheif は 64x64 を下回るサイズの HEIF は作れません。(空ファイルが出来ます)
+ImageMagick が HEIF 生成の為に利用する libheif - x265 は 64x64 を下回るサイズの HEIF は作れません。(空ファイルが出来ます)
 
 ```
 % convert rose.png rose.heic
