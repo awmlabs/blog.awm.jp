@@ -136,7 +136,7 @@ rose.gif[4] GIF 70x46 70x46+0+0 8-bit sRGB 256c 20982B 0.000u 0:00.000
 
 ##  APNG
 
-ImageMagick は APNG に対応していません。
+ImageMagick は APNG に対応していません。(追記: 2020年10月リリース 7.0.10-31 で APNG も変換できるようになりました。apng:out.png のように指定します)
 
 - https://gif2apng.sourceforge.net/
 
