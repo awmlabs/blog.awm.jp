@@ -68,4 +68,4 @@ $ convert in.png -resize 200x200 <u>-background red</u> –flatten out.jpg <img 
 $ convert in.png -resize 200x200  –flatten <u>-background red</u> out.jpg <img src="../logowhite_hh.jpg" />
 </pre>
 
-背景を赤くぬる前にレイヤー統合してしまったからだと思われます。
+背景色を指定する前にレイヤー統合した結果のようです。
