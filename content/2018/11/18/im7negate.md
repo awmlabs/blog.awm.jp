@@ -51,7 +51,7 @@ ImageMagick6 negate, there is no problem.
 |---|---|
 | <img src="../rose-matte.png" /> |<img src="../rose-matte-negate6.png" /> |
 
-## Expcted Usage
+## Expected Usage
 
 By specifying -channel RGB, negate only RGB, A can go through.
 ImageMagick6 can also behave like ImageMagick7 by specifying -channel RGBA.
