@@ -17,3 +17,7 @@ SidebarRecentLimit = 5
 
 loadfastload = true  # 386
 twitter = "yoya"
+
+[outputs]
+
+home = ["HTML", "RSS", "JSON"]
