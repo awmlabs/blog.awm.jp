@@ -1,6 +1,6 @@
 baseurl = "https://blog.awm.jp/"
 languageCode = "ja-JP"
-theme = "base16"
+theme = "hugo-theme-base16"
 title = "awm-Tech"
 copyright = "&copy; awm.jp"
 disqusShortname = "awmtech"
@@ -12,3 +12,8 @@ paginate = 5
 author = "awmlabs"
 avatar = "https://avatars3.githubusercontent.com/u/12230940?v=3&s=400"
 contact = "labs@g.awm.jp"
+
+SidebarRecentLimit = 5
+
+loadfastload = true  # 386
+twitter = "yoya"
