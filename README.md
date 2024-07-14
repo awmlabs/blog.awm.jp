@@ -15,7 +15,7 @@ $ pip install Pygments # for syntax highlight
 
 ```
 $ cd blog.awm.jp
-$ hugo server --watch -t base16
+$ hugo server --watch -t hugo-theme-base16
 ```
 
 ## edit
@@ -34,6 +34,7 @@ $ vi content/2016/01/01/blog.md
 $ hugo new site blog.awm.jp
 $ cd blog.awm.jp
 $ git init
-$ git submodule add git@github.com:htdvisser/hugo-base16-theme.git themes/base16
+$ # forked from  git@github.com:htdvisser/hugo-base16-theme.git
+$ git submodule add git@github.com:awmlabs/hugo-base16-theme.git  themes/hugo-base16-theme
 $ vi config.toml
 ```
