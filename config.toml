@@ -21,3 +21,8 @@ twitter = "yoya"
 [outputs]
 
 home = ["HTML", "RSS"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
