@@ -1,0 +1,14 @@
+{
+  "name": "blog.awm.jp",
+  "version": "1.0.0",
+  "description": "hugo files",
+  "main": "index.js",
+  "scripts": {
+    "index": "hugo-lunr -i \"content/**\" -o public/index.json"
+  },
+  "author": "yoya@awm.jp",
+  "license": "ISC",
+  "dependencies": {
+    "hugo-lunr": "^0.0.4"
+  }
+}
