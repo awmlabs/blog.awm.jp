@@ -20,4 +20,4 @@ twitter = "yoya"
 
 [outputs]
 
-home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS"]
